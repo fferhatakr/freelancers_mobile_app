@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:freelancer_tracking_system/login_page.dart';
+import 'package:freelancer_tracking_system/core/login_page.dart';
 
 void main() {
   runApp(const MyApp());
