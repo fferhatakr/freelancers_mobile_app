@@ -1,4 +1,4 @@
-void main() {
+class hardcodeVeri {
   final user1 = Client(
     '1',
     'Company A',
@@ -42,6 +42,7 @@ void main() {
     RateType.fixed,
     50,
   );
+
   final task1 = Task('1', '1', 'Revize Yap', true, priority: Priority.low);
   final task2 = Task('2', '3', '3 Buton Ekle', false, priority: Priority.high);
   final task3 = Task('3', '2', 'Teslim Tarihi Geldi Teslim et', false);
@@ -59,10 +60,6 @@ void main() {
     endTime: DateTime(2026, 1, 1),
   );
   final timeEntry3 = TimeEntry('3', '2', DateTime.now(), endTime: null);
-  print(user1.name);
-  print(project3.rateType);
-  print(task2.priority);
-  print(timeEntry3.startTime);
 }
 
 enum Status { completed, pending }

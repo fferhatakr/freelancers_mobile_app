@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:freelancer_tracking_system/core/dashboard.dart';
+import 'package:freelancer_tracking_system/screen/dashboard.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home: freelancerDashboard(),
+      home: dashboard(),
     );
   }
 }
