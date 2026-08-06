@@ -17,6 +17,7 @@ class dashboard extends StatelessWidget {
         centerTitle: false,
         actions: [
           IconButton(onPressed: () {}, icon: Icon(Icons.notifications)),
+          IconButton(onPressed: () {}, icon: Icon(Icons.settings)),
         ],
       ),
       body: SingleChildScrollView(
