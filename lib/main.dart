@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:freelancer_tracking_system/core/login_page.dart';
 import 'package:freelancer_tracking_system/screen/dashboard.dart';
-import 'package:freelancer_tracking_system/screen/projeListesi.dart';
+import 'package:freelancer_tracking_system/screen/projectList.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,13 +15,19 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData.light().copyWith(
+        inputDecorationTheme: InputDecorationTheme(
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+          ),
+        ),
         appBarTheme: const AppBarTheme(
-          centerTitle: true,
+          centerTitle: false,
           systemOverlayStyle: SystemUiOverlayStyle.dark,
           elevation: 0,
           backgroundColor: Colors.transparent,
         ),
       ),
+
       debugShowCheckedModeBanner: false,
       home: dashboard(),
     );

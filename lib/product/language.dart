@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/schema/classes.dart';
 
 class language {
-  final String aktifProjelerim = 'Aktif Projelerim';
-  final String tamamlananProjeler = 'Tamamlanan Projeler';
-  final String bekleyenOdeme = 'Bekleyen Ödeme ';
-  final String hosgeldinKullanici = 'Hoşgeldin Ferhat';
+  static String aktifProjelerim = 'Aktif Projelerim';
+  static String tamamlananProjeler = 'Tamamlanan Projeler';
+  static String bekleyenOdeme = 'Bekleyen Ödeme ';
+  static String hosgeldinKullanici = 'Hoşgeldin Ferhat';
 
   List<Object> aktifProjeler = [
     {hardcodeVeri().project1},

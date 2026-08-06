@@ -13,7 +13,7 @@ class dashboard extends StatelessWidget {
       backgroundColor: Color(0xFFF5F5F5),
       appBar: AppBar(
         backgroundColor: Color(0xFFF5F5F5),
-        title: Text(language().hosgeldinKullanici),
+        title: Text(language.hosgeldinKullanici),
         centerTitle: false,
         actions: [
           IconButton(onPressed: () {}, icon: Icon(Icons.notifications)),
@@ -25,6 +25,13 @@ class dashboard extends StatelessWidget {
         child: Column(
           children: [cards(), staticsLineChart(), fastTransactions()],
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: (value) {},
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(icon: Icon(Icons.work), label: 'Project'),
+        ],
       ),
     );
   }

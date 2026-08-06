@@ -2,6 +2,62 @@ import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/product/language.dart';
 import 'package:freelancer_tracking_system/widget/fastTransactions.dart';
 
+class _OzetKarti extends StatelessWidget {
+  final IconData ikon;
+  final Color renk;
+  final String baslik;
+  final String deger;
+
+  const _OzetKarti({
+    required this.ikon,
+    required this.renk,
+    required this.baslik,
+    required this.deger,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      color: cardFeatures.color,
+      elevation: cardFeatures.Elevation,
+      child: InkWell(
+        onTap: () {
+          print('Tapped');
+        },
+        child: Container(
+          height: cardFeatures.height,
+          width: cardFeatures.widht,
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: containerFeatures.widht,
+                      height: containerFeatures.height,
+                      decoration: BoxDecoration(
+                        color: renk,
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                      ),
+                      child: Icon(ikon, color: Colors.white),
+                    ),
+                    SizedBox(height: 8),
+                    Text(baslik, style: cardtitle1Style()),
+                    Text(deger),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class cards extends StatelessWidget {
   cards({super.key});
 
@@ -10,128 +66,23 @@ class cards extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        Card(
-          color: cardFeatures.color,
-          elevation: cardFeatures.Elevation,
-          child: InkWell(
-            onTap: () {
-              print('Tapped');
-            },
-            child: Container(
-              height: cardFeatures.height,
-              width: cardFeatures.widht,
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          width: containerFeatures.widht,
-                          height: containerFeatures.height,
-                          decoration: BoxDecoration(
-                            color: containerFeatures.homeColor,
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                          ),
-                          child: Icon(Icons.home, color: Colors.white),
-                        ),
-                        SizedBox(height: 8),
-                        Text(
-                          language().aktifProjelerim,
-                          style: cardtitle1Style(),
-                        ),
-                        Text(language().aktifProjeler.length.toString()),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+        _OzetKarti(
+          ikon: Icons.home,
+          renk: Colors.purple,
+          baslik: language.aktifProjelerim,
+          deger: '3',
         ),
-        Card(
-          color: cardFeatures.color,
-          elevation: cardFeatures.Elevation,
-          child: InkWell(
-            onTap: () {
-              print('Tapped');
-            },
-            child: Container(
-              height: cardFeatures.height,
-              width: cardFeatures.widht,
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          width: containerFeatures.widht,
-                          height: containerFeatures.height,
-                          decoration: BoxDecoration(
-                            color: containerFeatures.checkColor,
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                          ),
-                          child: Icon(Icons.check, color: Colors.white),
-                        ),
-                        SizedBox(height: 8),
-                        Text(
-                          language().tamamlananProjeler,
-                          style: cardtitle1Style(),
-                        ),
-                        Text(language().aktifProjeler.length.toString()),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+        _OzetKarti(
+          ikon: Icons.check,
+          renk: Colors.green,
+          baslik: language.tamamlananProjeler,
+          deger: '3',
         ),
-        Card(
-          color: cardFeatures.color,
-          elevation: cardFeatures.Elevation,
-          child: InkWell(
-            onTap: () {
-              print('Tapped');
-            },
-            child: Container(
-              height: cardFeatures.height,
-              width: cardFeatures.widht,
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          width: containerFeatures.widht,
-                          height: containerFeatures.height,
-                          decoration: BoxDecoration(
-                            color: containerFeatures.moneyColor,
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                          ),
-                          child: Icon(Icons.currency_lira, color: Colors.white),
-                        ),
-                        SizedBox(height: 8),
-                        Text(
-                          language().bekleyenOdeme,
-                          style: cardtitle1Style(),
-                        ),
-                        Text('₺'.toString() + calculatePayment().toString()),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+        _OzetKarti(
+          ikon: Icons.currency_lira,
+          renk: Colors.amber,
+          baslik: language.bekleyenOdeme,
+          deger: '3575',
         ),
       ],
     );
