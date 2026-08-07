@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/product/language.dart';
+import 'package:freelancer_tracking_system/screen/projectList.dart';
+import 'package:freelancer_tracking_system/widget/activeProject.dart';
 import 'package:freelancer_tracking_system/widget/cards.dart';
 import 'package:freelancer_tracking_system/widget/fastTransactions.dart';
 import 'package:freelancer_tracking_system/widget/statics.dart';
 
-class dashboard extends StatelessWidget {
-  const dashboard({super.key});
+class Dashboard extends StatelessWidget {
+  const Dashboard({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,15 +25,13 @@ class dashboard extends StatelessWidget {
       body: SingleChildScrollView(
         padding: EdgeInsets.all(10),
         child: Column(
-          children: [cards(), staticsLineChart(), fastTransactions()],
+          children: [
+            cards(),
+            staticsLineChart(),
+            ActiveProject(),
+            fastTransactions(),
+          ],
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: (value) {},
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.work), label: 'Project'),
-        ],
       ),
     );
   }

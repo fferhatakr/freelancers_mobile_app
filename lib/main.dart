@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:freelancer_tracking_system/homePage.dart';
 import 'package:freelancer_tracking_system/screen/dashboard.dart';
 import 'package:freelancer_tracking_system/screen/projectList.dart';
+import 'package:freelancer_tracking_system/widget/projectList.dart';
 
 void main() {
   runApp(const MyApp());
@@ -29,7 +31,7 @@ class MyApp extends StatelessWidget {
       ),
 
       debugShowCheckedModeBanner: false,
-      home: dashboard(),
+      home: homePage(),
     );
   }
 }

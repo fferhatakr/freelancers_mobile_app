@@ -2,23 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/product/language.dart';
 
 class _FastCard extends StatelessWidget {
-  TextStyle title2Style() {
-    return TextStyle(
-      color: FastTransactionsCard.title2Color,
-      fontSize: FastTransactionsCard.title2fontSize,
-    );
-  }
-
-  TextStyle title1Style() {
-    return TextStyle(
-      fontWeight: FontWeight.bold,
-      fontSize: FastTransactionsCard.fontSize,
-    );
-  }
-
-  BorderRadius cardBorderRadius() => BorderRadius.circular(8);
-
-  EdgeInsetsGeometry cardPadding() => EdgeInsetsGeometry.all(12);
   final Color iconContainerColorOne;
   final IconData iconOne;
   final String title1;
@@ -73,7 +56,9 @@ class _FastCard extends StatelessWidget {
               Align(
                 alignment: Alignment.centerRight,
                 child: GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    print('object');
+                  },
                   child: Container(
                     width: 28,
                     height: 28,
@@ -95,6 +80,24 @@ class _FastCard extends StatelessWidget {
       ),
     );
   }
+}
+
+BorderRadius cardBorderRadius() => BorderRadius.circular(8);
+
+EdgeInsetsGeometry cardPadding() => EdgeInsetsGeometry.all(12);
+
+TextStyle title2Style() {
+  return TextStyle(
+    color: FastTransactionsCard.title2Color,
+    fontSize: FastTransactionsCard.title2fontSize,
+  );
+}
+
+TextStyle title1Style() {
+  return TextStyle(
+    fontWeight: FontWeight.bold,
+    fontSize: FastTransactionsCard.fontSize,
+  );
 }
 
 class FastTransactionsCard {
