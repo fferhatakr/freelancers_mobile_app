@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/screen/clientList.dart';
 import 'package:freelancer_tracking_system/screen/dashboard.dart';
 import 'package:freelancer_tracking_system/screen/projectList.dart';
+import 'package:freelancer_tracking_system/screen/tasksPage.dart';
 
 class homePage extends StatefulWidget {
   const homePage({super.key});
@@ -12,7 +13,12 @@ class homePage extends StatefulWidget {
 
 // Varsayilan deger ana sayfa olan dashboard = 0
 int _secilenIndex = 0;
-final List<Widget> _sayfalar = [Dashboard(), ProjectList(), ClientListPage()];
+final List<Widget> _sayfalar = [
+  Dashboard(),
+  ProjectList(),
+  ClientListPage(),
+  TasksPage(),
+];
 
 class _homePageState extends State<homePage> {
   @override
