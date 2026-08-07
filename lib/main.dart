@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:freelancer_tracking_system/homePage.dart';
+import 'package:freelancer_tracking_system/screen/clientList.dart';
 import 'package:freelancer_tracking_system/screen/dashboard.dart';
 import 'package:freelancer_tracking_system/screen/projectList.dart';
-import 'package:freelancer_tracking_system/widget/projectList.dart';
+import 'package:freelancer_tracking_system/widget/clientWidget.dart';
+import 'package:freelancer_tracking_system/widget/projectListWidget.dart';
 
 void main() {
   runApp(const MyApp());

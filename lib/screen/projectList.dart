@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:freelancer_tracking_system/widget/projectList.dart';
+import 'package:freelancer_tracking_system/widget/projectListWidget.dart';
 
 class ProjectList extends StatefulWidget {
   const ProjectList({super.key});
