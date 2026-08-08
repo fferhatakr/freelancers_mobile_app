@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:freelancer_tracking_system/homePage.dart';
-import 'package:freelancer_tracking_system/screen/tasksPage.dart';
+import 'package:freelancer_tracking_system/features/dashboard/homePage.dart';
+import 'package:freelancer_tracking_system/features/tasks/tasksPage.dart';
 
 void main() {
   runApp(const MyApp());

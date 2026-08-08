@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:freelancer_tracking_system/product/language.dart';
-import 'package:freelancer_tracking_system/screen/projectList.dart';
-import 'package:freelancer_tracking_system/widget/activeProject.dart';
-import 'package:freelancer_tracking_system/widget/cards.dart';
-import 'package:freelancer_tracking_system/widget/fastTransactions.dart';
-import 'package:freelancer_tracking_system/widget/statics.dart';
+import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
+import 'package:freelancer_tracking_system/core/theme/language.dart';
+import 'package:freelancer_tracking_system/features/projects/projectList.dart';
+import 'package:freelancer_tracking_system/features/dashboard/widgets/activeProject.dart';
+import 'package:freelancer_tracking_system/features/dashboard/widgets/ozet_cards.dart';
+import 'package:freelancer_tracking_system/features/dashboard/widgets/fastTransactions.dart';
+import 'package:freelancer_tracking_system/features/dashboard/widgets/statics.dart';
 
 class Dashboard extends StatelessWidget {
   const Dashboard({super.key});
@@ -12,9 +13,9 @@ class Dashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF5F5F5),
+      backgroundColor: AppColors.dashboardBackground,
       appBar: AppBar(
-        backgroundColor: Color(0xFFF5F5F5),
+        backgroundColor: AppColors.dashboardBackground,
         title: Text(language.hosgeldinKullanici),
         centerTitle: false,
         actions: [

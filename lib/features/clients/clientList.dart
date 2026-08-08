@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:freelancer_tracking_system/widget/clientWidget.dart';
+import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
+import 'package:freelancer_tracking_system/features/clients/widgets/clientWidget.dart';
 
 class ClientListPage extends StatefulWidget {
   const ClientListPage({super.key});
@@ -27,11 +28,11 @@ class _ClientListPageState extends State<ClientListPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Müşteriler',
+              language.musteriler,
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             Text(
-              'Tüm müşterileri buradan yönet',
+              language.musterileriYonet,
               style: TextStyle(fontSize: 12, fontWeight: FontWeight.w300),
             ),
           ],
@@ -47,10 +48,13 @@ class _ClientListPageState extends State<ClientListPage> {
               height: 48,
               width: 48,
               decoration: BoxDecoration(
-                color: Colors.deepPurple[300],
+                color: AppColors.clientListDecoration,
                 borderRadius: BorderRadius.all(Radius.circular(30)),
               ),
-              child: Icon(Icons.person_add_alt_1_outlined, color: Colors.white),
+              child: Icon(
+                Icons.person_add_alt_1_outlined,
+                color: AppColors.personIconColor,
+              ),
             ),
           ),
         ],
@@ -65,9 +69,9 @@ class _ClientListPageState extends State<ClientListPage> {
               maxLength: 30,
               decoration: InputDecoration(
                 prefixIcon: Icon(Icons.search_outlined),
-                labelText: 'Hızlı Arama',
-                hintText: 'Müşteri ara',
-                hintStyle: TextStyle(color: Colors.grey),
+                labelText: language.hizliArama,
+                hintText: language.musteriAra,
+                hintStyle: TextStyle(color: AppColors.hintTextColor),
               ),
             ),
             Expanded(

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:freelancer_tracking_system/screen/clientList.dart';
-import 'package:freelancer_tracking_system/screen/dashboard.dart';
-import 'package:freelancer_tracking_system/screen/projectList.dart';
-import 'package:freelancer_tracking_system/screen/tasksPage.dart';
+import 'package:freelancer_tracking_system/features/clients/clientList.dart';
+import 'package:freelancer_tracking_system/features/dashboard/widgets/dashboard.dart';
+import 'package:freelancer_tracking_system/features/projects/projectList.dart';
+import 'package:freelancer_tracking_system/features/tasks/tasksPage.dart';
 
 class homePage extends StatefulWidget {
   const homePage({super.key});

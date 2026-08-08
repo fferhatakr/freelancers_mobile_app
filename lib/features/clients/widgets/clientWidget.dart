@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
 
 class ClientList extends StatelessWidget {
   final String name;
@@ -27,7 +28,7 @@ class ClientList extends StatelessWidget {
               height: 50,
               width: 50,
               decoration: BoxDecoration(
-                color: Colors.blueAccent,
+                color: AppColors.clientWidget,
                 borderRadius: BorderRadius.all(Radius.circular(30)),
               ),
               child: Icon(Icons.person_2_outlined),

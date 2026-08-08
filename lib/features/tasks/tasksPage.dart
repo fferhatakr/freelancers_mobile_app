@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:freelancer_tracking_system/widget/tasks.dart';
+import 'package:freelancer_tracking_system/features/tasks/widgets/resultTaskWidget.dart';
+import 'package:freelancer_tracking_system/features/tasks/widgets/tasks.dart';
 
 class TasksPage extends StatelessWidget {
   TasksPage({super.key});
@@ -75,6 +76,7 @@ class TasksPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            ResultTask(),
             Expanded(
               child: ListView.builder(
                 itemCount: dummyTasks.length,

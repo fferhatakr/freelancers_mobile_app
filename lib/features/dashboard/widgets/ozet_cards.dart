@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:freelancer_tracking_system/product/language.dart';
-import 'package:freelancer_tracking_system/widget/fastTransactions.dart';
+import 'package:freelancer_tracking_system/core/theme/language.dart';
+import 'package:freelancer_tracking_system/features/dashboard/widgets/fastTransactions.dart';
 
 class _OzetKarti extends StatelessWidget {
   final IconData ikon;

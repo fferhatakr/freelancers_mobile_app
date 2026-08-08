@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:freelancer_tracking_system/widget/fastTransactions.dart';
+import 'package:freelancer_tracking_system/core/theme/app_colors.dart';
+import 'package:freelancer_tracking_system/core/theme/language.dart';
+import 'package:freelancer_tracking_system/features/dashboard/widgets/fastTransactions.dart';
 
 class _ActiveProjects extends StatelessWidget {
   final Color containerColor;
@@ -25,7 +27,7 @@ class _ActiveProjects extends StatelessWidget {
     return Column(
       children: [
         Card(
-          color: const Color.fromARGB(255, 0, 27, 49),
+          color: AppColors.activeProjectCardColor,
           elevation: 6,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -84,8 +86,85 @@ class _ActiveProjects extends StatelessWidget {
   }
 }
 
-class ActiveProject extends StatelessWidget {
+class ActiveProject extends StatefulWidget {
   const ActiveProject({super.key});
+
+  @override
+  State<ActiveProject> createState() => _ActiveProjectState();
+}
+
+class _ActiveProjectState extends State<ActiveProject> {
+  late final List<_ActiveProjects> _items;
+
+  @override
+  void initState() {
+    super.initState();
+    _items = [
+      _ActiveProjects(
+        containerColor: AppColors.containerGoldColor,
+        containerIconColor: AppColors.containerIConGoldColor,
+        icon: Icons.add_shopping_cart_rounded,
+        title1: 'E-Ticaret Sitesi',
+        title2: 'İnteraktif',
+        title3: 'title3',
+        containerTwoColor: AppColors.containerGoldColor,
+      ),
+      _ActiveProjects(
+        containerColor: AppColors.containerBlueColor,
+        containerIconColor: AppColors.containerIconBlueColor,
+        icon: Icons.phone_android_rounded,
+        title1: 'Mobile Uygulama',
+        title2: 'Mobile App',
+        title3: 'Bar',
+        containerTwoColor: AppColors.containerBlueColor,
+      ),
+      _ActiveProjects(
+        containerColor: AppColors.containerGoldColor,
+        containerIconColor: AppColors.containerIConGoldColor,
+        icon: Icons.admin_panel_settings_outlined,
+        title1: 'Yönetim Paneli',
+        title2: 'Dashboard',
+        title3: 'Bar',
+        containerTwoColor: AppColors.containerGoldColor,
+      ),
+      _ActiveProjects(
+        containerColor: AppColors.containerBlueColor,
+        containerIconColor: AppColors.containerIconBlueColor,
+        icon: Icons.language_outlined,
+        title1: 'Kurumsal Website',
+        title2: 'Web Tasarim',
+        title3: 'Bar',
+        containerTwoColor: AppColors.containerBlueColor,
+      ),
+      _ActiveProjects(
+        containerColor: AppColors.containerBlueColor,
+        containerIconColor: AppColors.containerIconBlueColor,
+        icon: Icons.language_outlined,
+        title1: 'Kurumsal Website',
+        title2: 'Web Tasarim',
+        title3: 'Bar',
+        containerTwoColor: AppColors.containerBlueColor,
+      ),
+      _ActiveProjects(
+        containerColor: AppColors.containerBlueColor,
+        containerIconColor: AppColors.containerIconBlueColor,
+        icon: Icons.language_outlined,
+        title1: 'Kurumsal Website',
+        title2: 'Web Tasarim',
+        title3: 'Bar',
+        containerTwoColor: AppColors.containerBlueColor,
+      ),
+      _ActiveProjects(
+        containerColor: AppColors.containerBlueColor,
+        containerIconColor: AppColors.containerIconBlueColor,
+        icon: Icons.language_outlined,
+        title1: 'Kurumsal Website',
+        title2: 'Web Tasarim',
+        title3: 'Bar',
+        containerTwoColor: AppColors.containerBlueColor,
+      ),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -95,70 +174,35 @@ class ActiveProject extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            'Aktif Projeler',
+            language.aktifProje,
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
         ),
-        _ActiveProjects(
-          containerColor: containerGoldColor(),
-          containerIconColor: containerIConGoldColor(),
-          icon: Icons.add_shopping_cart_rounded,
-          title1: 'E-Ticaret Sitesi',
-          title2: 'İnteraktif',
-          title3: 'title3',
-          containerTwoColor: containerGoldColor(),
-        ),
-        _ActiveProjects(
-          containerColor: containerBlueColor(),
-          containerIconColor: containerIconBlueColor(),
-          icon: Icons.phone_android_rounded,
-          title1: 'Mobile Uygulama',
-          title2: 'Mobile App',
-          title3: 'Bar',
-          containerTwoColor: containerBlueColor(),
-        ),
-        _ActiveProjects(
-          containerColor: containerGoldColor(),
-          containerIconColor: containerIConGoldColor(),
-          icon: Icons.admin_panel_settings_outlined,
-          title1: 'Yönetim Paneli',
-          title2: 'Dashboard',
-          title3: 'Bar',
-          containerTwoColor: containerGoldColor(),
-        ),
-        _ActiveProjects(
-          containerColor: containerBlueColor(),
-          containerIconColor: containerIconBlueColor(),
-          icon: Icons.language_outlined,
-          title1: 'Kurumsal Website',
-          title2: 'Web Tasarim',
-          title3: 'Bar',
-          containerTwoColor: containerBlueColor(),
+        SizedBox(
+          height: 355,
+          child: ListView.builder(
+            itemCount: _items.length,
+            itemBuilder: ((context, index) {
+              return _items[index];
+            }),
+          ),
         ),
       ],
     );
   }
-
-  Color containerIconBlueColor() => const Color.fromARGB(255, 135, 76, 255);
-
-  Color containerBlueColor() => const Color.fromARGB(255, 29, 51, 100);
-
-  Color containerIConGoldColor() => Color.fromARGB(255, 248, 197, 101);
-
-  Color containerGoldColor() => Color.fromARGB(255, 124, 87, 8);
 }
 
 TextStyle _title1Style() {
   return TextStyle(
     fontWeight: FontWeight.bold,
     fontSize: FastTransactionsCard.fontSize,
-    color: Colors.white,
+    color: AppColors.textStyle,
   );
 }
 
 TextStyle _title2Style() {
   return TextStyle(
-    color: Colors.white,
+    color: AppColors.textStyle,
     fontSize: FastTransactionsCard.title2fontSize,
   );
 }
