@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
 
 class ResultTask extends StatelessWidget {
   ResultTask({super.key});
@@ -11,36 +12,34 @@ class ResultTask extends StatelessWidget {
       height: 80,
       child: Card(
         elevation: 10,
-        color: _CardFeatures.cardColor,
+        color: AppColors.activeProjectCardColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadiusGeometry.circular(10),
         ),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Expanded(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Column(
-                  children: [
-                    Text('12', style: _textStyle()),
-                    Text('Toplam Görev', style: _twoTextStyle()),
-                  ],
-                ),
-                Column(
-                  children: [
-                    Text('8', style: _textStyle()),
-                    Text('Tamamlandı', style: _twoTextStyle()),
-                  ],
-                ),
-                Column(
-                  children: [
-                    Text('4', style: _textStyle()),
-                    Text('Devam Ediyor', style: _twoTextStyle()),
-                  ],
-                ),
-              ],
-            ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Column(
+                children: [
+                  Text('12', style: _textStyle()),
+                  Text('Toplam Görev', style: _twoTextStyle()),
+                ],
+              ),
+              Column(
+                children: [
+                  Text('8', style: _textStyle()),
+                  Text('Tamamlandı', style: _twoTextStyle()),
+                ],
+              ),
+              Column(
+                children: [
+                  Text('4', style: _textStyle()),
+                  Text('Devam Ediyor', style: _twoTextStyle()),
+                ],
+              ),
+            ],
           ),
         ),
       ),
@@ -56,9 +55,4 @@ class ResultTask extends StatelessWidget {
       color: const Color.fromARGB(255, 255, 248, 248),
     );
   }
-}
-
-class _CardFeatures {
-  static Color cardColor = const Color.fromARGB(255, 14, 14, 14);
-  static double height = 100;
 }

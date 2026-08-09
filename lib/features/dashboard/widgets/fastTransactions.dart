@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:freelancer_tracking_system/core/navigation/app_navigation.dart';
 import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
 import 'package:freelancer_tracking_system/core/theme/language.dart';
+import 'package:freelancer_tracking_system/features/clients/clients_add_screen.dart';
+import 'package:freelancer_tracking_system/features/projects/projectAddScreen.dart';
 
 class _FastCard extends StatelessWidget {
   final Color iconContainerColorOne;
@@ -54,7 +57,7 @@ class _FastCard extends StatelessWidget {
                 SizedBox(width: 16),
                 GestureDetector(
                   onTap: () {
-                    print('object');
+                    onTap();
                   },
                   child: Container(
                     width: 28,
@@ -101,7 +104,7 @@ class _fastTransactionsState extends State<fastTransactions> {
         iconContainerColorTwo: Color.fromARGB(255, 240, 153, 255),
         iconTwoColor: Colors.purple,
         onTap: () {
-          print('object');
+          AppNavigation.navigateTo(context, ClientAddScreen());
         },
       ),
       _FastCard(
@@ -112,7 +115,7 @@ class _fastTransactionsState extends State<fastTransactions> {
         iconContainerColorTwo: const Color.fromARGB(255, 196, 249, 198),
         iconTwoColor: Colors.green,
         onTap: () {
-          print('object');
+          AppNavigation.navigateTo(context, ClientAddScreen());
         },
       ),
       _FastCard(
@@ -123,7 +126,7 @@ class _fastTransactionsState extends State<fastTransactions> {
         iconContainerColorTwo: const Color.fromARGB(255, 255, 245, 213),
         iconTwoColor: const Color.fromARGB(255, 255, 188, 4),
         onTap: () {
-          print('object');
+          AppNavigation.navigateTo(context, TaskAddPage());
         },
       ),
       _FastCard(

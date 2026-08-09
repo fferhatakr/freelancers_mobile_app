@@ -14,6 +14,7 @@ class ClientAddScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.green[400],
         title: Text(
           'Yeni Müşteri',
           style: TextStyle(fontWeight: FontWeight.bold),

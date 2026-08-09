@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:freelancer_tracking_system/features/clients/clients_add_screen.dart';
 import 'package:freelancer_tracking_system/features/dashboard/homePage.dart';
+import 'package:freelancer_tracking_system/features/projects/projectAddScreen.dart';
+import 'package:freelancer_tracking_system/features/projects/widgets/projectAddWidget.dart';
 
 void main() {
   runApp(const MyApp());

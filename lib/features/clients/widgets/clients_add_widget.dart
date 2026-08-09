@@ -19,17 +19,17 @@ class ClientAdd extends StatelessWidget {
       height: 75,
       width: double.infinity,
       decoration: BoxDecoration(
-        color: Colors.white70,
+        color: Colors.blueGrey[50],
         borderRadius: BorderRadius.all(Radius.circular(20)),
       ),
       child: ListTile(
-        leading: Icon(icon, size: 20),
+        leading: Icon(icon, size: 20, color: Colors.green[800]),
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(title, style: TextStyle(fontSize: 15)),
             SizedBox(
-              height: 24,
+              height: 36,
               child: TextField(
                 controller: TextEditingController(),
                 decoration: InputDecoration(
