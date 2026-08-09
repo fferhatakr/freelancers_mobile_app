@@ -17,4 +17,5 @@ class AppColors {
   static const Color containerGoldColor = Color.fromARGB(255, 124, 87, 8);
   static const Color textStyle = Colors.white;
   static const Color dashboardBackground = Color(0xFFF5F5F5);
+  static const Color hintTextcolor = Colors.grey;
 }

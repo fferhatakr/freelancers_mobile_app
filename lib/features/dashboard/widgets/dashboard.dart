@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:freelancer_tracking_system/core/navigation/app_navigation.dart';
 import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
 import 'package:freelancer_tracking_system/core/theme/language.dart';
 import 'package:freelancer_tracking_system/features/projects/projectList.dart';
@@ -28,7 +29,7 @@ class _DashboardState extends State<Dashboard> {
           IconButton(onPressed: () {}, icon: Icon(Icons.notifications)),
           IconButton(
             onPressed: () {
-              navigateToWidget(context, SettingsScreen());
+              AppNavigation.navigateTo(context, SettingsScreen());
             },
             icon: Icon(Icons.settings),
           ),
@@ -44,16 +45,6 @@ class _DashboardState extends State<Dashboard> {
             fastTransactions(),
           ],
         ),
-      ),
-    );
-  }
-
-  void navigateToWidget(BuildContext context, Widget widget) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) {
-          return widget;
-        },
       ),
     );
   }

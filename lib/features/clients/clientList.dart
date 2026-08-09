@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:freelancer_tracking_system/core/navigation/app_navigation.dart';
 import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
+import 'package:freelancer_tracking_system/features/clients/clients_add_screen.dart';
 import 'package:freelancer_tracking_system/features/clients/widgets/clientWidget.dart';
 
 class ClientListPage extends StatefulWidget {
@@ -42,7 +44,7 @@ class _ClientListPageState extends State<ClientListPage> {
         actions: [
           IconButton(
             onPressed: () {
-              print('Müşteri Ekleme Çok yakında');
+              AppNavigation.navigateTo(context, ClientAddScreen());
             },
             icon: Container(
               height: 48,
