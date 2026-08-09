@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/features/projects/widgets/projectAddWidget.dart';
 
-class TaskAddPage extends StatelessWidget {
-  const TaskAddPage({super.key});
+class ProjectAddPage extends StatelessWidget {
+  const ProjectAddPage({super.key});
 
   @override
   Widget build(BuildContext context) {
