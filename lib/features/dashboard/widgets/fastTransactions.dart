@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
 import 'package:freelancer_tracking_system/core/theme/language.dart';
 
 class _FastCard extends StatelessWidget {
@@ -7,7 +8,7 @@ class _FastCard extends StatelessWidget {
   final String title1;
   final String title2;
   final Color iconContainerColorTwo;
-
+  final VoidCallback onTap;
   final Color iconTwoColor;
 
   const _FastCard({
@@ -16,13 +17,14 @@ class _FastCard extends StatelessWidget {
     required this.title1,
     required this.title2,
     required this.iconContainerColorTwo,
-
     required this.iconTwoColor,
+    required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: AppColors.activeProjectCardColor,
       elevation: FastTransactionsCard.elevation,
       shape: RoundedRectangleBorder(borderRadius: cardBorderRadius()),
       child: Padding(
@@ -98,6 +100,9 @@ class _fastTransactionsState extends State<fastTransactions> {
         title2: language.yeniFaturaekle,
         iconContainerColorTwo: Color.fromARGB(255, 240, 153, 255),
         iconTwoColor: Colors.purple,
+        onTap: () {
+          print('object');
+        },
       ),
       _FastCard(
         iconContainerColorOne: Colors.green,
@@ -106,6 +111,9 @@ class _fastTransactionsState extends State<fastTransactions> {
         title2: language.musteriKaydiEkle,
         iconContainerColorTwo: const Color.fromARGB(255, 196, 249, 198),
         iconTwoColor: Colors.green,
+        onTap: () {
+          print('object');
+        },
       ),
       _FastCard(
         iconContainerColorOne: Colors.amber,
@@ -114,6 +122,9 @@ class _fastTransactionsState extends State<fastTransactions> {
         title2: language.yeniKazancSagla,
         iconContainerColorTwo: const Color.fromARGB(255, 255, 245, 213),
         iconTwoColor: const Color.fromARGB(255, 255, 188, 4),
+        onTap: () {
+          print('object');
+        },
       ),
       _FastCard(
         iconContainerColorOne: const Color.fromARGB(255, 255, 53, 39),
@@ -122,6 +133,9 @@ class _fastTransactionsState extends State<fastTransactions> {
         title2: language.projeniSaglamaAl,
         iconContainerColorTwo: const Color.fromARGB(255, 255, 195, 190),
         iconTwoColor: Colors.red,
+        onTap: () {
+          print('object');
+        },
       ),
     ];
   }
@@ -167,6 +181,7 @@ TextStyle title2Style() {
 
 TextStyle title1Style() {
   return TextStyle(
+    color: Colors.white,
     fontWeight: FontWeight.bold,
     fontSize: FastTransactionsCard.fontSize,
   );

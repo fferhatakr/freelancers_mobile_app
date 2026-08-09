@@ -6,10 +6,16 @@ import 'package:freelancer_tracking_system/features/dashboard/widgets/activeProj
 import 'package:freelancer_tracking_system/features/dashboard/widgets/ozet_cards.dart';
 import 'package:freelancer_tracking_system/features/dashboard/widgets/fastTransactions.dart';
 import 'package:freelancer_tracking_system/features/dashboard/widgets/statics.dart';
+import 'package:freelancer_tracking_system/features/settings/settings_screen.dart';
 
-class Dashboard extends StatelessWidget {
+class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
 
+  @override
+  State<Dashboard> createState() => _DashboardState();
+}
+
+class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +26,12 @@ class Dashboard extends StatelessWidget {
         centerTitle: false,
         actions: [
           IconButton(onPressed: () {}, icon: Icon(Icons.notifications)),
-          IconButton(onPressed: () {}, icon: Icon(Icons.settings)),
+          IconButton(
+            onPressed: () {
+              navigateToWidget(context, SettingsScreen());
+            },
+            icon: Icon(Icons.settings),
+          ),
         ],
       ),
       body: SingleChildScrollView(
@@ -33,6 +44,16 @@ class Dashboard extends StatelessWidget {
             fastTransactions(),
           ],
         ),
+      ),
+    );
+  }
+
+  void navigateToWidget(BuildContext context, Widget widget) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) {
+          return widget;
+        },
       ),
     );
   }
