@@ -9,29 +9,28 @@ class TasksPage extends StatelessWidget {
 
   final List<Map<String, String>> dummyTasks = [
     {
-      'taskName': 'Revize1',
-      'taskDescription': 'Mobile Uygulama',
+      'taskName': 'App',
+      'taskDescription': 'Mobile Uygulamaya',
       'time': '3.42',
+      'date': '3 Ekim',
+      'status': 'Zor',
+      'value': '90',
     },
     {
-      'taskName': 'Revize2',
-      'taskDescription': 'Mobile Uygulama',
-      'time': '3.42',
+      'taskName': 'Revize',
+      'taskDescription': 'Yönetim Paneline Ekleme',
+      'time': '2.30',
+      'date': '5 Ağustos',
+      'status': 'Orta',
+      'value': '60',
     },
     {
-      'taskName': 'Revize3',
-      'taskDescription': 'Mobile Uygulama',
+      'taskName': 'App',
+      'taskDescription': 'Mobile Uygulamaya',
       'time': '3.42',
-    },
-    {
-      'taskName': 'Revize4',
-      'taskDescription': 'Mobile Uygulama',
-      'time': '3.42',
-    },
-    {
-      'taskName': 'Revize5',
-      'taskDescription': 'Mobile Uygulama',
-      'time': '3.42',
+      'date': '3 Ekim',
+      'status': 'Kolay',
+      'value': '40',
     },
   ];
 
@@ -60,7 +59,7 @@ class TasksPage extends StatelessWidget {
               width: 40,
               height: 40,
               decoration: BoxDecoration(
-                color: Colors.blueGrey,
+                color: Colors.amber,
                 borderRadius: BorderRadius.all(Radius.circular(64)),
               ),
               child: IconButton(
@@ -87,6 +86,9 @@ class TasksPage extends StatelessWidget {
                     taskName: dummyTasks[index]['taskName']!,
                     taskDescription: dummyTasks[index]['taskDescription']!,
                     time: dummyTasks[index]['time']!,
+                    date: dummyTasks[index]['date']!,
+                    status: dummyTasks[index]['status']!,
+                    value: dummyTasks[index]['value']!,
                   );
                 },
               ),

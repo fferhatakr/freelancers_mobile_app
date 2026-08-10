@@ -6,25 +6,30 @@ class TasksCards extends StatelessWidget {
   final String taskName;
   final String taskDescription;
   final String time;
+  final String date;
+  final String status;
+  final String value;
 
   const TasksCards({
     required this.taskName,
     required this.taskDescription,
     required this.time,
+    required this.date,
+    required this.status,
+    required this.value,
   });
-
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: _CardFeatures.height,
-      child: SizedBox(
-        height: 100,
-        child: Card(
-          color: ActiveProjectStyle.activeProjectCardColor,
-          shape: _cardShape(),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
+    return Card(
+      color: Colors.blueAccent[50],
+      shape: _cardShape(),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          spacing: 20,
+          children: [
+            Row(
+              spacing: 10,
               children: [
                 Column(
                   children: [
@@ -32,7 +37,7 @@ class TasksCards extends StatelessWidget {
                       height: _CardFeatures.containerHeight,
                       width: _CardFeatures.containerWidht,
                       decoration: BoxDecoration(
-                        color: Color.fromRGBO(212, 167, 44, 1),
+                        color: levelColor(status),
                         borderRadius: BorderRadius.all(Radius.circular(10)),
                       ),
                       child: Icon(
@@ -42,65 +47,24 @@ class TasksCards extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(width: 10),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       taskName,
                       style: TextStyle(
-                        color: _CardFeatures.textColor,
+                        color: Colors.black,
                         fontSize: 18,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
-                    SizedBox(height: 5),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.work_outline,
-                          color: Color.fromRGBO(142, 147, 155, 1),
-                        ),
-                        SizedBox(width: 5),
-                        Text(
-                          taskDescription,
-                          style: TextStyle(
-                            color: Color.fromRGBO(142, 147, 155, 1),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 5),
-                    Container(
-                      width: 120,
-                      height: 20,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                        color: Color.fromRGBO(212, 167, 44, 1),
+                    SizedBox(width: 5),
+                    Text(
+                      taskDescription,
+                      style: TextStyle(
+                        color: Color.fromRGBO(47, 47, 49, 1),
+                        fontSize: 14,
                       ),
-                      child: Center(
-                        child: Text(
-                          '+++',
-                          style: TextStyle(color: Colors.red[800]),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 5),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.watch_later_outlined,
-                          color: Color.fromRGBO(230, 193, 90, 1),
-                        ),
-                        SizedBox(width: 5),
-                        Text(
-                          time.toString(),
-                          style: TextStyle(
-                            color: Color.fromRGBO(230, 193, 90, 1),
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ],
                     ),
                   ],
                 ),
@@ -112,22 +76,79 @@ class TasksCards extends StatelessWidget {
                       print('Başlatiliyor');
                     },
                     child: Container(
-                      width: 40,
-                      height: 40,
+                      width: 75,
+                      height: 30,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(10)),
-                        color: Color.fromRGBO(230, 193, 90, 1),
+                        color: Colors.blueGrey[100],
                       ),
-                      child: Icon(
-                        Icons.play_arrow,
-                        color: Colors.amberAccent[800],
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.circle,
+                            color: levelColor(status),
+                            size: 16,
+                          ),
+                          Text(
+                            status,
+                            style: TextStyle(
+                              color: levelColor(status),
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
                 ),
               ],
             ),
-          ),
+            Row(
+              spacing: 10,
+              children: [
+                SizedBox(
+                  width: 300,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(50),
+                    child: LinearProgressIndicator(
+                      minHeight: 3,
+                      value: double.parse(value) / 100,
+                      color: levelColor(status),
+                    ),
+                  ),
+                ),
+
+                Text('$value%', style: TextStyle(fontWeight: FontWeight.w500)),
+              ],
+            ),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(
+                  width: 150,
+                  child: Row(
+                    children: [Icon(Icons.watch_later_outlined), Text(time)],
+                  ),
+                ),
+                Expanded(
+                  child: Row(
+                    children: [Icon(Icons.calendar_month), Text(date)],
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    print('Başlatiliyor');
+                  },
+                  child: CircleAvatar(
+                    child: Icon(Icons.play_arrow_rounded, color: Colors.white),
+                    backgroundColor: levelColor(status),
+                  ),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );
@@ -141,10 +162,20 @@ class TasksCards extends StatelessWidget {
 }
 
 class _CardFeatures {
-  static double height = 140;
   static double containerHeight = 48;
   static double containerWidht = 48;
-  static Color textColor = Color.fromRGBO(245, 245, 245, 1);
 }
 
 enum Levels { kolay, orta, zor }
+
+levelColor(String status) {
+  if (status == 'Zor') {
+    return Color.fromRGBO(255, 69, 69, 1);
+  } else if (status == 'Orta') {
+    return Color.fromRGBO(255, 153, 0, 1);
+  } else if (status == 'Kolay') {
+    return Color.fromRGBO(76, 175, 80, 1);
+  } else {
+    print('Derece Belirtin');
+  }
+}
