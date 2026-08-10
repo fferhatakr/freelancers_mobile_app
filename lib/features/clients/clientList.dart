@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/core/navigation/app_navigation.dart';
+import 'package:freelancer_tracking_system/core/theme/app_all_style.dart';
+import 'package:freelancer_tracking_system/core/theme/app_style.dart';
 import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
 import 'package:freelancer_tracking_system/features/clients/clients_add_screen.dart';
 import 'package:freelancer_tracking_system/features/clients/widgets/clientWidget.dart';
@@ -29,14 +31,8 @@ class _ClientListPageState extends State<ClientListPage> {
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              language.musteriler,
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            Text(
-              language.musterileriYonet,
-              style: TextStyle(fontSize: 12, fontWeight: FontWeight.w300),
-            ),
+            Text(language.musteriler, style: _appBarTitle()),
+            Text(language.musterileriYonet, style: _appBarSubtitle()),
           ],
         ),
 
@@ -46,36 +42,16 @@ class _ClientListPageState extends State<ClientListPage> {
             onPressed: () {
               AppNavigation.navigateTo(context, ClientAddScreen());
             },
-            icon: Container(
-              height: 48,
-              width: 48,
-              decoration: BoxDecoration(
-                color: AppColors.clientListDecoration,
-                borderRadius: BorderRadius.all(Radius.circular(30)),
-              ),
-              child: Icon(
-                Icons.person_add_alt_1_outlined,
-                color: AppColors.personIconColor,
-              ),
-            ),
+            icon: _personAdd(),
           ),
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(GeneralStyle.paddingSize),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextField(
-              autofocus: true,
-              maxLength: 30,
-              decoration: InputDecoration(
-                prefixIcon: Icon(Icons.search_outlined),
-                labelText: language.hizliArama,
-                hintText: language.musteriAra,
-                hintStyle: TextStyle(color: AppColors.hintTextColor),
-              ),
-            ),
+            _clientSearch(),
             Expanded(
               child: ListView.builder(
                 itemCount: dummyClient.length,
@@ -91,6 +67,40 @@ class _ClientListPageState extends State<ClientListPage> {
           ],
         ),
       ),
+    );
+  }
+
+  TextField _clientSearch() {
+    return TextField(
+      autofocus: true,
+      maxLength: GeneralStyle.textFieldMaxLenght,
+      decoration: InputDecoration(
+        prefixIcon: Icon(Icons.search_outlined),
+        labelText: language.hizliArama,
+        hintText: language.musteriAra,
+        hintStyle: TextStyle(color: GeneralStyle.hintTextcolor),
+      ),
+    );
+  }
+
+  CircleAvatar _personAdd() {
+    return CircleAvatar(
+      backgroundColor: ClientsStyle.circleAvatarColor,
+      child: Icon(Icons.person_add, color: ClientsStyle.personIconColor),
+    );
+  }
+
+  TextStyle _appBarSubtitle() {
+    return TextStyle(
+      fontSize: GeneralStyle.appBarSubtitleSize,
+      fontWeight: FontWeight.w300,
+    );
+  }
+
+  TextStyle _appBarTitle() {
+    return TextStyle(
+      fontSize: GeneralStyle.appBarTitleSize,
+      fontWeight: FontWeight.bold,
     );
   }
 }

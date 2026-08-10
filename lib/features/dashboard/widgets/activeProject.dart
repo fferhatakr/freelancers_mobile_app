@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:freelancer_tracking_system/core/theme/app_colors.dart';
+import 'package:freelancer_tracking_system/core/theme/app_all_style.dart';
+import 'package:freelancer_tracking_system/core/theme/app_style.dart';
 import 'package:freelancer_tracking_system/core/theme/language.dart';
-import 'package:freelancer_tracking_system/features/dashboard/widgets/fastTransactions.dart';
 
 class _ActiveProjects extends StatelessWidget {
   final Color containerColor;
@@ -27,34 +27,38 @@ class _ActiveProjects extends StatelessWidget {
     return Column(
       children: [
         Card(
-          color: AppColors.activeProjectCardColor,
-          elevation: 6,
+          color: ActiveProjectStyle.activeProjectCardColor,
+          elevation: GeneralStyle.elevation,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10)),
+            borderRadius: BorderRadius.all(
+              Radius.circular(GeneralStyle.shapeSize),
+            ),
           ),
           child: Padding(
-            padding: EdgeInsetsGeometry.all(12),
+            padding: EdgeInsetsGeometry.all(GeneralStyle.paddingSize),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
+                  spacing: GeneralStyle.rowSpacing,
                   children: [
                     Container(
-                      width: 40,
-                      height: 40,
+                      width: ActiveProjectStyle.containerWidht,
+                      height: ActiveProjectStyle.containerWidht,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(GeneralStyle.paddingSize),
+                        ),
                         color: containerColor,
                       ),
                       child: Icon(icon, color: containerIconColor),
                     ),
-                    SizedBox(width: 10),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(title1, style: _title1Style()),
                         Text(title2, style: _title2Style()),
-                        Text(title3, style: TextStyle(color: Colors.white)),
+                        Text(title3, style: _title3Style()),
                       ],
                     ),
                     Spacer(),
@@ -63,15 +67,20 @@ class _ActiveProjects extends StatelessWidget {
                       child: Container(
                         decoration: BoxDecoration(
                           color: containerTwoColor,
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(GeneralStyle.borderRadius),
+                          ),
                         ),
-                        height: 24,
-                        width: 24,
+                        height: ActiveProjectStyle.miniContainer,
+                        width: ActiveProjectStyle.miniContainer,
                         child: GestureDetector(
                           onTap: () {
                             print('object');
                           },
-                          child: Icon(Icons.chevron_right, color: Colors.white),
+                          child: Icon(
+                            Icons.chevron_right,
+                            color: ActiveProjectStyle.iconChevronColor,
+                          ),
                         ),
                       ),
                     ),
@@ -101,67 +110,40 @@ class _ActiveProjectState extends State<ActiveProject> {
     super.initState();
     _items = [
       _ActiveProjects(
-        containerColor: AppColors.containerGoldColor,
-        containerIconColor: AppColors.containerIConGoldColor,
+        containerColor: ActiveProjectStyle.containerGoldColor,
+        containerIconColor: ActiveProjectStyle.containerIConGoldColor,
         icon: Icons.add_shopping_cart_rounded,
-        title1: 'E-Ticaret Sitesi',
-        title2: 'İnteraktif',
-        title3: 'title3',
-        containerTwoColor: AppColors.containerGoldColor,
+        title1: language.eTicaretSitesi,
+        title2: language.interaktif,
+        title3: language.bar,
+        containerTwoColor: ActiveProjectStyle.containerGoldColor,
       ),
       _ActiveProjects(
-        containerColor: AppColors.containerBlueColor,
-        containerIconColor: AppColors.containerIconBlueColor,
+        containerColor: ActiveProjectStyle.containerBlueColor,
+        containerIconColor: ActiveProjectStyle.containerIconBlueColor,
         icon: Icons.phone_android_rounded,
-        title1: 'Mobile Uygulama',
-        title2: 'Mobile App',
-        title3: 'Bar',
-        containerTwoColor: AppColors.containerBlueColor,
+        title1: language.mobileUygulama,
+        title2: language.mobileApp,
+        title3: language.bar,
+        containerTwoColor: ActiveProjectStyle.containerBlueColor,
       ),
       _ActiveProjects(
-        containerColor: AppColors.containerGoldColor,
-        containerIconColor: AppColors.containerIConGoldColor,
+        containerColor: ActiveProjectStyle.containerGoldColor,
+        containerIconColor: ActiveProjectStyle.containerIConGoldColor,
         icon: Icons.admin_panel_settings_outlined,
-        title1: 'Yönetim Paneli',
-        title2: 'Dashboard',
-        title3: 'Bar',
-        containerTwoColor: AppColors.containerGoldColor,
+        title1: language.yonetimPaneli,
+        title2: language.dashboard,
+        title3: language.bar,
+        containerTwoColor: ActiveProjectStyle.containerGoldColor,
       ),
       _ActiveProjects(
-        containerColor: AppColors.containerBlueColor,
-        containerIconColor: AppColors.containerIconBlueColor,
+        containerColor: ActiveProjectStyle.containerBlueColor,
+        containerIconColor: ActiveProjectStyle.containerIconBlueColor,
         icon: Icons.language_outlined,
-        title1: 'Kurumsal Website',
-        title2: 'Web Tasarim',
-        title3: 'Bar',
-        containerTwoColor: AppColors.containerBlueColor,
-      ),
-      _ActiveProjects(
-        containerColor: AppColors.containerBlueColor,
-        containerIconColor: AppColors.containerIconBlueColor,
-        icon: Icons.language_outlined,
-        title1: 'Kurumsal Website',
-        title2: 'Web Tasarim',
-        title3: 'Bar',
-        containerTwoColor: AppColors.containerBlueColor,
-      ),
-      _ActiveProjects(
-        containerColor: AppColors.containerBlueColor,
-        containerIconColor: AppColors.containerIconBlueColor,
-        icon: Icons.language_outlined,
-        title1: 'Kurumsal Website',
-        title2: 'Web Tasarim',
-        title3: 'Bar',
-        containerTwoColor: AppColors.containerBlueColor,
-      ),
-      _ActiveProjects(
-        containerColor: AppColors.containerBlueColor,
-        containerIconColor: AppColors.containerIconBlueColor,
-        icon: Icons.language_outlined,
-        title1: 'Kurumsal Website',
-        title2: 'Web Tasarim',
-        title3: 'Bar',
-        containerTwoColor: AppColors.containerBlueColor,
+        title1: language.kurumsalWebsite,
+        title2: language.webTasarim,
+        title3: language.bar,
+        containerTwoColor: ActiveProjectStyle.containerBlueColor,
       ),
     ];
   }
@@ -172,14 +154,17 @@ class _ActiveProjectState extends State<ActiveProject> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(GeneralStyle.paddingSize),
           child: Text(
             language.aktifProje,
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            style: TextStyle(
+              fontSize: GeneralStyle.columnMiniTitle,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
         SizedBox(
-          height: 355,
+          height: ActiveProjectStyle.activeProjectSizedBox,
           child: ListView.builder(
             itemCount: _items.length,
             itemBuilder: ((context, index) {
@@ -195,14 +180,16 @@ class _ActiveProjectState extends State<ActiveProject> {
 TextStyle _title1Style() {
   return TextStyle(
     fontWeight: FontWeight.bold,
-    fontSize: FastTransactionsCard.fontSize,
-    color: AppColors.textStyle,
+    fontSize: FastTransactionsCardStyle.fontSize,
+    color: ActiveProjectStyle.textColor,
   );
 }
 
+TextStyle _title3Style() => TextStyle(color: ActiveProjectStyle.textColor);
+
 TextStyle _title2Style() {
   return TextStyle(
-    color: AppColors.textStyle,
-    fontSize: FastTransactionsCard.title2fontSize,
+    color: ActiveProjectStyle.textColor,
+    fontSize: FastTransactionsCardStyle.title2fontSize,
   );
 }

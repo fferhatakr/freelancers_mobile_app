@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:freelancer_tracking_system/core/theme/app_colors.dart';
+import 'package:freelancer_tracking_system/core/theme/app_all_style.dart';
 
 class ProjectAddWidget extends StatelessWidget {
   final IconData _icon;
@@ -33,7 +33,7 @@ class ProjectAddWidget extends StatelessWidget {
               decoration: InputDecoration(
                 hint: Text(
                   _title2,
-                  style: TextStyle(color: AppColors.hintTextColor),
+                  style: TextStyle(color: GeneralStyle.hintTextcolor),
                 ),
               ),
             ),

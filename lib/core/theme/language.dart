@@ -10,7 +10,7 @@ class language {
   static String hizliIslemler = 'Hızlı İşlemler';
   static String faturaOlustur = 'Fatura Oluştur';
   static String yeniFaturaekle = 'Yeni Fatura Ekle';
-  static String yeniMusteri = 'Yeni Musteri';
+  static String yeniMusteri = 'Yeni Müşteri';
   static String musteriKaydiEkle = 'Müşteri Kaydı Ekle';
   static String projeEkle = 'Proje Ekle';
   static String yeniKazancSagla = 'Yeni Kazanç Sağla';
@@ -44,7 +44,43 @@ class language {
   static String uygulamaHakkinda = 'Uygulama Hakkında';
   static String uygulamaHakkindaAciklama = 'Uygulama sürümü ve bilgiler';
   static String oturumuKapat = 'Oturumu Kapat';
+  static String kaydet = 'Kaydet';
+  static String info = 'Kaydedildiginde müşteri listenizde görünecektir';
+  static String musteriBilgileri = 'Müşteri Bilgileri';
 
+  static String adSoyad = 'Ad Soyad';
+  static String adSoyadAciklama = 'Müşteri adı soyadı';
+  static String eposta = 'E-posta';
+  static String epostaAciklama = 'ornek@mail.com';
+  static String telefon = 'Telefon';
+  static String telefonAciklama = '5XX XXX XX XX';
+  static String firmaAdi = 'Firma Adı';
+  static String firmaAdiAciklama = 'Firma adı(opsiyonel)';
+  static String aciklamaEkle = 'Açıklama';
+  static String aciklama = 'Not ekleyin(opsiyonel)';
+  static String adresTitle = 'Adres Bilgileri';
+  static String adres = 'Adres';
+  static String adresAciklama = 'Adres Bilgileri(opsiyonel)';
+  static String not = 'Not Ekle';
+  static String notAciklama = 'Müşterin ile ilgili not ekle(opsiyonel)';
+  static String adresBilgileri = 'Adres Bilgileri';
+  static String notlarTitle = 'Notlar';
+  static String kaynakTitle = 'Müşteri Kaynağı';
+  static String kaynak = 'Kaynak';
+  static String kaynakAciklama = 'Müşterini Nereden Buldun(opsiyonel)';
+
+  static String eTicaretSitesi = 'E-Ticaret Sitesi';
+  static String interaktif = 'İnteraktif';
+
+  static String mobileUygulama = 'Mobile Uygulama';
+  static String mobileApp = 'Mobile App';
+  static String bar = 'Bar';
+
+  static String yonetimPaneli = 'Yönetim Paneli';
+  static String dashboard = 'Dashboard';
+
+  static String kurumsalWebsite = 'Kurumsal Website';
+  static String webTasarim = 'Web Tasarim';
   List<Object> aktifProjeler = [
     {hardcodeVeri().project1},
     {hardcodeVeri().project2},

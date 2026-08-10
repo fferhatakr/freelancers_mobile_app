@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:freelancer_tracking_system/core/theme/app_style.dart';
 import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
 
 class staticsLineChart extends StatelessWidget {
@@ -19,7 +20,7 @@ class staticsLineChart extends StatelessWidget {
           SizedBox(height: 8),
           Container(
             decoration: BoxDecoration(
-              color: AppColors.activeProjectCardColor,
+              color: ActiveProjectStyle.activeProjectCardColor,
               borderRadius: BorderRadius.all(Radius.circular(10)),
             ),
             height: 250,

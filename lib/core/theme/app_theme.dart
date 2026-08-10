@@ -1,3 +1,3 @@
-export 'app_colors.dart';
+export 'app_all_style.dart';
 export 'language.dart';
-export 'app_spacing.dart';
+export 'app_style.dart';

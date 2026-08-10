@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/core/navigation/app_navigation.dart';
 import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
-import 'package:freelancer_tracking_system/core/theme/language.dart';
 import 'package:freelancer_tracking_system/features/clients/clients_add_screen.dart';
 import 'package:freelancer_tracking_system/features/projects/projectAddScreen.dart';
 import 'package:freelancer_tracking_system/features/tasks/tasksAddPage.dart';
@@ -28,8 +27,8 @@ class _FastCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: AppColors.activeProjectCardColor,
-      elevation: FastTransactionsCard.elevation,
+      color: ActiveProjectStyle.activeProjectCardColor,
+      elevation: GeneralStyle.elevation,
       shape: RoundedRectangleBorder(borderRadius: cardBorderRadius()),
       child: Padding(
         padding: cardPadding(),
@@ -37,17 +36,21 @@ class _FastCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
+              spacing: GeneralStyle.rowSpacing,
               children: [
                 Container(
-                  height: FastTransactionsCard.sizeContainer,
-                  width: FastTransactionsCard.sizeContainer,
+                  height: FastTransactionsCardStyle.sizeContainer,
+                  width: FastTransactionsCardStyle.sizeContainer,
                   decoration: BoxDecoration(
                     borderRadius: cardBorderRadius(),
                     color: iconContainerColorOne,
                   ),
-                  child: Icon(iconOne, color: Colors.white, size: 18),
+                  child: Icon(
+                    iconOne,
+                    color: FastTransactionsCardStyle.iconColor,
+                    size: FastTransactionsCardStyle.iconSize,
+                  ),
                 ),
-                SizedBox(width: 10),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -55,21 +58,22 @@ class _FastCard extends StatelessWidget {
                     Text(title2, style: title2Style()),
                   ],
                 ),
-                SizedBox(width: 16),
                 GestureDetector(
                   onTap: () {
                     onTap();
                   },
                   child: Container(
-                    width: 28,
-                    height: 28,
+                    width: FastTransactionsCardStyle.iconSizeContainer,
+                    height: FastTransactionsCardStyle.iconSizeContainer,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(GeneralStyle.borderRadius),
+                      ),
                       color: iconContainerColorTwo,
                     ),
                     child: Icon(
                       Icons.arrow_forward_ios,
-                      size: 16,
+                      size: FastTransactionsCardStyle.iconChevronSize,
                       color: iconTwoColor,
                     ),
                   ),
@@ -98,45 +102,47 @@ class _fastTransactionsState extends State<fastTransactions> {
     super.initState();
     _items = [
       _FastCard(
-        iconContainerColorOne: Colors.purple,
+        iconContainerColorOne: FastTransactionsCardStyle.faturaContainerColor,
         iconOne: Icons.task,
         title1: language.faturaOlustur,
         title2: language.yeniFaturaekle,
-        iconContainerColorTwo: Color.fromARGB(255, 240, 153, 255),
-        iconTwoColor: Colors.purple,
+        iconContainerColorTwo:
+            FastTransactionsCardStyle.faturaIconContainerColor,
+        iconTwoColor: FastTransactionsCardStyle.faturaContainerColor,
         onTap: () {
           AppNavigation.navigateTo(context, ClientAddScreen());
         },
       ),
       _FastCard(
-        iconContainerColorOne: Colors.green,
+        iconContainerColorOne:
+            FastTransactionsCardStyle.yeniMusteriContainerColor,
         iconOne: Icons.person_add,
         title1: language.yeniMusteri,
         title2: language.musteriKaydiEkle,
-        iconContainerColorTwo: const Color.fromARGB(255, 196, 249, 198),
-        iconTwoColor: Colors.green,
+        iconContainerColorTwo: FastTransactionsCardStyle.yeniMusteriIconColor,
+        iconTwoColor: FastTransactionsCardStyle.yeniMusteriContainerColor,
         onTap: () {
           AppNavigation.navigateTo(context, ClientAddScreen());
         },
       ),
       _FastCard(
-        iconContainerColorOne: Colors.amber,
+        iconContainerColorOne: FastTransactionsCardStyle.projeContainerColor,
         iconOne: Icons.assignment_add,
         title1: language.projeEkle,
         title2: language.yeniKazancSagla,
-        iconContainerColorTwo: const Color.fromARGB(255, 255, 245, 213),
-        iconTwoColor: const Color.fromARGB(255, 255, 188, 4),
+        iconContainerColorTwo: FastTransactionsCardStyle.projeIconColor,
+        iconTwoColor: FastTransactionsCardStyle.projeContainerColor,
         onTap: () {
           AppNavigation.navigateTo(context, ProjectAddPage());
         },
       ),
       _FastCard(
-        iconContainerColorOne: const Color.fromARGB(255, 255, 53, 39),
+        iconContainerColorOne: FastTransactionsCardStyle.gorevContainerColor,
         iconOne: Icons.add_task,
         title1: language.gorevEkle,
         title2: language.projeniSaglamaAl,
-        iconContainerColorTwo: const Color.fromARGB(255, 255, 195, 190),
-        iconTwoColor: Colors.red,
+        iconContainerColorTwo: FastTransactionsCardStyle.gorevIconColor,
+        iconTwoColor: FastTransactionsCardStyle.gorevContainerColor,
         onTap: () {
           AppNavigation.navigateTo(context, TasksAddPage());
         },
@@ -147,17 +153,20 @@ class _fastTransactionsState extends State<fastTransactions> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(GeneralStyle.paddingSize),
       child: Column(
+        spacing: GeneralStyle.columnSpacing,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             language.hizliIslemler,
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            style: TextStyle(
+              fontSize: GeneralStyle.columnMiniTitle,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-          SizedBox(height: AppSpacing.small),
           SizedBox(
-            height: 75,
+            height: FastTransactionsCardStyle.sizedBoxHeight,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: _items.length,
@@ -172,14 +181,16 @@ class _fastTransactionsState extends State<fastTransactions> {
   }
 }
 
-BorderRadius cardBorderRadius() => BorderRadius.circular(8);
+BorderRadius cardBorderRadius() =>
+    BorderRadius.circular(GeneralStyle.borderRadius);
 
-EdgeInsetsGeometry cardPadding() => EdgeInsetsGeometry.all(12);
+EdgeInsetsGeometry cardPadding() =>
+    EdgeInsetsGeometry.all(GeneralStyle.paddingSize);
 
 TextStyle title2Style() {
   return TextStyle(
-    color: FastTransactionsCard.title2Color,
-    fontSize: FastTransactionsCard.title2fontSize,
+    color: FastTransactionsCardStyle.title2Color,
+    fontSize: FastTransactionsCardStyle.title2fontSize,
   );
 }
 
@@ -187,22 +198,6 @@ TextStyle title1Style() {
   return TextStyle(
     color: Colors.white,
     fontWeight: FontWeight.bold,
-    fontSize: FastTransactionsCard.fontSize,
+    fontSize: FastTransactionsCardStyle.fontSize,
   );
-}
-
-class FastTransactionsCard {
-  static double sizeContainer = 36;
-  static Color? billColor = Colors.purple[600];
-  static Color receiptIconColor = Colors.white;
-  static double fontSize = 14;
-  static double title2fontSize = 11;
-  static Color? title2Color = Colors.grey;
-  static double elevation = 3;
-}
-
-class AppSpacing {
-  static const double small = 8;
-  static const double medium = 12;
-  static const double large = 16;
 }

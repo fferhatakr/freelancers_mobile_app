@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:freelancer_tracking_system/features/projects/widgets/projectAddWidget.dart';
 import 'package:freelancer_tracking_system/features/tasks/widgets/taskAddWidget.dart';
 
 class TasksAddPage extends StatelessWidget {

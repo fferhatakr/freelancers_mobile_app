@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:freelancer_tracking_system/core/theme/app_all_style.dart';
 import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
 
 class TaskAdd extends StatelessWidget {
@@ -30,7 +31,7 @@ class TaskAdd extends StatelessWidget {
           height: 35,
           child: TextField(
             decoration: InputDecoration(hint: Text(_subtitle)),
-            style: TextStyle(color: AppColors.hintTextColor),
+            style: TextStyle(color: GeneralStyle.hintTextcolor),
           ),
         ),
       ),

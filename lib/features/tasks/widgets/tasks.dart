@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:freelancer_tracking_system/core/theme/app_style.dart';
 import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
 
 class TasksCards extends StatelessWidget {
@@ -19,7 +20,7 @@ class TasksCards extends StatelessWidget {
       child: SizedBox(
         height: 100,
         child: Card(
-          color: AppColors.activeProjectCardColor,
+          color: ActiveProjectStyle.activeProjectCardColor,
           shape: _cardShape(),
           child: Padding(
             padding: const EdgeInsets.all(8.0),

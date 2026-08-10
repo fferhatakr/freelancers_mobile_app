@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:freelancer_tracking_system/core/theme/app_colors.dart';
+import 'package:freelancer_tracking_system/core/theme/app_all_style.dart';
+import 'package:freelancer_tracking_system/core/theme/app_style.dart';
 
 class ClientAdd extends StatelessWidget {
   final IconData icon;
@@ -16,35 +16,53 @@ class ClientAdd extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 75,
+      height: ClientsStyle.containerHeight,
       width: double.infinity,
-      decoration: BoxDecoration(
-        color: Colors.blueGrey[50],
-        borderRadius: BorderRadius.all(Radius.circular(20)),
-      ),
+      decoration: ClientAddDecartion(),
       child: ListTile(
-        leading: Icon(icon, size: 20, color: Colors.green[800]),
+        leading: Icon(
+          icon,
+          size: GeneralStyle.iconSize,
+          color: ClientsStyle.addIconColor,
+        ),
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(title, style: TextStyle(fontSize: 15)),
+            Text(title, style: _titleStyle()),
             SizedBox(
-              height: 36,
+              height: ClientsStyle.boxHeight,
               child: TextField(
                 controller: TextEditingController(),
                 decoration: InputDecoration(
-                  hint: Text(
-                    title2,
-                    style: TextStyle(
-                      fontSize: 10,
-                      color: AppColors.hintTextcolor,
-                    ),
-                  ),
+                  hint: Text(title2, style: _hintStyle()),
                 ),
               ),
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  TextStyle _hintStyle() {
+    return TextStyle(
+      fontSize: GeneralStyle.hintTextSize,
+      color: GeneralStyle.hintTextcolor,
+    );
+  }
+
+  TextStyle _titleStyle() {
+    return TextStyle(
+      fontSize: GeneralStyle.fontSize,
+      fontWeight: FontWeight.bold,
+    );
+  }
+
+  BoxDecoration ClientAddDecartion() {
+    return BoxDecoration(
+      color: ClientsStyle.containerColsor,
+      borderRadius: BorderRadius.all(
+        Radius.circular(GeneralStyle.radiusCircular),
       ),
     );
   }

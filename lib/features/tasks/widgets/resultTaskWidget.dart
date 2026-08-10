@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
+import 'package:freelancer_tracking_system/core/theme/app_style.dart';
 
 class ResultTask extends StatelessWidget {
   ResultTask({super.key});
@@ -12,7 +12,7 @@ class ResultTask extends StatelessWidget {
       height: 80,
       child: Card(
         elevation: 10,
-        color: AppColors.activeProjectCardColor,
+        color: ActiveProjectStyle.activeProjectCardColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadiusGeometry.circular(10),
         ),

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/core/navigation/app_navigation.dart';
 import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
-import 'package:freelancer_tracking_system/core/theme/language.dart';
-import 'package:freelancer_tracking_system/features/projects/projectList.dart';
 import 'package:freelancer_tracking_system/features/dashboard/widgets/activeProject.dart';
 import 'package:freelancer_tracking_system/features/dashboard/widgets/ozet_cards.dart';
 import 'package:freelancer_tracking_system/features/dashboard/widgets/fastTransactions.dart';
@@ -20,9 +18,9 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.dashboardBackground,
+      backgroundColor: GeneralStyle.dashboardBackground,
       appBar: AppBar(
-        backgroundColor: AppColors.dashboardBackground,
+        backgroundColor: GeneralStyle.dashboardBackground,
         title: Text(language.hosgeldinKullanici),
         centerTitle: false,
         actions: [
@@ -36,7 +34,7 @@ class _DashboardState extends State<Dashboard> {
         ],
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(10),
+        padding: EdgeInsets.all(GeneralStyle.paddingSize),
         child: Column(
           children: [
             cards(),
