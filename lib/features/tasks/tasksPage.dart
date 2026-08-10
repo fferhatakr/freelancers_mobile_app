@@ -7,14 +7,14 @@ import 'package:freelancer_tracking_system/features/tasks/widgets/tasks.dart';
 class TasksPage extends StatelessWidget {
   TasksPage({super.key});
 
-  final List<Map<String, String>> dummyTasks = [
+  static List<Map<String, String>> dummyTasks = [
     {
       'taskName': 'App',
       'taskDescription': 'Mobile Uygulamaya',
       'time': '3.42',
       'date': '3 Ekim',
       'status': 'Zor',
-      'value': '90',
+      'value': '100',
     },
     {
       'taskName': 'Revize',
@@ -33,6 +33,7 @@ class TasksPage extends StatelessWidget {
       'value': '40',
     },
   ];
+  static var filteredTasks = dummyTasks.where((task) => task['value'] == 100);
 
   @override
   Widget build(BuildContext context) {

@@ -1,0 +1,9 @@
+{
+  "files.exclude": {
+    "**/build/**": true
+  },
+  "dart.showTodos": false,
+  "dart.analysisExcludedFolders": [
+    "build"
+  ]
+}

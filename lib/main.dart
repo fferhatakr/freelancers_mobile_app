@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:freelancer_tracking_system/features/auth/screens/login_page.dart';
 import 'package:freelancer_tracking_system/features/dashboard/homePage.dart';
-import 'package:freelancer_tracking_system/features/tasks/tasksPage.dart';
+import 'firebase_options.dart';
 
 void main() {
   runApp(const MyApp());
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
       ),
 
       debugShowCheckedModeBanner: false,
-      home: TasksPage(),
+      home: LoginPage(),
     );
   }
 }

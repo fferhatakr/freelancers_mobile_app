@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/core/theme/app_style.dart';
+import 'package:freelancer_tracking_system/features/clients/clientList.dart';
+import 'package:freelancer_tracking_system/features/tasks/tasksPage.dart';
 
 class ResultTask extends StatelessWidget {
   ResultTask({super.key});
 
   DateTime now = DateTime.now();
-
+  static int resultProject = TasksPage.dummyTasks.length;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -26,7 +28,7 @@ class ResultTask extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(Icons.article_outlined, color: Colors.black),
-                  Text('12', style: _textStyle()),
+                  Text(resultProject.toString(), style: _textStyle()),
                   Text('Toplam', style: _twoTextStyle()),
                 ],
               ),
@@ -36,7 +38,7 @@ class ResultTask extends StatelessWidget {
                 children: [
                   Icon(Icons.check_outlined, color: Colors.green),
 
-                  Text('8', style: _textStyle()),
+                  Text('1', style: _textStyle()),
                   Text('Tamamlandı', style: _twoTextStyle()),
                 ],
               ),
@@ -46,7 +48,7 @@ class ResultTask extends StatelessWidget {
                 children: [
                   Icon(Icons.watch_later_outlined, color: Colors.amber),
 
-                  Text('4', style: _textStyle()),
+                  Text('2', style: _textStyle()),
                   Text('Devam', style: _twoTextStyle()),
                 ],
               ),
