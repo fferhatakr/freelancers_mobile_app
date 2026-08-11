@@ -28,6 +28,7 @@ class LabeledTextField extends StatelessWidget {
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           TextField(
+            controller: controller,
             obscureText: obscureText,
             decoration: InputDecoration(
               prefixIcon: Icon(prefixIcon),

@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:freelancer_tracking_system/core/navigation/app_navigation.dart';
+import 'package:freelancer_tracking_system/core/theme/app_all_style.dart';
+import 'package:freelancer_tracking_system/features/auth/screens/login_page.dart';
 import 'package:freelancer_tracking_system/features/settings/widgets/avatar.dart';
 import 'package:freelancer_tracking_system/features/settings/widgets/settings_card.dart';
 import 'package:freelancer_tracking_system/core/theme/language.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SettingsScreen extends StatelessWidget {
   @override
@@ -13,6 +17,29 @@ class SettingsScreen extends StatelessWidget {
           'Ayarlar',
           style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(GeneralStyle.paddingSize),
+            child: GestureDetector(
+              onTap: () async {
+                print('Çıkış');
+                await FirebaseAuth.instance.signOut();
+                Navigator.popUntil(context, ModalRoute.withName("/"));
+              },
+              child: Container(
+                height: 36,
+                width: 48,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(GeneralStyle.borderRadius),
+                  ),
+                  color: Colors.red,
+                ),
+                child: Icon(Icons.exit_to_app_outlined, color: Colors.white),
+              ),
+            ),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Padding(

@@ -1,18 +1,21 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/core/theme/app_all_style.dart';
-import 'package:freelancer_tracking_system/features/auth/screens/Widgets.dart';
+import 'package:freelancer_tracking_system/features/auth/screens/LabeledTextField._widgets.dart';
 
 class RegisterPage extends StatefulWidget {
-  const RegisterPage({super.key});
+  RegisterPage({super.key});
+  final name = TextEditingController();
+
   @override
   State<RegisterPage> createState() => _RegisterPageState();
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  final _name = TextEditingController();
-  final _email = TextEditingController();
-  final _password = TextEditingController();
-  final _againPassword = TextEditingController();
+  final TextEditingController name = TextEditingController();
+  final TextEditingController _email = TextEditingController();
+  final TextEditingController _password = TextEditingController();
+  final TextEditingController _againPassword = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +48,7 @@ class _RegisterPageState extends State<RegisterPage> {
         child: Column(
           children: [
             LabeledTextField(
-              controller: _name,
+              controller: name,
               miniTitle: 'Ad Soyad',
               hintText: 'Adınız Soyadınız',
               prefixIcon: Icons.person_2_outlined,
@@ -106,7 +109,23 @@ class _RegisterPageState extends State<RegisterPage> {
               padding: const EdgeInsets.all(8.0),
               child: InkWell(
                 onTap: () async {
-                  print('object');
+                  print('Giriş Yapıldı');
+                  try {
+                    final credential = await FirebaseAuth.instance
+                        .createUserWithEmailAndPassword(
+                          email: _email.text.trim(),
+                          password: _password.text.trim(),
+                        );
+                  } on FirebaseAuthException catch (e) {
+                    if (e.code == 'weak-password') {
+                      print('The password provided is too weak.');
+                    } else if (e.code == 'email-already-in-use') {
+                      print('The account already exists for that email.');
+                    }
+                  } catch (e) {
+                    print(e);
+                  }
+                  Navigator.popUntil(context, ModalRoute.withName("/"));
                 },
                 child: Container(
                   width: double.infinity,
