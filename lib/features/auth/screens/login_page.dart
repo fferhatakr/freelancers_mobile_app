@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:freelancer_tracking_system/core/navigation/app_navigation.dart';
+import 'package:freelancer_tracking_system/features/auth/screens/Widgets.dart';
+import 'package:freelancer_tracking_system/features/auth/screens/register_page.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
-
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final ePostaGir = TextEditingController();
-  final sifreGir = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blueGrey[200],
       appBar: AppBar(),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -45,169 +48,33 @@ class _LoginPageState extends State<LoginPage> {
                 child: Padding(
                   padding: const EdgeInsets.all(20),
                   child: Column(
+                    spacing: 5,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'Giriş Yap',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
-                      ),
-                      Text(
-                        'Hesabınıza giriş yaparak devam edin',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 13,
-                          fontWeight: FontWeight.w300,
-                        ),
-                      ),
-                      SizedBox(height: 15),
-                      Text(
-                        'E-posta',
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.black,
-                        ),
-                      ),
-                      SizedBox(height: 5),
-                      TextField(
-                        controller: ePostaGir,
-                        decoration: InputDecoration(
-                          hintText: 'E-posta adresinizi giriniz',
-                          hintStyle: TextStyle(
-                            color: Colors.black,
-                            fontSize: 13,
-                          ),
-                          prefixIcon: Icon(
-                            Icons.mail_outline_outlined,
-                            color: Colors.black,
-                          ),
-                        ),
+                      LabeledTextField(
+                        controller: _emailController,
+                        miniTitle: 'E-posta',
+                        hintText: 'Lütfen e-posta giriniz',
+                        prefixIcon: Icons.mail_outline,
                       ),
 
-                      SizedBox(height: 10),
-                      Text(
-                        'Şifre',
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.black,
-                        ),
+                      LabeledTextField(
+                        controller: _passwordController,
+                        miniTitle: 'Şifre',
+                        hintText: 'Şifrenizi Giriniz',
+                        prefixIcon: Icons.lock_outline,
                       ),
-                      SizedBox(height: 5),
-                      TextField(
-                        obscureText: true, // Girdiği şifreyi yıldızlar!
-                        controller: sifreGir,
-                        decoration: InputDecoration(
-                          hintText: 'Şifrenizi giriniz',
-                          hintStyle: TextStyle(
-                            color: Colors.black,
-                            fontSize: 13,
-                          ),
-                          prefixIcon: Icon(
-                            Icons.lock_outlined,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          print('Şifremi Unuttum');
-                        },
-                        child: Text(
-                          'Şifremi unuttum?',
-                          style: TextStyle(color: Colors.black),
-                        ),
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          print(sifreGir.text + ePostaGir.text);
-                        },
-                        child: Center(
-                          child: Text(
-                            'Giriş Yap',
-                            style: TextStyle(color: Colors.black),
-                          ),
-                        ),
-                      ),
+                      _sifremiUnuttum(),
+                      _girisYap(),
                       Center(
                         child: Text(
                           'veya',
                           style: TextStyle(color: Colors.black),
                         ),
                       ),
-                      SizedBox(height: 5),
-                      InkWell(
-                        onTap: () {
-                          print('object');
-                        },
-                        child: Container(
-                          width: double.infinity,
-                          height: 50,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            color: Colors.blueGrey[300],
-                          ),
-                          child: Row(
-                            children: [
-                              SizedBox(
-                                width: 32,
-                                child: Icon(
-                                  Icons.g_mobiledata,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              Expanded(
-                                child: Center(
-                                  child: Text(
-                                    'Google ile giriş yap.',
-                                    style: TextStyle(color: Colors.black),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(width: 16),
-                            ],
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 5),
+                      _withLoginGoogle(),
 
-                      InkWell(
-                        onTap: () {
-                          print('object');
-                        },
-                        child: Container(
-                          width: double.infinity,
-                          height: 50,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            color: Colors.blueGrey[300],
-                          ),
-                          child: Row(
-                            children: [
-                              SizedBox(
-                                width: 32,
-                                child: Icon(
-                                  Icons.apple_outlined,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              Expanded(
-                                child: Center(
-                                  child: Text(
-                                    'Apple ile giriş yap.',
-                                    style: TextStyle(color: Colors.black),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(width: 16),
-                            ],
-                          ),
-                        ),
-                      ),
+                      _withLoginApple(),
                     ],
                   ),
                 ),
@@ -218,7 +85,9 @@ class _LoginPageState extends State<LoginPage> {
               children: [
                 Text('Hesabınız Yok mu?'),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    AppNavigation.navigateTo(context, RegisterPage());
+                  },
                   child: Text(
                     'Kayıt Olun',
                     style: TextStyle(
@@ -233,6 +102,92 @@ class _LoginPageState extends State<LoginPage> {
           ],
         ),
       ),
+    );
+  }
+
+  InkWell _withLoginApple() {
+    return InkWell(
+      onTap: () {
+        print('object');
+      },
+      child: Container(
+        width: double.infinity,
+        height: 50,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+          color: Colors.blueGrey[300],
+        ),
+        child: Row(
+          children: [
+            SizedBox(
+              width: 32,
+              child: Icon(Icons.apple_outlined, color: Colors.white),
+            ),
+            Expanded(
+              child: Center(
+                child: Text(
+                  'Apple ile giriş yap.',
+                  style: TextStyle(color: Colors.black),
+                ),
+              ),
+            ),
+            SizedBox(width: 16),
+          ],
+        ),
+      ),
+    );
+  }
+
+  InkWell _withLoginGoogle() {
+    return InkWell(
+      onTap: () {
+        print('object');
+      },
+      child: Container(
+        width: double.infinity,
+        height: 50,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+          color: Colors.blueGrey[300],
+        ),
+        child: Row(
+          children: [
+            SizedBox(
+              width: 32,
+              child: Icon(Icons.g_mobiledata, color: Colors.white),
+            ),
+            Expanded(
+              child: Center(
+                child: Text(
+                  'Google ile giriş yap.',
+                  style: TextStyle(color: Colors.black),
+                ),
+              ),
+            ),
+            SizedBox(width: 16),
+          ],
+        ),
+      ),
+    );
+  }
+
+  ElevatedButton _girisYap() {
+    return ElevatedButton(
+      onPressed: () async {
+        print('object');
+      },
+      child: Center(
+        child: Text('Giriş Yap', style: TextStyle(color: Colors.black)),
+      ),
+    );
+  }
+
+  TextButton _sifremiUnuttum() {
+    return TextButton(
+      onPressed: () {
+        print('Şifremi Unuttum');
+      },
+      child: Text('Şifremi unuttum?', style: TextStyle(color: Colors.black)),
     );
   }
 }

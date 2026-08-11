@@ -4,7 +4,7 @@ import 'package:freelancer_tracking_system/core/theme/app_all_style.dart';
 import 'package:freelancer_tracking_system/core/theme/app_style.dart';
 import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
 import 'package:freelancer_tracking_system/features/clients/clients_add_screen.dart';
-import 'package:freelancer_tracking_system/features/clients/widgets/clientWidget.dart';
+import 'package:freelancer_tracking_system/features/clients/widgets/client_Widget.dart';
 
 class ClientListPage extends StatefulWidget {
   const ClientListPage({super.key});

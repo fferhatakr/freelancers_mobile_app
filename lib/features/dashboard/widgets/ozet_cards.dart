@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:freelancer_tracking_system/core/theme/app_style.dart';
 import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
-import 'package:freelancer_tracking_system/core/theme/language.dart';
-import 'package:freelancer_tracking_system/features/dashboard/widgets/fastTransactions.dart';
 
 class _OzetKarti extends StatelessWidget {
   final IconData ikon;
@@ -57,7 +54,7 @@ class _OzetKarti extends StatelessWidget {
 }
 
 class cards extends StatelessWidget {
-  cards({super.key});
+  const cards({super.key});
 
   @override
   Widget build(BuildContext context) {
