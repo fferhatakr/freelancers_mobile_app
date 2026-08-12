@@ -1,33 +1,69 @@
 import 'package:flutter/material.dart';
+import 'package:freelancer_tracking_system/core/navigation/app_navigation.dart';
 import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
+import 'package:freelancer_tracking_system/features/clients/widgets/clients_detail_page.dart';
 
 class ClientList extends StatelessWidget {
   final String name;
-  final String surname;
   final String email;
-
-  const ClientList({
+  final String telefon;
+  final String? firma;
+  final String? not;
+  final String? adres;
+  final String? source;
+  final String? aciklama;
+  ClientList({
     required this.name,
-    required this.surname,
     required this.email,
+    required this.telefon,
+    this.firma,
+    this.not,
+    this.adres,
+    this.source,
+    this.aciklama,
   });
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: ClientsStyle.listHeight,
+    return InkWell(
+      onTap: () {
+        AppNavigationReplace.navigateTo(
+          context,
+          ClientsDetailPage(
+            adSoyad: name,
+            email: email,
+            telefon: telefon,
+            firma: firma,
+            not: not,
+            adres: adres,
+            source: source,
+            aciklama: aciklama,
+          ),
+        );
+      },
       child: Card(
         elevation: GeneralStyle.elevation,
         shape: _listTileShape(),
         child: ListTile(
           leading: _CircleAvatar(),
 
-          title: Text('$name $surname'),
-          subtitle: Row(
+          title: Text('$name'),
+          subtitle: Column(
             children: [
-              Icon(Icons.email, size: 15),
-              SizedBox(width: 5),
-              Text('$email'),
+              Row(
+                children: [
+                  Icon(Icons.email, size: 15),
+                  SizedBox(width: 5),
+                  Text('$email'),
+                ],
+              ),
+              Row(
+                children: [
+                  Icon(Icons.call, size: 15),
+                  SizedBox(width: 5),
+                  Text('$telefon'),
+                ],
+              ),
             ],
           ),
           trailing: GestureDetector(

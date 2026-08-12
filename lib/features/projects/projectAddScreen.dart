@@ -1,8 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/features/projects/widgets/projectAddWidget.dart';
+import 'package:freelancer_tracking_system/features/tasks/widgets/tasks.dart';
+import 'package:freelancer_tracking_system/provider/project_provider.dart';
+import 'package:provider/provider.dart';
 
 class ProjectAddPage extends StatelessWidget {
-  const ProjectAddPage({super.key});
+  final projectName = TextEditingController();
+  final aciklama = TextEditingController();
+  final projectAmount = TextEditingController();
+  final note = TextEditingController();
+
+  @override
+  void dispose() {
+    projectName.dispose();
+    aciklama.dispose();
+    projectAmount.dispose();
+    note.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +37,7 @@ class ProjectAddPage extends StatelessWidget {
             spacing: 10,
             children: [
               ProjectAddWidget(
+                controller: projectName,
                 icon: Icons.task_sharp,
                 title: 'Proje Adı',
                 title2: 'Proje Adını Giriniz',
@@ -36,6 +51,7 @@ class ProjectAddPage extends StatelessWidget {
                 },
               ),
               ProjectAddWidget(
+                controller: aciklama,
                 icon: Icons.comment,
                 title: 'Açıklama',
                 title2: 'Proje Hakkında Detaylı Bilgi Girin',
@@ -57,6 +73,7 @@ class ProjectAddPage extends StatelessWidget {
                 },
               ),
               ProjectAddWidget(
+                controller: TextEditingController(),
                 icon: Icons.currency_lira_outlined,
                 title: 'Proje Ücreti',
                 title2: '₺ 0.00',
@@ -78,13 +95,19 @@ class ProjectAddPage extends StatelessWidget {
                 },
               ),
               ProjectAddWidget(
+                controller: note,
                 icon: Icons.comment,
                 title: 'Notlar',
                 title2: 'Ek notlarınızı Yazın',
               ),
               ElevatedButton(
                 onPressed: () {
-                  print('Kaydedildi');
+                  final project = ProjectAddProvier(
+                    projectName: projectName.text,
+                  );
+                  context.read<ProjectProvider>().addProject(project);
+                  print('Kaydettik');
+                  Navigator.pop(context);
                 },
                 child: Row(
                   spacing: 10,

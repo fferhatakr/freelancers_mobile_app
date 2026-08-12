@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:freelancer_tracking_system/core/theme/app_all_style.dart';
-import 'package:freelancer_tracking_system/core/theme/app_style.dart';
+import 'package:freelancer_tracking_system/provider/client_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
 import 'package:freelancer_tracking_system/features/clients/widgets/clients_add_widget.dart';
 
-class ClientAddScreen extends StatelessWidget {
+class ClientAddScreen extends StatefulWidget {
+  @override
+  State<ClientAddScreen> createState() => _ClientAddScreenState();
+}
+
+class _ClientAddScreenState extends State<ClientAddScreen> {
   final adSoyadController = TextEditingController();
   final emailController = TextEditingController();
   final telefonController = TextEditingController();
@@ -13,6 +18,19 @@ class ClientAddScreen extends StatelessWidget {
   final adresController = TextEditingController();
   final sourceController = TextEditingController();
   final aciklamaController = TextEditingController();
+  @override
+  void dispose() {
+    adSoyadController.dispose();
+    emailController.dispose();
+    telefonController.dispose();
+    firmaController.dispose();
+    notController.dispose();
+    adresController.dispose();
+    sourceController.dispose();
+    aciklamaController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +41,7 @@ class ClientAddScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(GeneralStyle.paddingSize),
-          child: _clientAddCards(),
+          child: _clientAddCards(context),
         ),
       ),
     );
@@ -40,7 +58,7 @@ class ClientAddScreen extends StatelessWidget {
     );
   }
 
-  Column _clientAddCards() {
+  Column _clientAddCards(BuildContext context) {
     return Column(
       spacing: GeneralStyle.columnSpacing,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -124,16 +142,24 @@ class ClientAddScreen extends StatelessWidget {
         _Info(),
         Padding(
           padding: const EdgeInsets.all(GeneralStyle.paddingSize),
-          child: _elevatedButton(),
+          child: _elevatedButton(context),
         ),
       ],
     );
   }
 
-  ElevatedButton _elevatedButton() {
+  ElevatedButton _elevatedButton(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
-        print('Saved');
+        final customer = Customer(
+          adSoyad: adSoyadController.text,
+          email: emailController.text,
+          telefon: telefonController.text,
+        );
+
+        context.read<CustomerProvider>().addCustomer(customer);
+        print('Kaydettik');
+        Navigator.pop(context);
       },
       child: Center(
         child: Text(

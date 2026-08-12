@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/core/navigation/app_navigation.dart';
 import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
 import 'package:freelancer_tracking_system/features/clients/clients_add_screen.dart';
+import 'package:freelancer_tracking_system/features/dashboard/widgets/bilss_create_widgets.dart';
 import 'package:freelancer_tracking_system/features/projects/projectAddScreen.dart';
 import 'package:freelancer_tracking_system/features/tasks/tasksAddPage.dart';
 
@@ -110,7 +111,7 @@ class _fastTransactionsState extends State<fastTransactions> {
             FastTransactionsCardStyle.faturaIconContainerColor,
         iconTwoColor: FastTransactionsCardStyle.faturaContainerColor,
         onTap: () {
-          AppNavigation.navigateTo(context, ClientAddScreen());
+          AppNavigation.navigateTo(context, BillsCreatedPage());
         },
       ),
       _FastCard(

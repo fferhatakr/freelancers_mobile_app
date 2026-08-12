@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 class ProjectCard extends StatelessWidget {
   final String title;
-  final String status;
+  final String? status;
 
-  const ProjectCard({required this.title, required this.status});
-  Color cardColor(String staus) {
+  const ProjectCard({required this.title, this.status});
+  Color cardColor(String? staus) {
     if (staus == 'Tamamlandı') {
       return Color(0xFFE8F8F0);
     } else if (status == 'Beklemede') {
@@ -15,7 +15,7 @@ class ProjectCard extends StatelessWidget {
     }
   }
 
-  Color iconColor(String status) {
+  Color iconColor(String? status) {
     if (status == 'Devam Ediyor') {
       return Color(0xFF2196F3);
     } else if (status == 'Tamamlandı') {
@@ -25,7 +25,7 @@ class ProjectCard extends StatelessWidget {
     }
   }
 
-  Color iconBackgraoundColor(String status) {
+  Color iconBackgraoundColor(String? status) {
     if (status == 'Tamamlandı') {
       return const Color.fromARGB(255, 166, 255, 155);
     } else if (status == 'Devam Ediyor') {
@@ -35,17 +35,13 @@ class ProjectCard extends StatelessWidget {
     }
   }
 
-  dynamic icon(String status) {
-    if (status.isEmpty || status != '') {
-      if (status == 'Tamamlandı') {
-        return Icons.check;
-      } else if (status == 'Devam Ediyor') {
-        return Icons.change_circle_outlined;
-      } else {
-        return Icons.pending_outlined;
-      }
+  dynamic icon(String? status) {
+    if (status == 'Tamamlandı') {
+      return Icons.check;
+    } else if (status == 'Devam Ediyor') {
+      return Icons.change_circle_outlined;
     } else {
-      throw 'Lütfen bir durum bildirin!';
+      return Icons.pending_outlined;
     }
   }
 
@@ -68,7 +64,7 @@ class ProjectCard extends StatelessWidget {
             title,
             style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
           ),
-          subtitle: Text(status),
+          subtitle: Text(status ?? 'İşaretlenmedi'),
           trailing: Icon(Icons.chevron_right_outlined),
           onTap: () {
             print('object');

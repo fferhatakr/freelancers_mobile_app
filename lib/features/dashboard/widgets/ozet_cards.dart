@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
+import 'package:freelancer_tracking_system/features/projects/projectList.dart';
+import 'package:freelancer_tracking_system/provider/project_provider.dart';
+import 'package:provider/provider.dart';
+import 'package:freelancer_tracking_system/provider/project_provider.dart';
 
 class _OzetKarti extends StatelessWidget {
   final IconData ikon;
   final Color renk;
   final String baslik;
-  final String deger;
+  final int deger;
 
   const _OzetKarti({
     required this.ikon,
@@ -42,7 +46,7 @@ class _OzetKarti extends StatelessWidget {
                     child: Icon(ikon, color: OzetCardsStyle.iconColor),
                   ),
                   Text(baslik, style: cardtitle1Style()),
-                  Text(deger, style: TextStyle(color: Colors.white)),
+                  Text('$deger', style: TextStyle(color: Colors.white)),
                 ],
               ),
             ),
@@ -58,6 +62,8 @@ class cards extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final items = context.watch<ProjectProvider>().projectItems;
+    final int totalProject = items.length;
     return InkWell(
       onTap: () {
         print('object');
@@ -81,19 +87,19 @@ class cards extends StatelessWidget {
                     ikon: Icons.home,
                     renk: OzetCardsStyle.homeColor,
                     baslik: language.aktifProjelerim,
-                    deger: '3',
+                    deger: totalProject,
                   ),
                   _OzetKarti(
                     ikon: Icons.check,
                     renk: OzetCardsStyle.checkColor,
                     baslik: language.tamamlananProjeler,
-                    deger: '3',
+                    deger: 3,
                   ),
                   _OzetKarti(
                     ikon: Icons.currency_lira,
                     renk: OzetCardsStyle.liraColor,
                     baslik: language.bekleyenOdeme,
-                    deger: '3575',
+                    deger: 3575,
                   ),
                 ],
               ),

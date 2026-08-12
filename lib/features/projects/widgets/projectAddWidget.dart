@@ -5,11 +5,13 @@ class ProjectAddWidget extends StatelessWidget {
   final IconData _icon;
   final String _title;
   final String _title2;
+  final TextEditingController controller;
 
   const ProjectAddWidget({
     required this._icon,
     required this._title,
     required this._title2,
+    required this.controller,
   });
 
   @override
@@ -30,6 +32,7 @@ class ProjectAddWidget extends StatelessWidget {
           subtitle: SizedBox(
             height: 40,
             child: TextField(
+              controller: controller,
               decoration: InputDecoration(
                 hint: Text(
                   _title2,

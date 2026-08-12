@@ -1,11 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/core/theme/app_all_style.dart';
-import 'package:freelancer_tracking_system/features/auth/screens/LabeledTextField._widgets.dart';
+import 'package:freelancer_tracking_system/features/auth/screens/auth_widgets.dart';
 
 class RegisterPage extends StatefulWidget {
-  RegisterPage({super.key});
-  final name = TextEditingController();
+  const RegisterPage({super.key});
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
@@ -111,11 +110,10 @@ class _RegisterPageState extends State<RegisterPage> {
                 onTap: () async {
                   print('Giriş Yapıldı');
                   try {
-                    final credential = await FirebaseAuth.instance
-                        .createUserWithEmailAndPassword(
-                          email: _email.text.trim(),
-                          password: _password.text.trim(),
-                        );
+                    await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                      email: _email.text.trim(),
+                      password: _password.text.trim(),
+                    );
                   } on FirebaseAuthException catch (e) {
                     if (e.code == 'weak-password') {
                       print('The password provided is too weak.');

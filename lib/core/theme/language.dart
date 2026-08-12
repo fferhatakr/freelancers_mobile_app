@@ -1,7 +1,7 @@
 import 'package:freelancer_tracking_system/data/dummy/dummy_data.dart';
 
 class language {
-  static String aktifProjelerim = 'Aktif Projeler';
+  static String aktifProjelerim = 'Projelerim';
   static String tamamlananProjeler = 'Tamamlanan Projeler';
   static String bekleyenOdeme = 'Bekleyen Ödeme ';
   static String hosgeldinKullanici = 'Hoşgeldin Ferhat';

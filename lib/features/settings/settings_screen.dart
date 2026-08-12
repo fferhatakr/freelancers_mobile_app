@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:freelancer_tracking_system/core/navigation/app_navigation.dart';
 import 'package:freelancer_tracking_system/core/theme/app_all_style.dart';
-import 'package:freelancer_tracking_system/features/auth/screens/login_page.dart';
 import 'package:freelancer_tracking_system/features/settings/widgets/avatar.dart';
 import 'package:freelancer_tracking_system/features/settings/widgets/settings_card.dart';
 import 'package:freelancer_tracking_system/core/theme/language.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class SettingsScreen extends StatelessWidget {
+  const SettingsScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

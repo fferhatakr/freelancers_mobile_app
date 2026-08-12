@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/core/navigation/app_navigation.dart';
-import 'package:freelancer_tracking_system/features/auth/screens/LabeledTextField._widgets.dart';
+import 'package:freelancer_tracking_system/features/auth/screens/auth_widgets.dart';
 import 'package:freelancer_tracking_system/features/auth/screens/register_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -178,11 +178,10 @@ class _LoginPageState extends State<LoginPage> {
       onPressed: () async {
         print('Giriş Yapıldı');
         try {
-          final credential = await FirebaseAuth.instance
-              .signInWithEmailAndPassword(
-                email: _emailController.text.trim(),
-                password: _passwordController.text.trim(),
-              );
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
+            email: _emailController.text.trim(),
+            password: _passwordController.text.trim(),
+          );
         } on FirebaseAuthException catch (e) {
           if (e.code == 'user-not-found') {
             print('No user found for that email.');

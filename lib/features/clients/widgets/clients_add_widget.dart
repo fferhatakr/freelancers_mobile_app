@@ -6,7 +6,8 @@ class ClientAdd extends StatelessWidget {
   final IconData icon;
   final String title;
   final String title2;
-  final dynamic controlText;
+  final TextEditingController controlText;
+
   const ClientAdd({
     required this.icon,
     required this.title,
@@ -31,8 +32,9 @@ class ClientAdd extends StatelessWidget {
             Text(title, style: _titleStyle()),
             SizedBox(
               height: ClientsStyle.boxHeight,
+
               child: TextField(
-                controller: TextEditingController(),
+                controller: controlText,
                 decoration: InputDecoration(
                   hint: Text(title2, style: _hintStyle()),
                 ),

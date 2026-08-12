@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/features/projects/widgets/projectListWidget.dart';
+import 'package:freelancer_tracking_system/provider/project_provider.dart';
+import 'package:provider/provider.dart';
 
 class ProjectList extends StatefulWidget {
   const ProjectList({super.key});
@@ -9,19 +11,11 @@ class ProjectList extends StatefulWidget {
 }
 
 class _ProjectListState extends State<ProjectList> {
-  //İç içe yapmak için map kullandım
-  static List<Map<String, String>> dummyProject = [
-    {'ad': 'Ahmet Beye E-Ticaret Sitesi', 'durum': 'Devam Ediyor'},
-    {'ad': 'Mehmet Beye Yönetim Paneli', 'durum': 'Tamamlandı'},
-    {'ad': 'Nisa Hanıma Mobile App', 'durum': 'Tamamlandı'},
-    {'ad': 'Rox Emlak Website', 'durum': 'Devam Ediyor'},
-    {'ad': 'Migros Sanal Market App ', 'durum': 'Devam Ediyor'},
-    {'ad': 'Getir Uygulaması Revize', 'durum': 'Tamamlandı'},
-    {'ad': 'Trendyol Revize', 'durum': 'Beklemede'},
-  ];
-  static int resultProject = dummyProject.length;
   @override
   Widget build(BuildContext context) {
+    final items = context.watch<ProjectProvider>().projectItems;
+    final int totalProject = items.length;
+
     return Scaffold(
       appBar: AppBar(title: Text('Proje Listesi')),
       body: Padding(
@@ -39,18 +33,14 @@ class _ProjectListState extends State<ProjectList> {
                 prefix: Icon(Icons.search),
               ),
             ),
-            Text(
-              'Toplam Proje: $resultProject',
-              style: TextStyle(fontSize: 16),
-            ),
+            Text('Toplam Proje: $totalProject', style: TextStyle(fontSize: 16)),
             Expanded(
               child: ListView.builder(
-                itemCount: dummyProject.length,
+                itemCount: items.length,
                 itemBuilder: (context, index) {
-                  return ProjectCard(
-                    title: dummyProject[index]['ad']!,
-                    status: dummyProject[index]['durum']!,
-                  );
+                  print('Okundu');
+                  final projectAdd = items[index];
+                  return ProjectCard(title: projectAdd.projectName);
                 },
               ),
             ),

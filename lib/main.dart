@@ -2,14 +2,27 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:freelancer_tracking_system/features/auth/screens/login_page.dart';
+import 'package:freelancer_tracking_system/features/clients/clientList.dart';
+import 'package:freelancer_tracking_system/features/clients/widgets/clients_detail_page.dart';
 import 'package:freelancer_tracking_system/features/dashboard/homePage.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:freelancer_tracking_system/provider/client_provider.dart';
+import 'package:freelancer_tracking_system/provider/project_provider.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
-  runApp(MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => CustomerProvider()),
+        ChangeNotifierProvider(create: (context) => ProjectProvider()),
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -47,3 +60,14 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+
+/**StreamBuilder<User?>(
+        stream: _authStream,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return homePage();
+          }
+          return LoginPage();
+        },
+      ), */

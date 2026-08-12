@@ -4,7 +4,7 @@ import 'package:freelancer_tracking_system/features/tasks/tasksPage.dart';
 class ResultTask extends StatelessWidget {
   ResultTask({super.key});
 
-  DateTime now = DateTime.now();
+  final DateTime now = DateTime.now();
   static int resultProject = TasksPage.dummyTasks.length;
   @override
   Widget build(BuildContext context) {
