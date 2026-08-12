@@ -1,6 +1,4 @@
-import 'package:freelancer_tracking_system/data/dummy/dummy_data.dart';
-
-class language {
+class Language {
   static String aktifProjelerim = 'Projelerim';
   static String tamamlananProjeler = 'Tamamlanan Projeler';
   static String bekleyenOdeme = 'Bekleyen Ödeme ';
@@ -81,9 +79,4 @@ class language {
 
   static String kurumsalWebsite = 'Kurumsal Website';
   static String webTasarim = 'Web Tasarim';
-  List<Object> aktifProjeler = [
-    {hardcodeVeri().project1},
-    {hardcodeVeri().project2},
-    {hardcodeVeri().project3},
-  ];
 }

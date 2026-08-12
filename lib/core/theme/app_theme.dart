@@ -1,3 +1,3 @@
 export 'app_all_style.dart';
-export 'language.dart';
+export 'Language.dart';
 export 'app_style.dart';

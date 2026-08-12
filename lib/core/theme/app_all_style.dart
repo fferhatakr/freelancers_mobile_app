@@ -18,4 +18,5 @@ class GeneralStyle {
   static const double rowSpacing = 10;
   static const double borderRadius = 10;
   static const Color dashboardBackground = Color(0xFFF5F5F5);
+  static const double spacingTextField = 5;
 }

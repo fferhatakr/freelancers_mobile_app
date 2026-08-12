@@ -6,11 +6,12 @@ class SettingsCard extends StatelessWidget {
   final String title2;
   final VoidCallback ontap;
 
-  SettingsCard({
+  const SettingsCard({
     required this.icon,
     required this.title1,
     required this.title2,
     required this.ontap,
+    super.key,
   });
 
   @override

@@ -1,6 +1,6 @@
 # Project-level configuration.
 cmake_minimum_required(VERSION 3.13)
-project(runner LANGUAGES CXX)
+project(runner LanguageS CXX)
 
 # The name of the executable created for the application. Change this to change
 # the on-disk name of your application.
@@ -13,7 +13,7 @@ set(APPLICATION_ID "com.example.freelancer_tracking_system")
 # versions of CMake.
 cmake_policy(SET CMP0063 NEW)
 
-# Load bundled libraries from the lib/ directory relative to the binary.
+# Load bundled libraries from the lib/ directory relative tof the binary.
 set(CMAKE_INSTALL_RPATH "$ORIGIN/lib")
 
 # Root filesystem for cross-building.

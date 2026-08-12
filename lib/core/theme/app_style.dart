@@ -56,12 +56,7 @@ class FastTransactionsCardStyle {
     153,
     255,
   );
-  static const Color gorevContainerColor = const Color.fromARGB(
-    255,
-    255,
-    53,
-    39,
-  );
+  static const Color gorevContainerColor = Color.fromARGB(255, 255, 53, 39);
   static const Color projeContainerColor = Colors.amber;
   static const Color projeIconColor = Color.fromARGB(255, 255, 245, 213);
   static const Color gorevIconColor = Color.fromARGB(255, 255, 195, 190);
@@ -88,7 +83,7 @@ class OzetCardsStyle {
   static const Color liraColor = Colors.amber;
 }
 
-class containerFeatures {
+class ContainerFeatures {
   static Color? homeColor = Colors.deepPurple[600];
   static Color? checkColor = Colors.green[600];
   static Color? moneyColor = Colors.amber[700];
