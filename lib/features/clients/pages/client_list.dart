@@ -4,7 +4,6 @@ import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
 import 'package:freelancer_tracking_system/features/clients/pages/client_add.dart';
 import 'package:freelancer_tracking_system/features/clients/widgets/client_card.dart';
 import 'package:freelancer_tracking_system/providers/client.dart';
-import 'package:provider/provider.dart';
 
 class ClientList extends StatefulWidget {
   const ClientList({super.key});
@@ -16,8 +15,6 @@ class ClientList extends StatefulWidget {
 class _ClientListState extends State<ClientList> {
   @override
   Widget build(BuildContext context) {
-    final customerItems = context.watch<CustomerProvider>().items;
-
     return Scaffold(
       appBar: AppBar(
         title: Column(
@@ -47,14 +44,26 @@ class _ClientListState extends State<ClientList> {
             Expanded(
               child: InkWell(
                 onTap: () {},
-                child: ListView.builder(
-                  itemCount: customerItems.length,
-                  itemBuilder: (context, index) {
-                    final customer = customerItems[index];
-                    return ClientCard(
-                      name: customer.adSoyad,
-                      telefon: customer.telefon,
-                      email: customer.email,
+                child: ValueListenableBuilder(
+                  key: UniqueKey(),
+                  valueListenable: CustomerProvider(),
+                  builder: (context, customerItems, child) {
+                    return ListView.builder(
+                      itemCount: customerItems.length,
+                      itemBuilder: (context, index) {
+                        final customer = customerItems[index];
+                        return Dismissible(
+                          onDismissed: (direction) {
+                            CustomerProvider().removeCustomer(customer);
+                          },
+                          key: ValueKey(customer.id),
+                          child: ClientCard(
+                            name: customer.adSoyad,
+                            telefon: customer.telefon,
+                            email: customer.email,
+                          ),
+                        );
+                      },
                     );
                   },
                 ),

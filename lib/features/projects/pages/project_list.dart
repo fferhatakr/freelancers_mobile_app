@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/features/projects/widgets/project_card.dart';
 import 'package:freelancer_tracking_system/providers/project.dart';
-import 'package:provider/provider.dart';
+import 'package:freelancer_tracking_system/providers/tasks.dart';
 
 class ProjectList extends StatefulWidget {
   const ProjectList({super.key});
@@ -13,9 +13,7 @@ class ProjectList extends StatefulWidget {
 class _ProjectListState extends State<ProjectList> {
   @override
   Widget build(BuildContext context) {
-    final items = context.watch<ProjectProvider>().projectItems;
-    final int totalProject = items.length;
-
+    final tasksCounts = TaskProvider().value.length;
     return Scaffold(
       appBar: AppBar(title: Text('Proje Listesi')),
       body: Padding(
@@ -33,14 +31,24 @@ class _ProjectListState extends State<ProjectList> {
                 prefix: Icon(Icons.search),
               ),
             ),
-            Text('Toplam Proje: $totalProject', style: TextStyle(fontSize: 16)),
+            Text('Toplam Proje: $tasksCounts', style: TextStyle(fontSize: 16)),
             Expanded(
-              child: ListView.builder(
-                itemCount: items.length,
-                itemBuilder: (context, index) {
-                  print('Okundu');
-                  final projectAdd = items[index];
-                  return ProjectCard(title: projectAdd.projectName);
+              child: ValueListenableBuilder(
+                valueListenable: ProjectProvider(),
+                builder: (context, projectItems, child) {
+                  return ListView.builder(
+                    itemCount: projectItems.length,
+                    itemBuilder: (context, index) {
+                      final projectadd = projectItems[index];
+                      return Dismissible(
+                        onDismissed: (direction) {
+                          ProjectProvider().removeProject(items: projectadd);
+                        },
+                        key: ValueKey(projectadd.id),
+                        child: ProjectCard(title: projectadd.projectName),
+                      );
+                    },
+                  );
                 },
               ),
             ),

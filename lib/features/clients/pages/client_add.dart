@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/providers/client.dart';
-import 'package:provider/provider.dart';
 import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
 import 'package:freelancer_tracking_system/features/clients/widgets/client_form_field.dart';
 
@@ -96,12 +95,7 @@ class _ClientAddScreenState extends State<ClientAddScreen> {
           title2: Language.firmaAdiAciklama,
           controlText: firmaController,
         ),
-        ClientFormField(
-          icon: Icons.comment,
-          title: Language.aciklama,
-          title2: Language.aciklamaEkle,
-          controlText: aciklamaController,
-        ),
+
         Text(
           Language.adresTitle,
           style: TextStyle(
@@ -110,11 +104,15 @@ class _ClientAddScreenState extends State<ClientAddScreen> {
           ),
         ),
 
-        ClientFormField(
-          icon: Icons.navigation_outlined,
-          title: Language.aciklama,
-          title2: Language.aciklamaEkle,
-          controlText: adresController,
+        SizedBox(
+          height: 100,
+          child: ClientFormField(
+            icon: Icons.comment,
+            title: 'Açıklama Ekle(Opsiyonel)',
+            title2: Language.aciklamaEkle,
+            controlText: adresController,
+            height: 60,
+          ),
         ),
 
         Text(
@@ -157,9 +155,7 @@ class _ClientAddScreenState extends State<ClientAddScreen> {
           email: emailController.text,
           telefon: telefonController.text,
         );
-
-        context.read<CustomerProvider>().addCustomer(customer);
-
+        CustomerProvider().addCustomer(items: customer);
         Navigator.pop(context);
       },
       child: Center(

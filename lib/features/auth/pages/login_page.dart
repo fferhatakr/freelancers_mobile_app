@@ -1,9 +1,10 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/core/navigation/app_navigation.dart';
 import 'package:freelancer_tracking_system/core/theme/app_all_style.dart';
 import 'package:freelancer_tracking_system/features/auth/widgets/labeled_text_field.dart.dart';
 import 'package:freelancer_tracking_system/features/auth/pages/register_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:freelancer_tracking_system/services/auth_services.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -14,7 +15,13 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final AuthServices _authService = AuthServices();
 
+  final _wrongPassword = SnackBar(content: Text('Şifre yanlış.'));
+  final _userOrPasswordWrong = SnackBar(
+    content: Text('Kullanıcı adı veya şifre yanlış.'),
+  );
+  final _notFoundUser = SnackBar(content: Text('Böyle bir kullanıcı yok'));
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -175,15 +182,17 @@ class _LoginPageState extends State<LoginPage> {
     return ElevatedButton(
       onPressed: () async {
         try {
-          await FirebaseAuth.instance.signInWithEmailAndPassword(
+          await _authService.login(
             email: _emailController.text.trim(),
             password: _passwordController.text.trim(),
           );
         } on FirebaseAuthException catch (e) {
           if (e.code == 'user-not-found') {
-            print('No user found for that email.');
+            ScaffoldMessenger.of(context).showSnackBar(_notFoundUser);
           } else if (e.code == 'wrong-password') {
-            print('Wrong password provided for that user.');
+            ScaffoldMessenger.of(context).showSnackBar(_wrongPassword);
+          } else if (e.code == 'invalid-credential') {
+            ScaffoldMessenger.of(context).showSnackBar(_userOrPasswordWrong);
           }
         }
       },

@@ -3,6 +3,8 @@ import 'package:freelancer_tracking_system/features/clients/pages/client_list.da
 import 'package:freelancer_tracking_system/features/dashboard/pages/dashboard.dart';
 import 'package:freelancer_tracking_system/features/projects/pages/project_list.dart';
 import 'package:freelancer_tracking_system/features/tasks/page/tasks.dart';
+import 'package:freelancer_tracking_system/providers/navigation.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -12,7 +14,6 @@ class Home extends StatefulWidget {
 }
 
 // Varsayilan deger ana sayfa olan dashboard = 0
-int _secilenIndex = 0;
 final List<Widget> _sayfalar = [
   Dashboard(),
   ProjectList(),
@@ -23,26 +24,32 @@ final List<Widget> _sayfalar = [
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _sayfalar[_secilenIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: (value) {
-          setState(() {
-            _secilenIndex = value;
-          });
-        },
-        currentIndex: _secilenIndex,
-        type: BottomNavigationBarType.fixed,
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.assignment),
-            label: 'Project',
+    return ValueListenableBuilder<int>(
+      valueListenable: context.read<NavigationProviders>(),
+      builder: (context, secilenIndex, child) {
+        return Scaffold(
+          body: _sayfalar[secilenIndex],
+          bottomNavigationBar: BottomNavigationBar(
+            onTap: (value) {
+              context.read<NavigationProviders>().changeIndex(value);
+            },
+            currentIndex: secilenIndex,
+            type: BottomNavigationBarType.fixed,
+            items: [
+              BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.assignment),
+                label: 'Project',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.person),
+                label: 'Client',
+              ),
+              BottomNavigationBarItem(icon: Icon(Icons.task), label: 'Task'),
+            ],
           ),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Client'),
-          BottomNavigationBarItem(icon: Icon(Icons.task), label: 'Task'),
-        ],
-      ),
+        );
+      },
     );
   }
 }

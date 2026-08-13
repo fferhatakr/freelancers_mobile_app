@@ -1,27 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
 
-class CustomerProvider extends ChangeNotifier {
-  final List<Customer> _customers = [];
+class CustomerProvider extends ValueNotifier<List<Customer>> {
+  //Nerede çağrılırsa çağrılsın aynı provider nesnesini kullanmak
+  CustomerProvider._sharedInstance()
+    : super([]); //Super ile başlangıçta boş bir müşteri oluşur.
+  static final CustomerProvider _shared =
+      CustomerProvider._sharedInstance(); // oluşan müşteriyi saklar.
+  factory CustomerProvider() => _shared; //CustomerProvider diyerek çağırırız.
 
-  List<Customer> get items => _customers;
-
-  void addCustomer(Customer items) {
-    _customers.add(items);
+  void addCustomer({required Customer items}) {
+    value.add(items);
     notifyListeners();
   }
 
   void removeCustomer(Customer items) {
-    _customers.remove(items);
-    notifyListeners();
-  }
-
-  void removeAllCustomer() {
-    _customers.clear();
+    value.remove(items);
     notifyListeners();
   }
 }
 
 class Customer {
+  final String id;
   final String adSoyad;
   final String email;
   final String telefon;
@@ -39,5 +39,5 @@ class Customer {
     this.adres,
     this.source,
     this.aciklama,
-  });
+  }) : id = const Uuid().v4();
 }

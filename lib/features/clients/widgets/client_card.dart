@@ -28,7 +28,7 @@ class ClientCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        AppNavigationReplace.navigateTo(
+        AppNavigation.navigateTo(
           context,
           ClientsDetail(
             adSoyad: name,
@@ -67,10 +67,7 @@ class ClientCard extends StatelessWidget {
               ),
             ],
           ),
-          trailing: GestureDetector(
-            onTap: () {},
-            child: Icon(Icons.chevron_right_outlined),
-          ),
+          trailing: Icon(Icons.chevron_right_outlined),
         ),
       ),
     );

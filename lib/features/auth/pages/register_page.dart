@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/core/theme/app_all_style.dart';
 import 'package:freelancer_tracking_system/features/auth/widgets/labeled_text_field.dart.dart';
+import 'package:freelancer_tracking_system/services/auth_services.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -11,11 +12,17 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  final TextEditingController name = TextEditingController();
+  final TextEditingController _name = TextEditingController();
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
-  final TextEditingController _againPassword = TextEditingController();
-
+  final TextEditingController _confirmPassword = TextEditingController();
+  final AuthServices _authServices = AuthServices();
+  final _weakPassword = SnackBar(content: Text('Şifre çok zayıf'));
+  final _emailAlredyUse = SnackBar(content: Text('Email kullanılmaktadır'));
+  final _noMatchPassword = SnackBar(content: Text('Şifreler uyuşmuyor'));
+  final _noLength8 = SnackBar(content: Text('Şifreniz çok kısa.'));
+  final _nameRequired = SnackBar(content: Text('Isim alanı boş geçilmez'));
+  final _emailRequired = SnackBar(content: Text('Email alanı boş geçilmez'));
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,7 +54,7 @@ class _RegisterPageState extends State<RegisterPage> {
         child: Column(
           children: [
             LabeledTextField(
-              controller: name,
+              controller: _name,
               miniTitle: 'Ad Soyad',
               hintText: 'Adınız Soyadınız',
               prefixIcon: Icons.person_2_outlined,
@@ -66,7 +73,7 @@ class _RegisterPageState extends State<RegisterPage> {
               prefixIcon: Icons.lock_outline,
             ),
             LabeledTextField(
-              controller: _againPassword,
+              controller: _confirmPassword,
               obscureText: true,
               miniTitle: 'Şifre(Tekrar)',
               hintText: 'Şifrenizi Tekrar Girin',
@@ -109,21 +116,38 @@ class _RegisterPageState extends State<RegisterPage> {
               child: InkWell(
                 onTap: () async {
                   try {
-                    await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                    await _authServices.register(
+                      name: _name.text.trim(),
                       email: _email.text.trim(),
                       password: _password.text.trim(),
+                      confirmPassword: _confirmPassword.text.trim(),
                     );
+                    Navigator.popUntil(context, ModalRoute.withName("/"));
                   } on FirebaseAuthException catch (e) {
                     if (e.code == 'weak-password') {
-                      print('The password provided is too weak.');
+                      ScaffoldMessenger.of(context).showSnackBar(_weakPassword);
                     } else if (e.code == 'email-already-in-use') {
-                      print('The account already exists for that email.');
+                      ScaffoldMessenger.of(
+                        context,
+                      ).showSnackBar(_emailAlredyUse);
                     }
                   } catch (e) {
+                    final error = e.toString();
+                    if (error.contains('password-mismatch')) {
+                      ScaffoldMessenger.of(
+                        context,
+                      ).showSnackBar(_noMatchPassword);
+                    } else if (error.contains('password-too-short')) {
+                      ScaffoldMessenger.of(context).showSnackBar(_noLength8);
+                    } else if (error.contains('name-required')) {
+                      ScaffoldMessenger.of(context).showSnackBar(_nameRequired);
+                    } else if (error.contains('email-required')) {
+                      ScaffoldMessenger.of(
+                        context,
+                      ).showSnackBar(_emailRequired);
+                    }
                     print(e);
                   }
-                  if (!context.mounted) return;
-                  Navigator.popUntil(context, ModalRoute.withName("/"));
                 },
                 child: Container(
                   width: double.infinity,

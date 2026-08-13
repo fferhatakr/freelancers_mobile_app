@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/providers/tasks.dart';
-import 'package:provider/provider.dart';
 
 class ResultTask extends StatelessWidget {
   ResultTask({super.key});
@@ -8,8 +7,7 @@ class ResultTask extends StatelessWidget {
   final DateTime now = DateTime.now();
   @override
   Widget build(BuildContext context) {
-    final tasksItems = context.watch<TasksProvider>().tasksItems;
-
+    final projectCount = TaskProvider().value.length;
     return SizedBox(
       height: 100,
       child: Card(
@@ -28,7 +26,7 @@ class ResultTask extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(Icons.article_outlined, color: Colors.black),
-                  Text(tasksItems.length.toString(), style: _textStyle()),
+                  Text(projectCount.toString(), style: _textStyle()),
                   Text('Toplam', style: _twoTextStyle()),
                 ],
               ),

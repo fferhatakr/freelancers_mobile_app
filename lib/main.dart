@@ -5,6 +5,7 @@ import 'package:freelancer_tracking_system/features/auth/pages/login_page.dart';
 import 'package:freelancer_tracking_system/features/home/pages/home.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:freelancer_tracking_system/providers/client.dart';
+import 'package:freelancer_tracking_system/providers/navigation.dart';
 import 'package:freelancer_tracking_system/providers/project.dart';
 import 'package:freelancer_tracking_system/providers/tasks.dart';
 import 'package:provider/provider.dart';
@@ -18,7 +19,8 @@ void main() async {
       providers: [
         ChangeNotifierProvider(create: (context) => CustomerProvider()),
         ChangeNotifierProvider(create: (context) => ProjectProvider()),
-        ChangeNotifierProvider(create: (context) => TasksProvider()),
+        ChangeNotifierProvider(create: (context) => TaskProvider()),
+        ChangeNotifierProvider(create: (context) => NavigationProviders()),
       ],
       child: MyApp(),
     ),

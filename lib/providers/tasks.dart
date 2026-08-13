@@ -1,22 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
 
-class TasksProvider extends ChangeNotifier {
+class TaskProvider extends ValueNotifier<List<Task>> {
+  TaskProvider._sharedInstance() : super([]);
+  static final TaskProvider _shared = TaskProvider._sharedInstance();
+  factory TaskProvider() =>
+      _shared; //Factory kullanım amacı nesne çağıırlınca ne döndürücegime ben karar veririm.
 
-  final List<TasksAddProvider> _tasks = [];
-  List<TasksAddProvider> get tasksItems => _tasks;
-
-  void addTask(TasksAddProvider tasksItems) {
-    _tasks.add(tasksItems);
+  void addTasks({required Task items}) {
+    value.add(items);
     notifyListeners();
   }
 
-  void removeTask(TasksAddProvider tasksItems) {
-    _tasks.remove(tasksItems);
+  void removeTasks({required Task items}) {
+    value.remove(items);
     notifyListeners();
   }
 }
 
-class TasksAddProvider {
+class Task {
+  final String id;
   final String taskName;
   final String comment;
   final String? bagliMusteri;
@@ -26,7 +29,7 @@ class TasksAddProvider {
   final double? saat;
   final String? note;
   final String? levels;
-  TasksAddProvider({
+  Task({
     required this.taskName,
     required this.comment,
     this.bagliMusteri,
@@ -36,9 +39,5 @@ class TasksAddProvider {
     this.saat,
     this.note,
     this.levels,
-  });
+  }) : id = const Uuid().v4(); //v4 seçme sebebimiz rastgele dagıtım yapması
 }
-
-
-// snackCase olmalı dartta dosya adları .
-// upperCase olmalı class isimleri

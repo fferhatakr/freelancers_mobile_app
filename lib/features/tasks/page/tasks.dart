@@ -4,7 +4,6 @@ import 'package:freelancer_tracking_system/features/tasks/page/task_add.dart';
 import 'package:freelancer_tracking_system/features/tasks/widgets/result_task.dart';
 import 'package:freelancer_tracking_system/features/tasks/widgets/task_card.dart';
 import 'package:freelancer_tracking_system/providers/tasks.dart';
-import 'package:provider/provider.dart';
 
 class Tasks extends StatefulWidget {
   const Tasks({super.key});
@@ -16,8 +15,6 @@ class Tasks extends StatefulWidget {
 class _TasksState extends State<Tasks> {
   @override
   Widget build(BuildContext context) {
-    final tasksItems = context.watch<TasksProvider>().tasksItems;
-
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
@@ -61,13 +58,24 @@ class _TasksState extends State<Tasks> {
           children: [
             ResultTask(),
             Expanded(
-              child: ListView.builder(
-                itemCount: tasksItems.length,
-                itemBuilder: (context, index) {
-                  final tasks = tasksItems[index];
-                  return TasksCard(
-                    taskName: tasks.taskName,
-                    taskDescription: tasks.comment,
+              child: ValueListenableBuilder(
+                valueListenable: TaskProvider(),
+                builder: (context, projectItems, child) {
+                  return ListView.builder(
+                    itemCount: projectItems.length,
+                    itemBuilder: (context, index) {
+                      final task = projectItems[index];
+                      return Dismissible(
+                        onDismissed: (direction) {
+                          TaskProvider().removeTasks(items: task);
+                        },
+                        key: ValueKey(task.id),
+                        child: TasksCard(
+                          taskName: task.taskName,
+                          taskDescription: task.comment,
+                        ),
+                      );
+                    },
                   );
                 },
               ),

@@ -7,12 +7,16 @@ class ClientFormField extends StatelessWidget {
   final String title;
   final String title2;
   final TextEditingController controlText;
+  final int? maxLines;
+  final double? height;
 
   const ClientFormField({
     required this.icon,
     required this.title,
     required this.title2,
     required this.controlText,
+    this.height,
+    this.maxLines,
     super.key,
   });
   @override
@@ -32,11 +36,12 @@ class ClientFormField extends StatelessWidget {
           children: [
             Text(title, style: _titleStyle()),
             SizedBox(
-              height: ClientsStyle.boxHeight,
+              height: height ?? ClientsStyle.boxHeight,
 
               child: TextField(
                 controller: controlText,
                 decoration: InputDecoration(
+                  hintMaxLines: maxLines ?? 2,
                   hint: Text(title2, style: _hintStyle()),
                 ),
               ),

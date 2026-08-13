@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
-import 'package:freelancer_tracking_system/providers/project.dart';
-import 'package:provider/provider.dart';
+import 'package:freelancer_tracking_system/core/utils/app_data.dart';
 
 class _SummaryCard extends StatelessWidget {
   final IconData icon;
@@ -60,8 +59,6 @@ class SummaryCards extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final items = context.watch<ProjectProvider>().projectItems;
-    final int totalProject = items.length;
     return InkWell(
       onTap: () {},
       child: Container(
@@ -83,7 +80,7 @@ class SummaryCards extends StatelessWidget {
                     icon: Icons.home,
                     color: OzetCardsStyle.homeColor,
                     title: Language.aktifProjelerim,
-                    value: totalProject,
+                    value: AppData.projectCount,
                   ),
                   _SummaryCard(
                     icon: Icons.check,

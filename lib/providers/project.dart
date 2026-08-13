@@ -1,23 +1,24 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
 
-class ProjectProvider extends ChangeNotifier {
-  final List<ProjectAddProvier> _project = [];
+class ProjectProvider extends ValueNotifier<List<Project>> {
+  ProjectProvider._sharedInstance() : super([]);
+  static final ProjectProvider _shared = ProjectProvider._sharedInstance();
+  factory ProjectProvider() => _shared;
 
-  List<ProjectAddProvier> get projectItems => _project;
-
-  void addProject(ProjectAddProvier projectItems) {
-    _project.add(projectItems);
+  void addProject({required Project items}) {
+    value.add(items);
     notifyListeners();
   }
 
-  void removeProject(ProjectAddProvier projectItems) {
-    _project.remove(projectItems);
+  void removeProject({required Project items}) {
+    value.remove(items);
     notifyListeners();
   }
 }
 
-class ProjectAddProvier {
+class Project {
+  final String id;
   final String projectName;
   final String? musteriName;
   final String? aciklama;
@@ -27,7 +28,7 @@ class ProjectAddProvier {
   final String? status;
   final String? oncelik;
   final String? nots;
-  ProjectAddProvier({
+  Project({
     required this.projectName,
     this.musteriName,
     this.aciklama,
@@ -37,5 +38,5 @@ class ProjectAddProvier {
     this.status,
     this.oncelik,
     this.nots,
-  });
+  }) : id = const Uuid().v4();
 }

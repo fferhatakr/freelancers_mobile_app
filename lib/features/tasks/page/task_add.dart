@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+
 import 'package:freelancer_tracking_system/features/tasks/widgets/task_add.dart';
+import 'package:freelancer_tracking_system/providers/client.dart';
 import 'package:freelancer_tracking_system/providers/tasks.dart';
-import 'package:provider/provider.dart';
 
 class TasksAdd extends StatefulWidget {
   const TasksAdd({super.key});
@@ -15,6 +16,7 @@ final commentController = TextEditingController();
 final noteController = TextEditingController();
 
 class _TasksAddState extends State<TasksAdd> {
+  Customer? selectedCustomer;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +46,7 @@ class _TasksAddState extends State<TasksAdd> {
               SelectionTask(
                 icon2: Icons.person_2_outlined,
                 title2: 'Bağlantılı Müşteri',
-                subtitle2: 'Ferhat Akar',
+                subtitle2: selectedCustomer?.adSoyad ?? 'Müşteri Seç',
                 onTap: () {},
               ),
               SelectionTask(
@@ -87,12 +89,11 @@ class _TasksAddState extends State<TasksAdd> {
 
               ElevatedButton(
                 onPressed: () {
-                  final task = TasksAddProvider(
+                  final task = Task(
                     taskName: tasksNameController.text,
                     comment: commentController.text,
                   );
-                  context.read<TasksProvider>().addTask(task);
-                  print('Kaydettik');
+                  TaskProvider().addTasks(items: task);
                   Navigator.pop(context);
                 },
                 child: Row(

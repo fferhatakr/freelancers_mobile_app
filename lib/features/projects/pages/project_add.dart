@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/features/projects/widgets/project_from_field.dart';
 import 'package:freelancer_tracking_system/providers/project.dart';
-import 'package:provider/provider.dart';
 
 class ProjectAdd extends StatelessWidget {
   ProjectAdd({super.key});
@@ -94,11 +93,8 @@ class ProjectAdd extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {
-                  final project = ProjectAddProvier(
-                    projectName: projectName.text,
-                  );
-                  context.read<ProjectProvider>().addProject(project);
-                  print('Kaydettik');
+                  final project = Project(projectName: projectName.text);
+                  ProjectProvider().addProject(items: project);
                   Navigator.pop(context);
                 },
                 child: Row(
