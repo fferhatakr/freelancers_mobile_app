@@ -20,7 +20,7 @@ class ProjectProvider extends ValueNotifier<List<Project>> {
 class Project {
   final String id;
   final String projectName;
-  final String? musteriName;
+  final String musteriName;
   final String? aciklama;
   final String? startDate;
   final String? endDate;
@@ -30,7 +30,7 @@ class Project {
   final String? nots;
   Project({
     required this.projectName,
-    this.musteriName,
+    required this.musteriName,
     this.aciklama,
     this.startDate,
     this.endDate,

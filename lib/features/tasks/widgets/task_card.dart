@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:freelancer_tracking_system/features/tasks/widgets/result_task.dart';
 
 class TasksCard extends StatefulWidget {
   final String taskName;
@@ -24,17 +23,16 @@ class TasksCard extends StatefulWidget {
 }
 
 class _TasksCardState extends State<TasksCard> {
-  Status? selectedStatus;
+  _Status? selectedStatus;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
-        final status = await showModalBottomSheet<Status>(
+        final status = await showModalBottomSheet<_Status>(
           context: context,
           builder: (context) {
             return SizedBox(
-              height: 200,
               width: double.infinity,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -44,7 +42,15 @@ class _TasksCardState extends State<TasksCard> {
                       child: ListTile(
                         title: Text('Devam Ediyor'),
                         onTap: () {
-                          Navigator.pop(context, Status.devamEdiyor);
+                          Navigator.pop(context, _Status.devamEdiyor);
+                        },
+                      ),
+                    ),
+                    Card(
+                      child: ListTile(
+                        title: Text('Beklemede'),
+                        onTap: () {
+                          Navigator.pop(context, _Status.beklemede);
                         },
                       ),
                     ),
@@ -52,7 +58,7 @@ class _TasksCardState extends State<TasksCard> {
                       child: ListTile(
                         title: Text('Tamamlandı'),
                         onTap: () {
-                          Navigator.pop(context, Status.tamamlandi);
+                          Navigator.pop(context, _Status.tamamlandi);
                         },
                       ),
                     ),
@@ -117,56 +123,41 @@ class _TasksCardState extends State<TasksCard> {
                   Spacer(),
                   Align(
                     alignment: Alignment.bottomRight,
-                    child: GestureDetector(
-                      onTap: () {
-                        print('Başlatiliyor');
-                      },
-                      child: Column(
-                        spacing: 10,
-                        children: [
-                          Container(
-                            width: 75,
-                            height: 30,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(10),
-                              ),
-                              color: Colors.blueGrey[100],
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.circle,
-                                  color:
-                                      levelColor(widget.status) ?? Colors.red,
-                                  size: 16,
-                                ),
-                              ],
-                            ),
+                    child: Column(
+                      spacing: 10,
+                      children: [
+                        Container(
+                          width: 75,
+                          height: 30,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            color: Colors.blueGrey[100],
                           ),
+                          child: Icon(
+                            Icons.circle,
+                            color: levelColor(widget.status) ?? Colors.red,
+                            size: 16,
+                          ),
+                        ),
 
-                          Container(
-                            width: 75,
-                            height: 30,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(10),
-                              ),
-                              color: Colors.blueGrey[100],
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  checkStatus(selectedStatus.toString()),
-                                  style: _statusStyle(),
-                                ),
-                              ],
-                            ),
+                        Container(
+                          width: 75,
+                          height: 30,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            color: checkColor(selectedStatus),
                           ),
-                        ],
-                      ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                selectedStatus?.label ?? 'Belirtilmedi',
+                                style: _statusStyle(),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],
@@ -230,15 +221,36 @@ dynamic levelColor(String? status) {
   }
 }
 
-dynamic checkStatus(String status) {
-  if (status == Status.devamEdiyor.toString()) {
-    return 'Devam Ediyor';
+dynamic checkColor(_Status? status) {
+  if (status == _Status.devamEdiyor) {
+    return Colors.blue;
+  } else if (status == _Status.beklemede) {
+    return Colors.amber;
+  } else if (status == _Status.tamamlandi) {
+    return Colors.green;
   } else {
-    return 'Tamamlandı';
+    return Colors.blueGrey[100];
+  }
+}
+
+dynamic checkStatus(_Status status) {
+  if (status == _Status.devamEdiyor) {
+    return _Status.devamEdiyor;
+  } else if (status == _Status.tamamlandi) {
+    return _Status.tamamlandi;
+  } else {
+    return _Status.beklemede;
   }
 }
 
 TextStyle _statusStyle() =>
     TextStyle(fontSize: 10, fontWeight: FontWeight.bold);
 
-enum Status { tamamlandi, devamEdiyor }
+enum _Status {
+  tamamlandi('Tamamlandı'),
+  beklemede('Beklemede'),
+  devamEdiyor('Devam Ediyor');
+
+  final String label;
+  const _Status(this.label);
+}

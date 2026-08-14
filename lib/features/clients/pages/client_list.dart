@@ -59,6 +59,10 @@ class _ClientListState extends State<ClientList> {
                           name: customer.adSoyad,
                           telefon: customer.telefon,
                           email: customer.email,
+                          firma: customer.firma,
+                          not: customer.not,
+                          adres: customer.adres,
+                          aciklama: customer.comment,
                         ),
                       );
                     },

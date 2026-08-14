@@ -17,7 +17,7 @@ class _ClientAddScreenState extends State<ClientAddScreen> {
   final notController = TextEditingController();
   final adresController = TextEditingController();
   final sourceController = TextEditingController();
-  final aciklamaController = TextEditingController();
+  final commentController = TextEditingController();
   @override
   void dispose() {
     adSoyadController.dispose();
@@ -27,7 +27,7 @@ class _ClientAddScreenState extends State<ClientAddScreen> {
     notController.dispose();
     adresController.dispose();
     sourceController.dispose();
-    aciklamaController.dispose();
+    commentController.dispose();
     super.dispose();
   }
 
@@ -73,19 +73,19 @@ class _ClientAddScreenState extends State<ClientAddScreen> {
 
         ClientFormField(
           icon: Icons.person_2_outlined,
-          title: Language.adSoyad,
+          title: Language.adSoyad + '*',
           title2: Language.adSoyadAciklama,
           controlText: adSoyadController,
         ),
         ClientFormField(
           icon: Icons.mail_outline,
-          title: Language.eposta,
+          title: Language.eposta + '*',
           title2: Language.epostaAciklama,
           controlText: emailController,
         ),
         ClientFormField(
           icon: Icons.call,
-          title: Language.telefon,
+          title: Language.telefon + '*',
           title2: Language.telefonAciklama,
           controlText: telefonController,
         ),
@@ -154,6 +154,10 @@ class _ClientAddScreenState extends State<ClientAddScreen> {
           adSoyad: adSoyadController.text,
           email: emailController.text,
           telefon: telefonController.text,
+          firma: firmaController.text,
+          not: notController.text,
+          source: sourceController.text,
+          comment: commentController.text,
         );
         CustomerProvider().addCustomer(items: customer);
         Navigator.pop(context);

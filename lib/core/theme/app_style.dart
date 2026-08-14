@@ -37,7 +37,7 @@ class ActiveProjectStyle {
 }
 
 class FastTransactionsCardStyle {
-  static const double sizedBoxHeight = 75;
+  static const double sizedBoxHeight = 300;
   static const double sizeContainer = 36;
   static Color? billColor = Colors.purple[600];
   static const Color receiptIconColor = Colors.white;

@@ -31,14 +31,14 @@ class ClientCard extends StatelessWidget {
         AppNavigation.navigateTo(
           context,
           ClientsDetail(
-            adSoyad: name,
+            name: name,
             email: email,
             telefon: telefon,
             firma: firma,
             not: not,
             adres: adres,
             source: source,
-            aciklama: aciklama,
+            comment: aciklama,
           ),
         );
       },

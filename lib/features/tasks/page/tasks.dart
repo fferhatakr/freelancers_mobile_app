@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/core/navigation/app_navigation.dart';
 import 'package:freelancer_tracking_system/features/tasks/page/task_add.dart';
-import 'package:freelancer_tracking_system/features/tasks/widgets/result_task.dart';
 import 'package:freelancer_tracking_system/features/tasks/widgets/task_card.dart';
 import 'package:freelancer_tracking_system/providers/tasks.dart';
 

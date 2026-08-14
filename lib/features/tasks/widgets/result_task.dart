@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:freelancer_tracking_system/features/tasks/widgets/task_card.dart';
 import 'package:freelancer_tracking_system/providers/tasks.dart';
 
 class ResultTask extends StatefulWidget {
@@ -62,15 +61,6 @@ class _ResultTaskState extends State<ResultTask> {
         ),
       ),
     );
-  }
-
-  dynamic status(String status) {
-    if (status == Status.devamEdiyor) {
-      devamEdiyor += 1;
-    }
-    if (status == Status.tamamlandi) {
-      tamamlandi += 1;
-    }
   }
 
   TextStyle _twoTextStyle() =>

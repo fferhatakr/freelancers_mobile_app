@@ -1,13 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/features/projects/widgets/project_from_field.dart';
+import 'package:freelancer_tracking_system/providers/client.dart';
 import 'package:freelancer_tracking_system/providers/project.dart';
 
-class ProjectAdd extends StatelessWidget {
+class ProjectAdd extends StatefulWidget {
   ProjectAdd({super.key});
+
+  @override
+  State<ProjectAdd> createState() => _ProjectAddState();
+}
+
+class _ProjectAddState extends State<ProjectAdd> {
   final projectName = TextEditingController();
+  final customerName = TextEditingController();
   final aciklama = TextEditingController();
+
   final projectAmount = TextEditingController();
+
   final note = TextEditingController();
+
+  final startDateController = TextEditingController();
+  final endDateController = TextEditingController();
+
+  String? selectedCustomer;
 
   @override
   Widget build(BuildContext context) {
@@ -30,16 +45,70 @@ class ProjectAdd extends StatelessWidget {
               ProjectFormField(
                 controller: projectName,
                 icon: Icons.task_sharp,
-                title: 'Proje Adı',
+                title: 'Proje Adı *',
                 title2: 'Proje Adını Giriniz',
               ),
-              SelectionTile(
-                icon2: Icons.people,
-                title2: 'Müşteri',
-                subtitle2: 'Müşteri Seçin',
-                onTap: () {
-                  print('object');
+              InkWell(
+                onTap: () async {
+                  final customer = await showModalBottomSheet<String>(
+                    context: context,
+                    builder: (context) {
+                      return SizedBox(
+                        width: double.infinity,
+                        child: ValueListenableBuilder(
+                          valueListenable: CustomerProvider(),
+                          builder: (context, value, child) {
+                            return Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Expanded(
+                                child: ListView.builder(
+                                  itemCount: value.length,
+                                  itemBuilder: (context, index) {
+                                    final customerName = value[index];
+                                    return Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Card(
+                                        color: Colors.blueGrey[200],
+                                        child: Material(
+                                          type: MaterialType.transparency,
+                                          child: ListTile(
+                                            onTap: () {
+                                              Navigator.pop(
+                                                context,
+                                                customerName.adSoyad,
+                                              );
+                                            },
+                                            title: Text(customerName.adSoyad),
+                                            subtitle: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(customerName.email),
+                                                Text(customerName.telefon),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      );
+                    },
+                  );
+                  setState(() {
+                    selectedCustomer = customer;
+                  });
                 },
+                child: SelectionTile(
+                  icon2: Icons.people,
+                  title2: 'Müşteri *',
+                  subtitle2: selectedCustomer?.toString() ?? 'Müşteri Seçiniz',
+                ),
               ),
               ProjectFormField(
                 controller: aciklama,
@@ -47,21 +116,17 @@ class ProjectAdd extends StatelessWidget {
                 title: 'Açıklama',
                 title2: 'Proje Hakkında Detaylı Bilgi Girin',
               ),
-              SelectionTile(
-                icon2: Icons.calendar_month_outlined,
-                title2: 'Başlangıç Tarihi',
-                subtitle2: '09 Ağustos 2026',
-                onTap: () {
-                  print('object');
-                },
+              ProjectFormField(
+                icon: Icons.calendar_month,
+                title: 'Başlangıç Tarihi',
+                title2: 'GG/AA/YYYY',
+                controller: startDateController,
               ),
-              SelectionTile(
-                icon2: Icons.calendar_month_outlined,
-                title2: 'Bitiş Tarihi',
-                subtitle2: 'Tarih Seçin',
-                onTap: () {
-                  print('object');
-                },
+              ProjectFormField(
+                icon: Icons.calendar_month,
+                title: 'Bitiş Tarihi',
+                title2: 'GG/AA/YYYY',
+                controller: endDateController,
               ),
               ProjectFormField(
                 keyboardType: TextInputType.numberWithOptions(),
@@ -70,22 +135,7 @@ class ProjectAdd extends StatelessWidget {
                 title: 'Proje Ücreti',
                 title2: '₺ 0.00',
               ),
-              SelectionTile(
-                icon2: Icons.flag,
-                title2: 'Durum',
-                subtitle2: 'Planlandı',
-                onTap: () {
-                  print('object');
-                },
-              ),
-              SelectionTile(
-                icon2: Icons.star_border,
-                title2: 'Öncelik',
-                subtitle2: 'Orta',
-                onTap: () {
-                  print('object');
-                },
-              ),
+
               ProjectFormField(
                 controller: note,
                 icon: Icons.comment,
@@ -94,7 +144,10 @@ class ProjectAdd extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {
-                  final project = Project(projectName: projectName.text);
+                  final project = Project(
+                    projectName: projectName.text,
+                    musteriName: customerName.text,
+                  );
                   ProjectProvider().addProject(items: project);
                   Navigator.pop(context);
                 },

@@ -39,43 +39,53 @@ class _FastCard extends StatelessWidget {
             Row(
               spacing: GeneralStyle.rowSpacing,
               children: [
-                Container(
-                  height: FastTransactionsCardStyle.sizeContainer,
-                  width: FastTransactionsCardStyle.sizeContainer,
-                  decoration: BoxDecoration(
-                    borderRadius: cardBorderRadius(),
-                    color: iconContainerColorOne,
-                  ),
-                  child: Icon(
-                    iconOne,
-                    color: FastTransactionsCardStyle.iconColor,
-                    size: FastTransactionsCardStyle.iconSize,
-                  ),
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(title1, style: title1Style()),
-                    Text(title2, style: title2Style()),
-                  ],
-                ),
-                GestureDetector(
-                  onTap: () {
-                    onTap();
-                  },
+                SizedBox(
+                  width: 35,
                   child: Container(
-                    width: FastTransactionsCardStyle.iconSizeContainer,
-                    height: FastTransactionsCardStyle.iconSizeContainer,
+                    height: FastTransactionsCardStyle.sizeContainer,
+                    width: FastTransactionsCardStyle.sizeContainer,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(GeneralStyle.borderRadius),
-                      ),
-                      color: iconContainerColorTwo,
+                      borderRadius: cardBorderRadius(),
+                      color: iconContainerColorOne,
                     ),
                     child: Icon(
-                      Icons.arrow_forward_ios,
-                      size: FastTransactionsCardStyle.iconChevronSize,
-                      color: iconTwoColor,
+                      iconOne,
+                      color: FastTransactionsCardStyle.iconColor,
+                      size: FastTransactionsCardStyle.iconSize,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: 200,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(title1, style: title1Style()),
+                      Text(title2, style: title2Style()),
+                    ],
+                  ),
+                ),
+                Spacer(),
+                SizedBox(
+                  width: 50,
+                  child: GestureDetector(
+                    onTap: () {
+                      onTap();
+                    },
+                    child: Container(
+                      width: FastTransactionsCardStyle.iconSizeContainer,
+                      height: FastTransactionsCardStyle.iconSizeContainer,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(GeneralStyle.borderRadius),
+                        ),
+                        color: iconContainerColorTwo,
+                      ),
+                      child: Icon(
+                        Icons.arrow_forward_ios,
+                        size: FastTransactionsCardStyle.iconChevronSize,
+                        color: iconTwoColor,
+                      ),
                     ),
                   ),
                 ),
@@ -169,7 +179,6 @@ class _FastTransactionsState extends State<FastTransactions> {
           SizedBox(
             height: FastTransactionsCardStyle.sizedBoxHeight,
             child: ListView.builder(
-              scrollDirection: Axis.horizontal,
               itemCount: _items.length,
               itemBuilder: (context, index) {
                 return _items[index];

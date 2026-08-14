@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/core/navigation/app_navigation.dart';
 import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
-import 'package:freelancer_tracking_system/features/dashboard/widgets/active_projects.dart';
 import 'package:freelancer_tracking_system/features/dashboard/widgets/summary_cards.dart';
 import 'package:freelancer_tracking_system/features/dashboard/widgets/fast_transactions.dart';
 import 'package:freelancer_tracking_system/features/dashboard/widgets/statistics_linear.dart';
@@ -36,12 +35,7 @@ class _DashboardState extends State<Dashboard> {
       body: SingleChildScrollView(
         padding: EdgeInsets.all(GeneralStyle.paddingSize),
         child: Column(
-          children: [
-            SummaryCards(),
-            StatisticsLiner(),
-            ActiveProjects(),
-            FastTransactions(),
-          ],
+          children: [SummaryCards(), StatisticsLiner(), FastTransactions()],
         ),
       ),
     );

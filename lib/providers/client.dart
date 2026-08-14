@@ -29,7 +29,7 @@ class Customer {
   final String? not;
   final String? adres;
   final String? source;
-  final String? aciklama;
+  final String? comment;
   Customer({
     required this.adSoyad,
     required this.email,
@@ -38,6 +38,6 @@ class Customer {
     this.not,
     this.adres,
     this.source,
-    this.aciklama,
+    this.comment,
   }) : id = const Uuid().v4();
 }

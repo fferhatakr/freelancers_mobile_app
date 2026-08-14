@@ -40,18 +40,18 @@ class _TasksAddState extends State<TasksAdd> {
               TaskAdd(
                 controller: tasksNameController,
                 icon: Icons.add_task_outlined,
-                title: 'Görev İsmi',
+                title: 'Görev İsmi *',
                 subtitle: 'Görev Adını Giriniz',
               ),
               TaskAdd(
                 controller: commentController,
                 icon: Icons.article,
-                title: 'Açıklama',
+                title: 'Açıklama *',
                 subtitle: 'Açıklama Ekle',
               ),
               SelectionTask(
                 icon2: Icons.person_2_outlined,
-                title2: 'Bağlantılı Müşteri',
+                title2: 'Bağlantılı Müşteri * ',
                 subtitle2: selectedCustomerName ?? 'Müşteri Seçiniz',
                 onTap: () async {
                   final customerName = await showModalBottomSheet<String>(
@@ -118,7 +118,7 @@ class _TasksAddState extends State<TasksAdd> {
               ),
               SelectionTask(
                 icon2: Icons.search,
-                title2: 'Bağlantılı Proje',
+                title2: 'Bağlantılı Proje*',
                 subtitle2: selectedProject ?? 'Mobile App',
                 onTap: () async {
                   final projectName = await showModalBottomSheet<String>(
@@ -196,8 +196,8 @@ class _TasksAddState extends State<TasksAdd> {
               ),
               SelectionTask(
                 icon2: Icons.flag,
-                title2: 'Zorluk',
-                subtitle2: '$selectedLevel',
+                title2: 'Zorluk *',
+                subtitle2: selectedLevel?.label ?? 'Derece Belirtin',
                 onTap: () async {
                   final level = await showModalBottomSheet<Levels>(
                     context: context,
@@ -275,4 +275,11 @@ class _TasksAddState extends State<TasksAdd> {
   }
 }
 
-enum Levels { kolay, orta, zor }
+enum Levels {
+  kolay('Kolay'),
+  orta('Orta'),
+  zor('Zor');
+
+  final String label;
+  const Levels(this.label);
+}
