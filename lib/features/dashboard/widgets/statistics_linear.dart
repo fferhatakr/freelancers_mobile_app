@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:freelancer_tracking_system/core/theme/app_style.dart';
 import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
+import 'package:freelancer_tracking_system/providers/project.dart';
 
 class StatisticsLiner extends StatelessWidget {
   const StatisticsLiner({super.key});
@@ -33,76 +34,22 @@ class StatisticsLiner extends StatelessWidget {
                 bottom: 8,
                 left: 20,
               ),
-              child: LineChart(
-                LineChartData(
-                  backgroundColor: Colors.transparent,
-                  minX: 0,
-                  maxX: 6,
-                  maxY: 10000,
-                  borderData: FlBorderData(
-                    show: true,
-                    border: Border.all(color: Colors.white, width: 2),
-                  ),
 
-                  lineBarsData: [
-                    LineChartBarData(
-                      color: Colors.blueGrey,
-                      spots: [
-                        FlSpot(0, 1000),
-                        FlSpot(1, 2000),
-                        FlSpot(3, 3000),
-                        FlSpot(4, 4000),
-                        FlSpot(5, 7000),
-                      ],
-                    ),
-                  ],
-
-                  titlesData: FlTitlesData(
-                    leftTitles: AxisTitles(
-                      sideTitles: SideTitles(
-                        getTitlesWidget: (value, meta) {
-                          return Text(
-                            value.toString(),
-                            style: TextStyle(color: Colors.white, fontSize: 9),
-                          );
-                        },
-                        showTitles: false,
-                        reservedSize: 0,
-                      ),
-                    ),
-                    bottomTitles: AxisTitles(
-                      sideTitles: SideTitles(
-                        showTitles: true,
-                        interval: 1,
-                        reservedSize: 20,
-
-                        getTitlesWidget: (value, meta) {
-                          final gunler = [
-                            'Pzt',
-                            'Sal',
-                            'Çar',
-                            'Per',
-                            'Cum',
-                            'Cmt',
-                            'Paz',
-                          ];
-
-                          return Text(
-                            gunler[value.toInt()],
-                            style: TextStyle(color: Colors.white),
-                          );
-                        },
-                      ),
-                    ),
-
-                    rightTitles: AxisTitles(
-                      sideTitles: SideTitles(showTitles: false),
-                    ),
-                    topTitles: AxisTitles(
-                      sideTitles: SideTitles(showTitles: false),
-                    ),
-                  ),
-                ),
+              child: ValueListenableBuilder<List<Project>>(
+                valueListenable: ProjectProvider(),
+                builder: (context, project, child) {
+                  final completadProjects = project.where(
+                    (project) => project.status == 'Tamamlandı',
+                  );
+                  double total = 0;
+                  for (final project in completadProjects) {
+                    total += project.projectAmount ?? 0;
+                  }
+                  return Text(
+                    'Toplam: $total Tl',
+                    style: TextStyle(color: Colors.white),
+                  );
+                },
               ),
             ),
           ),

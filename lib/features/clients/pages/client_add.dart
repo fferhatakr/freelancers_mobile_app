@@ -10,7 +10,7 @@ class ClientAddScreen extends StatefulWidget {
 }
 
 class _ClientAddScreenState extends State<ClientAddScreen> {
-  final adSoyadController = TextEditingController();
+  final nameController = TextEditingController();
   final emailController = TextEditingController();
   final telefonController = TextEditingController();
   final firmaController = TextEditingController();
@@ -20,7 +20,7 @@ class _ClientAddScreenState extends State<ClientAddScreen> {
   final commentController = TextEditingController();
   @override
   void dispose() {
-    adSoyadController.dispose();
+    nameController.dispose();
     emailController.dispose();
     telefonController.dispose();
     firmaController.dispose();
@@ -31,6 +31,9 @@ class _ClientAddScreenState extends State<ClientAddScreen> {
     super.dispose();
   }
 
+  final SnackBar _requiredfields = SnackBar(
+    content: Text('Zorunlu Alanları Doldurunuz'),
+  );
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,7 +78,7 @@ class _ClientAddScreenState extends State<ClientAddScreen> {
           icon: Icons.person_2_outlined,
           title: Language.adSoyad + '*',
           title2: Language.adSoyadAciklama,
-          controlText: adSoyadController,
+          controlText: nameController,
         ),
         ClientFormField(
           icon: Icons.mail_outline,
@@ -151,7 +154,7 @@ class _ClientAddScreenState extends State<ClientAddScreen> {
     return ElevatedButton(
       onPressed: () {
         final customer = Customer(
-          adSoyad: adSoyadController.text,
+          adSoyad: nameController.text,
           email: emailController.text,
           telefon: telefonController.text,
           firma: firmaController.text,
@@ -159,9 +162,16 @@ class _ClientAddScreenState extends State<ClientAddScreen> {
           source: sourceController.text,
           comment: commentController.text,
         );
-        CustomerProvider().addCustomer(items: customer);
-        Navigator.pop(context);
+        if (nameController.text.trim().isEmpty ||
+            emailController.text.trim().isEmpty ||
+            telefonController.text.trim().isEmpty) {
+          ScaffoldMessenger.of(context).showSnackBar(_requiredfields);
+        } else {
+          CustomerProvider().addCustomer(items: customer);
+          Navigator.pop(context);
+        }
       },
+
       child: Center(
         child: Text(
           Language.kaydet,

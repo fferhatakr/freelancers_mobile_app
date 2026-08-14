@@ -2,8 +2,19 @@ import 'package:flutter/material.dart';
 
 class ProjectCard extends StatefulWidget {
   final String title;
+  final double? amount;
+  final String? projectStatus;
+  final String? id;
+  final String selectedCustomer;
 
-  ProjectCard({required this.title, super.key});
+  ProjectCard({
+    required this.title,
+    required this.selectedCustomer,
+    this.amount,
+    this.projectStatus,
+    this.id,
+    super.key,
+  });
 
   @override
   State<ProjectCard> createState() => _ProjectCardState();
@@ -14,64 +25,68 @@ class _ProjectCardState extends State<ProjectCard> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 80,
-      child: InkWell(
-        onTap: () async {
-          final status = await showModalBottomSheet<Status>(
-            context: context,
-            builder: (context) {
-              return SizedBox(
-                width: double.infinity,
-                child: Material(
-                  child: ListView(
-                    children: [
-                      ListTile(
-                        title: Text('Bekliyor'),
-                        onTap: () {
-                          Navigator.pop(context, Status.bekliyor);
-                        },
-                      ),
-                      ListTile(
-                        onTap: () {
-                          Navigator.pop(context, Status.devamEdiyor);
-                        },
-                        title: Text('Devam Ediyor'),
-                      ),
-                      ListTile(
-                        onTap: () {
-                          Navigator.pop(context, Status.tamamlandi);
-                        },
-                        title: Text('Tamamlandı'),
-                      ),
-                    ],
-                  ),
+    return InkWell(
+      onTap: () async {
+        final status = await showModalBottomSheet<Status>(
+          context: context,
+          builder: (context) {
+            return SizedBox(
+              width: double.infinity,
+              child: Material(
+                child: ListView(
+                  children: [
+                    ListTile(
+                      title: Text('Bekliyor'),
+                      onTap: () {
+                        Navigator.pop(context, Status.bekliyor);
+                      },
+                    ),
+                    ListTile(
+                      onTap: () {
+                        Navigator.pop(context, Status.devamEdiyor);
+                      },
+                      title: Text('Devam Ediyor'),
+                    ),
+                    ListTile(
+                      onTap: () {
+                        Navigator.pop(context, Status.tamamlandi);
+                      },
+                      title: Text('Tamamlandı'),
+                    ),
+                  ],
                 ),
-              );
-            },
-          );
-          setState(() {
-            selectedStatus = status;
-          });
-        },
-        child: Card(
-          color: checkStatusColor(selectedStatus),
-          elevation: 15,
-          shape: BeveledRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(3)),
+              ),
+            );
+          },
+        );
+        setState(() {
+          selectedStatus = status;
+        });
+      },
+      child: Card(
+        color: checkStatusColor(selectedStatus),
+        elevation: 15,
+        shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(3)),
+        ),
+        child: ListTile(
+          leading: CircleAvatar(
+            backgroundColor: Colors.blueGrey[300],
+            child: Icon(Icons.assignment_outlined, color: Colors.white),
           ),
-          child: ListTile(
-            leading: CircleAvatar(
-              backgroundColor: Colors.blueGrey[300],
-              child: Icon(Icons.assignment_outlined, color: Colors.white),
-            ),
-            title: Text(
-              widget.title,
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
-            ),
-            subtitle: Text(selectedStatus?.label ?? 'Durum Belirtilmedi'),
-            trailing: Icon(Icons.chevron_right_outlined),
+          title: Text(
+            widget.title,
+            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
           ),
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(widget.selectedCustomer),
+              Text(selectedStatus?.label ?? 'Durum Belirtilmedi'),
+            ],
+          ),
+
+          trailing: Icon(Icons.chevron_right_outlined),
         ),
       ),
     );

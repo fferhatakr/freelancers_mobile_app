@@ -16,6 +16,7 @@ class TaskProvider extends ValueNotifier<List<Task>> {
     value.remove(items);
     notifyListeners();
   }
+
 }
 
 class Task {

@@ -11,19 +11,20 @@ class ProjectAdd extends StatefulWidget {
 }
 
 class _ProjectAddState extends State<ProjectAdd> {
-  final projectName = TextEditingController();
-  final customerName = TextEditingController();
-  final aciklama = TextEditingController();
+  final projectNameController = TextEditingController();
+  final customerNameController = TextEditingController();
+  final aciklamaController = TextEditingController();
 
-  final projectAmount = TextEditingController();
+  final projectAmountController = TextEditingController();
 
-  final note = TextEditingController();
+  final noteController = TextEditingController();
 
   final startDateController = TextEditingController();
   final endDateController = TextEditingController();
-
   String? selectedCustomer;
-
+  final SnackBar _requiredField = SnackBar(
+    content: Text('Zorunlu Alanı Doldurunuz'),
+  );
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,7 +44,7 @@ class _ProjectAddState extends State<ProjectAdd> {
             spacing: 10,
             children: [
               ProjectFormField(
-                controller: projectName,
+                controller: projectNameController,
                 icon: Icons.task_sharp,
                 title: 'Proje Adı *',
                 title2: 'Proje Adını Giriniz',
@@ -60,39 +61,37 @@ class _ProjectAddState extends State<ProjectAdd> {
                           builder: (context, value, child) {
                             return Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Expanded(
-                                child: ListView.builder(
-                                  itemCount: value.length,
-                                  itemBuilder: (context, index) {
-                                    final customerName = value[index];
-                                    return Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Card(
-                                        color: Colors.blueGrey[200],
-                                        child: Material(
-                                          type: MaterialType.transparency,
-                                          child: ListTile(
-                                            onTap: () {
-                                              Navigator.pop(
-                                                context,
-                                                customerName.adSoyad,
-                                              );
-                                            },
-                                            title: Text(customerName.adSoyad),
-                                            subtitle: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(customerName.email),
-                                                Text(customerName.telefon),
-                                              ],
-                                            ),
+                              child: ListView.builder(
+                                itemCount: value.length,
+                                itemBuilder: (context, index) {
+                                  final customerName = value[index];
+                                  return Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Card(
+                                      color: Colors.blueGrey[200],
+                                      child: Material(
+                                        type: MaterialType.transparency,
+                                        child: ListTile(
+                                          onTap: () {
+                                            Navigator.pop(
+                                              context,
+                                              customerName.adSoyad,
+                                            );
+                                          },
+                                          title: Text(customerName.adSoyad),
+                                          subtitle: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(customerName.email),
+                                              Text(customerName.telefon),
+                                            ],
                                           ),
                                         ),
                                       ),
-                                    );
-                                  },
-                                ),
+                                    ),
+                                  );
+                                },
                               ),
                             );
                           },
@@ -111,7 +110,7 @@ class _ProjectAddState extends State<ProjectAdd> {
                 ),
               ),
               ProjectFormField(
-                controller: aciklama,
+                controller: aciklamaController,
                 icon: Icons.comment,
                 title: 'Açıklama',
                 title2: 'Proje Hakkında Detaylı Bilgi Girin',
@@ -137,7 +136,7 @@ class _ProjectAddState extends State<ProjectAdd> {
               ),
 
               ProjectFormField(
-                controller: note,
+                controller: noteController,
                 icon: Icons.comment,
                 title: 'Notlar',
                 title2: 'Ek notlarınızı Yazın',
@@ -145,11 +144,15 @@ class _ProjectAddState extends State<ProjectAdd> {
               ElevatedButton(
                 onPressed: () {
                   final project = Project(
-                    projectName: projectName.text,
-                    musteriName: customerName.text,
+                    projectName: projectNameController.text,
+                    selectedCustomer: selectedCustomer,
                   );
-                  ProjectProvider().addProject(items: project);
-                  Navigator.pop(context);
+                  if (projectNameController.text.trim().isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(_requiredField);
+                  } else {
+                    ProjectProvider().addProject(items: project);
+                    Navigator.pop(context);
+                  }
                 },
                 child: Row(
                   spacing: 10,

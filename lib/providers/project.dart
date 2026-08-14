@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:freelancer_tracking_system/features/projects/widgets/project_card.dart';
 import 'package:uuid/uuid.dart';
 
 class ProjectProvider extends ValueNotifier<List<Project>> {
@@ -20,17 +21,17 @@ class ProjectProvider extends ValueNotifier<List<Project>> {
 class Project {
   final String id;
   final String projectName;
-  final String musteriName;
+  final String? selectedCustomer;
   final String? aciklama;
   final String? startDate;
   final String? endDate;
   final double? projectAmount;
-  final String? status;
+  Status? status;
   final String? oncelik;
   final String? nots;
   Project({
     required this.projectName,
-    required this.musteriName,
+    this.selectedCustomer,
     this.aciklama,
     this.startDate,
     this.endDate,

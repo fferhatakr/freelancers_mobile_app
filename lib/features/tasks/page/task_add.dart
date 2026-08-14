@@ -22,7 +22,9 @@ class _TasksAddState extends State<TasksAdd> {
   String? selectedCustomerName;
   String? selectedProject;
   Levels? selectedLevel;
-
+  final SnackBar requiredFields = SnackBar(
+    content: Text('Zorunlu Alanları Giriniz'),
+  );
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -172,7 +174,7 @@ class _TasksAddState extends State<TasksAdd> {
 
               TaskAdd(
                 icon: Icons.calendar_month,
-                title: 'Başlangıç Tarihi',
+                title: 'Başlangıç Tarihi*',
                 subtitle: 'GG/AA/YYYY',
                 controller: startDate,
               ),
@@ -184,7 +186,7 @@ class _TasksAddState extends State<TasksAdd> {
               ),
               TaskAdd(
                 icon: Icons.watch,
-                title: 'Kaç saat sürücek?',
+                title: 'Kaç saat sürücek?*',
                 subtitle: 'Saat Belirle',
                 controller: watchController,
               ),
@@ -249,8 +251,19 @@ class _TasksAddState extends State<TasksAdd> {
                     saat: watchController.text,
                     levels: selectedLevel.toString(),
                   );
-                  TaskProvider().addTasks(items: task);
-                  Navigator.pop(context);
+                  if (tasksNameController.text.trim().isEmpty ||
+                      commentController.text.trim().isEmpty ||
+                      endDate.text.trim().isEmpty ||
+                      watchController.text.trim().isEmpty ||
+                      selectedCustomerName == null ||
+                      selectedProject == null ||
+                      selectedLevel == null) {
+                    ScaffoldMessenger.of(context).showSnackBar(requiredFields);
+                  } else {
+                    TaskProvider().addTasks(items: task);
+                    Navigator.pop(context);
+                    ScaffoldMessenger.of(context).showSnackBar(requiredFields);
+                  }
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,

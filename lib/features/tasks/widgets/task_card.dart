@@ -216,8 +216,6 @@ dynamic levelColor(String? status) {
     return Color.fromRGBO(255, 153, 0, 1);
   } else if (status == Levels.kolay.toString()) {
     return Color.fromRGBO(76, 175, 80, 1);
-  } else {
-    print('Derece Belirtin');
   }
 }
 

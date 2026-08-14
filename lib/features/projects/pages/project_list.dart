@@ -10,7 +10,36 @@ class ProjectList extends StatefulWidget {
 }
 
 class _ProjectListState extends State<ProjectList> {
+  final TextEditingController searchController = TextEditingController();
+  final List<Project> allProject = ProjectProvider().value;
+  List<Project> _foundProjectName = [];
   String? status;
+
+  @override
+  void initState() {
+    super.initState();
+    // ekran ilk açıldığında tüm listeyi göstermek için
+    _foundProjectName = ProjectProvider().value;
+  }
+
+  void _runFilter(String enteredKeyword) {
+    List<Project> results = [];
+    if (enteredKeyword.isEmpty) {
+      results = allProject;
+    } else {
+      results = allProject
+          .where(
+            (project) => project.projectName.toLowerCase().contains(
+              enteredKeyword.toLowerCase(),
+            ),
+          )
+          .toList();
+    }
+    setState(() {
+      _foundProjectName = results;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,6 +50,9 @@ class _ProjectListState extends State<ProjectList> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextField(
+              onChanged: (value) {
+                _runFilter(value);
+              },
               maxLength: 30,
               autofocus: true,
               decoration: InputDecoration(
@@ -31,25 +63,33 @@ class _ProjectListState extends State<ProjectList> {
               ),
             ),
             Expanded(
-              child: ValueListenableBuilder(
-                valueListenable: ProjectProvider(),
-                builder: (context, projectItems, child) {
-                  return ListView.builder(
-                    itemCount: projectItems.length,
-                    itemBuilder: (context, index) {
-                      final projectadd = projectItems[index];
-
-                      return Dismissible(
-                        onDismissed: (direction) {
-                          ProjectProvider().removeProject(items: projectadd);
-                        },
-                        key: ValueKey(projectadd.id),
-                        child: ProjectCard(title: projectadd.projectName),
-                      );
-                    },
-                  );
-                },
-              ),
+              child: _foundProjectName.isNotEmpty
+                  ? ValueListenableBuilder(
+                      valueListenable: ProjectProvider(),
+                      builder: (context, allProject, child) {
+                        return ListView.builder(
+                          itemCount: _foundProjectName.length,
+                          itemBuilder: (context, index) {
+                            final project = _foundProjectName[index];
+                            return Dismissible(
+                              onDismissed: (direction) {
+                                ProjectProvider().removeProject(items: project);
+                              },
+                              key: ValueKey(project.id),
+                              child: ProjectCard(
+                                title: project.projectName,
+                                selectedCustomer:
+                                    project.selectedCustomer ?? 'Belirtilmedi',
+                              ),
+                            );
+                          },
+                        );
+                      },
+                    )
+                  : const Text(
+                      'No results found',
+                      style: TextStyle(fontSize: 24),
+                    ),
             ),
           ],
         ),
