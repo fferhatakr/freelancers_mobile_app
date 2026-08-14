@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/features/clients/pages/client_list.dart';
 import 'package:freelancer_tracking_system/features/dashboard/pages/dashboard.dart';
 import 'package:freelancer_tracking_system/features/projects/pages/project_list.dart';
-import 'package:freelancer_tracking_system/features/tasks/page/tasks.dart';
+import 'package:freelancer_tracking_system/features/tasks/page/tasks_list.dart';
 import 'package:freelancer_tracking_system/providers/navigation.dart';
 import 'package:provider/provider.dart';
 

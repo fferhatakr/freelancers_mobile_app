@@ -8,12 +8,14 @@ class TaskAdd extends StatelessWidget {
   final String _subtitle;
   final TextEditingController controller;
   final TextInputType? keyboardType;
+  final int maxLength;
 
   const TaskAdd({
     required this._icon,
     required this._title,
     required this._subtitle,
     required this.controller,
+    required this.maxLength,
     this.keyboardType,
     super.key,
   });
@@ -35,10 +37,11 @@ class TaskAdd extends StatelessWidget {
         subtitle: SizedBox(
           height: 35,
           child: TextField(
+            maxLength: maxLength,
             textInputAction: TextInputAction.next,
             keyboardType: keyboardType ?? TextInputType.text,
             controller: controller,
-            decoration: InputDecoration(hint: Text(_subtitle)),
+            decoration: InputDecoration(hint: Text(_subtitle), counterText: ''),
             style: TextStyle(color: GeneralStyle.hintTextcolor),
           ),
         ),
@@ -54,6 +57,7 @@ class SelectionTask extends StatelessWidget {
   final String _title2;
   final String _subtitle2;
   final VoidCallback onTap;
+
   const SelectionTask({
     required this._icon2,
     required this._title2,

@@ -13,6 +13,32 @@ class ClientList extends StatefulWidget {
 }
 
 class _ClientListState extends State<ClientList> {
+  final List<Customer> _allCustomer = CustomerProvider().value;
+  List<Customer> _foundCustomer = [];
+  @override
+  void initState() {
+    super.initState();
+    _foundCustomer = CustomerProvider().value;
+  }
+
+  void _runFilter(String enteredKeyword) {
+    List<Customer> result = [];
+    if (enteredKeyword.isEmpty) {
+      result = _allCustomer;
+    } else {
+      result = _allCustomer
+          .where(
+            (customer) => customer.adSoyad.toLowerCase().contains(
+              enteredKeyword.toLowerCase(),
+            ),
+          )
+          .toList();
+    }
+    setState(() {
+      _foundCustomer = result;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,33 +68,40 @@ class _ClientListState extends State<ClientList> {
           children: [
             _clientSearch(),
             Expanded(
-              child: ValueListenableBuilder(
-                key: UniqueKey(),
-                valueListenable: CustomerProvider(),
-                builder: (context, customerItems, child) {
-                  return ListView.builder(
-                    itemCount: customerItems.length,
-                    itemBuilder: (context, index) {
-                      final customer = customerItems[index];
-                      return Dismissible(
-                        onDismissed: (direction) {
-                          CustomerProvider().removeCustomer(customer);
-                        },
-                        key: ValueKey(customer.id),
-                        child: ClientCard(
-                          name: customer.adSoyad,
-                          telefon: customer.telefon,
-                          email: customer.email,
-                          firma: customer.firma,
-                          not: customer.not,
-                          adres: customer.adres,
-                          aciklama: customer.comment,
-                        ),
-                      );
-                    },
-                  );
-                },
-              ),
+              child: _foundCustomer.isNotEmpty
+                  ? ValueListenableBuilder(
+                      key: UniqueKey(),
+                      valueListenable: CustomerProvider(),
+                      builder: (context, allCustomer, child) {
+                        return ListView.builder(
+                          itemCount: _foundCustomer.length,
+                          itemBuilder: (context, index) {
+                            final customer = _foundCustomer[index];
+                            return Dismissible(
+                              onDismissed: (direction) {
+                                CustomerProvider().removeCustomer(customer);
+                              },
+                              key: ValueKey(customer.id),
+                              child: ClientCard(
+                                name: customer.adSoyad,
+                                telefon: customer.telefon,
+                                email: customer.email,
+                                firma: customer.firma,
+                                not: customer.not,
+                                adres: customer.adres,
+                                aciklama: customer.comment,
+                              ),
+                            );
+                          },
+                        );
+                      },
+                    )
+                  : Center(
+                      child: Text(
+                        'No results found',
+                        style: TextStyle(fontSize: 24),
+                      ),
+                    ),
             ),
           ],
         ),
@@ -78,6 +111,9 @@ class _ClientListState extends State<ClientList> {
 
   TextField _clientSearch() {
     return TextField(
+      onChanged: (value) {
+        _runFilter(value);
+      },
       autofocus: true,
       maxLength: GeneralStyle.textFieldMaxLenght,
       decoration: InputDecoration(

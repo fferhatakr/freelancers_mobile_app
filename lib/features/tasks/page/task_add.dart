@@ -40,12 +40,14 @@ class _TasksAddState extends State<TasksAdd> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               TaskAdd(
+                maxLength: 20,
                 controller: tasksNameController,
                 icon: Icons.add_task_outlined,
                 title: 'Görev İsmi *',
                 subtitle: 'Görev Adını Giriniz',
               ),
               TaskAdd(
+                maxLength: 20,
                 controller: commentController,
                 icon: Icons.article,
                 title: 'Açıklama *',
@@ -173,24 +175,28 @@ class _TasksAddState extends State<TasksAdd> {
               ),
 
               TaskAdd(
+                maxLength: 8,
                 icon: Icons.calendar_month,
                 title: 'Başlangıç Tarihi*',
                 subtitle: 'GG/AA/YYYY',
                 controller: startDate,
               ),
               TaskAdd(
+                maxLength: 8,
                 icon: Icons.calendar_month,
                 title: 'Bitiş Tarihi',
                 subtitle: 'GG/AA/YYYY',
                 controller: endDate,
               ),
               TaskAdd(
+                maxLength: 8,
                 icon: Icons.watch,
                 title: 'Kaç saat sürücek?*',
                 subtitle: 'Saat Belirle',
                 controller: watchController,
               ),
               TaskAdd(
+                maxLength: 20,
                 controller: noteController,
                 icon: Icons.note_add,
                 title: 'Not ekleyin',
