@@ -187,6 +187,7 @@ class _LoginPageState extends State<LoginPage> {
             password: _passwordController.text.trim(),
           );
         } on FirebaseAuthException catch (e) {
+          if (!mounted) return;
           if (e.code == 'user-not-found') {
             ScaffoldMessenger.of(context).showSnackBar(_notFoundUser);
           } else if (e.code == 'wrong-password') {

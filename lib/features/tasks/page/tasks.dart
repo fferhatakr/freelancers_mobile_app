@@ -56,7 +56,6 @@ class _TasksState extends State<Tasks> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ResultTask(),
             Expanded(
               child: ValueListenableBuilder(
                 valueListenable: TaskProvider(),
@@ -73,6 +72,9 @@ class _TasksState extends State<Tasks> {
                         child: TasksCard(
                           taskName: task.taskName,
                           taskDescription: task.comment,
+                          time: task.saat,
+                          date: task.startDate,
+                          status: task.levels,
                         ),
                       );
                     },

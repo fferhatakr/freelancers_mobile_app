@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:freelancer_tracking_system/features/tasks/widgets/task_card.dart';
 import 'package:freelancer_tracking_system/providers/tasks.dart';
 
-class ResultTask extends StatelessWidget {
+class ResultTask extends StatefulWidget {
   ResultTask({super.key});
 
+  @override
+  State<ResultTask> createState() => _ResultTaskState();
+}
+
+class _ResultTaskState extends State<ResultTask> {
   final DateTime now = DateTime.now();
+  int tamamlandi = 0;
+  int devamEdiyor = 0;
   @override
   Widget build(BuildContext context) {
     final projectCount = TaskProvider().value.length;
@@ -35,8 +43,7 @@ class ResultTask extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(Icons.check_outlined, color: Colors.green),
-
-                  Text('0', style: _textStyle()),
+                  Text(tamamlandi.toString(), style: _textStyle()),
                   Text('Tamamlandı', style: _twoTextStyle()),
                 ],
               ),
@@ -46,7 +53,7 @@ class ResultTask extends StatelessWidget {
                 children: [
                   Icon(Icons.watch_later_outlined, color: Colors.amber),
 
-                  Text('0', style: _textStyle()),
+                  Text(devamEdiyor.toString(), style: _textStyle()),
                   Text('Devam', style: _twoTextStyle()),
                 ],
               ),
@@ -55,6 +62,15 @@ class ResultTask extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  dynamic status(String status) {
+    if (status == Status.devamEdiyor) {
+      devamEdiyor += 1;
+    }
+    if (status == Status.tamamlandi) {
+      tamamlandi += 1;
+    }
   }
 
   TextStyle _twoTextStyle() =>

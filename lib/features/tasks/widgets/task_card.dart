@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:freelancer_tracking_system/features/tasks/widgets/result_task.dart';
 
-class TasksCard extends StatelessWidget {
+class TasksCard extends StatefulWidget {
   final String taskName;
   final String taskDescription;
   final String? time;
@@ -17,146 +18,187 @@ class TasksCard extends StatelessWidget {
     this.value,
     super.key,
   });
+
+  @override
+  State<TasksCard> createState() => _TasksCardState();
+}
+
+class _TasksCardState extends State<TasksCard> {
+  Status? selectedStatus;
+
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: Colors.blueAccent[50],
-      shape: _cardShape(),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          spacing: 20,
-          children: [
-            Row(
-              spacing: 10,
-              children: [
-                Column(
+    return InkWell(
+      onTap: () async {
+        final status = await showModalBottomSheet<Status>(
+          context: context,
+          builder: (context) {
+            return SizedBox(
+              height: 200,
+              width: double.infinity,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ListView(
                   children: [
-                    Container(
-                      height: _CardFeatures.containerHeight,
-                      width: _CardFeatures.containerWidht,
-                      decoration: BoxDecoration(
-                        color: levelColor(status) ?? Colors.red,
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                    Card(
+                      child: ListTile(
+                        title: Text('Devam Ediyor'),
+                        onTap: () {
+                          Navigator.pop(context, Status.devamEdiyor);
+                        },
                       ),
-                      child: Icon(
-                        Icons.screenshot_monitor_outlined,
-                        color: Colors.white,
+                    ),
+                    Card(
+                      child: ListTile(
+                        title: Text('Tamamlandı'),
+                        onTap: () {
+                          Navigator.pop(context, Status.tamamlandi);
+                        },
                       ),
                     ),
                   ],
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      taskName,
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
+              ),
+            );
+          },
+        );
+        setState(() {
+          selectedStatus = status;
+        });
+      },
+      child: Card(
+        color: Colors.blueAccent[50],
+        shape: _cardShape(),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            spacing: 20,
+            children: [
+              Row(
+                spacing: 10,
+                children: [
+                  Column(
+                    children: [
+                      Container(
+                        height: _CardFeatures.containerHeight,
+                        width: _CardFeatures.containerWidht,
+                        decoration: BoxDecoration(
+                          color: levelColor(widget.status) ?? Colors.red,
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                        ),
+                        child: Icon(
+                          Icons.screenshot_monitor_outlined,
+                          color: Colors.white,
+                        ),
                       ),
-                    ),
-                    SizedBox(width: 5),
-                    Text(
-                      taskDescription,
-                      style: TextStyle(
-                        color: Color.fromRGBO(47, 47, 49, 1),
-                        fontSize: 14,
+                    ],
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.taskName,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                Spacer(),
-                Align(
-                  alignment: Alignment.bottomRight,
-                  child: GestureDetector(
-                    onTap: () {
-                      print('Başlatiliyor');
-                    },
-                    child: Container(
-                      width: 75,
-                      height: 30,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                        color: Colors.blueGrey[100],
+                      SizedBox(width: 5),
+                      Text(
+                        widget.taskDescription,
+                        style: TextStyle(
+                          color: Color.fromRGBO(47, 47, 49, 1),
+                          fontSize: 14,
+                        ),
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                    ],
+                  ),
+                  Spacer(),
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: GestureDetector(
+                      onTap: () {
+                        print('Başlatiliyor');
+                      },
+                      child: Column(
+                        spacing: 10,
                         children: [
-                          Icon(
-                            Icons.circle,
-                            color: levelColor(status) ?? Colors.red,
-                            size: 16,
+                          Container(
+                            width: 75,
+                            height: 30,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(10),
+                              ),
+                              color: Colors.blueGrey[100],
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.circle,
+                                  color:
+                                      levelColor(widget.status) ?? Colors.red,
+                                  size: 16,
+                                ),
+                              ],
+                            ),
                           ),
-                          Text(
-                            status ?? 'Zor',
-                            style: TextStyle(
-                              color: levelColor(status) ?? Colors.red,
-                              fontSize: 12,
+
+                          Container(
+                            width: 75,
+                            height: 30,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(10),
+                              ),
+                              color: Colors.blueGrey[100],
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  checkStatus(selectedStatus.toString()),
+                                  style: _statusStyle(),
+                                ),
+                              ],
                             ),
                           ),
                         ],
                       ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            Row(
-              spacing: 10,
-              children: [
-                SizedBox(
-                  width: 300,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(50),
-                    child: LinearProgressIndicator(
-                      minHeight: 3,
-                      value: double.parse(value ?? '90') / 100,
-                      color: levelColor(status) ?? Colors.amber,
+                ],
+              ),
+
+              Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(
+                      width: 150,
+                      child: Row(
+                        children: [
+                          Icon(Icons.watch_later_outlined),
+                          Text(widget.time ?? '19.00'),
+                        ],
+                      ),
                     ),
-                  ),
+                    SizedBox(
+                      width: 110,
+                      child: Row(
+                        children: [
+                          Icon(Icons.calendar_month),
+                          Text(widget.date ?? '12 Ağustos'),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-
-                Text(
-                  '${value ?? 90}%',
-                  style: TextStyle(fontWeight: FontWeight.w500),
-                ),
-              ],
-            ),
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SizedBox(
-                  width: 150,
-                  child: Row(
-                    children: [
-                      Icon(Icons.watch_later_outlined),
-                      Text(time ?? '19.00'),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: Row(
-                    children: [
-                      Icon(Icons.calendar_month),
-                      Text(date ?? '12 Ağustos'),
-                    ],
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    print('Başlatiliyor');
-                  },
-                  child: CircleAvatar(
-                    backgroundColor: levelColor(status) ?? Colors.red,
-                    child: Icon(Icons.play_arrow_rounded, color: Colors.white),
-                  ),
-                ),
-              ],
-            ),
-          ],
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -177,13 +219,26 @@ class _CardFeatures {
 enum Levels { kolay, orta, zor }
 
 dynamic levelColor(String? status) {
-  if (status == 'Zor') {
+  if (status == Levels.zor.toString()) {
     return Color.fromRGBO(255, 69, 69, 1);
-  } else if (status == 'Orta') {
+  } else if (status == Levels.orta.toString()) {
     return Color.fromRGBO(255, 153, 0, 1);
-  } else if (status == 'Kolay') {
+  } else if (status == Levels.kolay.toString()) {
     return Color.fromRGBO(76, 175, 80, 1);
   } else {
     print('Derece Belirtin');
   }
 }
+
+dynamic checkStatus(String status) {
+  if (status == Status.devamEdiyor.toString()) {
+    return 'Devam Ediyor';
+  } else {
+    return 'Tamamlandı';
+  }
+}
+
+TextStyle _statusStyle() =>
+    TextStyle(fontSize: 10, fontWeight: FontWeight.bold);
+
+enum Status { tamamlandi, devamEdiyor }

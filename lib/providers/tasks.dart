@@ -26,7 +26,7 @@ class Task {
   final String? baglantiliProje;
   final String? startDate;
   final String? endDate;
-  final double? saat;
+  final String? saat;
   final String? note;
   final String? levels;
   Task({

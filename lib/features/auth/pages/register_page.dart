@@ -122,6 +122,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       password: _password.text.trim(),
                       confirmPassword: _confirmPassword.text.trim(),
                     );
+                    if (!context.mounted) return;
                     Navigator.popUntil(context, ModalRoute.withName("/"));
                   } on FirebaseAuthException catch (e) {
                     if (e.code == 'weak-password') {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-
 import 'package:freelancer_tracking_system/features/tasks/widgets/task_add.dart';
 import 'package:freelancer_tracking_system/providers/client.dart';
+import 'package:freelancer_tracking_system/providers/project.dart';
 import 'package:freelancer_tracking_system/providers/tasks.dart';
 
 class TasksAdd extends StatefulWidget {
@@ -14,9 +14,15 @@ class TasksAdd extends StatefulWidget {
 final tasksNameController = TextEditingController();
 final commentController = TextEditingController();
 final noteController = TextEditingController();
+final startDate = TextEditingController();
+final endDate = TextEditingController();
+final watchController = TextEditingController();
 
 class _TasksAddState extends State<TasksAdd> {
-  Customer? selectedCustomer;
+  String? selectedCustomerName;
+  String? selectedProject;
+  Levels? selectedLevel;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,33 +52,141 @@ class _TasksAddState extends State<TasksAdd> {
               SelectionTask(
                 icon2: Icons.person_2_outlined,
                 title2: 'Bağlantılı Müşteri',
-                subtitle2: selectedCustomer?.adSoyad ?? 'Müşteri Seç',
-                onTap: () {},
+                subtitle2: selectedCustomerName ?? 'Müşteri Seçiniz',
+                onTap: () async {
+                  final customerName = await showModalBottomSheet<String>(
+                    context: context,
+                    builder: (context) {
+                      return ValueListenableBuilder(
+                        valueListenable: CustomerProvider(),
+                        builder: (context, value, child) {
+                          return ListView.builder(
+                            itemCount: value.length,
+                            itemBuilder: (context, index) {
+                              final customer = value[index];
+                              return Padding(
+                                padding: _paddingSize(),
+                                child: InkWell(
+                                  onTap: () {
+                                    Navigator.pop(
+                                      context,
+                                      customer.adSoyad,
+                                    ); //Müşterinin seçtiği değerin ismini alıyoruz
+                                  },
+                                  child: Card(
+                                    color: Colors.blueGrey[50],
+                                    child: ListTile(
+                                      leading: CircleAvatar(
+                                        child: Icon(Icons.person_2_outlined),
+                                      ),
+                                      title: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            customer.adSoyad,
+                                            style: TextStyle(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          Text(
+                                            customer.email,
+                                            style: TextStyle(fontSize: 14),
+                                          ),
+                                          Text(
+                                            customer.telefon,
+                                            style: TextStyle(fontSize: 14),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        },
+                      );
+                    },
+                  );
+                  setState(() {
+                    selectedCustomerName =
+                        customerName; //yenileyerek seçtiği ismi seçilen isme yansıtıyoruz.
+                  });
+                },
               ),
               SelectionTask(
                 icon2: Icons.search,
                 title2: 'Bağlantılı Proje',
-                subtitle2: 'Mobile App',
-                onTap: () {},
+                subtitle2: selectedProject ?? 'Mobile App',
+                onTap: () async {
+                  final projectName = await showModalBottomSheet<String>(
+                    context: context,
+                    builder: (context) {
+                      return SizedBox(
+                        width: double.infinity,
+
+                        child: ValueListenableBuilder(
+                          valueListenable: ProjectProvider(),
+                          builder: (context, projectIndex, child) {
+                            return ListView.builder(
+                              itemCount: projectIndex.length,
+                              itemBuilder: (context, index) {
+                                final project = projectIndex[index];
+                                return InkWell(
+                                  onTap: () {
+                                    Navigator.pop(context, project.projectName);
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 10,
+                                    ),
+                                    child: Card(
+                                      color: Colors.blueGrey[50],
+                                      child: ListTile(
+                                        leading: CircleAvatar(
+                                          backgroundColor: Colors.red,
+                                          child: Icon(
+                                            Icons.work,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                        title: Text(project.projectName),
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                        ),
+                      );
+                    },
+                  );
+                  setState(() {
+                    selectedProject = projectName;
+                  });
+                },
               ),
 
-              SelectionTask(
-                icon2: Icons.calendar_month,
-                title2: 'Başlangıç Tarihi',
-                subtitle2: '12 Ağustos 2026',
-                onTap: () {},
+              TaskAdd(
+                icon: Icons.calendar_month,
+                title: 'Başlangıç Tarihi',
+                subtitle: 'GG/AA/YYYY',
+                controller: startDate,
               ),
-              SelectionTask(
-                icon2: Icons.calendar_month,
-                title2: 'Bitiş Tarihi',
-                subtitle2: 'Tarih Seç',
-                onTap: () {},
+              TaskAdd(
+                icon: Icons.calendar_month,
+                title: 'Bitiş Tarihi',
+                subtitle: 'GG/AA/YYYY',
+                controller: endDate,
               ),
-              SelectionTask(
-                icon2: Icons.watch_later_outlined,
-                title2: 'Kaç Saat Sürücek?',
-                subtitle2: 'Saat Belirle',
-                onTap: () {},
+              TaskAdd(
+                icon: Icons.watch,
+                title: 'Kaç saat sürücek?',
+                subtitle: 'Saat Belirle',
+                controller: watchController,
               ),
               TaskAdd(
                 controller: noteController,
@@ -83,8 +197,44 @@ class _TasksAddState extends State<TasksAdd> {
               SelectionTask(
                 icon2: Icons.flag,
                 title2: 'Zorluk',
-                subtitle2: 'Basit/Orta/Zor',
-                onTap: () {},
+                subtitle2: '$selectedLevel',
+                onTap: () async {
+                  final level = await showModalBottomSheet<Levels>(
+                    context: context,
+                    builder: (context) {
+                      return SizedBox(
+                        width: double.infinity,
+                        height: 300,
+                        child: ListView(
+                          children: [
+                            ListTile(
+                              title: Text('Kolay'),
+                              onTap: () {
+                                Navigator.pop(context, Levels.kolay);
+                              },
+                            ),
+                            ListTile(
+                              title: Text('Orta'),
+                              onTap: () {
+                                Navigator.pop(context, Levels.orta);
+                              },
+                            ),
+                            ListTile(
+                              title: Text('Zor'),
+                              onTap: () {
+                                Navigator.pop(context, Levels.zor);
+                              },
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  );
+
+                  setState(() {
+                    selectedLevel = level;
+                  });
+                },
               ),
 
               ElevatedButton(
@@ -92,6 +242,12 @@ class _TasksAddState extends State<TasksAdd> {
                   final task = Task(
                     taskName: tasksNameController.text,
                     comment: commentController.text,
+                    bagliMusteri: selectedCustomerName,
+                    baglantiliProje: selectedProject,
+                    startDate: startDate.text,
+                    endDate: endDate.text,
+                    saat: watchController.text,
+                    levels: selectedLevel.toString(),
                   );
                   TaskProvider().addTasks(items: task);
                   Navigator.pop(context);
@@ -113,4 +269,10 @@ class _TasksAddState extends State<TasksAdd> {
       ),
     );
   }
+
+  EdgeInsets _paddingSize() {
+    return const EdgeInsets.symmetric(horizontal: 10);
+  }
 }
+
+enum Levels { kolay, orta, zor }

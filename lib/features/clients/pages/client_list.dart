@@ -42,31 +42,28 @@ class _ClientListState extends State<ClientList> {
           children: [
             _clientSearch(),
             Expanded(
-              child: InkWell(
-                onTap: () {},
-                child: ValueListenableBuilder(
-                  key: UniqueKey(),
-                  valueListenable: CustomerProvider(),
-                  builder: (context, customerItems, child) {
-                    return ListView.builder(
-                      itemCount: customerItems.length,
-                      itemBuilder: (context, index) {
-                        final customer = customerItems[index];
-                        return Dismissible(
-                          onDismissed: (direction) {
-                            CustomerProvider().removeCustomer(customer);
-                          },
-                          key: ValueKey(customer.id),
-                          child: ClientCard(
-                            name: customer.adSoyad,
-                            telefon: customer.telefon,
-                            email: customer.email,
-                          ),
-                        );
-                      },
-                    );
-                  },
-                ),
+              child: ValueListenableBuilder(
+                key: UniqueKey(),
+                valueListenable: CustomerProvider(),
+                builder: (context, customerItems, child) {
+                  return ListView.builder(
+                    itemCount: customerItems.length,
+                    itemBuilder: (context, index) {
+                      final customer = customerItems[index];
+                      return Dismissible(
+                        onDismissed: (direction) {
+                          CustomerProvider().removeCustomer(customer);
+                        },
+                        key: ValueKey(customer.id),
+                        child: ClientCard(
+                          name: customer.adSoyad,
+                          telefon: customer.telefon,
+                          email: customer.email,
+                        ),
+                      );
+                    },
+                  );
+                },
               ),
             ),
           ],

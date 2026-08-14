@@ -6,12 +6,14 @@ class ProjectFormField extends StatelessWidget {
   final String _title;
   final String _title2;
   final TextEditingController controller;
+  final TextInputType? keyboardType;
 
   const ProjectFormField({
     required this._icon,
     required this._title,
     required this._title2,
     required this.controller,
+    this.keyboardType,
     super.key,
   });
 
@@ -33,6 +35,8 @@ class ProjectFormField extends StatelessWidget {
           subtitle: SizedBox(
             height: 40,
             child: TextField(
+              textInputAction: TextInputAction.next,
+              keyboardType: keyboardType,
               controller: controller,
               decoration: InputDecoration(
                 hint: Text(

@@ -7,12 +7,14 @@ class TaskAdd extends StatelessWidget {
   final String _title;
   final String _subtitle;
   final TextEditingController controller;
+  final TextInputType? keyboardType;
 
   const TaskAdd({
     required this._icon,
     required this._title,
     required this._subtitle,
     required this.controller,
+    this.keyboardType,
     super.key,
   });
   @override
@@ -25,7 +27,7 @@ class TaskAdd extends StatelessWidget {
         color: Colors.blueGrey[50],
       ),
       child: ListTile(
-        leading: Icon(_icon, color: const Color.fromARGB(255, 255, 38, 23)),
+        leading: Icon(_icon, color: Colors.red),
         title: Text(
           _title,
           style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
@@ -33,6 +35,8 @@ class TaskAdd extends StatelessWidget {
         subtitle: SizedBox(
           height: 35,
           child: TextField(
+            textInputAction: TextInputAction.next,
+            keyboardType: keyboardType ?? TextInputType.text,
             controller: controller,
             decoration: InputDecoration(hint: Text(_subtitle)),
             style: TextStyle(color: GeneralStyle.hintTextcolor),

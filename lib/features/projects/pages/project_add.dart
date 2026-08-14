@@ -64,6 +64,7 @@ class ProjectAdd extends StatelessWidget {
                 },
               ),
               ProjectFormField(
+                keyboardType: TextInputType.numberWithOptions(),
                 controller: TextEditingController(),
                 icon: Icons.currency_lira_outlined,
                 title: 'Proje Ücreti',
