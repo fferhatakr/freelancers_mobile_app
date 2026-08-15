@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/providers/client.dart';
 import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
-import 'package:freelancer_tracking_system/features/clients/widgets/client_form_field.dart';
+import 'package:freelancer_tracking_system/features/customer/widgets/client_form_field.dart';
 
-class ClientAddScreen extends StatefulWidget {
-  const ClientAddScreen({super.key});
+class CustomerAddScreen extends StatefulWidget {
+  const CustomerAddScreen({super.key});
   @override
-  State<ClientAddScreen> createState() => _ClientAddScreenState();
+  State<CustomerAddScreen> createState() => _CustomerAddScreenState();
 }
 
-class _ClientAddScreenState extends State<ClientAddScreen> {
+class _CustomerAddScreenState extends State<CustomerAddScreen> {
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final telefonController = TextEditingController();
@@ -52,7 +52,7 @@ class _ClientAddScreenState extends State<ClientAddScreen> {
 
   Text _clientAddAppBarTitle() {
     return Text(
-      Language.yeniMusteri,
+      CustomerStrings.yeniMusteri,
       style: TextStyle(
         fontSize: GeneralStyle.appBarTitleSize,
         color: GeneralStyle.appBarTitle,
@@ -67,7 +67,7 @@ class _ClientAddScreenState extends State<ClientAddScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          Language.musteriBilgileri,
+          CustomerStrings.musteriBilgileri,
           style: TextStyle(
             fontSize: GeneralStyle.columnMiniTitle,
             fontWeight: FontWeight.bold,
@@ -76,31 +76,31 @@ class _ClientAddScreenState extends State<ClientAddScreen> {
 
         ClientFormField(
           icon: Icons.person_2_outlined,
-          title: Language.adSoyad + '*',
-          title2: Language.adSoyadAciklama,
+          title: CustomerStrings.adSoyad + '*',
+          title2: CustomerStrings.adSoyadAciklama,
           controlText: nameController,
         ),
         ClientFormField(
           icon: Icons.mail_outline,
-          title: Language.eposta + '*',
-          title2: Language.epostaAciklama,
+          title: CustomerStrings.eposta + '*',
+          title2: CustomerStrings.epostaAciklama,
           controlText: emailController,
         ),
         ClientFormField(
           icon: Icons.call,
-          title: Language.telefon + '*',
-          title2: Language.telefonAciklama,
+          title: CustomerStrings.telefon + '*',
+          title2: CustomerStrings.telefonAciklama,
           controlText: telefonController,
         ),
         ClientFormField(
           icon: Icons.home,
-          title: Language.firmaAdi,
-          title2: Language.firmaAdiAciklama,
+          title: CustomerStrings.firmaAdi,
+          title2: CustomerStrings.firmaAdiAciklama,
           controlText: firmaController,
         ),
 
         Text(
-          Language.adresTitle,
+          CustomerStrings.adresTitle,
           style: TextStyle(
             fontSize: GeneralStyle.columnMiniTitle,
             fontWeight: FontWeight.bold,
@@ -111,15 +111,15 @@ class _ClientAddScreenState extends State<ClientAddScreen> {
           height: 100,
           child: ClientFormField(
             icon: Icons.comment,
-            title: 'Açıklama Ekle(Opsiyonel)',
-            title2: Language.aciklamaEkle,
+            title: CustomerStrings.opsiyonelAciklama,
+            title2: CustomerStrings.aciklamaEkle,
             controlText: adresController,
             height: 60,
           ),
         ),
 
         Text(
-          Language.notlarTitle,
+          CustomerStrings.notlarTitle,
           style: TextStyle(
             fontSize: GeneralStyle.columnMiniTitle,
             fontWeight: FontWeight.bold,
@@ -127,18 +127,18 @@ class _ClientAddScreenState extends State<ClientAddScreen> {
         ),
         ClientFormField(
           icon: Icons.note_add_outlined,
-          title: Language.not,
-          title2: Language.notAciklama,
+          title: CustomerStrings.not,
+          title2: CustomerStrings.notAciklama,
           controlText: notController,
         ),
         Text(
-          Language.kaynakTitle,
+          CustomerStrings.kaynakTitle,
           style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         ),
         ClientFormField(
           icon: Icons.source,
-          title: Language.kaynak,
-          title2: Language.kaynakAciklama,
+          title: CustomerStrings.kaynak,
+          title2: CustomerStrings.kaynakAciklama,
           controlText: sourceController,
         ),
         _Info(),
@@ -174,7 +174,7 @@ class _ClientAddScreenState extends State<ClientAddScreen> {
 
       child: Center(
         child: Text(
-          Language.kaydet,
+          CommonStrings.kaydet,
           style: TextStyle(color: ClientsStyle.addIconColor),
         ),
       ),
@@ -196,7 +196,7 @@ class _Info extends StatelessWidget {
       child: ListTile(
         leading: Icon(Icons.info_outline, color: ClientsStyle.infoIconColor),
         title: Text(
-          Language.info,
+          CommonStrings.info,
           style: TextStyle(fontSize: ClientsStyle.infoFontSize),
         ),
       ),

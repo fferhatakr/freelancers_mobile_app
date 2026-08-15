@@ -79,19 +79,19 @@ class SummaryCards extends StatelessWidget {
                   _SummaryCard(
                     icon: Icons.home,
                     color: OzetCardsStyle.homeColor,
-                    title: Language.aktifProjelerim,
+                    title: DashboardStrings.aktifProjelerim,
                     value: AppData.projectCount,
                   ),
                   _SummaryCard(
                     icon: Icons.check,
                     color: OzetCardsStyle.checkColor,
-                    title: Language.tamamlananProjeler,
+                    title: DashboardStrings.tamamlananProjeler,
                     value: 3,
                   ),
                   _SummaryCard(
                     icon: Icons.currency_lira,
                     color: OzetCardsStyle.liraColor,
-                    title: Language.bekleyenOdeme,
+                    title: DashboardStrings.bekleyenOdeme,
                     value: 3575,
                   ),
                 ],

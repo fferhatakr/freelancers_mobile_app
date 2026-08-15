@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/core/navigation/app_navigation.dart';
 import 'package:freelancer_tracking_system/core/theme/app_all_style.dart';
-import 'package:freelancer_tracking_system/features/clients/pages/client_add.dart';
+import 'package:freelancer_tracking_system/features/customer/pages/customer_add.dart';
 
 class BillCreate extends StatelessWidget {
   final String? _selectedCustomer;
@@ -100,7 +100,7 @@ class BillCreate extends StatelessWidget {
                           onTap: () {
                             AppNavigation.navigateTo(
                               context,
-                              ClientAddScreen(),
+                              CustomerAddScreen(),
                             );
                           },
                           child: Container(

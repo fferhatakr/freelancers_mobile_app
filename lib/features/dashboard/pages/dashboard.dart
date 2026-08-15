@@ -20,7 +20,7 @@ class _DashboardState extends State<Dashboard> {
       backgroundColor: GeneralStyle.dashboardBackground,
       appBar: AppBar(
         backgroundColor: GeneralStyle.dashboardBackground,
-        title: Text(Language.hosgeldinKullanici),
+        title: Text(DashboardStrings.hosgeldinKullanici),
         centerTitle: false,
         actions: [
           IconButton(onPressed: () {}, icon: Icon(Icons.notifications)),

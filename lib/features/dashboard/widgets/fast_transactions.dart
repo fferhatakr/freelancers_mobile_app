@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/core/navigation/app_navigation.dart';
 import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
-import 'package:freelancer_tracking_system/features/clients/pages/client_add.dart';
+import 'package:freelancer_tracking_system/features/customer/pages/customer_add.dart';
 import 'package:freelancer_tracking_system/features/dashboard/pages/bill_create.dart';
 import 'package:freelancer_tracking_system/features/projects/pages/project_add.dart';
 import 'package:freelancer_tracking_system/features/tasks/page/task_add.dart';
@@ -115,8 +115,8 @@ class _FastTransactionsState extends State<FastTransactions> {
       _FastCard(
         iconContainerColorOne: FastTransactionsCardStyle.faturaContainerColor,
         iconOne: Icons.task,
-        title1: Language.faturaOlustur,
-        title2: Language.yeniFaturaekle,
+        title1: InvoiceStrings.faturaOlustur,
+        title2: InvoiceStrings.yeniFaturaekle,
         iconContainerColorTwo:
             FastTransactionsCardStyle.faturaIconContainerColor,
         iconTwoColor: FastTransactionsCardStyle.faturaContainerColor,
@@ -128,19 +128,19 @@ class _FastTransactionsState extends State<FastTransactions> {
         iconContainerColorOne:
             FastTransactionsCardStyle.yeniMusteriContainerColor,
         iconOne: Icons.person_add,
-        title1: Language.yeniMusteri,
-        title2: Language.musteriKaydiEkle,
+        title1: CustomerStrings.yeniMusteri,
+        title2: CustomerStrings.musteriKaydiEkle,
         iconContainerColorTwo: FastTransactionsCardStyle.yeniMusteriIconColor,
         iconTwoColor: FastTransactionsCardStyle.yeniMusteriContainerColor,
         onTap: () {
-          AppNavigation.navigateTo(context, ClientAddScreen());
+          AppNavigation.navigateTo(context, CustomerAddScreen());
         },
       ),
       _FastCard(
         iconContainerColorOne: FastTransactionsCardStyle.projeContainerColor,
         iconOne: Icons.assignment_add,
-        title1: Language.projeEkle,
-        title2: Language.yeniKazancSagla,
+        title1: ProjectStrings.projeEkle,
+        title2: ProjectStrings.yeniKazancSagla,
         iconContainerColorTwo: FastTransactionsCardStyle.projeIconColor,
         iconTwoColor: FastTransactionsCardStyle.projeContainerColor,
         onTap: () {
@@ -150,8 +150,8 @@ class _FastTransactionsState extends State<FastTransactions> {
       _FastCard(
         iconContainerColorOne: FastTransactionsCardStyle.gorevContainerColor,
         iconOne: Icons.add_task,
-        title1: Language.gorevEkle,
-        title2: Language.projeniSaglamaAl,
+        title1: ProjectStrings.gorevEkle,
+        title2: ProjectStrings.projeniSaglamaAl,
         iconContainerColorTwo: FastTransactionsCardStyle.gorevIconColor,
         iconTwoColor: FastTransactionsCardStyle.gorevContainerColor,
         onTap: () {
@@ -170,7 +170,7 @@ class _FastTransactionsState extends State<FastTransactions> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            Language.hizliIslemler,
+            DashboardStrings.hizliIslemler,
             style: TextStyle(
               fontSize: GeneralStyle.columnMiniTitle,
               fontWeight: FontWeight.bold,

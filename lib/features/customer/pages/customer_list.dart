@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/core/navigation/app_navigation.dart';
 import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
-import 'package:freelancer_tracking_system/features/clients/pages/client_add.dart';
-import 'package:freelancer_tracking_system/features/clients/widgets/client_card.dart';
+import 'package:freelancer_tracking_system/features/customer/pages/customer_add.dart';
+import 'package:freelancer_tracking_system/features/customer/widgets/client_card.dart';
 import 'package:freelancer_tracking_system/providers/client.dart';
 
 class ClientList extends StatefulWidget {
@@ -46,8 +46,8 @@ class _ClientListState extends State<ClientList> {
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(Language.musteriler, style: _appBarTitle()),
-            Text(Language.musterileriYonet, style: _appBarSubtitle()),
+            Text(CommonStrings.musteriler, style: _appBarTitle()),
+            Text(CommonStrings.musterileriYonet, style: _appBarSubtitle()),
           ],
         ),
 
@@ -55,7 +55,7 @@ class _ClientListState extends State<ClientList> {
         actions: [
           IconButton(
             onPressed: () {
-              AppNavigation.navigateTo(context, ClientAddScreen());
+              AppNavigation.navigateTo(context, CustomerAddScreen());
             },
             icon: _personAdd(),
           ),
@@ -118,8 +118,8 @@ class _ClientListState extends State<ClientList> {
       maxLength: GeneralStyle.textFieldMaxLenght,
       decoration: InputDecoration(
         prefixIcon: Icon(Icons.search_outlined),
-        labelText: Language.hizliArama,
-        hintText: Language.musteriAra,
+        labelText: CommonStrings.hizliArama,
+        hintText: CommonStrings.musteriAra,
         hintStyle: TextStyle(color: GeneralStyle.hintTextcolor),
       ),
     );

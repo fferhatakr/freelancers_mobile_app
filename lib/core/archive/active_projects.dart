@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/core/theme/app_all_style.dart';
-import 'package:freelancer_tracking_system/core/theme/app_language.dart';
 import 'package:freelancer_tracking_system/core/theme/app_style.dart';
+import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
+import 'package:freelancer_tracking_system/core/theme/localization/common_strings.dart';
 
 class ActiveProjectsCard extends StatelessWidget {
   final Color containerColor;
@@ -112,36 +113,36 @@ class _ActiveProjectsState extends State<ActiveProjects> {
         containerColor: ActiveProjectStyle.containerGoldColor,
         containerIconColor: ActiveProjectStyle.containerIConGoldColor,
         icon: Icons.add_shopping_cart_rounded,
-        title1: Language.eTicaretSitesi,
-        title2: Language.interaktif,
-        title3: Language.bar,
+        title1: DashboardStrings.eTicaretSitesi,
+        title2: DashboardStrings.interaktif,
+        title3: DashboardStrings.bar,
         containerTwoColor: ActiveProjectStyle.containerGoldColor,
       ),
       ActiveProjectsCard(
         containerColor: ActiveProjectStyle.containerBlueColor,
         containerIconColor: ActiveProjectStyle.containerIconBlueColor,
         icon: Icons.phone_android_rounded,
-        title1: Language.mobileUygulama,
-        title2: Language.mobileApp,
-        title3: Language.bar,
+        title1: DashboardStrings.mobileUygulama,
+        title2: '',
+        title3: DashboardStrings.bar,
         containerTwoColor: ActiveProjectStyle.containerBlueColor,
       ),
       ActiveProjectsCard(
         containerColor: ActiveProjectStyle.containerGoldColor,
         containerIconColor: ActiveProjectStyle.containerIConGoldColor,
         icon: Icons.admin_panel_settings_outlined,
-        title1: Language.yonetimPaneli,
-        title2: Language.dashboard,
-        title3: Language.bar,
+        title1: DashboardStrings.yonetimPaneli,
+        title2: '',
+        title3: DashboardStrings.bar,
         containerTwoColor: ActiveProjectStyle.containerGoldColor,
       ),
       ActiveProjectsCard(
         containerColor: ActiveProjectStyle.containerBlueColor,
         containerIconColor: ActiveProjectStyle.containerIconBlueColor,
         icon: Icons.language_outlined,
-        title1: Language.kurumsalWebsite,
-        title2: Language.webTasarim,
-        title3: Language.bar,
+        title1: DashboardStrings.kurumsalWebsite,
+        title2: DashboardStrings.webTasarim,
+        title3: DashboardStrings.bar,
         containerTwoColor: ActiveProjectStyle.containerBlueColor,
       ),
     ];
@@ -155,7 +156,7 @@ class _ActiveProjectsState extends State<ActiveProjects> {
         Padding(
           padding: const EdgeInsets.all(GeneralStyle.paddingSize),
           child: Text(
-            Language.aktifProje,
+            DashboardStrings.aktifProje,
             style: TextStyle(
               fontSize: GeneralStyle.columnMiniTitle,
               fontWeight: FontWeight.bold,

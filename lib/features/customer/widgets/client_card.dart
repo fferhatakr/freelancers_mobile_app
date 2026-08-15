@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/core/navigation/app_navigation.dart';
 import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
-import 'package:freelancer_tracking_system/features/clients/pages/client_detail.dart';
+import 'package:freelancer_tracking_system/features/customer/pages/client_detail.dart';
 
 class ClientCard extends StatelessWidget {
   final String name;

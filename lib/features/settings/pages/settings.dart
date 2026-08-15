@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:freelancer_tracking_system/core/theme/app_all_style.dart';
-import 'package:freelancer_tracking_system/core/theme/app_language.dart';
+import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
 import 'package:freelancer_tracking_system/features/settings/widgets/profile_card.dart';
 import 'package:freelancer_tracking_system/features/settings/widgets/settings_card.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -49,62 +48,62 @@ class SettingsScreen extends StatelessWidget {
               ProfileCard(),
               SettingsCard(
                 icon: Icons.person_2_outlined,
-                title1: Language.profilBilgileri,
-                title2: Language.kisiselBilgiler,
+                title1: SettingsStrings.profilBilgileri,
+                title2: SettingsStrings.kisiselBilgiler,
                 ontap: () {},
               ),
               SettingsCard(
                 icon: Icons.security,
-                title1: Language.guvenlik,
-                title2: Language.guvenlikAciklama,
+                title1: SettingsStrings.guvenlik,
+                title2: SettingsStrings.guvenlikAciklama,
                 ontap: () {},
               ),
               SettingsCard(
                 icon: Icons.credit_card,
-                title1: Language.abonelik,
-                title2: Language.abonelikAciklama,
+                title1: SettingsStrings.abonelik,
+                title2: SettingsStrings.abonelikAciklama,
                 ontap: () {},
               ),
               SettingsCard(
                 icon: Icons.image,
-                title1: Language.gorunum,
-                title2: Language.gorunumAciklama,
+                title1: SettingsStrings.gorunum,
+                title2: SettingsStrings.gorunumAciklama,
                 ontap: () {},
               ),
               SettingsCard(
                 icon: Icons.notifications_outlined,
-                title1: Language.bildirimler,
-                title2: Language.bildirimlerAciklama,
+                title1: SettingsStrings.bildirimler,
+                title2: SettingsStrings.bildirimlerAciklama,
                 ontap: () {},
               ),
               SettingsCard(
                 icon: Icons.watch_later_outlined,
-                title1: Language.zamanTakibi,
-                title2: Language.zamanTakibiAciklama,
+                title1: SettingsStrings.zamanTakibi,
+                title2: SettingsStrings.zamanTakibiAciklama,
                 ontap: () {},
               ),
               SettingsCard(
                 icon: Icons.data_object,
-                title1: Language.veriVeDepolama,
-                title2: Language.veriVeDepolamaAciklama,
+                title1: SettingsStrings.veriVeDepolama,
+                title2: SettingsStrings.veriVeDepolamaAciklama,
                 ontap: () {},
               ),
               SettingsCard(
                 icon: Icons.language,
-                title1: Language.dil,
-                title2: Language.dilAciklama,
+                title1: SettingsStrings.dil,
+                title2: SettingsStrings.dilAciklama,
                 ontap: () {},
               ),
               SettingsCard(
                 icon: Icons.help_center_outlined,
-                title1: Language.dil,
-                title2: Language.dilAciklama,
+                title1: SettingsStrings.dil,
+                title2: SettingsStrings.dilAciklama,
                 ontap: () {},
               ),
               SettingsCard(
                 icon: Icons.comment,
-                title1: Language.bizeUlasin,
-                title2: Language.bizeUlasinAciklama,
+                title1: SettingsStrings.bizeUlasin,
+                title2: SettingsStrings.bizeUlasinAciklama,
                 ontap: () {},
               ),
             ],

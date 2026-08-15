@@ -143,18 +143,17 @@ class ClientsDetail extends StatelessWidget {
 }
 
 class _AddDetail extends StatelessWidget {
+  final String? detail;
+  final String notAdded;
+  final IconData icon;
+  final String title;
+
   const _AddDetail({
-    super.key,
     required this.detail,
     required this.icon,
     required this.notAdded,
     required this.title,
   });
-
-  final String? detail;
-  final String notAdded;
-  final IconData icon;
-  final String title;
 
   @override
   Widget build(BuildContext context) {
