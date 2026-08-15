@@ -86,9 +86,11 @@ class _ProjectListState extends State<ProjectList> {
                         );
                       },
                     )
-                  : const Text(
-                      'No results found',
-                      style: TextStyle(fontSize: 24),
+                  : Center(
+                      child: const Text(
+                        'No results found',
+                        style: TextStyle(fontSize: 24),
+                      ),
                     ),
             ),
           ],

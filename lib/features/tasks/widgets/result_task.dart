@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/providers/tasks.dart';
 
 class ResultTask extends StatefulWidget {
-  ResultTask({super.key});
+  const ResultTask({super.key});
 
   @override
   State<ResultTask> createState() => _ResultTaskState();

@@ -4,7 +4,7 @@ import 'package:freelancer_tracking_system/providers/client.dart';
 import 'package:freelancer_tracking_system/providers/project.dart';
 
 class ProjectAdd extends StatefulWidget {
-  ProjectAdd({super.key});
+  const ProjectAdd({super.key});
 
   @override
   State<ProjectAdd> createState() => _ProjectAddState();

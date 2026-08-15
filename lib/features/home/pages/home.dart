@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:freelancer_tracking_system/core/navigation/app_navigation.dart';
 import 'package:freelancer_tracking_system/features/customer/pages/customer_list.dart';
 import 'package:freelancer_tracking_system/features/dashboard/pages/dashboard.dart';
 import 'package:freelancer_tracking_system/features/projects/pages/project_list.dart';
 import 'package:freelancer_tracking_system/features/tasks/page/tasks_list.dart';
+import 'package:freelancer_tracking_system/features/time_tracking/page/stop_watch.dart';
 import 'package:freelancer_tracking_system/providers/navigation.dart';
 import 'package:provider/provider.dart';
 
@@ -28,6 +30,16 @@ class _HomeState extends State<Home> {
       valueListenable: context.read<NavigationProviders>(),
       builder: (context, secilenIndex, child) {
         return Scaffold(
+          floatingActionButton: FloatingActionButton(
+            backgroundColor: Colors.blueGrey[100],
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30),
+            ),
+            onPressed: () {
+              AppNavigation.navigateTo(context, StopWatch());
+            },
+            child: Icon(Icons.watch_outlined, color: Colors.black),
+          ),
           body: _sayfalar[secilenIndex],
           bottomNavigationBar: BottomNavigationBar(
             onTap: (value) {

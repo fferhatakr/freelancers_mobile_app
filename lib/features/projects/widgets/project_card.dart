@@ -7,7 +7,7 @@ class ProjectCard extends StatefulWidget {
   final String? id;
   final String selectedCustomer;
 
-  ProjectCard({
+  const ProjectCard({
     required this.title,
     required this.selectedCustomer,
     this.amount,
