@@ -65,20 +65,23 @@ class _RegisterPageState extends State<RegisterPage> {
               hintText: 'E-posta adresiniz',
               prefixIcon: Icons.mail_outline,
             ),
-            LabeledTextField(
+            PasswordTextField(
               controller: _password,
-              obscureText: true,
               miniTitle: 'Şifre',
               hintText: 'Şifrenizi Oluşturun',
               prefixIcon: Icons.lock_outline,
+              suffixIconOff: Icons.visibility_off_outlined,
+              suffixIconOn: Icons.visibility_outlined,
             ),
-            LabeledTextField(
+            PasswordTextField(
               controller: _confirmPassword,
-              obscureText: true,
               miniTitle: 'Şifre(Tekrar)',
               hintText: 'Şifrenizi Tekrar Girin',
-              prefixIcon: Icons.lock_outline,
+              prefixIcon: Icons.lock,
+              suffixIconOff: Icons.visibility_off_outlined,
+              suffixIconOn: Icons.visibility_outlined,
             ),
+
             Padding(
               padding: const EdgeInsets.all(GeneralStyle.paddingSize),
               child: Container(

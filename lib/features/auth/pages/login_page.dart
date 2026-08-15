@@ -68,12 +68,13 @@ class _LoginPageState extends State<LoginPage> {
                         prefixIcon: Icons.mail_outline,
                       ),
 
-                      LabeledTextField(
-                        obscureText: true,
+                      PasswordTextField(
                         controller: _passwordController,
                         miniTitle: 'Şifre',
                         hintText: 'Şifrenizi Giriniz',
-                        prefixIcon: Icons.lock_outline,
+                        prefixIcon: Icons.lock,
+                        suffixIconOff: Icons.visibility_off_outlined,
+                        suffixIconOn: Icons.visibility_outlined,
                       ),
                       _forgetPassword(),
                       _login(),
@@ -84,8 +85,6 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                       _withLoginGoogle(),
-
-                      _withLoginApple(),
                     ],
                   ),
                 ),
@@ -110,37 +109,6 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ],
             ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  InkWell _withLoginApple() {
-    return InkWell(
-      onTap: () {},
-      child: Container(
-        width: double.infinity,
-        height: 50,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-          color: Colors.blueGrey[300],
-        ),
-        child: Row(
-          children: [
-            SizedBox(
-              width: 32,
-              child: Icon(Icons.apple_outlined, color: Colors.white),
-            ),
-            Expanded(
-              child: Center(
-                child: Text(
-                  'Apple ile giriş yap.',
-                  style: TextStyle(color: Colors.black),
-                ),
-              ),
-            ),
-            SizedBox(width: 16),
           ],
         ),
       ),
