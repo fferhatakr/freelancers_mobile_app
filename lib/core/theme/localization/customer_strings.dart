@@ -6,13 +6,13 @@ class CustomerStrings {
   static const String yeniMusteri = 'Yeni Müşteri';
   static const String musteriKaydiEkle = 'Müşteri Kaydı Ekle';
 
-  static const String adSoyad = 'Ad Soyad';
+  static const String adSoyad = 'Ad Soyad*';
   static const String adSoyadAciklama = 'Müşteri adı soyadı';
 
-  static const String eposta = 'E-posta';
+  static const String eposta = 'E-posta*';
   static const String epostaAciklama = 'ornek@mail.com';
 
-  static const String telefon = 'Telefon';
+  static const String telefon = 'Telefon*';
   static const String telefonAciklama = '5XX XXX XX XX';
 
   static const String firmaAdi = 'Firma Adı';

@@ -76,11 +76,7 @@ class _ProjectListState extends State<ProjectList> {
                                 ProjectProvider().removeProject(items: project);
                               },
                               key: ValueKey(project.id),
-                              child: ProjectCard(
-                                title: project.projectName,
-                                selectedCustomer:
-                                    project.selectedCustomer ?? 'Belirtilmedi',
-                              ),
+                              child: ProjectCard(project: project),
                             );
                           },
                         );

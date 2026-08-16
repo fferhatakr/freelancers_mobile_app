@@ -41,7 +41,13 @@ class MyApp extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(10)),
           ),
         ),
+
         appBarTheme: const AppBarTheme(
+          titleTextStyle: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+            fontSize: 20,
+          ),
           centerTitle: false,
           systemOverlayStyle: SystemUiOverlayStyle.dark,
           elevation: 0,

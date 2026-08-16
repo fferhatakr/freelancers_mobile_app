@@ -17,6 +17,7 @@ final noteController = TextEditingController();
 final startDate = TextEditingController();
 final endDate = TextEditingController();
 final watchController = TextEditingController();
+final statusController = TextEditingController();
 
 class _TasksAddState extends State<TasksAdd> {
   String? selectedCustomerName;

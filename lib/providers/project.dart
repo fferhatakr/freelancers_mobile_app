@@ -16,6 +16,16 @@ class ProjectProvider extends ValueNotifier<List<Project>> {
     value.remove(items);
     notifyListeners();
   }
+
+  void updateStatus({required String id, required Status status}) {
+    for (var i = 0; i < value.length; i++) {
+      if (value[i].id == id) {
+        value[i].status = status;
+        notifyListeners();
+        return;
+      }
+    }
+  }
 }
 
 class Project {

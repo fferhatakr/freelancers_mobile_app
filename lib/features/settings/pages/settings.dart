@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:freelancer_tracking_system/core/navigation/app_navigation.dart';
 import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
+import 'package:freelancer_tracking_system/features/settings/pages/contact_us.dart';
+import 'package:freelancer_tracking_system/features/settings/pages/profile_info.dart';
 import 'package:freelancer_tracking_system/features/settings/widgets/profile_card.dart';
 import 'package:freelancer_tracking_system/features/settings/widgets/settings_card.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -44,67 +47,107 @@ class SettingsScreen extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ProfileCard(),
-              SettingsCard(
-                icon: Icons.person_2_outlined,
-                title1: SettingsStrings.profilBilgileri,
-                title2: SettingsStrings.kisiselBilgiler,
-                ontap: () {},
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  'Hesap',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
               ),
-              SettingsCard(
-                icon: Icons.security,
-                title1: SettingsStrings.guvenlik,
-                title2: SettingsStrings.guvenlikAciklama,
-                ontap: () {},
+              Card(
+                child: Column(
+                  children: [
+                    SettingsCard(
+                      icon: Icons.person_2_outlined,
+                      title1: SettingsStrings.profilBilgileri,
+                      title2: 'Ad,e-posta,meslek',
+                      ontap: () {
+                        AppNavigation.navigateTo(context, ProfileInfo());
+                      },
+                    ),
+                    SettingsCard(
+                      icon: Icons.security,
+                      title1: SettingsStrings.guvenlik,
+                      title2: SettingsStrings.guvenlikAciklama,
+                      ontap: () {},
+                    ),
+                    SettingsCard(
+                      icon: Icons.notifications_outlined,
+                      title1: SettingsStrings.bildirimler,
+                      title2: SettingsStrings.bildirimlerAciklama,
+                      ontap: () {},
+                    ),
+                  ],
+                ),
               ),
-              SettingsCard(
-                icon: Icons.credit_card,
-                title1: SettingsStrings.abonelik,
-                title2: SettingsStrings.abonelikAciklama,
-                ontap: () {},
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  'Görünüm',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
               ),
-              SettingsCard(
-                icon: Icons.image,
-                title1: SettingsStrings.gorunum,
-                title2: SettingsStrings.gorunumAciklama,
-                ontap: () {},
+              Card(
+                child: Column(
+                  children: [
+                    SettingsCard(
+                      icon: Icons.language,
+                      title1: SettingsStrings.dil,
+                      title2: SettingsStrings.dilAciklama,
+                      ontap: () {},
+                    ),
+
+                    SettingsCard(
+                      icon: Icons.comment,
+                      title1: SettingsStrings.bizeUlasin,
+                      title2: SettingsStrings.bizeUlasinAciklama,
+                      ontap: () {},
+                    ),
+                    SettingsCard(
+                      icon: Icons.light_mode_outlined,
+                      title1: 'Koyu Tema',
+                      title2: 'Varsıyalan Light',
+                      ontap: () {},
+                    ),
+                  ],
+                ),
               ),
-              SettingsCard(
-                icon: Icons.notifications_outlined,
-                title1: SettingsStrings.bildirimler,
-                title2: SettingsStrings.bildirimlerAciklama,
-                ontap: () {},
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  'Destek',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
               ),
-              SettingsCard(
-                icon: Icons.watch_later_outlined,
-                title1: SettingsStrings.zamanTakibi,
-                title2: SettingsStrings.zamanTakibiAciklama,
-                ontap: () {},
-              ),
-              SettingsCard(
-                icon: Icons.data_object,
-                title1: SettingsStrings.veriVeDepolama,
-                title2: SettingsStrings.veriVeDepolamaAciklama,
-                ontap: () {},
-              ),
-              SettingsCard(
-                icon: Icons.language,
-                title1: SettingsStrings.dil,
-                title2: SettingsStrings.dilAciklama,
-                ontap: () {},
-              ),
-              SettingsCard(
-                icon: Icons.help_center_outlined,
-                title1: SettingsStrings.dil,
-                title2: SettingsStrings.dilAciklama,
-                ontap: () {},
-              ),
-              SettingsCard(
-                icon: Icons.comment,
-                title1: SettingsStrings.bizeUlasin,
-                title2: SettingsStrings.bizeUlasinAciklama,
-                ontap: () {},
+              Card(
+                child: Column(
+                  children: [
+                    SettingsCard(
+                      icon: Icons.help_outline,
+                      title1: 'Yardım Merkezi',
+                      title2: 'Yardım için dokunun',
+                      ontap: () {},
+                    ),
+
+                    SettingsCard(
+                      icon: Icons.comment,
+                      title1: SettingsStrings.bizeUlasin,
+                      title2: SettingsStrings.bizeUlasinAciklama,
+                      ontap: () {
+                        AppNavigation.navigateTo(context, ContactUs());
+                      },
+                    ),
+                    SettingsCard(
+                      icon: Icons.article_outlined,
+                      title1: 'Gizlilik Politikası',
+                      title2: 'Okumak için tıkla',
+                      ontap: () {},
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

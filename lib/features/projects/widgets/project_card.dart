@@ -1,30 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:freelancer_tracking_system/providers/project.dart';
 
 class ProjectCard extends StatefulWidget {
-  final String title;
-  final double? amount;
-  final String? projectStatus;
-  final String? id;
-  final String selectedCustomer;
+  final Project project;
 
-  const ProjectCard({
-    required this.title,
-    required this.selectedCustomer,
-    this.amount,
-    this.projectStatus,
-    this.id,
-    super.key,
-  });
+  const ProjectCard({required this.project, super.key});
 
   @override
   State<ProjectCard> createState() => _ProjectCardState();
 }
 
 class _ProjectCardState extends State<ProjectCard> {
-  Status? selectedStatus;
-
   @override
   Widget build(BuildContext context) {
+    final result = widget.project.status?.label.toString() ?? 'Tanımlanmadı';
     return InkWell(
       onTap: () async {
         final status = await showModalBottomSheet<Status>(
@@ -59,12 +48,12 @@ class _ProjectCardState extends State<ProjectCard> {
             );
           },
         );
-        setState(() {
-          selectedStatus = status;
-        });
+        if (status != null) {
+          ProjectProvider().updateStatus(id: widget.project.id, status: status);
+        }
       },
       child: Card(
-        color: checkStatusColor(selectedStatus),
+        color: checkStatusColor(widget.project.status),
         elevation: 15,
         shape: BeveledRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(3)),
@@ -75,14 +64,14 @@ class _ProjectCardState extends State<ProjectCard> {
             child: Icon(Icons.assignment_outlined, color: Colors.white),
           ),
           title: Text(
-            widget.title,
+            widget.project.projectName,
             style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
           ),
           subtitle: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(widget.selectedCustomer),
-              Text(selectedStatus?.label ?? 'Durum Belirtilmedi'),
+              Text(widget.project.selectedCustomer.toString()),
+              Text(result.toString()),
             ],
           ),
 

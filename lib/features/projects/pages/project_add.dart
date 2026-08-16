@@ -14,13 +14,11 @@ class _ProjectAddState extends State<ProjectAdd> {
   final projectNameController = TextEditingController();
   final customerNameController = TextEditingController();
   final aciklamaController = TextEditingController();
-
   final projectAmountController = TextEditingController();
-
   final noteController = TextEditingController();
-
   final startDateController = TextEditingController();
   final endDateController = TextEditingController();
+
   String? selectedCustomer;
   final SnackBar _requiredField = SnackBar(
     content: Text('Zorunlu Alanı Doldurunuz'),

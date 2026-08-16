@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:freelancer_tracking_system/features/tasks/widgets/task_card.dart';
 import 'package:uuid/uuid.dart';
 
 class TaskProvider extends ValueNotifier<List<Task>> {
@@ -16,6 +17,16 @@ class TaskProvider extends ValueNotifier<List<Task>> {
     value.remove(items);
     notifyListeners();
   }
+
+  void updateStatus({required String id, required TaskStatus taskStatus}) {
+    for (var i = 0; i < value.length; i++) {
+      if (value[i].id == id) {
+        value[i].taskStatus = taskStatus;
+        notifyListeners();
+        return;
+      }
+    }
+  }
 }
 
 class Task {
@@ -29,6 +40,7 @@ class Task {
   final String? saat;
   final String? note;
   final String? levels;
+  TaskStatus? taskStatus;
   Task({
     required this.taskName,
     required this.comment,
@@ -39,5 +51,6 @@ class Task {
     this.saat,
     this.note,
     this.levels,
+    this.taskStatus,
   }) : id = const Uuid().v4(); //v4 seçme sebebimiz rastgele dagıtım yapması
 }

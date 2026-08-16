@@ -106,13 +106,7 @@ class _TasksState extends State<Tasks> {
                                 TaskProvider().removeTasks(items: task);
                               },
                               key: ValueKey(task.id),
-                              child: TasksCard(
-                                taskName: task.taskName,
-                                taskDescription: task.comment,
-                                time: task.saat,
-                                date: task.startDate,
-                                status: task.levels,
-                              ),
+                              child: TasksCard(task: task),
                             );
                           },
                         );

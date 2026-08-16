@@ -76,19 +76,19 @@ class _CustomerAddScreenState extends State<CustomerAddScreen> {
 
         ClientFormField(
           icon: Icons.person_2_outlined,
-          title: CustomerStrings.adSoyad + '*',
+          title: CustomerStrings.adSoyad,
           title2: CustomerStrings.adSoyadAciklama,
           controlText: nameController,
         ),
         ClientFormField(
           icon: Icons.mail_outline,
-          title: CustomerStrings.eposta + '*',
+          title: CustomerStrings.eposta,
           title2: CustomerStrings.epostaAciklama,
           controlText: emailController,
         ),
         ClientFormField(
           icon: Icons.call,
-          title: CustomerStrings.telefon + '*',
+          title: CustomerStrings.telefon,
           title2: CustomerStrings.telefonAciklama,
           controlText: telefonController,
         ),

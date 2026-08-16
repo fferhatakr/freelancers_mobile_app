@@ -1,35 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:freelancer_tracking_system/providers/tasks.dart';
 
 class TasksCard extends StatefulWidget {
-  final String taskName;
-  final String taskDescription;
-  final String? time;
-  final String? date;
-  final String? status;
-  final String? value;
+  final Task task;
 
-  const TasksCard({
-    required this.taskName,
-    required this.taskDescription,
-    this.time,
-    this.date,
-    this.status,
-    this.value,
-    super.key,
-  });
+  const TasksCard({required this.task, super.key});
 
   @override
   State<TasksCard> createState() => _TasksCardState();
 }
 
 class _TasksCardState extends State<TasksCard> {
-  _Status? selectedStatus;
-
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
-        final status = await showModalBottomSheet<_Status>(
+        final taskStatus = await showModalBottomSheet<TaskStatus>(
           context: context,
           builder: (context) {
             return SizedBox(
@@ -42,7 +28,7 @@ class _TasksCardState extends State<TasksCard> {
                       child: ListTile(
                         title: Text('Devam Ediyor'),
                         onTap: () {
-                          Navigator.pop(context, _Status.devamEdiyor);
+                          Navigator.pop(context, TaskStatus.devamEdiyor);
                         },
                       ),
                     ),
@@ -50,7 +36,7 @@ class _TasksCardState extends State<TasksCard> {
                       child: ListTile(
                         title: Text('Beklemede'),
                         onTap: () {
-                          Navigator.pop(context, _Status.beklemede);
+                          Navigator.pop(context, TaskStatus.bekliyor);
                         },
                       ),
                     ),
@@ -58,7 +44,7 @@ class _TasksCardState extends State<TasksCard> {
                       child: ListTile(
                         title: Text('Tamamlandı'),
                         onTap: () {
-                          Navigator.pop(context, _Status.tamamlandi);
+                          Navigator.pop(context, TaskStatus.tamamlandi);
                         },
                       ),
                     ),
@@ -68,9 +54,13 @@ class _TasksCardState extends State<TasksCard> {
             );
           },
         );
-        setState(() {
-          selectedStatus = status;
-        });
+
+        if (taskStatus != null) {
+          TaskProvider().updateStatus(
+            id: widget.task.id,
+            taskStatus: taskStatus,
+          );
+        }
       },
       child: Card(
         color: Colors.blueAccent[50],
@@ -89,7 +79,9 @@ class _TasksCardState extends State<TasksCard> {
                         height: _CardFeatures.containerHeight,
                         width: _CardFeatures.containerWidht,
                         decoration: BoxDecoration(
-                          color: levelColor(widget.status) ?? Colors.red,
+                          color:
+                              levelColor(widget.task.taskStatus.toString()) ??
+                              Colors.red,
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
                         child: Icon(
@@ -103,7 +95,7 @@ class _TasksCardState extends State<TasksCard> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        widget.taskName,
+                        widget.task.taskName,
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 18,
@@ -112,7 +104,7 @@ class _TasksCardState extends State<TasksCard> {
                       ),
                       SizedBox(width: 5),
                       Text(
-                        widget.taskDescription,
+                        widget.task.taskName,
                         style: TextStyle(
                           color: Color.fromRGBO(47, 47, 49, 1),
                           fontSize: 14,
@@ -135,7 +127,9 @@ class _TasksCardState extends State<TasksCard> {
                           ),
                           child: Icon(
                             Icons.circle,
-                            color: levelColor(widget.status) ?? Colors.red,
+                            color:
+                                levelColor(widget.task.taskStatus.toString()) ??
+                                Colors.red,
                             size: 16,
                           ),
                         ),
@@ -145,13 +139,17 @@ class _TasksCardState extends State<TasksCard> {
                           height: 30,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(10)),
-                            color: checkColor(selectedStatus),
+                            color: checkColor(
+                              widget.task.taskStatus.toString(),
+                            ),
                           ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
+
                             children: [
                               Text(
-                                selectedStatus?.label ?? 'Belirtilmedi',
+                                widget.task.taskStatus?.label.toString() ??
+                                    'Seçilmedi',
                                 style: _statusStyle(),
                               ),
                             ],
@@ -172,7 +170,7 @@ class _TasksCardState extends State<TasksCard> {
                       child: Row(
                         children: [
                           Icon(Icons.watch_later_outlined),
-                          Text(widget.time ?? '19.00'),
+                          Text(widget.task.saat ?? 'Belirtilmedi'),
                         ],
                       ),
                     ),
@@ -181,7 +179,7 @@ class _TasksCardState extends State<TasksCard> {
                       child: Row(
                         children: [
                           Icon(Icons.calendar_month),
-                          Text(widget.date ?? '12 Ağustos'),
+                          Text(widget.task.endDate ?? '12 Ağustos'),
                         ],
                       ),
                     ),
@@ -219,36 +217,36 @@ dynamic levelColor(String? status) {
   }
 }
 
-dynamic checkColor(_Status? status) {
-  if (status == _Status.devamEdiyor) {
+dynamic checkColor(String? status) {
+  if (status == TaskStatus.devamEdiyor.toString()) {
     return Colors.blue;
-  } else if (status == _Status.beklemede) {
+  } else if (status == TaskStatus.bekliyor.toString()) {
     return Colors.amber;
-  } else if (status == _Status.tamamlandi) {
+  } else if (status == TaskStatus.tamamlandi.toString()) {
     return Colors.green;
   } else {
     return Colors.blueGrey[100];
   }
 }
 
-dynamic checkStatus(_Status status) {
-  if (status == _Status.devamEdiyor) {
-    return _Status.devamEdiyor;
-  } else if (status == _Status.tamamlandi) {
-    return _Status.tamamlandi;
+dynamic checkStatus(TaskStatus status) {
+  if (status == TaskStatus.devamEdiyor) {
+    return TaskStatus.devamEdiyor;
+  } else if (status == TaskStatus.tamamlandi) {
+    return TaskStatus.tamamlandi;
   } else {
-    return _Status.beklemede;
+    return TaskStatus.bekliyor;
   }
 }
 
 TextStyle _statusStyle() =>
     TextStyle(fontSize: 10, fontWeight: FontWeight.bold);
 
-enum _Status {
+enum TaskStatus {
   tamamlandi('Tamamlandı'),
-  beklemede('Beklemede'),
+  bekliyor('Beklemede'),
   devamEdiyor('Devam Ediyor');
 
   final String label;
-  const _Status(this.label);
+  const TaskStatus(this.label);
 }
