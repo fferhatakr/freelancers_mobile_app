@@ -13,7 +13,10 @@ import 'package:provider/provider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-
+  //Sahte veriler
+  CustomerProvider().seedFakeData();
+  TaskProvider().seedFakeData();
+  ProjectProvider().seedFakeData();
   runApp(
     MultiProvider(
       providers: [

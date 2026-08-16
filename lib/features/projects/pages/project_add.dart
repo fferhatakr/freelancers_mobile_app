@@ -20,6 +20,7 @@ class _ProjectAddState extends State<ProjectAdd> {
   final endDateController = TextEditingController();
 
   String? selectedCustomer;
+  double? price;
   final SnackBar _requiredField = SnackBar(
     content: Text('Zorunlu Alanı Doldurunuz'),
   );
@@ -127,7 +128,7 @@ class _ProjectAddState extends State<ProjectAdd> {
               ),
               ProjectFormField(
                 keyboardType: TextInputType.numberWithOptions(),
-                controller: TextEditingController(),
+                controller: projectAmountController,
                 icon: Icons.currency_lira_outlined,
                 title: 'Proje Ücreti',
                 title2: '₺ 0.00',
@@ -144,7 +145,11 @@ class _ProjectAddState extends State<ProjectAdd> {
                   final project = Project(
                     projectName: projectNameController.text,
                     selectedCustomer: selectedCustomer,
+                    projectAmount: double.parse(projectAmountController.text),
                   );
+                  setState(() {
+                    price = project.projectAmount;
+                  });
                   if (projectNameController.text.trim().isEmpty) {
                     ScaffoldMessenger.of(context).showSnackBar(_requiredField);
                   } else {

@@ -26,6 +26,114 @@ class ProjectProvider extends ValueNotifier<List<Project>> {
       }
     }
   }
+
+  void seedFakeData() {
+    final fakeProjects = [
+      Project(
+        projectName: 'E-ticaret Sitesi',
+        selectedCustomer: 'Ahmet Yılmaz',
+        aciklama: 'Online mağaza tasarımı',
+        startDate: '01/08/2026',
+        endDate: '30/09/2026',
+        projectAmount: 15000,
+        status: Status.devamEdiyor,
+        oncelik: 'Yüksek',
+      ),
+      Project(
+        projectName: 'Mobil Uygulama',
+        selectedCustomer: 'Zeynep Kaya',
+        aciklama: 'iOS ve Android uygulama',
+        startDate: '15/07/2026',
+        endDate: '15/10/2026',
+        projectAmount: 25000,
+        status: Status.bekliyor,
+        oncelik: 'Orta',
+      ),
+      Project(
+        projectName: 'Logo Tasarımı',
+        selectedCustomer: 'Mehmet Demir',
+        aciklama: 'Kurumsal kimlik çalışması',
+        startDate: '01/06/2026',
+        endDate: '10/06/2026',
+        projectAmount: 3000,
+        status: Status.tamamlandi,
+        oncelik: 'Düşük',
+      ),
+      Project(
+        projectName: 'Web Sitesi Yenileme',
+        selectedCustomer: 'Elif Şahin',
+        aciklama: 'Eski siteyi güncelleme',
+        startDate: '10/08/2026',
+        endDate: '25/08/2026',
+        projectAmount: 8000,
+        status: Status.devamEdiyor,
+        oncelik: 'Yüksek',
+      ),
+      Project(
+        projectName: 'SEO Danışmanlığı',
+        selectedCustomer: 'Can Öztürk',
+        aciklama: 'Arama motoru optimizasyonu',
+        startDate: '05/08/2026',
+        endDate: '05/11/2026',
+        projectAmount: 6000,
+        status: Status.bekliyor,
+        oncelik: 'Orta',
+      ),
+      Project(
+        projectName: 'Sosyal Medya Yönetimi',
+        selectedCustomer: 'Ayşe Arslan',
+        aciklama: 'Instagram ve Twitter içerikleri',
+        startDate: '01/07/2026',
+        endDate: '31/12/2026',
+        projectAmount: 12000,
+        status: Status.devamEdiyor,
+        oncelik: 'Orta',
+      ),
+      Project(
+        projectName: 'Muhasebe Yazılımı',
+        selectedCustomer: 'Burak Aydın',
+        aciklama: 'Küçük işletme için özel yazılım',
+        startDate: '20/06/2026',
+        endDate: '20/09/2026',
+        projectAmount: 30000,
+        status: Status.bekliyor,
+        oncelik: 'Yüksek',
+      ),
+      Project(
+        projectName: 'Video Düzenleme',
+        selectedCustomer: 'Selin Koç',
+        aciklama: 'Tanıtım filmi montajı',
+        startDate: '12/08/2026',
+        endDate: '20/08/2026',
+        projectAmount: 4500,
+        status: Status.tamamlandi,
+        oncelik: 'Düşük',
+      ),
+      Project(
+        projectName: 'API Entegrasyonu',
+        selectedCustomer: 'Kerem Yıldız',
+        aciklama: 'Ödeme sistemi bağlantısı',
+        startDate: '01/08/2026',
+        endDate: '15/08/2026',
+        projectAmount: 9000,
+        status: Status.devamEdiyor,
+        oncelik: 'Yüksek',
+      ),
+      Project(
+        projectName: 'Veritabanı Optimizasyonu',
+        selectedCustomer: 'Deniz Aksoy',
+        aciklama: 'Sorgu hızlandırma çalışması',
+        startDate: '05/07/2026',
+        endDate: '20/07/2026',
+        projectAmount: 7000,
+        status: Status.tamamlandi,
+        oncelik: 'Orta',
+      ),
+    ];
+
+    value.addAll(fakeProjects);
+    notifyListeners();
+  }
 }
 
 class Project {
@@ -35,7 +143,8 @@ class Project {
   final String? aciklama;
   final String? startDate;
   final String? endDate;
-  final double? projectAmount;
+  final double projectAmount;
+  final DateTime? dateTime;
   Status? status;
   final String? oncelik;
   final String? nots;
@@ -45,9 +154,10 @@ class Project {
     this.aciklama,
     this.startDate,
     this.endDate,
-    this.projectAmount,
+    required this.projectAmount,
     this.status,
     this.oncelik,
     this.nots,
+    this.dateTime,
   }) : id = const Uuid().v4();
 }

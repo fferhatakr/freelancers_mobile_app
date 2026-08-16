@@ -62,6 +62,7 @@ class _ProjectListState extends State<ProjectList> {
                 prefix: Icon(Icons.search),
               ),
             ),
+
             Expanded(
               child: _foundProjectName.isNotEmpty
                   ? ValueListenableBuilder(

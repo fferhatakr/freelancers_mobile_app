@@ -38,7 +38,7 @@ class _HomeState extends State<Home> {
             onPressed: () {
               AppNavigation.navigateTo(context, StopWatch());
             },
-            child: Icon(Icons.watch_outlined, color: Colors.black),
+            child: Icon(Icons.alarm_outlined, color: Colors.black),
           ),
           body: _sayfalar[secilenIndex],
           bottomNavigationBar: BottomNavigationBar(

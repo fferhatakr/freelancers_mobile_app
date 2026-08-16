@@ -100,36 +100,31 @@ class ClientsDetail extends StatelessWidget {
                     _AddDetail(
                       title: 'Şirket Bilgisi',
                       detail: firma,
-                      notAdded: firma ?? notAdded,
                       icon: Icons.business,
                     ),
                     Divider(),
                     _AddDetail(
                       title: 'Adres Bilgisi',
-                      detail: adres,
-                      notAdded: adres ?? notAdded,
+                      detail: adres ?? notAdded,
                       icon: Icons.home_outlined,
                     ),
                     Divider(),
                     _AddDetail(
                       title: 'Not',
-                      detail: not ?? notAdded,
+                      detail: not,
                       icon: Icons.note_outlined,
-                      notAdded: notAdded,
                     ),
                     Divider(),
                     _AddDetail(
                       title: 'Referans',
                       detail: source ?? notAdded,
                       icon: Icons.source_outlined,
-                      notAdded: notAdded,
                     ),
                     Divider(),
                     _AddDetail(
                       title: 'Açıklama',
-                      detail: comment ?? notAdded,
+                      detail: comment,
                       icon: Icons.comment_bank_outlined,
-                      notAdded: notAdded,
                     ),
                   ],
                 ),
@@ -144,14 +139,14 @@ class ClientsDetail extends StatelessWidget {
 
 class _AddDetail extends StatelessWidget {
   final String? detail;
-  final String notAdded;
+  final String? notAdded;
   final IconData icon;
   final String title;
 
   const _AddDetail({
     required this.detail,
     required this.icon,
-    required this.notAdded,
+    this.notAdded,
     required this.title,
   });
 
@@ -168,7 +163,7 @@ class _AddDetail extends StatelessWidget {
               title,
               style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
             ),
-            Text(detail ?? notAdded, style: TextStyle(fontSize: 12)),
+            Text(detail ?? '', style: TextStyle(fontSize: 12)),
           ],
         ),
       ],

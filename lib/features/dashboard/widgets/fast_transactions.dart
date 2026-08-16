@@ -33,45 +33,43 @@ class _FastCard extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: cardBorderRadius()),
       child: Padding(
         padding: cardPadding(),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              spacing: GeneralStyle.rowSpacing,
-              children: [
-                SizedBox(
-                  width: 35,
-                  child: Container(
-                    height: FastTransactionsCardStyle.sizeContainer,
-                    width: FastTransactionsCardStyle.sizeContainer,
-                    decoration: BoxDecoration(
-                      borderRadius: cardBorderRadius(),
-                      color: iconContainerColorOne,
-                    ),
-                    child: Icon(
-                      iconOne,
-                      color: FastTransactionsCardStyle.iconColor,
-                      size: FastTransactionsCardStyle.iconSize,
+        child: InkWell(
+          onTap: onTap,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                spacing: GeneralStyle.rowSpacing,
+                children: [
+                  SizedBox(
+                    width: 35,
+                    child: Container(
+                      height: FastTransactionsCardStyle.sizeContainer,
+                      width: FastTransactionsCardStyle.sizeContainer,
+                      decoration: BoxDecoration(
+                        borderRadius: cardBorderRadius(),
+                        color: iconContainerColorOne,
+                      ),
+                      child: Icon(
+                        iconOne,
+                        color: FastTransactionsCardStyle.iconColor,
+                        size: FastTransactionsCardStyle.iconSize,
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  width: 200,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(title1, style: title1Style()),
-                      Text(title2, style: title2Style()),
-                    ],
+                  SizedBox(
+                    width: 200,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(title1, style: title1Style()),
+                        Text(title2, style: title2Style()),
+                      ],
+                    ),
                   ),
-                ),
-                Spacer(),
-                SizedBox(
-                  width: 50,
-                  child: GestureDetector(
-                    onTap: () {
-                      onTap();
-                    },
+                  Spacer(),
+                  SizedBox(
+                    width: 50,
                     child: Container(
                       width: FastTransactionsCardStyle.iconSizeContainer,
                       height: FastTransactionsCardStyle.iconSizeContainer,
@@ -88,10 +86,10 @@ class _FastCard extends StatelessWidget {
                       ),
                     ),
                   ),
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -109,84 +107,65 @@ class _FastTransactionsState extends State<FastTransactions> {
   late final List<_FastCard> _items;
 
   @override
-  void initState() {
-    super.initState();
-    _items = [
-      _FastCard(
-        iconContainerColorOne: FastTransactionsCardStyle.faturaContainerColor,
-        iconOne: Icons.task,
-        title1: InvoiceStrings.faturaOlustur,
-        title2: InvoiceStrings.yeniFaturaekle,
-        iconContainerColorTwo:
-            FastTransactionsCardStyle.faturaIconContainerColor,
-        iconTwoColor: FastTransactionsCardStyle.faturaContainerColor,
-        onTap: () {
-          AppNavigation.navigateTo(context, BillCreate());
-        },
-      ),
-      _FastCard(
-        iconContainerColorOne:
-            FastTransactionsCardStyle.yeniMusteriContainerColor,
-        iconOne: Icons.person_add,
-        title1: CustomerStrings.yeniMusteri,
-        title2: CustomerStrings.musteriKaydiEkle,
-        iconContainerColorTwo: FastTransactionsCardStyle.yeniMusteriIconColor,
-        iconTwoColor: FastTransactionsCardStyle.yeniMusteriContainerColor,
-        onTap: () {
-          AppNavigation.navigateTo(context, CustomerAddScreen());
-        },
-      ),
-      _FastCard(
-        iconContainerColorOne: FastTransactionsCardStyle.projeContainerColor,
-        iconOne: Icons.assignment_add,
-        title1: ProjectStrings.projeEkle,
-        title2: ProjectStrings.yeniKazancSagla,
-        iconContainerColorTwo: FastTransactionsCardStyle.projeIconColor,
-        iconTwoColor: FastTransactionsCardStyle.projeContainerColor,
-        onTap: () {
-          AppNavigation.navigateTo(context, ProjectAdd());
-        },
-      ),
-      _FastCard(
-        iconContainerColorOne: FastTransactionsCardStyle.gorevContainerColor,
-        iconOne: Icons.add_task,
-        title1: ProjectStrings.gorevEkle,
-        title2: ProjectStrings.projeniSaglamaAl,
-        iconContainerColorTwo: FastTransactionsCardStyle.gorevIconColor,
-        iconTwoColor: FastTransactionsCardStyle.gorevContainerColor,
-        onTap: () {
-          AppNavigation.navigateTo(context, TasksAdd());
-        },
-      ),
-    ];
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(GeneralStyle.paddingSize),
-      child: Column(
-        spacing: GeneralStyle.columnSpacing,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            DashboardStrings.hizliIslemler,
-            style: TextStyle(
-              fontSize: GeneralStyle.columnMiniTitle,
-              fontWeight: FontWeight.bold,
-            ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          DashboardStrings.hizliIslemler,
+          style: TextStyle(
+            fontSize: GeneralStyle.columnMiniTitle,
+            fontWeight: FontWeight.bold,
           ),
-          SizedBox(
-            height: FastTransactionsCardStyle.sizedBoxHeight,
-            child: ListView.builder(
-              itemCount: _items.length,
-              itemBuilder: (context, index) {
-                return _items[index];
-              },
-            ),
-          ),
-        ],
-      ),
+        ),
+        SizedBox(height: 10),
+        _FastCard(
+          iconContainerColorOne: FastTransactionsCardStyle.faturaContainerColor,
+          iconOne: Icons.task,
+          title1: InvoiceStrings.faturaOlustur,
+          title2: InvoiceStrings.yeniFaturaekle,
+          iconContainerColorTwo:
+              FastTransactionsCardStyle.faturaIconContainerColor,
+          iconTwoColor: FastTransactionsCardStyle.faturaContainerColor,
+          onTap: () {
+            AppNavigation.navigateTo(context, BillCreate());
+          },
+        ),
+        _FastCard(
+          iconContainerColorOne:
+              FastTransactionsCardStyle.yeniMusteriContainerColor,
+          iconOne: Icons.person_add,
+          title1: CustomerStrings.yeniMusteri,
+          title2: CustomerStrings.musteriKaydiEkle,
+          iconContainerColorTwo: FastTransactionsCardStyle.yeniMusteriIconColor,
+          iconTwoColor: FastTransactionsCardStyle.yeniMusteriContainerColor,
+          onTap: () {
+            AppNavigation.navigateTo(context, CustomerAddScreen());
+          },
+        ),
+        _FastCard(
+          iconContainerColorOne: FastTransactionsCardStyle.projeContainerColor,
+          iconOne: Icons.assignment_add,
+          title1: ProjectStrings.projeEkle,
+          title2: ProjectStrings.yeniKazancSagla,
+          iconContainerColorTwo: FastTransactionsCardStyle.projeIconColor,
+          iconTwoColor: FastTransactionsCardStyle.projeContainerColor,
+          onTap: () {
+            AppNavigation.navigateTo(context, ProjectAdd());
+          },
+        ),
+        _FastCard(
+          iconContainerColorOne: FastTransactionsCardStyle.gorevContainerColor,
+          iconOne: Icons.add_task,
+          title1: ProjectStrings.gorevEkle,
+          title2: ProjectStrings.projeniSaglamaAl,
+          iconContainerColorTwo: FastTransactionsCardStyle.gorevIconColor,
+          iconTwoColor: FastTransactionsCardStyle.gorevContainerColor,
+          onTap: () {
+            AppNavigation.navigateTo(context, TasksAdd());
+          },
+        ),
+      ],
     );
   }
 }
