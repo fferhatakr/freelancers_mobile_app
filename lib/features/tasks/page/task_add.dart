@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:freelancer_tracking_system/features/date/page/date.dart';
 import 'package:freelancer_tracking_system/features/tasks/widgets/task_add.dart';
 import 'package:freelancer_tracking_system/providers/client.dart';
 import 'package:freelancer_tracking_system/providers/project.dart';
 import 'package:freelancer_tracking_system/providers/tasks.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 class TasksAdd extends StatefulWidget {
   const TasksAdd({super.key});
@@ -23,9 +25,25 @@ class _TasksAddState extends State<TasksAdd> {
   String? selectedCustomerName;
   String? selectedProject;
   Levels? selectedLevel;
+
   final SnackBar requiredFields = SnackBar(
     content: Text('Zorunlu Alanları Giriniz'),
   );
+
+  DateTime? selectedDate;
+  Future<void> _selectDate() async {
+    final DateTime? pickedDate = await showDatePicker(
+      locale: Locale("tr", "TR"),
+      context: context,
+      firstDate: DateTime(2026),
+      lastDate: DateTime(2027),
+      initialDate: DateTime(2026, 7, 25),
+    );
+    setState(() {
+      selectedDate = pickedDate;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,9 +73,9 @@ class _TasksAddState extends State<TasksAdd> {
                 subtitle: 'Açıklama Ekle',
               ),
               SelectionTask(
-                icon2: Icons.person_2_outlined,
-                title2: 'Bağlantılı Müşteri * ',
-                subtitle2: selectedCustomerName ?? 'Müşteri Seçiniz',
+                icon: Icons.person_2_outlined,
+                title: 'Bağlantılı Müşteri * ',
+                subtitle: selectedCustomerName ?? 'Müşteri Seçiniz',
                 onTap: () async {
                   final customerName = await showModalBottomSheet<String>(
                     context: context,
@@ -122,9 +140,9 @@ class _TasksAddState extends State<TasksAdd> {
                 },
               ),
               SelectionTask(
-                icon2: Icons.search,
-                title2: 'Bağlantılı Proje*',
-                subtitle2: selectedProject ?? 'Mobile App',
+                icon: Icons.search,
+                title: 'Bağlantılı Proje*',
+                subtitle: selectedProject ?? 'Mobile App',
                 onTap: () async {
                   final projectName = await showModalBottomSheet<String>(
                     context: context,
@@ -174,22 +192,18 @@ class _TasksAddState extends State<TasksAdd> {
                   });
                 },
               ),
-
-              TaskAdd(
-                maxLength: 8,
+              DatePicture(
                 icon: Icons.calendar_month,
-                title: 'Başlangıç Tarihi*',
-                subtitle: 'GG/AA/YYYY',
-                controller: startDate,
+                title: 'Başlangıç Tarihi',
+                title2: 'Tarih Giriniz',
               ),
-              TaskAdd(
-                maxLength: 8,
-                icon: Icons.calendar_month,
+              DatePicture(
+                icon: Icons.calendar_view_day_rounded,
                 title: 'Bitiş Tarihi',
-                subtitle: 'GG/AA/YYYY',
-                controller: endDate,
+                title2: 'Tarih Giriniz',
               ),
               TaskAdd(
+                onlyRead: false,
                 maxLength: 8,
                 icon: Icons.watch,
                 title: 'Kaç saat sürücek?*',
@@ -204,9 +218,9 @@ class _TasksAddState extends State<TasksAdd> {
                 subtitle: 'Görev Notlarını ekleyin',
               ),
               SelectionTask(
-                icon2: Icons.flag,
-                title2: 'Zorluk *',
-                subtitle2: selectedLevel?.label ?? 'Derece Belirtin',
+                icon: Icons.flag,
+                title: 'Zorluk *',
+                subtitle: selectedLevel?.label ?? 'Derece Belirtin',
                 onTap: () async {
                   final level = await showModalBottomSheet<Levels>(
                     context: context,
@@ -253,14 +267,11 @@ class _TasksAddState extends State<TasksAdd> {
                     comment: commentController.text,
                     bagliMusteri: selectedCustomerName,
                     baglantiliProje: selectedProject,
-                    startDate: startDate.text,
-                    endDate: endDate.text,
                     saat: watchController.text,
                     levels: selectedLevel.toString(),
                   );
                   if (tasksNameController.text.trim().isEmpty ||
                       commentController.text.trim().isEmpty ||
-                      endDate.text.trim().isEmpty ||
                       watchController.text.trim().isEmpty ||
                       selectedCustomerName == null ||
                       selectedProject == null ||
@@ -269,8 +280,8 @@ class _TasksAddState extends State<TasksAdd> {
                   } else {
                     TaskProvider().addTasks(items: task);
                     Navigator.pop(context);
-                    ScaffoldMessenger.of(context).showSnackBar(requiredFields);
                   }
+                  print(task.startDate.toString());
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,

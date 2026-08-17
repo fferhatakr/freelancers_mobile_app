@@ -9,6 +9,7 @@ class TaskAdd extends StatelessWidget {
   final TextEditingController controller;
   final TextInputType? keyboardType;
   final int maxLength;
+  final bool onlyRead;
 
   const TaskAdd({
     required this._icon,
@@ -17,6 +18,7 @@ class TaskAdd extends StatelessWidget {
     required this.controller,
     required this.maxLength,
     this.keyboardType,
+    this.onlyRead = false,
     super.key,
   });
   @override
@@ -37,6 +39,7 @@ class TaskAdd extends StatelessWidget {
         subtitle: SizedBox(
           height: 35,
           child: TextField(
+            readOnly: onlyRead,
             maxLength: maxLength,
             textInputAction: TextInputAction.next,
             keyboardType: keyboardType ?? TextInputType.text,
@@ -53,16 +56,17 @@ class TaskAdd extends StatelessWidget {
 }
 
 class SelectionTask extends StatelessWidget {
-  final IconData _icon2;
-  final String _title2;
-  final String _subtitle2;
+  final IconData _icon;
+  final String _title;
+  final String _subtitle;
   final VoidCallback onTap;
 
   const SelectionTask({
-    required this._icon2,
-    required this._title2,
-    required this._subtitle2,
+    required this._icon,
+    required this._title,
+    required this._subtitle,
     required this.onTap,
+
     super.key,
   });
   @override
@@ -74,16 +78,12 @@ class SelectionTask extends StatelessWidget {
         color: Colors.blueGrey[50],
       ),
       child: ListTile(
-        leading: Icon(
-          _icon2,
-          size: 24,
-          color: Color.fromARGB(255, 245, 33, 18),
-        ),
+        leading: Icon(_icon, size: 24),
         title: Text(
-          _title2,
+          _title,
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
         ),
-        subtitle: Text(_subtitle2),
+        subtitle: Text(_subtitle),
         trailing: GestureDetector(
           onTap: onTap,
           child: Icon(Icons.chevron_right_outlined),

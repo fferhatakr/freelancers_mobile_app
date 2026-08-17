@@ -45,4 +45,10 @@ class WatchProvider extends ValueNotifier {
 
     return "$minutes:$seconds:$milliseconds";
   }
+
+  List<String> get tumSaatler {
+    List<String> toplam = [];
+    toplam.add(WatchProvider().formattedText);
+    return toplam;
+  }
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:freelancer_tracking_system/features/projects/pages/project_list.dart';
 import 'package:freelancer_tracking_system/features/projects/widgets/project_card.dart';
 import 'package:uuid/uuid.dart';
 

@@ -4,8 +4,7 @@ import 'package:freelancer_tracking_system/providers/tasks.dart';
 import 'package:freelancer_tracking_system/providers/watch.dart';
 
 class StopWatch extends StatefulWidget {
-  StopWatch({super.key, this.selectedTaskName, this.id, this.resultTime});
-  String? selectedTaskName;
+  String? selectedCustomer;
   String? id;
   String? resultTime;
   @override
@@ -36,7 +35,10 @@ class _StopWatchState extends State<StopWatch> {
                           padding: const EdgeInsets.all(8.0),
                           child: ListTile(
                             onTap: () {
-                              Navigator.pop(context, (task.taskName, task.id));
+                              Navigator.pop(context, (
+                                task.bagliMusteri,
+                                task.id,
+                              ));
                             },
                             leading: Icon(Icons.person_outline, size: 30),
                             title: Text(
@@ -56,11 +58,12 @@ class _StopWatchState extends State<StopWatch> {
           );
 
           setState(() {
-            widget.selectedTaskName = task?.$1;
+            widget.selectedCustomer = task?.$1;
             widget.id = task?.$2;
-            widget.resultTime = WatchProvider().formattedText;
           });
-          print(widget.resultTime);
+          print(widget.id);
+          print(widget.selectedCustomer);
+          print(WatchProvider().tumSaatler);
           WatchProvider().reset();
         },
         child: Text(

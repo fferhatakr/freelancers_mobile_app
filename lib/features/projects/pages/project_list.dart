@@ -12,15 +12,7 @@ class ProjectList extends StatefulWidget {
 
 class _ProjectListState extends State<ProjectList> {
   final TextEditingController searchController = TextEditingController();
-  List<Project> _foundProjectName = [];
   String? status;
-
-  @override
-  void initState() {
-    super.initState();
-    // ekran ilk açıldığında tüm listeyi göstermek için
-    _foundProjectName = ProjectProvider().value;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,13 +37,10 @@ class _ProjectListState extends State<ProjectList> {
                 prefix: Icon(Icons.search),
               ),
             ),
-
             Expanded(
               child: ValueListenableBuilder<List<Project>>(
                 valueListenable: ProjectProvider(),
-
                 builder: (context, value, child) {
-                  print(ProjectProvider().completedProjectAmount.toString());
                   final displayList = searchController.text.isEmpty
                       ? value
                       : value
@@ -61,7 +50,6 @@ class _ProjectListState extends State<ProjectList> {
                               ),
                             )
                             .toList();
-
                   if (displayList.isEmpty) {
                     return Center(
                       child: Text(
@@ -70,17 +58,14 @@ class _ProjectListState extends State<ProjectList> {
                       ),
                     );
                   }
-
                   return ListView.builder(
                     itemCount: displayList.length,
                     itemBuilder: (context, index) {
                       final project = displayList[index];
-
                       return Dismissible(
                         onDismissed: (direction) {
                           ProjectProvider().removeProject(items: project);
                         },
-
                         key: ValueKey(project.id),
                         child: ProjectCard(project: project),
                       );

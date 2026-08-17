@@ -9,10 +9,12 @@ import 'package:freelancer_tracking_system/providers/navigation.dart';
 import 'package:freelancer_tracking_system/providers/project.dart';
 import 'package:freelancer_tracking_system/providers/tasks.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+
   //Sahte veriler
   CustomerProvider().seedFakeData();
   TaskProvider().seedFakeData();
@@ -38,6 +40,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: [GlobalMaterialLocalizations.delegate],
+      supportedLocales: [const Locale('en'), const Locale('tr')],
       theme: ThemeData.light().copyWith(
         inputDecorationTheme: InputDecorationTheme(
           border: OutlineInputBorder(

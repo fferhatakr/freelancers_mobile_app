@@ -179,7 +179,7 @@ class _TasksCardState extends State<TasksCard> {
                       child: Row(
                         children: [
                           Icon(Icons.calendar_month),
-                          Text(widget.task.endDate ?? '12 Ağustos'),
+                          Text(widget.task.startDate.toString()),
                         ],
                       ),
                     ),
