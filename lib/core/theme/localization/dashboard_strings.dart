@@ -2,7 +2,7 @@
 class DashboardStrings {
   DashboardStrings._();
 
-  static const String aktifProjelerim = 'Projelerim';
+  static const String aktifProjelerim = 'Toplam Projelerim';
   static const String tamamlananProjeler = 'Tamamlanan Projeler';
   static const String bekleyenOdeme = 'Bekleyen Ödeme';
   static const String hosgeldinKullanici = 'Hoşgeldin Ferhat';

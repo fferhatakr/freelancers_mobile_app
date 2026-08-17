@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
-import 'package:freelancer_tracking_system/core/utils/app_data.dart';
+import 'package:freelancer_tracking_system/features/projects/pages/project_list.dart';
+import 'package:freelancer_tracking_system/providers/project.dart';
 
 class _SummaryCard extends StatelessWidget {
   final IconData icon;
   final Color color;
   final String title;
-  final int value;
+  final String value;
 
   const _SummaryCard({
     required this.icon,
@@ -43,7 +44,14 @@ class _SummaryCard extends StatelessWidget {
                     child: Icon(icon, color: OzetCardsStyle.iconColor),
                   ),
                   Text(title, style: cardtitle1Style()),
-                  Text('$value', style: TextStyle(color: Colors.white)),
+                  Text(
+                    '$value',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -80,19 +88,19 @@ class SummaryCards extends StatelessWidget {
                     icon: Icons.home,
                     color: OzetCardsStyle.homeColor,
                     title: DashboardStrings.aktifProjelerim,
-                    value: AppData.projectCount,
+                    value: '${ProjectList().allProject.length}',
                   ),
                   _SummaryCard(
                     icon: Icons.check,
                     color: OzetCardsStyle.checkColor,
                     title: DashboardStrings.tamamlananProjeler,
-                    value: 3,
+                    value: '${ProjectProvider().completedProject.length}',
                   ),
                   _SummaryCard(
                     icon: Icons.currency_lira,
                     color: OzetCardsStyle.liraColor,
                     title: DashboardStrings.bekleyenOdeme,
-                    value: 3575,
+                    value: '${ProjectProvider().calPendingAndOngoing()} ₺',
                   ),
                 ],
               ),
@@ -107,7 +115,8 @@ class SummaryCards extends StatelessWidget {
 TextStyle cardtitle1Style() {
   return TextStyle(
     color: Colors.white,
-    fontWeight: FontWeight.bold,
+    fontWeight: FontWeight.w400,
+
     fontSize: FastTransactionsCardStyle.fontSize,
   );
 }

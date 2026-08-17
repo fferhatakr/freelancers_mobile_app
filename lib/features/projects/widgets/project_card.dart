@@ -16,7 +16,7 @@ class _ProjectCardState extends State<ProjectCard> {
     final result = widget.project.status?.label.toString() ?? 'Tanımlanmadı';
     return InkWell(
       onTap: () async {
-        final status = await showModalBottomSheet<Status>(
+        final status = await showModalBottomSheet<(Status, DateTime)>(
           context: context,
           builder: (context) {
             return SizedBox(
@@ -27,18 +27,27 @@ class _ProjectCardState extends State<ProjectCard> {
                     ListTile(
                       title: Text('Bekliyor'),
                       onTap: () {
-                        Navigator.pop(context, Status.bekliyor);
+                        Navigator.pop(context, (
+                          Status.bekliyor,
+                          DateTime.now(),
+                        ));
                       },
                     ),
                     ListTile(
                       onTap: () {
-                        Navigator.pop(context, Status.devamEdiyor);
+                        Navigator.pop(context, (
+                          Status.devamEdiyor,
+                          DateTime.now(),
+                        ));
                       },
                       title: Text('Devam Ediyor'),
                     ),
                     ListTile(
                       onTap: () {
-                        Navigator.pop(context, Status.tamamlandi);
+                        Navigator.pop(context, (
+                          Status.tamamlandi,
+                          DateTime.now(),
+                        ));
                       },
                       title: Text('Tamamlandı'),
                     ),
@@ -48,8 +57,12 @@ class _ProjectCardState extends State<ProjectCard> {
             );
           },
         );
+
         if (status != null) {
-          ProjectProvider().updateStatus(id: widget.project.id, status: status);
+          ProjectProvider().updateStatus(
+            id: widget.project.id,
+            status: status.$1,
+          );
         }
       },
       child: Card(

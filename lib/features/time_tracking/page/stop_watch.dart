@@ -4,11 +4,10 @@ import 'package:freelancer_tracking_system/providers/tasks.dart';
 import 'package:freelancer_tracking_system/providers/watch.dart';
 
 class StopWatch extends StatefulWidget {
+  StopWatch({super.key, this.selectedTaskName, this.id, this.resultTime});
   String? selectedTaskName;
   String? id;
   String? resultTime;
-  StopWatch({super.key, this.selectedTaskName, this.id, this.resultTime});
-
   @override
   State<StopWatch> createState() => _StopWatchState();
 }

@@ -3,7 +3,8 @@ import 'package:freelancer_tracking_system/features/projects/widgets/project_car
 import 'package:freelancer_tracking_system/providers/project.dart';
 
 class ProjectList extends StatefulWidget {
-  const ProjectList({super.key});
+  ProjectList({super.key});
+  final List<Project> allProject = ProjectProvider().value;
 
   @override
   State<ProjectList> createState() => _ProjectListState();
@@ -11,7 +12,6 @@ class ProjectList extends StatefulWidget {
 
 class _ProjectListState extends State<ProjectList> {
   final TextEditingController searchController = TextEditingController();
-  final List<Project> allProject = ProjectProvider().value;
   List<Project> _foundProjectName = [];
   String? status;
 
@@ -20,24 +20,6 @@ class _ProjectListState extends State<ProjectList> {
     super.initState();
     // ekran ilk açıldığında tüm listeyi göstermek için
     _foundProjectName = ProjectProvider().value;
-  }
-
-  void _runFilter(String enteredKeyword) {
-    List<Project> results = [];
-    if (enteredKeyword.isEmpty) {
-      results = allProject;
-    } else {
-      results = allProject
-          .where(
-            (project) => project.projectName.toLowerCase().contains(
-              enteredKeyword.toLowerCase(),
-            ),
-          )
-          .toList();
-    }
-    setState(() {
-      _foundProjectName = results;
-    });
   }
 
   @override
@@ -50,8 +32,9 @@ class _ProjectListState extends State<ProjectList> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextField(
+              controller: searchController,
               onChanged: (value) {
-                _runFilter(value);
+                setState(() {});
               },
               maxLength: 30,
               autofocus: true,
@@ -64,31 +47,47 @@ class _ProjectListState extends State<ProjectList> {
             ),
 
             Expanded(
-              child: _foundProjectName.isNotEmpty
-                  ? ValueListenableBuilder(
-                      valueListenable: ProjectProvider(),
-                      builder: (context, allProject, child) {
-                        return ListView.builder(
-                          itemCount: _foundProjectName.length,
-                          itemBuilder: (context, index) {
-                            final project = _foundProjectName[index];
-                            return Dismissible(
-                              onDismissed: (direction) {
-                                ProjectProvider().removeProject(items: project);
-                              },
-                              key: ValueKey(project.id),
-                              child: ProjectCard(project: project),
-                            );
-                          },
-                        );
-                      },
-                    )
-                  : Center(
-                      child: const Text(
-                        'No results found',
+              child: ValueListenableBuilder<List<Project>>(
+                valueListenable: ProjectProvider(),
+
+                builder: (context, value, child) {
+                  print(ProjectProvider().completedProjectAmount.toString());
+                  final displayList = searchController.text.isEmpty
+                      ? value
+                      : value
+                            .where(
+                              (p) => p.projectName.toLowerCase().contains(
+                                searchController.text.toLowerCase(),
+                              ),
+                            )
+                            .toList();
+
+                  if (displayList.isEmpty) {
+                    return Center(
+                      child: Text(
+                        'No result found',
                         style: TextStyle(fontSize: 24),
                       ),
-                    ),
+                    );
+                  }
+
+                  return ListView.builder(
+                    itemCount: displayList.length,
+                    itemBuilder: (context, index) {
+                      final project = displayList[index];
+
+                      return Dismissible(
+                        onDismissed: (direction) {
+                          ProjectProvider().removeProject(items: project);
+                        },
+
+                        key: ValueKey(project.id),
+                        child: ProjectCard(project: project),
+                      );
+                    },
+                  );
+                },
+              ),
             ),
           ],
         ),

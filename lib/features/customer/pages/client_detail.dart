@@ -139,14 +139,12 @@ class ClientsDetail extends StatelessWidget {
 
 class _AddDetail extends StatelessWidget {
   final String? detail;
-  final String? notAdded;
   final IconData icon;
   final String title;
 
   const _AddDetail({
     required this.detail,
     required this.icon,
-    this.notAdded,
     required this.title,
   });
 

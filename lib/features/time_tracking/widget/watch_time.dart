@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-
-import 'package:flutter/cupertino.dart';
-import 'package:freelancer_tracking_system/providers/tasks.dart';
 import 'package:freelancer_tracking_system/providers/watch.dart';
 
 class WatchTime extends StatefulWidget {
+  const WatchTime({super.key});
   @override
   State<WatchTime> createState() => _WatchTimeState();
 }

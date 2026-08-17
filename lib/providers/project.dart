@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:freelancer_tracking_system/features/projects/pages/project_list.dart';
 import 'package:freelancer_tracking_system/features/projects/widgets/project_card.dart';
 import 'package:uuid/uuid.dart';
 
@@ -17,6 +18,71 @@ class ProjectProvider extends ValueNotifier<List<Project>> {
     notifyListeners();
   }
 
+  List<String> get completedProject {
+    List<String> result = [];
+    for (var p in value) {
+      bool alreadyExists = false;
+      if (p.status == Status.tamamlandi) {
+        for (int i = 0; i < result.length; i++) {
+          if (result[i] == p.projectName) {
+            alreadyExists = true;
+            break;
+          }
+        }
+        if (!alreadyExists) {
+          result.add(p.projectName);
+        }
+      }
+    }
+    return result;
+  }
+
+  List<int> get completedProjectAmount {
+    List<int> result = [];
+    for (var p in value) {
+      bool already = false;
+      if (p.status == Status.tamamlandi) {
+        for (int i = 0; i < result.length; i++) {
+          if (result[i] == p.projectAmount) {
+            already = true;
+            break;
+          }
+        }
+        if (!already) {
+          result.add(p.projectAmount.toInt());
+        }
+      }
+    }
+    return result;
+  }
+
+  dynamic calCompletedAmounts() {
+    int toplam = 0;
+    for (int i = 0; i < ProjectProvider().completedProjectAmount.length; i++) {
+      toplam = toplam + i;
+    }
+    return toplam;
+  }
+
+  List<int> get pendingAndOngoingProject {
+    List<int> resulta = [];
+    for (var p in value) {
+      if (p.status == Status.bekliyor || p.status == Status.devamEdiyor) {
+        bool already = false;
+        for (int i = 0; i < resulta.length; i++) {
+          if (resulta[i] == p.projectName) {
+            already = true;
+            break;
+          }
+        }
+        if (!already) {
+          resulta.add(p.projectAmount.toInt());
+        }
+      }
+    }
+    return resulta;
+  }
+
   void updateStatus({required String id, required Status status}) {
     for (var i = 0; i < value.length; i++) {
       if (value[i].id == id) {
@@ -25,6 +91,18 @@ class ProjectProvider extends ValueNotifier<List<Project>> {
         return;
       }
     }
+  }
+
+  dynamic calPendingAndOngoing() {
+    int result = 0;
+    for (
+      int i = 0;
+      i < ProjectProvider().pendingAndOngoingProject.length;
+      i++
+    ) {
+      result = result + ProjectProvider().pendingAndOngoingProject[i];
+    }
+    return result;
   }
 
   void seedFakeData() {

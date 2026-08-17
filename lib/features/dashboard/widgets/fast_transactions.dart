@@ -104,8 +104,6 @@ class FastTransactions extends StatefulWidget {
 }
 
 class _FastTransactionsState extends State<FastTransactions> {
-  late final List<_FastCard> _items;
-
   @override
   Widget build(BuildContext context) {
     return Column(
