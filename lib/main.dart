@@ -8,6 +8,7 @@ import 'package:freelancer_tracking_system/providers/client.dart';
 import 'package:freelancer_tracking_system/providers/navigation.dart';
 import 'package:freelancer_tracking_system/providers/project.dart';
 import 'package:freelancer_tracking_system/providers/tasks.dart';
+import 'package:freelancer_tracking_system/providers/watch.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -22,6 +23,7 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (context) => WatchProvider()),
         ChangeNotifierProvider(create: (context) => CustomerProvider()),
         ChangeNotifierProvider(create: (context) => ProjectProvider()),
         ChangeNotifierProvider(create: (context) => TaskProvider()),

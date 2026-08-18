@@ -38,17 +38,12 @@ class WatchProvider extends ValueNotifier {
 
   String get formattedText {
     var milli = stopWatch.elapsed.inMilliseconds;
-
-    String milliseconds = (milli % 1000).toString().padLeft(3, "0");
     String seconds = ((milli ~/ 1000) % 60).toString().padLeft(2, "0");
     String minutes = ((milli ~/ 1000) ~/ 60).toString().padLeft(2, "0");
+    String hours = (((milli ~/ 1000) ~/ 60) ~/ 60).toString().padLeft(2, "0");
 
-    return "$minutes:$seconds:$milliseconds";
+    return "$hours:$minutes:$seconds";
   }
 
-  List<String> get tumSaatler {
-    List<String> toplam = [];
-    toplam.add(WatchProvider().formattedText);
-    return toplam;
-  }
+  void addTotal() {}
 }

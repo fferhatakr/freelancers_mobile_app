@@ -4,7 +4,6 @@ import 'package:freelancer_tracking_system/features/tasks/widgets/task_add.dart'
 import 'package:freelancer_tracking_system/providers/client.dart';
 import 'package:freelancer_tracking_system/providers/project.dart';
 import 'package:freelancer_tracking_system/providers/tasks.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 
 class TasksAdd extends StatefulWidget {
   const TasksAdd({super.key});
@@ -202,14 +201,7 @@ class _TasksAddState extends State<TasksAdd> {
                 title: 'Bitiş Tarihi',
                 title2: 'Tarih Giriniz',
               ),
-              TaskAdd(
-                onlyRead: false,
-                maxLength: 8,
-                icon: Icons.watch,
-                title: 'Kaç saat sürücek?*',
-                subtitle: 'Saat Belirle',
-                controller: watchController,
-              ),
+
               TaskAdd(
                 maxLength: 20,
                 controller: noteController,
@@ -272,7 +264,6 @@ class _TasksAddState extends State<TasksAdd> {
                   );
                   if (tasksNameController.text.trim().isEmpty ||
                       commentController.text.trim().isEmpty ||
-                      watchController.text.trim().isEmpty ||
                       selectedCustomerName == null ||
                       selectedProject == null ||
                       selectedLevel == null) {

@@ -23,17 +23,23 @@ class _TasksState extends State<Tasks> {
 
   void _runFilter(String enteredKeyword) {
     List<Task> result = [];
+
     if (enteredKeyword.isEmpty) {
       result = taskAll;
     } else {
       result = taskAll
           .where(
-            (task) => task.taskName.toLowerCase().contains(
+            (task) => task.taskName.toLowerCase().toString().contains(
               enteredKeyword.toLowerCase(),
             ),
           )
           .toList();
     }
+
+    print('Aranan:$enteredKeyword');
+    print(result.length);
+    print(taskAll.length);
+
     setState(() {
       _foundTask = result;
     });
@@ -100,7 +106,7 @@ class _TasksState extends State<Tasks> {
                         return ListView.builder(
                           itemCount: _foundTask.length,
                           itemBuilder: (context, index) {
-                            final task = taskAll[index];
+                            final task = _foundTask[index];
                             return Dismissible(
                               onDismissed: (direction) {
                                 TaskProvider().removeTasks(items: task);

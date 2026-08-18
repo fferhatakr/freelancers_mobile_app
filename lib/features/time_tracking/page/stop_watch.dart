@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/features/time_tracking/widget/watch_time.dart';
 import 'package:freelancer_tracking_system/providers/tasks.dart';
 import 'package:freelancer_tracking_system/providers/watch.dart';
+import 'package:freelancer_tracking_system/providers/watch_record.dart';
 
 class StopWatch extends StatefulWidget {
   String? selectedCustomer;
@@ -12,6 +13,18 @@ class StopWatch extends StatefulWidget {
 }
 
 class _StopWatchState extends State<StopWatch> {
+  final SnackBar _noSelected = SnackBar(
+    content: Text('Görev Seçilmedi'),
+    backgroundColor: Colors.red.shade600,
+  );
+  final SnackBar _startStopWatch = SnackBar(
+    content: Text('Kronometre Başlatılmadı'),
+    backgroundColor: const Color.fromARGB(255, 251, 201, 22),
+  );
+  final SnackBar _selected = SnackBar(
+    content: Text('Görev Başarıyla Eklendi'),
+    backgroundColor: Colors.green,
+  );
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,7 +58,15 @@ class _StopWatchState extends State<StopWatch> {
                               task.taskName,
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
-                            subtitle: Text('${task.bagliMusteri} '),
+                            subtitle: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('${task.bagliMusteri} '),
+                                Text(
+                                  'Toplam Süre:${WatchRecord().formatDuration(WatchRecord().totalRecord[task.id] ?? Duration.zero)}',
+                                ),
+                              ],
+                            ),
                             trailing: Icon(Icons.add),
                           ),
                         );
@@ -61,10 +82,20 @@ class _StopWatchState extends State<StopWatch> {
             widget.selectedCustomer = task?.$1;
             widget.id = task?.$2;
           });
-          print(widget.id);
-          print(widget.selectedCustomer);
-          print(WatchProvider().tumSaatler);
-          WatchProvider().reset();
+          if (WatchProvider().stopWatch.elapsed.inMilliseconds != 0) {
+            if (widget.id != null) {
+              WatchRecord().addTotalRecord(
+                widget.id!,
+                WatchProvider().stopWatch.elapsed,
+              );
+              ScaffoldMessenger.of(context).showSnackBar(_selected);
+              WatchProvider().reset();
+            } else {
+              ScaffoldMessenger.of(context).showSnackBar(_noSelected);
+            }
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(_startStopWatch);
+          }
         },
         child: Text(
           'Save',

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/providers/tasks.dart';
+import 'package:freelancer_tracking_system/providers/watch_record.dart';
 
 class TasksCard extends StatefulWidget {
   final Task task;
@@ -166,11 +167,13 @@ class _TasksCardState extends State<TasksCard> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     SizedBox(
-                      width: 150,
+                      width: 200,
                       child: Row(
                         children: [
                           Icon(Icons.watch_later_outlined),
-                          Text(widget.task.saat ?? 'Belirtilmedi'),
+                          Text(
+                            'Toplam Süre:${WatchRecord().formatDuration(WatchRecord().totalRecord[widget.task.id] ?? Duration.zero)}',
+                          ),
                         ],
                       ),
                     ),
