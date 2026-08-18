@@ -1,6 +1,21 @@
-# Freelancer Takip Sistemi
+<div align="center">
 
-Flutter Uygulama Geliştirme Projesi
+<img src="https://img.shields.io/badge/Platform-iOS%20%7C%20Android-black?style=for-the-badge&logo=apple&logoColor=white" />
+<img src="https://img.shields.io/badge/Flutter-Mobile-02569B?style=for-the-badge&logo=flutter&logoColor=white" />
+
+<br/><br/>
+# Freelancer Takip Sistemi
+### Flutter Projelerinizi Dilediğiniz Gibi Yönetin
+<br/>
+
+
+| Dashboard | Customer | Project | Task | StopWatch |
+|-------|------|--------|---------|---------|
+| <img src="assets/png/dashboard.png" width="200"/> | <img src="assets/png/customer_list.png" width="200"/> | <img src="assets/png/project_list.png" width="200"/> | <img src="assets/png/tasks_list.png" width="200"/> | <img src="assets/png/stop_watch.png" width="200"/> |
+
+</div>
+
+
 
 ## Proje Hakkında
 
