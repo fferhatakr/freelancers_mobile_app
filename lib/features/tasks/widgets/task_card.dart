@@ -12,6 +12,28 @@ class TasksCard extends StatefulWidget {
 }
 
 class _TasksCardState extends State<TasksCard> {
+  DateTime? selectedDate;
+  String? toFormat(DateTime? date) {
+    if (date != null) {
+      return '${date.day}/${date.month}/${date.year}';
+    }
+  }
+
+  Future<void> _selectDate() async {
+    final DateTime? pickedDate = await showDatePicker(
+      locale: Locale("tr", "TR"),
+      context: context,
+      firstDate: DateTime(2026),
+      lastDate: DateTime(2050),
+      initialDate: DateTime(2026, 7, 25),
+    );
+    if (pickedDate != null) {
+      setState(() {
+        selectedDate = pickedDate;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -105,7 +127,14 @@ class _TasksCardState extends State<TasksCard> {
                       ),
                       SizedBox(width: 5),
                       Text(
-                        widget.task.taskName,
+                        widget.task.bagliMusteri ?? 'Müşteri Seçilmedi',
+                        style: TextStyle(
+                          color: Color.fromRGBO(47, 47, 49, 1),
+                          fontSize: 14,
+                        ),
+                      ),
+                      Text(
+                        widget.task.baglantiliProje ?? 'Proje Seçilmedi',
                         style: TextStyle(
                           color: Color.fromRGBO(47, 47, 49, 1),
                           fontSize: 14,
@@ -182,7 +211,7 @@ class _TasksCardState extends State<TasksCard> {
                       child: Row(
                         children: [
                           Icon(Icons.calendar_month),
-                          Text(widget.task.startDate.toString()),
+                          Text('${toFormat(widget.task.startDate)}'),
                         ],
                       ),
                     ),

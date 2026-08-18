@@ -64,12 +64,6 @@ class FastTransactionsCardStyle {
   static const Color yeniMusteriIconColor = Color.fromARGB(255, 196, 249, 198);
 }
 
-class AppColors {
-  static const Color clientWidget = Colors.blueAccent;
-  static Color? clientListDecoration = Colors.deepPurple[300];
-  static const Color dashboardBackground = Color(0xFFF5F5F5);
-}
-
 class OzetCardsStyle {
   static const double generalContainerHeight = 120;
   static const double containerHeight = 110;

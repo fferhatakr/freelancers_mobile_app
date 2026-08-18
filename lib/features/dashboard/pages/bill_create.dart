@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/core/navigation/app_navigation.dart';
 import 'package:freelancer_tracking_system/core/theme/app_all_style.dart';
 import 'package:freelancer_tracking_system/features/customer/pages/customer_add.dart';
+import 'package:freelancer_tracking_system/features/date/page/date.dart';
 
-class BillCreate extends StatelessWidget {
+class BillCreate extends StatefulWidget {
   final String? _selectedCustomer;
   final String? _selectedCalender;
   final String? _selectedUnit;
@@ -17,6 +18,19 @@ class BillCreate extends StatelessWidget {
     super.key,
   });
 
+  @override
+  State<BillCreate> createState() => _BillCreateState();
+}
+
+class _BillCreateState extends State<BillCreate> {
+  String? toFormat(DateTime? date) {
+    if (date != null) {
+      return '${date.day}/${date.month}/${date.year}';
+    }
+  }
+
+  DateTime? selectedEndDate;
+  DateTime? selectedBillsCalender;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,9 +94,9 @@ class BillCreate extends StatelessWidget {
                                   child: Icon(Icons.person_2_outlined),
                                 ),
                                 Text(
-                                  _selectedCustomer ?? 'Müşteri Seçin',
+                                  widget._selectedCustomer ?? 'Müşteri Seçin',
                                   style: TextStyle(
-                                    color: _selectedCustomer == null
+                                    color: widget._selectedCustomer == null
                                         ? Colors.grey
                                         : Colors.black,
                                   ),
@@ -143,44 +157,35 @@ class BillCreate extends StatelessWidget {
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      Row(
-                        children: [
-                          _BillsInfo(
-                            title: 'Fatura Numaranız',
-                            prefixIcon: Icons.article,
-                            hintTitle: 'Numaranızı Giriniz',
-                          ),
-                          Spacer(),
-                          _BillsInfo(
-                            title: 'Fatura Tarihi',
-                            prefixIcon: Icons.calendar_month,
-                            hintTitle: 'Tarih Seç',
-                          ),
-                        ],
+                      _BillsInfo(
+                        widht: double.infinity,
+                        title: 'Fatura Numaranız',
+                        prefixIcon: Icons.article,
+                        hintTitle: 'Numaranızı Giriniz',
                       ),
-                      Text(
-                        'Son ödeme tarihi',
-                        style: TextStyle(fontWeight: FontWeight.w400),
+                      DatePicture(
+                        icon: Icons.calendar_month,
+                        title: 'Fatura Tarihi',
+                        title2:
+                            '${toFormat(selectedBillsCalender) ?? ' Tarih Seçilmedi'} ',
+                        onDateSelected: (date) {
+                          setState(() {
+                            selectedBillsCalender = date;
+                          });
+                        },
+                        iconColor: Colors.purpleAccent,
                       ),
-                      Container(
-                        height: 40,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                          color: Colors.blueGrey[50],
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            spacing: 10,
-                            children: [
-                              Icon(Icons.calendar_month),
-                              Text(_selectedCalender ?? 'Tarih Secin'),
-                              Spacer(),
-                              Icon(Icons.arrow_drop_down, size: 32),
-                            ],
-                          ),
-                        ),
+                      DatePicture(
+                        icon: Icons.calendar_month,
+                        title: 'Son Ödeme Tarihi Seçin',
+                        title2:
+                            '${toFormat(selectedEndDate) ?? ' Tarih Seçilmedi'} ',
+                        onDateSelected: (date) {
+                          setState(() {
+                            selectedEndDate = date;
+                          });
+                        },
+                        iconColor: Colors.purpleAccent,
                       ),
                     ],
                   ),
@@ -258,7 +263,7 @@ class BillCreate extends StatelessWidget {
                               spacing: 10,
                               children: [
                                 Icon(Icons.currency_lira),
-                                Text(_selectedUnit ?? 'Birim Seçin'),
+                                Text(widget._selectedUnit ?? 'Birim Seçin'),
                                 Spacer(),
                                 Icon(Icons.arrow_drop_down, size: 32),
                               ],
@@ -282,7 +287,9 @@ class BillCreate extends StatelessWidget {
                               spacing: 10,
                               children: [
                                 Icon(Icons.credit_card),
-                                Text(_selectedMethod ?? 'Banka Transferi'),
+                                Text(
+                                  widget._selectedMethod ?? 'Banka Transferi',
+                                ),
                                 Spacer(),
                                 Icon(Icons.arrow_drop_down, size: 32),
                               ],

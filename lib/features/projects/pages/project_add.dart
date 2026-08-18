@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:freelancer_tracking_system/features/date/page/date.dart';
 import 'package:freelancer_tracking_system/features/projects/widgets/project_from_field.dart';
 import 'package:freelancer_tracking_system/providers/client.dart';
 import 'package:freelancer_tracking_system/providers/project.dart';
@@ -20,10 +21,18 @@ class _ProjectAddState extends State<ProjectAdd> {
   final endDateController = TextEditingController();
 
   String? selectedCustomer;
+  DateTime? selectedStartDate;
+  DateTime? selectedEndDate;
   double? price;
   final SnackBar _requiredField = SnackBar(
     content: Text('Zorunlu Alanı Doldurunuz'),
   );
+  String? toFormat(DateTime? date) {
+    if (date != null) {
+      return '${date.day}/${date.month}/${date.year}';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -114,17 +123,27 @@ class _ProjectAddState extends State<ProjectAdd> {
                 title: 'Açıklama',
                 title2: 'Proje Hakkında Detaylı Bilgi Girin',
               ),
-              ProjectFormField(
+              DatePicture(
                 icon: Icons.calendar_month,
-                title: 'Başlangıç Tarihi',
-                title2: 'GG/AA/YYYY',
-                controller: startDateController,
+                title: 'Başlangıç Tarihi ',
+                title2: toFormat(selectedStartDate) ?? 'Seçilmedi',
+                onDateSelected: (date) {
+                  setState(() {
+                    selectedEndDate = date;
+                  });
+                },
+                iconColor: Colors.amber,
               ),
-              ProjectFormField(
+              DatePicture(
                 icon: Icons.calendar_month,
-                title: 'Bitiş Tarihi',
-                title2: 'GG/AA/YYYY',
-                controller: endDateController,
+                title: 'Bitiş Tarihi ',
+                title2: toFormat(selectedStartDate) ?? 'Seçilmedi',
+                onDateSelected: (date) {
+                  setState(() {
+                    selectedStartDate = date;
+                  });
+                },
+                iconColor: Colors.amber,
               ),
               ProjectFormField(
                 keyboardType: TextInputType.numberWithOptions(),

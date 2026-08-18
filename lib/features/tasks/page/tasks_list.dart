@@ -36,10 +36,6 @@ class _TasksState extends State<Tasks> {
           .toList();
     }
 
-    print('Aranan:$enteredKeyword');
-    print(result.length);
-    print(taskAll.length);
-
     setState(() {
       _foundTask = result;
     });

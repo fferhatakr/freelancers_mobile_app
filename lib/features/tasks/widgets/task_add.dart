@@ -60,33 +60,35 @@ class SelectionTask extends StatelessWidget {
   final String _title;
   final String _subtitle;
   final VoidCallback onTap;
+  final Color iconColor;
 
   const SelectionTask({
     required this._icon,
     required this._title,
     required this._subtitle,
     required this.onTap,
+    required this.iconColor,
 
     super.key,
   });
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 75,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(10)),
-        color: Colors.blueGrey[50],
-      ),
-      child: ListTile(
-        leading: Icon(_icon, size: 24),
-        title: Text(
-          _title,
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        height: 75,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+          color: Colors.blueGrey[50],
         ),
-        subtitle: Text(_subtitle),
-        trailing: GestureDetector(
-          onTap: onTap,
-          child: Icon(Icons.chevron_right_outlined),
+        child: ListTile(
+          leading: Icon(_icon, size: 24, color: iconColor),
+          title: Text(
+            _title,
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+          ),
+          subtitle: Text(_subtitle),
+          trailing: Icon(Icons.list),
         ),
       ),
     );

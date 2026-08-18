@@ -24,24 +24,19 @@ class _TasksAddState extends State<TasksAdd> {
   String? selectedCustomerName;
   String? selectedProject;
   Levels? selectedLevel;
+  DateTime? selectedStartDate;
+  DateTime? selectedEndDate;
 
   final SnackBar requiredFields = SnackBar(
     content: Text('Zorunlu Alanları Giriniz'),
   );
-
-  DateTime? selectedDate;
-  Future<void> _selectDate() async {
-    final DateTime? pickedDate = await showDatePicker(
-      locale: Locale("tr", "TR"),
-      context: context,
-      firstDate: DateTime(2026),
-      lastDate: DateTime(2027),
-      initialDate: DateTime(2026, 7, 25),
-    );
-    setState(() {
-      selectedDate = pickedDate;
-    });
+  String? toFormat(DateTime? date) {
+    if (date != null) {
+      return '${date.day}/${date.month}/${date.year}';
+    }
   }
+
+  final Color red = Colors.red;
 
   @override
   Widget build(BuildContext context) {
@@ -64,14 +59,9 @@ class _TasksAddState extends State<TasksAdd> {
                 title: 'Görev İsmi *',
                 subtitle: 'Görev Adını Giriniz',
               ),
-              TaskAdd(
-                maxLength: 20,
-                controller: commentController,
-                icon: Icons.article,
-                title: 'Açıklama *',
-                subtitle: 'Açıklama Ekle',
-              ),
+
               SelectionTask(
+                iconColor: red,
                 icon: Icons.person_2_outlined,
                 title: 'Bağlantılı Müşteri * ',
                 subtitle: selectedCustomerName ?? 'Müşteri Seçiniz',
@@ -139,6 +129,7 @@ class _TasksAddState extends State<TasksAdd> {
                 },
               ),
               SelectionTask(
+                iconColor: red,
                 icon: Icons.search,
                 title: 'Bağlantılı Proje*',
                 subtitle: selectedProject ?? 'Mobile App',
@@ -192,14 +183,26 @@ class _TasksAddState extends State<TasksAdd> {
                 },
               ),
               DatePicture(
+                iconColor: Colors.red,
                 icon: Icons.calendar_month,
                 title: 'Başlangıç Tarihi',
-                title2: 'Tarih Giriniz',
+                title2: toFormat(selectedStartDate) ?? 'Tarih Seçiniz',
+                onDateSelected: (date) {
+                  setState(() {
+                    selectedStartDate = date;
+                  });
+                },
               ),
               DatePicture(
-                icon: Icons.calendar_view_day_rounded,
+                iconColor: Colors.red,
+                icon: Icons.calendar_month,
                 title: 'Bitiş Tarihi',
-                title2: 'Tarih Giriniz',
+                title2: toFormat(selectedEndDate) ?? 'Tarih Seçiniz',
+                onDateSelected: (date) {
+                  setState(() {
+                    selectedEndDate = date;
+                  });
+                },
               ),
 
               TaskAdd(
@@ -209,7 +212,15 @@ class _TasksAddState extends State<TasksAdd> {
                 title: 'Not ekleyin',
                 subtitle: 'Görev Notlarını ekleyin',
               ),
+              TaskAdd(
+                maxLength: 20,
+                controller: commentController,
+                icon: Icons.article,
+                title: 'Açıklama',
+                subtitle: 'Açıklama Ekle',
+              ),
               SelectionTask(
+                iconColor: red,
                 icon: Icons.flag,
                 title: 'Zorluk *',
                 subtitle: selectedLevel?.label ?? 'Derece Belirtin',
@@ -261,9 +272,11 @@ class _TasksAddState extends State<TasksAdd> {
                     baglantiliProje: selectedProject,
                     saat: watchController.text,
                     levels: selectedLevel.toString(),
+                    startDate: selectedStartDate,
+                    endDate: selectedEndDate,
                   );
                   if (tasksNameController.text.trim().isEmpty ||
-                      commentController.text.trim().isEmpty ||
+                      selectedStartDate == null ||
                       selectedCustomerName == null ||
                       selectedProject == null ||
                       selectedLevel == null) {
@@ -272,7 +285,6 @@ class _TasksAddState extends State<TasksAdd> {
                     TaskProvider().addTasks(items: task);
                     Navigator.pop(context);
                   }
-                  print(task.startDate.toString());
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,

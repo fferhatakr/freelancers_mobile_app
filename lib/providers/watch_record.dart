@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:freelancer_tracking_system/providers/watch.dart';
 
 class WatchRecord extends ChangeNotifier {
   WatchRecord._sharedInstance();

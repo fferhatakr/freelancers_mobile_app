@@ -82,7 +82,7 @@ class _StopWatchState extends State<StopWatch> {
             widget.selectedCustomer = task?.$1;
             widget.id = task?.$2;
           });
-          if (WatchProvider().stopWatch.elapsed.inMilliseconds != 0) {
+          if (WatchProvider().formattedText != '00:00:00') {
             if (widget.id != null) {
               WatchRecord().addTotalRecord(
                 widget.id!,
