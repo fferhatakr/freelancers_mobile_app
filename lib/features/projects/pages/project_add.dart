@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:freelancer_tracking_system/core/utils/date_formatter.dart';
 import 'package:freelancer_tracking_system/features/date/page/date.dart';
 import 'package:freelancer_tracking_system/features/projects/widgets/project_from_field.dart';
 import 'package:freelancer_tracking_system/providers/client.dart';
@@ -27,11 +28,6 @@ class _ProjectAddState extends State<ProjectAdd> {
   final SnackBar _requiredField = SnackBar(
     content: Text('Zorunlu Alanı Doldurunuz'),
   );
-  String? toFormat(DateTime? date) {
-    if (date != null) {
-      return '${date.day}/${date.month}/${date.year}';
-    }
-  }
 
   @override
   Widget build(BuildContext context) {

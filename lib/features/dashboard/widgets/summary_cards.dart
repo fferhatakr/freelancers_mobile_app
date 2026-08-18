@@ -45,7 +45,7 @@ class _SummaryCard extends StatelessWidget {
                   ),
                   Text(title, style: cardtitle1Style()),
                   Text(
-                    '$value',
+                    value,
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 15,

@@ -1,8 +1,16 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:freelancer_tracking_system/providers/project.dart';
 
-class StatisticsLiner extends StatelessWidget {
+class StatisticsLiner extends StatefulWidget {
   const StatisticsLiner({super.key});
+
+  @override
+  State<StatisticsLiner> createState() => _StatisticsLinerState();
+}
+
+class _StatisticsLinerState extends State<StatisticsLiner> {
+  List<double> veriler = ProjectProvider().resultChart();
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +23,7 @@ class StatisticsLiner extends StatelessWidget {
             'Haftalık Kazanç',
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
-          SizedBox(height: 8),
+          SizedBox(height: 10),
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -58,7 +66,7 @@ class StatisticsLiner extends StatelessWidget {
 
           sideTitleAlignment: SideTitleAlignment.outside,
 
-          sideTitles: SideTitles(showTitles: true, reservedSize: 40),
+          sideTitles: SideTitles(showTitles: true, reservedSize: 50),
         ),
 
         bottomTitles: AxisTitles(
@@ -90,7 +98,7 @@ class StatisticsLiner extends StatelessWidget {
       ),
       minX: 0,
       minY: 0,
-      maxY: 10000,
+      maxY: 200000,
       maxX: 6,
       backgroundColor: Colors.white,
       gridData: FlGridData(show: true),
@@ -101,14 +109,10 @@ class StatisticsLiner extends StatelessWidget {
             show: true,
             color: const Color.fromARGB(135, 114, 114, 114),
           ),
-          spots: [
-            FlSpot(0, 1000),
-            FlSpot(1, 3000),
-            FlSpot(2, 4000),
-            FlSpot(3, 6000),
-            FlSpot(5, 7000),
-            FlSpot(6, 8000),
-          ],
+          spots: List.generate(
+            7,
+            (index) => FlSpot(index.toDouble(), veriler[index]),
+          ),
           show: true, // Çubuk çizgisinini gösterilip Gösteriliceğini söyler.
           gradient: LinearGradient(
             colors: [Colors.black, Colors.red, Colors.purple],

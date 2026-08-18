@@ -3,16 +3,15 @@ import 'package:freelancer_tracking_system/core/navigation/app_navigation.dart';
 import 'package:freelancer_tracking_system/core/theme/app_all_style.dart';
 import 'package:freelancer_tracking_system/features/customer/pages/customer_add.dart';
 import 'package:freelancer_tracking_system/features/date/page/date.dart';
+import 'package:freelancer_tracking_system/core/utils/date_formatter.dart';
 
 class BillCreate extends StatefulWidget {
   final String? _selectedCustomer;
-  final String? _selectedCalender;
   final String? _selectedUnit;
   final String? _selectedMethod;
 
   const BillCreate({
     this._selectedCustomer,
-    this._selectedCalender,
     this._selectedUnit,
     this._selectedMethod,
     super.key,
@@ -23,14 +22,9 @@ class BillCreate extends StatefulWidget {
 }
 
 class _BillCreateState extends State<BillCreate> {
-  String? toFormat(DateTime? date) {
-    if (date != null) {
-      return '${date.day}/${date.month}/${date.year}';
-    }
-  }
-
   DateTime? selectedEndDate;
   DateTime? selectedBillsCalender;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

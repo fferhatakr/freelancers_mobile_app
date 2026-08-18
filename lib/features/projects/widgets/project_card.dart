@@ -16,7 +16,7 @@ class _ProjectCardState extends State<ProjectCard> {
     final result = widget.project.status?.label.toString() ?? 'Tanımlanmadı';
     return InkWell(
       onTap: () async {
-        final status = await showModalBottomSheet<(Status, DateTime)>(
+        final status = await showModalBottomSheet<(Status, DateTime, double)>(
           context: context,
           builder: (context) {
             return SizedBox(
@@ -30,6 +30,7 @@ class _ProjectCardState extends State<ProjectCard> {
                         Navigator.pop(context, (
                           Status.bekliyor,
                           DateTime.now(),
+                          widget.project.projectAmount,
                         ));
                       },
                     ),
@@ -38,6 +39,7 @@ class _ProjectCardState extends State<ProjectCard> {
                         Navigator.pop(context, (
                           Status.devamEdiyor,
                           DateTime.now(),
+                          widget.project.projectAmount,
                         ));
                       },
                       title: Text('Devam Ediyor'),
@@ -47,6 +49,7 @@ class _ProjectCardState extends State<ProjectCard> {
                         Navigator.pop(context, (
                           Status.tamamlandi,
                           DateTime.now(),
+                          widget.project.projectAmount,
                         ));
                       },
                       title: Text('Tamamlandı'),
@@ -62,6 +65,8 @@ class _ProjectCardState extends State<ProjectCard> {
           ProjectProvider().updateStatus(
             id: widget.project.id,
             status: status.$1,
+            date: status.$2,
+            money: status.$3,
           );
         }
       },

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:freelancer_tracking_system/core/utils/date_formatter.dart';
 import 'package:freelancer_tracking_system/features/date/page/date.dart';
 import 'package:freelancer_tracking_system/features/tasks/widgets/task_add.dart';
 import 'package:freelancer_tracking_system/providers/client.dart';
@@ -30,11 +31,6 @@ class _TasksAddState extends State<TasksAdd> {
   final SnackBar requiredFields = SnackBar(
     content: Text('Zorunlu Alanları Giriniz'),
   );
-  String? toFormat(DateTime? date) {
-    if (date != null) {
-      return '${date.day}/${date.month}/${date.year}';
-    }
-  }
 
   final Color red = Colors.red;
 

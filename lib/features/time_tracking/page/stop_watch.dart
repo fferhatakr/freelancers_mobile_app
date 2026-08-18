@@ -5,14 +5,15 @@ import 'package:freelancer_tracking_system/providers/watch.dart';
 import 'package:freelancer_tracking_system/providers/watch_record.dart';
 
 class StopWatch extends StatefulWidget {
-  String? selectedCustomer;
-  String? id;
-  String? resultTime;
+  const StopWatch({super.key});
   @override
   State<StopWatch> createState() => _StopWatchState();
 }
 
 class _StopWatchState extends State<StopWatch> {
+  String? selectedCustomer;
+  String? id;
+  String? resultTime;
   final SnackBar _noSelected = SnackBar(
     content: Text('Görev Seçilmedi'),
     backgroundColor: Colors.red.shade600,
@@ -79,20 +80,25 @@ class _StopWatchState extends State<StopWatch> {
           );
 
           setState(() {
-            widget.selectedCustomer = task?.$1;
-            widget.id = task?.$2;
+            selectedCustomer = task?.$1;
+            id = task?.$2;
           });
           if (WatchProvider().formattedText != '00:00:00') {
-            if (widget.id != null) {
+            if (id != null && context.mounted) {
               WatchRecord().addTotalRecord(
-                widget.id!,
+                id!,
                 WatchProvider().stopWatch.elapsed,
               );
+
               ScaffoldMessenger.of(context).showSnackBar(_selected);
               WatchProvider().reset();
+            }
+            if (!context.mounted) {
             } else {
               ScaffoldMessenger.of(context).showSnackBar(_noSelected);
             }
+          }
+          if (!context.mounted) {
           } else {
             ScaffoldMessenger.of(context).showSnackBar(_startStopWatch);
           }

@@ -69,7 +69,7 @@ class ProjectProvider extends ValueNotifier<List<Project>> {
       if (p.status == Status.bekliyor || p.status == Status.devamEdiyor) {
         bool already = false;
         for (int i = 0; i < resulta.length; i++) {
-          if (resulta[i] == p.projectName) {
+          if (resulta[i].toString() == p.projectName) {
             already = true;
             break;
           }
@@ -82,14 +82,37 @@ class ProjectProvider extends ValueNotifier<List<Project>> {
     return resulta;
   }
 
-  void updateStatus({required String id, required Status status}) {
+  void updateStatus({
+    required String id,
+    required Status status,
+    required DateTime date,
+    required double money,
+  }) {
     for (var i = 0; i < value.length; i++) {
       if (value[i].id == id) {
         value[i].status = status;
+        value[i].dateTime = date;
+        value[i].projectAmount = money;
         notifyListeners();
         return;
       }
     }
+  }
+
+  List<double> resultChart() {
+    List<Project> allProject = ProjectProvider().value;
+    List<double> result = [0, 0, 0, 0, 0, 0, 0];
+
+    for (int i = 0; i < allProject.length; i++) {
+      if (allProject[i].status == Status.tamamlandi) {
+        if (allProject[i].dateTime != null) {
+          int day = allProject[i].dateTime!.weekday - 1;
+          result[day] += allProject[i].projectAmount;
+        }
+      }
+    }
+    notifyListeners();
+    return result;
   }
 
   dynamic calPendingAndOngoing() {
@@ -133,7 +156,7 @@ class ProjectProvider extends ValueNotifier<List<Project>> {
         startDate: '01/06/2026',
         endDate: '10/06/2026',
         projectAmount: 3000,
-        status: Status.tamamlandi,
+        status: Status.devamEdiyor,
         oncelik: 'Düşük',
       ),
       Project(
@@ -183,7 +206,7 @@ class ProjectProvider extends ValueNotifier<List<Project>> {
         startDate: '12/08/2026',
         endDate: '20/08/2026',
         projectAmount: 4500,
-        status: Status.tamamlandi,
+        status: Status.devamEdiyor,
         oncelik: 'Düşük',
       ),
       Project(
@@ -220,8 +243,8 @@ class Project {
   final String? aciklama;
   final String? startDate;
   final String? endDate;
-  final double projectAmount;
-  final DateTime? dateTime;
+  double projectAmount;
+  DateTime? dateTime;
   Status? status;
   final String? oncelik;
   final String? nots;

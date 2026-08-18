@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/providers/tasks.dart';
 import 'package:freelancer_tracking_system/providers/watch_record.dart';
+import 'package:freelancer_tracking_system/core/utils/date_formatter.dart';
 
 class TasksCard extends StatefulWidget {
   final Task task;
@@ -13,26 +14,6 @@ class TasksCard extends StatefulWidget {
 
 class _TasksCardState extends State<TasksCard> {
   DateTime? selectedDate;
-  String? toFormat(DateTime? date) {
-    if (date != null) {
-      return '${date.day}/${date.month}/${date.year}';
-    }
-  }
-
-  Future<void> _selectDate() async {
-    final DateTime? pickedDate = await showDatePicker(
-      locale: Locale("tr", "TR"),
-      context: context,
-      firstDate: DateTime(2026),
-      lastDate: DateTime(2050),
-      initialDate: DateTime(2026, 7, 25),
-    );
-    if (pickedDate != null) {
-      setState(() {
-        selectedDate = pickedDate;
-      });
-    }
-  }
 
   @override
   Widget build(BuildContext context) {

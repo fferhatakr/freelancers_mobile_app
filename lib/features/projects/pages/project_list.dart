@@ -58,6 +58,7 @@ class _ProjectListState extends State<ProjectList> {
                       ),
                     );
                   }
+
                   return ListView.builder(
                     itemCount: displayList.length,
                     itemBuilder: (context, index) {
