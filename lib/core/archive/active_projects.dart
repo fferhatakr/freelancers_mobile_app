@@ -27,7 +27,6 @@ class ActiveProjectsCard extends StatelessWidget {
       children: [
         Card(
           color: ActiveProjectStyle.activeProjectCardColor,
-          elevation: GeneralStyle.elevation,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(
               Radius.circular(GeneralStyle.shapeSize),

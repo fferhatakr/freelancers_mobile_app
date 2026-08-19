@@ -49,13 +49,12 @@ class _BillCreateState extends State<BillCreate> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(GeneralStyle.paddingSize),
           child: Column(
             children: [
               Card(
-                elevation: GeneralStyle.elevation,
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(GeneralStyle.paddingSize),
                   child: Column(
                     spacing: 5,
                     crossAxisAlignment: CrossAxisAlignment.start,

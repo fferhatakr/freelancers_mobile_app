@@ -20,7 +20,6 @@ class _SummaryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       color: ActiveProjectStyle.activeProjectCardColor,
-      elevation: GeneralStyle.elevation,
       child: SizedBox(
         height: OzetCardsStyle.containerHeight,
         width: OzetCardsStyle.containerWidht,

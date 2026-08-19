@@ -5,14 +5,15 @@ import 'package:freelancer_tracking_system/features/auth/widgets/labeled_text_fi
 import 'package:freelancer_tracking_system/services/auth_services.dart';
 
 class RegisterPage extends StatefulWidget {
-  const RegisterPage({super.key});
+  RegisterPage({super.key, this.activeName});
+  String? activeName;
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  final TextEditingController _name = TextEditingController();
+  final TextEditingController name = TextEditingController();
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
   final TextEditingController _confirmPassword = TextEditingController();
@@ -54,7 +55,7 @@ class _RegisterPageState extends State<RegisterPage> {
         child: Column(
           children: [
             LabeledTextField(
-              controller: _name,
+              controller: name,
               miniTitle: 'Ad Soyad',
               hintText: 'Adınız Soyadınız',
               prefixIcon: Icons.person_2_outlined,
@@ -120,13 +121,15 @@ class _RegisterPageState extends State<RegisterPage> {
                 onTap: () async {
                   try {
                     await _authServices.register(
-                      name: _name.text.trim(),
+                      name: name.text.trim(),
                       email: _email.text.trim(),
                       password: _password.text.trim(),
                       confirmPassword: _confirmPassword.text.trim(),
                     );
+                    setState(() {
+                      widget.activeName = name.text.trim();
+                    });
                     if (!context.mounted) return;
-                    Navigator.popUntil(context, ModalRoute.withName("/"));
                   } on FirebaseAuthException catch (e) {
                     if (e.code == 'weak-password') {
                       ScaffoldMessenger.of(context).showSnackBar(_weakPassword);

@@ -43,7 +43,6 @@ class ClientCard extends StatelessWidget {
         );
       },
       child: Card(
-        elevation: GeneralStyle.elevation,
         shape: _listTileShape(),
         child: ListTile(
           leading: _CircleAvatar(),
@@ -52,18 +51,12 @@ class ClientCard extends StatelessWidget {
           subtitle: Column(
             children: [
               Row(
-                children: [
-                  Icon(Icons.email, size: 15),
-                  SizedBox(width: 5),
-                  Text(email),
-                ],
+                spacing: 5,
+                children: [Icon(Icons.email, size: 15), Text(email)],
               ),
               Row(
-                children: [
-                  Icon(Icons.call, size: 15),
-                  SizedBox(width: 5),
-                  Text(telefon),
-                ],
+                spacing: 5,
+                children: [Icon(Icons.call, size: 15), Text(telefon)],
               ),
             ],
           ),

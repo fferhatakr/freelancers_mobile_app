@@ -11,6 +11,7 @@ import 'package:freelancer_tracking_system/providers/tasks.dart';
 import 'package:freelancer_tracking_system/providers/watch.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,6 +21,10 @@ void main() async {
   CustomerProvider().seedFakeData();
   TaskProvider().seedFakeData();
   ProjectProvider().seedFakeData();
+  await GoogleSignIn.instance.initialize(
+    clientId:
+        '317619464989-s2g7pomi64ubq95hasqgjfe5djnvflve.apps.googleusercontent.com',
+  );
   runApp(
     MultiProvider(
       providers: [
@@ -45,12 +50,12 @@ class MyApp extends StatelessWidget {
       localizationsDelegates: [GlobalMaterialLocalizations.delegate],
       supportedLocales: [const Locale('en'), const Locale('tr')],
       theme: ThemeData.light().copyWith(
+        cardTheme: CardThemeData(elevation: 10),
         inputDecorationTheme: InputDecorationTheme(
           border: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(10)),
           ),
         ),
-
         appBarTheme: const AppBarTheme(
           titleTextStyle: TextStyle(
             fontWeight: FontWeight.bold,

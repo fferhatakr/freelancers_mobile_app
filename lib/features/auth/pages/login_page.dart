@@ -4,6 +4,7 @@ import 'package:freelancer_tracking_system/core/theme/app_all_style.dart';
 import 'package:freelancer_tracking_system/features/auth/widgets/labeled_text_field.dart.dart';
 import 'package:freelancer_tracking_system/features/auth/pages/register_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:freelancer_tracking_system/features/home/pages/home.dart';
 import 'package:freelancer_tracking_system/services/auth_services.dart';
 
 class LoginPage extends StatefulWidget {
@@ -21,6 +22,7 @@ class _LoginPageState extends State<LoginPage> {
   final _userOrPasswordWrong = SnackBar(
     content: Text('Kullanıcı adı veya şifre yanlış.'),
   );
+  final _girisYapilamadi = SnackBar(content: Text('Giriş Başarısız.'));
   final _notFoundUser = SnackBar(content: Text('Böyle bir kullanıcı yok'));
   @override
   Widget build(BuildContext context) {
@@ -117,7 +119,16 @@ class _LoginPageState extends State<LoginPage> {
 
   InkWell _withLoginGoogle() {
     return InkWell(
-      onTap: () {},
+      onTap: () async {
+        try {
+          UserCredential userCredential = await AuthServices()
+              .signInWithGoogle();
+          AppNavigationReplace.navigateTo(context, Home());
+        } catch (e) {
+          print(e);
+          ScaffoldMessenger.of(context).showSnackBar(_girisYapilamadi);
+        }
+      },
       child: Container(
         width: double.infinity,
         height: 50,

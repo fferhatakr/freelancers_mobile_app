@@ -1,6 +1,9 @@
 String? toFormat(DateTime? date) {
-  if (date != null) {
-    return '${date.day}/${date.month}/${date.year}';
+  try {
+    if (date != null) {
+      return '${date.day}/${date.month}/${date.year}';
+    }
+  } catch (e) {
+    print(e);
   }
-  throw 'Lütfen Tarih Seçiniz';
 }

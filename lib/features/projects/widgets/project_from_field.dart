@@ -20,7 +20,6 @@ class ProjectFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: GeneralStyle.elevation,
       child: Container(
         height: 80,
         decoration: BoxDecoration(
@@ -70,7 +69,6 @@ class SelectionTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: GeneralStyle.elevation,
       child: Container(
         height: 75,
         decoration: BoxDecoration(

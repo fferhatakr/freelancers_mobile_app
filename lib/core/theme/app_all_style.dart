@@ -6,7 +6,6 @@ class GeneralStyle {
   static const Color hintTextcolor = Color.fromARGB(255, 33, 33, 33);
   static const double hintTextSize = 12;
   static const double radiusCircular = 20;
-  static const double elevation = 10;
   static const double appBarTitleSize = 24;
   static const double appBarSubtitleSize = 12;
   static const double paddingSize = 10;

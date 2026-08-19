@@ -29,7 +29,6 @@ class _FastCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       color: ActiveProjectStyle.activeProjectCardColor,
-      elevation: GeneralStyle.elevation,
       shape: RoundedRectangleBorder(borderRadius: cardBorderRadius()),
       child: Padding(
         padding: cardPadding(),
