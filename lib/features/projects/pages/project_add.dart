@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
+import 'package:freelancer_tracking_system/core/theme/colors/app_colors.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/app_spacing.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/padding_sizes.dart';
 import 'package:freelancer_tracking_system/core/utils/date_formatter.dart';
 import 'package:freelancer_tracking_system/features/date/page/date.dart';
 import 'package:freelancer_tracking_system/features/projects/widgets/project_from_field.dart';
@@ -26,32 +30,31 @@ class _ProjectAddState extends State<ProjectAdd> {
   DateTime? selectedEndDate;
   double? price;
   final SnackBar _requiredField = SnackBar(
-    content: Text('Zorunlu Alanı Doldurunuz'),
+    content: Text(ProjectStrings.requiredField),
   );
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.amber[600],
+        backgroundColor: AppColors.amber,
         title: Text(
-          'Proje Ekle',
+          ProjectStrings.projeEkle,
           style: Theme.of(
             context,
-          ).textTheme.headlineMedium?.copyWith(color: Colors.white),
+          ).textTheme.headlineMedium?.copyWith(color: AppColors.white),
         ),
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(25.0),
+          padding: EdgeInsets.all(AppPadding.p24),
           child: Column(
-            spacing: 10,
+            spacing: AppSpacing.sm,
             children: [
               ProjectFormField(
                 controller: projectNameController,
                 icon: Icons.task_sharp,
-                title: 'Proje Adı *',
-                title2: 'Proje Adını Giriniz',
+                title: ProjectStrings.projeAdi,
+                title2: ProjectStrings.projeAdiEkle,
               ),
               InkWell(
                 onTap: () async {
@@ -64,15 +67,15 @@ class _ProjectAddState extends State<ProjectAdd> {
                           valueListenable: CustomerProvider(),
                           builder: (context, value, child) {
                             return Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: EdgeInsets.all(AppPadding.p8),
                               child: ListView.builder(
                                 itemCount: value.length,
                                 itemBuilder: (context, index) {
                                   final customerName = value[index];
                                   return Padding(
-                                    padding: const EdgeInsets.all(8.0),
+                                    padding: EdgeInsets.all(AppPadding.p8),
                                     child: Card(
-                                      color: Colors.blueGrey[200],
+                                      color: AppColors.grey,
                                       child: Material(
                                         type: MaterialType.transparency,
                                         child: ListTile(
@@ -109,51 +112,52 @@ class _ProjectAddState extends State<ProjectAdd> {
                 },
                 child: SelectionTile(
                   icon2: Icons.people,
-                  title2: 'Müşteri *',
-                  subtitle2: selectedCustomer?.toString() ?? 'Müşteri Seçiniz',
+                  title2: ProjectStrings.musteri,
+                  subtitle2:
+                      selectedCustomer?.toString() ?? ProjectStrings.musteriSec,
                 ),
               ),
               ProjectFormField(
                 controller: aciklamaController,
                 icon: Icons.comment,
-                title: 'Açıklama',
-                title2: 'Proje Hakkında Detaylı Bilgi Girin',
+                title: ProjectStrings.aciklama,
+                title2: ProjectStrings.aciklamaDetay,
               ),
               DatePicture(
                 icon: Icons.calendar_month,
-                title: 'Başlangıç Tarihi ',
-                title2: toFormat(selectedStartDate) ?? 'Seçilmedi',
+                title: ProjectStrings.baslangicTarihi,
+                title2: toFormat(selectedStartDate) ?? ProjectStrings.secilmedi,
                 onDateSelected: (date) {
                   setState(() {
                     selectedEndDate = date;
                   });
                 },
-                iconColor: Colors.amber,
+                iconColor: AppColors.amber,
               ),
               DatePicture(
                 icon: Icons.calendar_month,
-                title: 'Bitiş Tarihi ',
-                title2: toFormat(selectedStartDate) ?? 'Seçilmedi',
+                title: ProjectStrings.bitisTarihi,
+                title2: toFormat(selectedStartDate) ?? ProjectStrings.secilmedi,
                 onDateSelected: (date) {
                   setState(() {
                     selectedStartDate = date;
                   });
                 },
-                iconColor: Colors.amber,
+                iconColor: AppColors.amber,
               ),
               ProjectFormField(
                 keyboardType: TextInputType.numberWithOptions(),
                 controller: projectAmountController,
                 icon: Icons.currency_lira_outlined,
-                title: 'Proje Ücreti',
-                title2: '₺ 0.00',
+                title: ProjectStrings.projeUcreti,
+                title2: ProjectStrings.zeroK,
               ),
 
               ProjectFormField(
                 controller: noteController,
                 icon: Icons.comment,
-                title: 'Notlar',
-                title2: 'Ek notlarınızı Yazın',
+                title: ProjectStrings.notlar,
+                title2: ProjectStrings.ekNot,
               ),
               ElevatedButton(
                 onPressed: () {
@@ -173,11 +177,14 @@ class _ProjectAddState extends State<ProjectAdd> {
                   }
                 },
                 child: Row(
-                  spacing: 10,
+                  spacing: AppSpacing.sm,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.save, color: Colors.amber[600]),
-                    Text('Kaydet', style: TextStyle(color: Colors.amber[600])),
+                    Icon(Icons.save, color: AppColors.amber),
+                    Text(
+                      ProjectStrings.kaydet,
+                      style: TextStyle(color: AppColors.amber),
+                    ),
                   ],
                 ),
               ),

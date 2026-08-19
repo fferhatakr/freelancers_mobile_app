@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/core/navigation/app_navigation.dart';
 import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
+import 'package:freelancer_tracking_system/core/theme/colors/app_colors.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/app_sizes.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/app_spacing.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/border_sizes.dart';
 import 'package:freelancer_tracking_system/features/customer/pages/client_detail.dart';
 
 class ClientCard extends StatelessWidget {
@@ -51,12 +55,18 @@ class ClientCard extends StatelessWidget {
           subtitle: Column(
             children: [
               Row(
-                spacing: 5,
-                children: [Icon(Icons.email, size: 15), Text(email)],
+                spacing: AppSpacing.xs,
+                children: [
+                  Icon(Icons.email, size: AppSizes.size14),
+                  Text(email),
+                ],
               ),
               Row(
-                spacing: 5,
-                children: [Icon(Icons.call, size: 15), Text(telefon)],
+                spacing: AppSpacing.xs,
+                children: [
+                  Icon(Icons.call, size: AppSizes.size14),
+                  Text(telefon),
+                ],
               ),
             ],
           ),
@@ -68,9 +78,7 @@ class ClientCard extends StatelessWidget {
 
   RoundedRectangleBorder _listTileShape() {
     return RoundedRectangleBorder(
-      borderRadius: BorderRadius.all(
-        Radius.circular(GeneralStyle.radiusCircular),
-      ),
+      borderRadius: BorderRadius.all(Radius.circular(AppRadius.r20)),
     );
   }
 }
@@ -79,8 +87,8 @@ class _CircleAvatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CircleAvatar(
-      backgroundColor: ClientsStyle.circleAvatarColor,
-      child: Icon(ClientsStyle.personIcon, color: ClientsStyle.personIconColor),
+      backgroundColor: AppColors.blueAccent,
+      child: Icon(ClientsStyle.personIcon, color: AppColors.white),
     );
   }
 }

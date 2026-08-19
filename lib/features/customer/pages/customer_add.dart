@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:freelancer_tracking_system/core/theme/colors/app_colors.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/app_sizes.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/app_spacing.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/border_sizes.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/padding_sizes.dart';
 import 'package:freelancer_tracking_system/providers/client.dart';
 import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
 import 'package:freelancer_tracking_system/features/customer/widgets/client_form_field.dart';
@@ -38,24 +43,26 @@ class _CustomerAddScreenState extends State<CustomerAddScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: ClientsStyle.appBarBackground,
+        backgroundColor: AppColors.green,
         title: _clientAddAppBarTitle(),
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(GeneralStyle.paddingSize),
+          padding: _paddingSizeTen(),
           child: _clientAddCards(context),
         ),
       ),
     );
   }
 
+  EdgeInsets _paddingSizeTen() => EdgeInsets.all(AppPadding.p10);
+
   Text _clientAddAppBarTitle() {
     return Text(
       CustomerStrings.yeniMusteri,
       style: TextStyle(
-        fontSize: GeneralStyle.appBarTitleSize,
-        color: GeneralStyle.appBarTitle,
+        fontSize: AppSizes.size12,
+        color: AppColors.white,
         fontWeight: FontWeight.bold,
       ),
     );
@@ -63,13 +70,13 @@ class _CustomerAddScreenState extends State<CustomerAddScreen> {
 
   Column _clientAddCards(BuildContext context) {
     return Column(
-      spacing: GeneralStyle.columnSpacing,
+      spacing: AppSpacing.sm,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           CustomerStrings.musteriBilgileri,
           style: TextStyle(
-            fontSize: GeneralStyle.columnMiniTitle,
+            fontSize: AppSizes.size16,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -108,13 +115,13 @@ class _CustomerAddScreenState extends State<CustomerAddScreen> {
         ),
 
         SizedBox(
-          height: 100,
+          height: AppSizes.size96,
           child: ClientFormField(
             icon: Icons.comment,
             title: CustomerStrings.opsiyonelAciklama,
             title2: CustomerStrings.aciklamaEkle,
             controlText: adresController,
-            height: 60,
+            height: AppSizes.size64,
           ),
         ),
 
@@ -133,7 +140,10 @@ class _CustomerAddScreenState extends State<CustomerAddScreen> {
         ),
         Text(
           CustomerStrings.kaynakTitle,
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          style: TextStyle(
+            fontSize: AppSizes.size16,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         ClientFormField(
           icon: Icons.source,
@@ -143,7 +153,7 @@ class _CustomerAddScreenState extends State<CustomerAddScreen> {
         ),
         _Info(),
         Padding(
-          padding: const EdgeInsets.all(GeneralStyle.paddingSize),
+          padding: const EdgeInsets.all(AppPadding.p16),
           child: _elevatedButton(context),
         ),
       ],
@@ -175,7 +185,7 @@ class _CustomerAddScreenState extends State<CustomerAddScreen> {
       child: Center(
         child: Text(
           CommonStrings.kaydet,
-          style: TextStyle(color: ClientsStyle.addIconColor),
+          style: TextStyle(color: AppColors.greenDark),
         ),
       ),
     );
@@ -188,16 +198,14 @@ class _Info extends StatelessWidget {
     return Container(
       height: ClientsStyle.infoHeight,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(
-          Radius.circular(GeneralStyle.paddingSize),
-        ),
-        color: ClientsStyle.infoBackground,
+        borderRadius: BorderRadius.all(Radius.circular(AppRadius.r10)),
+        color: AppColors.greenPale,
       ),
       child: ListTile(
-        leading: Icon(Icons.info_outline, color: ClientsStyle.infoIconColor),
+        leading: Icon(Icons.info_outline, color: AppColors.greenDark),
         title: Text(
           CommonStrings.info,
-          style: TextStyle(fontSize: ClientsStyle.infoFontSize),
+          style: TextStyle(fontSize: AppSizes.size16),
         ),
       ),
     );

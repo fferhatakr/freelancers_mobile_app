@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/core/navigation/app_navigation.dart';
 import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
+import 'package:freelancer_tracking_system/core/theme/colors/app_colors.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/app_sizes.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/padding_sizes.dart';
 import 'package:freelancer_tracking_system/features/customer/pages/customer_add.dart';
 import 'package:freelancer_tracking_system/features/customer/widgets/client_card.dart';
 import 'package:freelancer_tracking_system/providers/client.dart';
@@ -13,6 +16,8 @@ class ClientList extends StatefulWidget {
 }
 
 class _ClientListState extends State<ClientList> {
+  final String _noResult = 'No results found';
+
   final List<Customer> _allCustomer = CustomerProvider().value;
   List<Customer> _foundCustomer = [];
   @override
@@ -62,7 +67,7 @@ class _ClientListState extends State<ClientList> {
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.all(GeneralStyle.paddingSize),
+        padding: EdgeInsets.all(AppPadding.p10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -98,8 +103,8 @@ class _ClientListState extends State<ClientList> {
                     )
                   : Center(
                       child: Text(
-                        'No results found',
-                        style: TextStyle(fontSize: 24),
+                        _noResult,
+                        style: TextStyle(fontSize: AppSizes.size24),
                       ),
                     ),
             ),
@@ -120,29 +125,23 @@ class _ClientListState extends State<ClientList> {
         prefixIcon: Icon(Icons.search_outlined),
         labelText: CommonStrings.hizliArama,
         hintText: CommonStrings.musteriAra,
-        hintStyle: TextStyle(color: GeneralStyle.hintTextcolor),
+        hintStyle: TextStyle(color: AppColors.grey),
       ),
     );
   }
 
   CircleAvatar _personAdd() {
     return CircleAvatar(
-      backgroundColor: ClientsStyle.circleAvatarColor,
-      child: Icon(Icons.person_add, color: ClientsStyle.personIconColor),
+      backgroundColor: AppColors.blueAccent,
+      child: Icon(Icons.person_add, color: AppColors.white),
     );
   }
 
   TextStyle _appBarSubtitle() {
-    return TextStyle(
-      fontSize: GeneralStyle.appBarSubtitleSize,
-      fontWeight: FontWeight.w300,
-    );
+    return TextStyle(fontSize: AppSizes.size12, fontWeight: FontWeight.w300);
   }
 
   TextStyle _appBarTitle() {
-    return TextStyle(
-      fontSize: GeneralStyle.appBarTitleSize,
-      fontWeight: FontWeight.bold,
-    );
+    return TextStyle(fontSize: AppSizes.size24, fontWeight: FontWeight.bold);
   }
 }

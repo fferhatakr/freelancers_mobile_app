@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
+import 'package:freelancer_tracking_system/core/theme/colors/app_colors.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/app_sizes.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/border_sizes.dart';
 import 'package:freelancer_tracking_system/providers/project.dart';
 
 class ProjectCard extends StatefulWidget {
@@ -13,7 +17,8 @@ class ProjectCard extends StatefulWidget {
 class _ProjectCardState extends State<ProjectCard> {
   @override
   Widget build(BuildContext context) {
-    final result = widget.project.status?.label.toString() ?? 'Tanımlanmadı';
+    final result =
+        widget.project.status?.label.toString() ?? ProjectStrings.tanimlanmadi;
     return InkWell(
       onTap: () async {
         final status = await showModalBottomSheet<(Status, DateTime, double)>(
@@ -25,7 +30,7 @@ class _ProjectCardState extends State<ProjectCard> {
                 child: ListView(
                   children: [
                     ListTile(
-                      title: Text('Bekliyor'),
+                      title: Text(ProjectStrings.bekliyor),
                       onTap: () {
                         Navigator.pop(context, (
                           Status.bekliyor,
@@ -42,7 +47,7 @@ class _ProjectCardState extends State<ProjectCard> {
                           widget.project.projectAmount,
                         ));
                       },
-                      title: Text('Devam Ediyor'),
+                      title: Text(ProjectStrings.devamEdiyor),
                     ),
                     ListTile(
                       onTap: () {
@@ -52,7 +57,7 @@ class _ProjectCardState extends State<ProjectCard> {
                           widget.project.projectAmount,
                         ));
                       },
-                      title: Text('Tamamlandı'),
+                      title: Text(ProjectStrings.tamamlandi),
                     ),
                   ],
                 ),
@@ -74,16 +79,19 @@ class _ProjectCardState extends State<ProjectCard> {
         color: checkStatusColor(widget.project.status),
         elevation: 15,
         shape: BeveledRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(3)),
+          borderRadius: BorderRadius.all(Radius.circular(AppRadius.r2)),
         ),
         child: ListTile(
           leading: CircleAvatar(
-            backgroundColor: Colors.blueGrey[300],
-            child: Icon(Icons.assignment_outlined, color: Colors.white),
+            backgroundColor: AppColors.grey,
+            child: Icon(Icons.assignment_outlined, color: AppColors.white),
           ),
           title: Text(
             widget.project.projectName,
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
+            style: TextStyle(
+              fontSize: AppSizes.size14,
+              fontWeight: FontWeight.w700,
+            ),
           ),
           subtitle: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
+import 'package:freelancer_tracking_system/core/theme/colors/app_colors.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/app_sizes.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/app_spacing.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/padding_sizes.dart';
 
 class ClientsDetail extends StatelessWidget {
   final String name;
@@ -20,60 +25,61 @@ class ClientsDetail extends StatelessWidget {
     this.comment,
     super.key,
   });
+  final String _notAdded = 'Henüz Eklenmedi';
+
   @override
   Widget build(BuildContext context) {
-    final String notAdded = 'Henüz Eklenmedi';
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Müşteri Detayı',
+          CustomerStrings.musteriDetay,
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: EdgeInsets.all(AppPadding.p10),
         child: Column(
-          spacing: 10,
+          spacing: AppSpacing.sm,
           children: [
             Center(
               child: Container(
-                height: 108,
-                width: 108,
+                height: AppSizes.size108,
+                width: AppSizes.size108,
                 decoration: BoxDecoration(
-                  color: Color(0xFF1E293B),
+                  color: AppColors.cardDarkBackground,
                   shape: BoxShape.circle,
-                  border: Border.all(color: Color(0xFFFFC107)),
+                  border: Border.all(color: AppColors.amber),
                 ),
                 child: Center(
-                  child: Text(name, style: TextStyle(color: Color(0xFFFFC107))),
+                  child: Text(name, style: TextStyle(color: AppColors.amber)),
                 ),
               ),
             ),
             Card(
-              color: Colors.white70,
+              color: AppColors.white,
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(AppPadding.p10),
                 child: Column(
-                  spacing: 5,
+                  spacing: AppSpacing.xs,
                   children: [
                     Row(
-                      spacing: 5,
+                      spacing: AppSpacing.xs,
                       children: [
                         Icon(Icons.person_2_outlined),
                         Text(
-                          'İletişim Bilgileri',
+                          CustomerStrings.iletisimBilgileri,
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
                     Row(
-                      spacing: 5,
+                      spacing: AppSpacing.xs,
                       children: [Icon(Icons.call), Text(telefon)],
                     ),
                     Divider(),
                     Row(
-                      spacing: 5,
+                      spacing: AppSpacing.xs,
                       children: [Icon(Icons.email_outlined), Text(email)],
                     ),
                   ],
@@ -81,48 +87,48 @@ class ClientsDetail extends StatelessWidget {
               ),
             ),
             Card(
-              color: Colors.white70,
+              color: AppColors.white,
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(AppPadding.p10),
                 child: Column(
-                  spacing: 5,
+                  spacing: AppSpacing.xs,
                   children: [
                     Row(
-                      spacing: 10,
+                      spacing: AppSpacing.md,
                       children: [
                         Icon(Icons.person_2_outlined),
                         Text(
-                          'Diğer Bilgiler',
+                          CustomerStrings.digerBilgiler,
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
                     _AddDetail(
-                      title: 'Şirket Bilgisi',
+                      title: CustomerStrings.sirketBilgisi,
                       detail: firma,
                       icon: Icons.business,
                     ),
                     Divider(),
                     _AddDetail(
-                      title: 'Adres Bilgisi',
-                      detail: adres ?? notAdded,
+                      title: CustomerStrings.adresBilgisi,
+                      detail: adres ?? _notAdded,
                       icon: Icons.home_outlined,
                     ),
                     Divider(),
                     _AddDetail(
-                      title: 'Not',
+                      title: CustomerStrings.not,
                       detail: not,
                       icon: Icons.note_outlined,
                     ),
                     Divider(),
                     _AddDetail(
-                      title: 'Referans',
-                      detail: source ?? notAdded,
+                      title: CustomerStrings.referans,
+                      detail: source ?? _notAdded,
                       icon: Icons.source_outlined,
                     ),
                     Divider(),
                     _AddDetail(
-                      title: 'Açıklama',
+                      title: CustomerStrings.aciklamaEkle,
                       detail: comment,
                       icon: Icons.comment_bank_outlined,
                     ),
@@ -151,7 +157,7 @@ class _AddDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      spacing: 10,
+      spacing: AppSpacing.sm,
       children: [
         Icon(icon),
         Column(
@@ -159,9 +165,12 @@ class _AddDetail extends StatelessWidget {
           children: [
             Text(
               title,
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+              style: TextStyle(
+                fontSize: AppSizes.size14,
+                fontWeight: FontWeight.w500,
+              ),
             ),
-            Text(detail ?? '', style: TextStyle(fontSize: 12)),
+            Text(detail ?? '', style: TextStyle(fontSize: AppSizes.size12)),
           ],
         ),
       ],

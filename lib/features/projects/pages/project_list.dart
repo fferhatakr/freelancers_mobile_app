@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
+import 'package:freelancer_tracking_system/core/theme/colors/app_colors.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/app_sizes.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/padding_sizes.dart';
 import 'package:freelancer_tracking_system/features/projects/widgets/project_card.dart';
 import 'package:freelancer_tracking_system/providers/project.dart';
 
@@ -17,9 +21,9 @@ class _ProjectListState extends State<ProjectList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Proje Listesi')),
+      appBar: AppBar(title: Text(ProjectStrings.projeListesi)),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: EdgeInsets.all(AppPadding.p8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -31,9 +35,9 @@ class _ProjectListState extends State<ProjectList> {
               maxLength: 30,
               autofocus: true,
               decoration: InputDecoration(
-                labelText: 'Hızlı Bul',
-                hintText: 'Örnek:Ferhat Akar',
-                hintStyle: TextStyle(color: Colors.grey),
+                labelText: ProjectStrings.hizliBul,
+                hintText: ProjectStrings.ornek,
+                hintStyle: TextStyle(color: AppColors.grey),
                 prefix: Icon(Icons.search),
               ),
             ),
@@ -53,8 +57,8 @@ class _ProjectListState extends State<ProjectList> {
                   if (displayList.isEmpty) {
                     return Center(
                       child: Text(
-                        'No result found',
-                        style: TextStyle(fontSize: 24),
+                        ProjectStrings.noResult,
+                        style: TextStyle(fontSize: AppSizes.size24),
                       ),
                     );
                   }

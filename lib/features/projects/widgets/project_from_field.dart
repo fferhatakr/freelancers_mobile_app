@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:freelancer_tracking_system/core/theme/app_all_style.dart';
+import 'package:freelancer_tracking_system/core/theme/colors/app_colors.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/app_sizes.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/border_sizes.dart';
 
 class ProjectFormField extends StatelessWidget {
   final IconData _icon;
@@ -21,29 +23,29 @@ class ProjectFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: Container(
-        height: 80,
+        height: AppSizes.size32,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-          color: Colors.blueGrey[50],
+          borderRadius: BorderRadius.all(Radius.circular(AppRadius.r10)),
+          color: AppColors.greyLight,
         ),
         child: Center(
           child: ListTile(
-            leading: Icon(_icon, size: 24, color: Colors.amber[600]),
+            leading: Icon(_icon, size: AppSizes.size8, color: AppColors.amber),
             title: Text(
               _title,
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: AppSizes.size14,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             subtitle: SizedBox(
-              height: 40,
+              height: AppSizes.size40,
               child: TextField(
                 textInputAction: TextInputAction.next,
                 keyboardType: keyboardType,
                 controller: controller,
                 decoration: InputDecoration(
-                  hint: Text(
-                    _title2,
-                    style: TextStyle(color: GeneralStyle.hintTextcolor),
-                  ),
+                  hint: Text(_title2, style: TextStyle(color: AppColors.grey)),
                 ),
               ),
             ),
@@ -70,17 +72,20 @@ class SelectionTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: Container(
-        height: 75,
+        height: AppSizes.size76,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-          color: Colors.blueGrey[50],
+          borderRadius: BorderRadius.all(Radius.circular(AppRadius.r10)),
+          color: AppColors.greyLight,
         ),
         child: ListTile(
           onTap: ontap,
-          leading: Icon(_icon2, size: 24, color: Colors.amber[600]),
+          leading: Icon(_icon2, size: AppSizes.size24, color: AppColors.amber),
           title: Text(
             _title2,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: AppSizes.size14,
+            ),
           ),
           subtitle: Text(_subtitle2),
           trailing: GestureDetector(child: Icon(Icons.chevron_right_outlined)),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:freelancer_tracking_system/core/theme/app_all_style.dart';
-import 'package:freelancer_tracking_system/core/theme/app_style.dart';
+
+import 'package:freelancer_tracking_system/core/theme/colors/app_colors.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/app_sizes.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/border_sizes.dart';
 
 class ClientFormField extends StatelessWidget {
   final IconData icon;
@@ -22,26 +24,22 @@ class ClientFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: ClientsStyle.containerHeight,
+      height: AppSizes.size76,
       width: double.infinity,
       decoration: clientAddDecartion(),
       child: ListTile(
-        leading: Icon(
-          icon,
-          size: GeneralStyle.iconSize,
-          color: ClientsStyle.addIconColor,
-        ),
+        leading: Icon(icon, size: AppSizes.size24, color: AppColors.green),
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(title, style: _titleStyle()),
             SizedBox(
-              height: height ?? ClientsStyle.boxHeight,
+              height: height ?? AppSizes.size36,
 
               child: TextField(
                 controller: controlText,
                 decoration: InputDecoration(
-                  hintMaxLines: maxLines ?? 2,
+                  hintMaxLines: maxLines ?? AppSizes.size2.toInt(),
                   hint: Text(title2, style: _hintStyle()),
                 ),
               ),
@@ -53,25 +51,17 @@ class ClientFormField extends StatelessWidget {
   }
 
   TextStyle _hintStyle() {
-    return TextStyle(
-      fontSize: GeneralStyle.hintTextSize,
-      color: GeneralStyle.hintTextcolor,
-    );
+    return TextStyle(fontSize: AppSizes.size12, color: AppColors.grey);
   }
 
   TextStyle _titleStyle() {
-    return TextStyle(
-      fontSize: GeneralStyle.fontSize,
-      fontWeight: FontWeight.bold,
-    );
+    return TextStyle(fontSize: AppSizes.size14, fontWeight: FontWeight.bold);
   }
 
   BoxDecoration clientAddDecartion() {
     return BoxDecoration(
-      color: ClientsStyle.containerColsor,
-      borderRadius: BorderRadius.all(
-        Radius.circular(GeneralStyle.radiusCircular),
-      ),
+      color: AppColors.white,
+      borderRadius: BorderRadius.all(Radius.circular(AppRadius.r20)),
     );
   }
 }
