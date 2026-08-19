@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/core/navigation/app_navigation.dart';
 import 'package:freelancer_tracking_system/core/theme/app_all_style.dart';
+import 'package:freelancer_tracking_system/core/theme/colors/app_colors.dart';
+import 'package:freelancer_tracking_system/core/theme/app_sizes.dart';
+import 'package:freelancer_tracking_system/core/theme/app_spacing.dart';
+import 'package:freelancer_tracking_system/core/theme/border_sizes.dart';
+import 'package:freelancer_tracking_system/core/theme/localization/billcreate_strings.dart';
+import 'package:freelancer_tracking_system/core/theme/padding_sizes.dart';
 import 'package:freelancer_tracking_system/features/customer/pages/customer_add.dart';
+import 'package:freelancer_tracking_system/features/dashboard/widgets/bill_create.dart';
 import 'package:freelancer_tracking_system/features/date/page/date.dart';
 import 'package:freelancer_tracking_system/core/utils/date_formatter.dart';
 
@@ -29,19 +36,22 @@ class _BillCreateState extends State<BillCreate> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.purple,
+        backgroundColor: AppColors.purple,
         title: Text(
-          'Fatura Oluştur',
+          BillsCreateString.faturaOlustur,
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         actions: [
           TextButton(
             onPressed: () {},
             child: Row(
-              spacing: 3,
+              spacing: AppSpacing.xs,
               children: [
-                Icon(Icons.save, color: Colors.black),
-                Text('Kaydet', style: TextStyle(color: Colors.black)),
+                Icon(Icons.save, color: AppColors.black),
+                Text(
+                  BillsCreateString.musteriBilgileri,
+                  style: TextStyle(color: AppColors.black),
+                ),
               ],
             ),
           ),
@@ -49,60 +59,64 @@ class _BillCreateState extends State<BillCreate> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(GeneralStyle.paddingSize),
+          padding: _paddingTen(),
           child: Column(
             children: [
               Card(
                 child: Padding(
-                  padding: const EdgeInsets.all(GeneralStyle.paddingSize),
+                  padding: _paddingTen(),
                   child: Column(
-                    spacing: 5,
+                    spacing: AppSpacing.xs,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Müşteri Bilgileri',
+                        BillsCreateString.musteriBilgileri,
                         style: TextStyle(
-                          fontSize: 16,
+                          fontSize: AppSizes.size16,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: _paddingTen(),
                         child: InkWell(
                           onTap: () {},
                           child: Container(
-                            height: 50,
+                            height: AppSizes.size48,
                             width: double.infinity,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(
                                 GeneralStyle.borderRadius,
                               ),
-                              color: Colors.grey[200],
+                              color: AppColors.surfaceLight,
                             ),
                             child: Row(
-                              spacing: 2,
+                              spacing: AppSpacing.xxs,
                               children: [
                                 SizedBox(
-                                  width: 50,
+                                  width: AppSizes.size48,
                                   child: Icon(Icons.person_2_outlined),
                                 ),
                                 Text(
-                                  widget._selectedCustomer ?? 'Müşteri Seçin',
+                                  widget._selectedCustomer ??
+                                      BillsCreateString.musteriSecin,
                                   style: TextStyle(
                                     color: widget._selectedCustomer == null
-                                        ? Colors.grey
-                                        : Colors.black,
+                                        ? AppColors.grey
+                                        : AppColors.black,
                                   ),
                                 ),
                                 Spacer(),
-                                Icon(Icons.arrow_drop_down_outlined, size: 32),
+                                Icon(
+                                  Icons.arrow_drop_down_outlined,
+                                  size: AppSizes.size32,
+                                ),
                               ],
                             ),
                           ),
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: _paddingTen(),
                         child: InkWell(
                           onTap: () {
                             AppNavigation.navigateTo(
@@ -111,21 +125,24 @@ class _BillCreateState extends State<BillCreate> {
                             );
                           },
                           child: Container(
-                            height: 50,
+                            height: AppSizes.size48,
                             width: double.infinity,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(
                                 GeneralStyle.borderRadius,
                               ),
-                              color: Colors.grey[200],
+                              color: AppColors.surfaceLight,
                             ),
                             child: Row(
-                              spacing: 2,
+                              spacing: AppSpacing.xxs,
                               children: [
-                                SizedBox(width: 50, child: Icon(Icons.add)),
+                                SizedBox(
+                                  width: AppSizes.size48,
+                                  child: Icon(Icons.add),
+                                ),
                                 Text(
-                                  'Yeni Müşteri Ekle',
-                                  style: TextStyle(color: Colors.black),
+                                  BillsCreateString.yeniMusteriEkle,
+                                  style: TextStyle(color: AppColors.black),
                                 ),
                               ],
                             ),
@@ -138,47 +155,47 @@ class _BillCreateState extends State<BillCreate> {
               ),
               Card(
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: _paddingTen(),
                   child: Column(
-                    spacing: 10,
+                    spacing: AppSpacing.sm,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Fatura Bilgileri',
+                        BillsCreateString.faturaBilgileri,
                         style: TextStyle(
-                          fontSize: 16,
+                          fontSize: AppSizes.size16,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      _BillsInfo(
+                      BillsInfo(
                         widht: double.infinity,
-                        title: 'Fatura Numaranız',
+                        title: BillsCreateString.faturaNumaraniz,
                         prefixIcon: Icons.article,
-                        hintTitle: 'Numaranızı Giriniz',
+                        hintTitle: BillsCreateString.numaraniziGiriniz,
                       ),
                       DatePicture(
                         icon: Icons.calendar_month,
-                        title: 'Fatura Tarihi',
+                        title: BillsCreateString.faturaTarihi,
                         title2:
-                            '${toFormat(selectedBillsCalender) ?? ' Tarih Seçilmedi'} ',
+                            '${toFormat(selectedBillsCalender) ?? {BillsCreateString.faturaTarihi}} ',
                         onDateSelected: (date) {
                           setState(() {
                             selectedBillsCalender = date;
                           });
                         },
-                        iconColor: Colors.purpleAccent,
+                        iconColor: AppColors.purpleAccent,
                       ),
                       DatePicture(
                         icon: Icons.calendar_month,
-                        title: 'Son Ödeme Tarihi Seçin',
+                        title: BillsCreateString.sonOdemeTarihiSecin,
                         title2:
-                            '${toFormat(selectedEndDate) ?? ' Tarih Seçilmedi'} ',
+                            '${toFormat(selectedEndDate) ?? {BillsCreateString.faturaTarihi}} ',
                         onDateSelected: (date) {
                           setState(() {
                             selectedEndDate = date;
                           });
                         },
-                        iconColor: Colors.purpleAccent,
+                        iconColor: AppColors.purpleAccent,
                       ),
                     ],
                   ),
@@ -188,32 +205,32 @@ class _BillCreateState extends State<BillCreate> {
                 width: double.infinity,
                 child: Card(
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: _paddingTen(),
                     child: Column(
-                      spacing: 10,
+                      spacing: AppSpacing.sm,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Ürün / Hizmetler',
+                          BillsCreateString.urunHizmetler,
                           style: TextStyle(
-                            fontSize: 16,
+                            fontSize: AppSizes.size16,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
                         Row(
-                          spacing: 20,
+                          spacing: AppSpacing.md,
                           children: [
-                            _BillsInfo(
+                            BillsInfo(
                               prefixIcon: Icons.note,
-                              widht: 170,
-                              title: 'Açıklama',
-                              hintTitle: 'Web/Mobile/',
+                              widht: AppSizes.size170,
+                              title: BillsCreateString.aciklama,
+                              hintTitle: BillsCreateString.webMobile,
                             ),
-                            _BillsInfo(
+                            BillsInfo(
                               prefixIcon: Icons.currency_lira,
-                              widht: 170,
-                              title: 'Tutar',
-                              hintTitle: '100',
+                              widht: AppSizes.size150,
+                              title: BillsCreateString.tutar,
+                              hintTitle: BillsCreateString.ucret,
                             ),
                           ],
                         ),
@@ -227,80 +244,89 @@ class _BillCreateState extends State<BillCreate> {
 
                 child: Card(
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: _paddingTen(),
                     child: Column(
-                      spacing: 10,
+                      spacing: AppSpacing.sm,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Ödeme Bilgileri',
+                          BillsCreateString.odemeBilgileri,
                           style: TextStyle(
-                            fontSize: 16,
+                            fontSize: AppSizes.size16,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
                         Text(
-                          'Para Birimi',
+                          BillsCreateString.paraBirimi,
                           style: TextStyle(fontWeight: FontWeight.w400),
                         ),
                         Container(
-                          height: 40,
+                          height: AppSizes.size40,
 
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            color: Colors.blueGrey[50],
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(AppRadius.r10),
+                            ),
+                            color: AppColors.surfaceBlueGreyLight,
                           ),
                           child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: _paddingTen(),
                             child: Row(
                               spacing: 10,
                               children: [
                                 Icon(Icons.currency_lira),
-                                Text(widget._selectedUnit ?? 'Birim Seçin'),
+                                Text(
+                                  widget._selectedUnit ??
+                                      BillsCreateString.birimSecin,
+                                ),
                                 Spacer(),
-                                Icon(Icons.arrow_drop_down, size: 32),
+                                Icon(
+                                  Icons.arrow_drop_down,
+                                  size: AppSizes.size32,
+                                ),
                               ],
                             ),
                           ),
                         ),
                         Text(
-                          'Ödeme Yöntemi',
+                          BillsCreateString.odemeYontemi,
                           style: TextStyle(fontWeight: FontWeight.w400),
                         ),
                         Container(
-                          height: 40,
+                          height: AppSizes.size40,
 
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            color: Colors.blueGrey[50],
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(AppRadius.r10),
+                            ),
+                            color: AppColors.surfaceBlueGreyLight,
                           ),
                           child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: _paddingTen(),
                             child: Row(
-                              spacing: 10,
+                              spacing: AppSpacing.sm,
                               children: [
                                 Icon(Icons.credit_card),
                                 Text(
-                                  widget._selectedMethod ?? 'Banka Transferi',
+                                  widget._selectedMethod ??
+                                      BillsCreateString.bankaTransferi,
                                 ),
                                 Spacer(),
-                                Icon(Icons.arrow_drop_down, size: 32),
+                                Icon(
+                                  Icons.arrow_drop_down,
+                                  size: AppSizes.size32,
+                                ),
                               ],
                             ),
                           ),
                         ),
 
-                        Row(
-                          spacing: 20,
-                          children: [
-                            _BillsInfo(
-                              height: 50,
-                              prefixIcon: Icons.note,
-                              widht: 362,
-                              title: 'Not(Opsiyonel)',
-                              hintTitle: 'Fatura Notu Ekleyebilirsin',
-                            ),
-                          ],
+                        BillsInfo(
+                          height: AppSizes.size48,
+                          prefixIcon: Icons.note,
+                          widht: double.infinity,
+                          title: BillsCreateString.notOpsiyonel,
+                          hintTitle: BillsCreateString.faturaNotuEkleyebilirsin,
                         ),
                       ],
                     ),
@@ -308,50 +334,13 @@ class _BillCreateState extends State<BillCreate> {
                 ),
               ),
 
-              SizedBox(height: 20),
+              SizedBox(height: AppSizes.size24),
             ],
           ),
         ),
       ),
     );
   }
-}
 
-class _BillsInfo extends StatelessWidget {
-  final String title;
-  final IconData prefixIcon;
-  final String hintTitle;
-  final double? widht;
-  final double? height;
-
-  const _BillsInfo({
-    required this.title,
-    required this.prefixIcon,
-    required this.hintTitle,
-    this.widht,
-    this.height,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(title, style: TextStyle(fontWeight: FontWeight.w400)),
-        SizedBox(
-          height: height ?? 50,
-          width: widht ?? 170,
-          child: TextField(
-            maxLength: 20,
-            decoration: InputDecoration(
-              counterText: '',
-              prefixIcon: Icon(prefixIcon),
-              hintText: hintTitle,
-              hintStyle: TextStyle(color: Colors.grey, fontSize: 12),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
+  EdgeInsets _paddingTen() => const EdgeInsets.all(AppPadding.p10);
 }

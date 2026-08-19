@@ -1,8 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:freelancer_tracking_system/core/navigation/app_navigation.dart';
-import 'package:freelancer_tracking_system/core/theme/app_colors.dart';
+import 'package:freelancer_tracking_system/core/theme/colors/app_colors.dart';
 import 'package:freelancer_tracking_system/features/auth/pages/login_page.dart';
 import 'package:freelancer_tracking_system/features/home/pages/home.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -11,7 +10,7 @@ import 'package:freelancer_tracking_system/providers/navigation.dart';
 import 'package:freelancer_tracking_system/providers/project.dart';
 import 'package:freelancer_tracking_system/providers/tasks.dart';
 import 'package:freelancer_tracking_system/providers/watch.dart';
-import 'package:freelancer_tracking_system/services/onayla.dart';
+import 'package:freelancer_tracking_system/features/auth/pages/onayla.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -78,7 +77,7 @@ class MyApp extends StatelessWidget {
             return Home();
           } else if (snapshot.hasData &&
               FirebaseAuth.instance.currentUser?.emailVerified == false) {
-            return Onayla();
+            return VerifyEmail();
           } else {
             return LoginPage();
           }

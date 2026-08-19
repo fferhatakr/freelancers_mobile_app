@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:freelancer_tracking_system/core/theme/app_colors.dart';
+import 'package:freelancer_tracking_system/core/theme/colors/app_colors.dart';
 import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
 
 class ActiveProjectsCard extends StatelessWidget {
