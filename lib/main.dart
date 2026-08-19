@@ -42,7 +42,6 @@ class MyApp extends StatelessWidget {
   MyApp({super.key});
   late final Stream<User?> _authStream = FirebaseAuth.instance
       .authStateChanges();
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
