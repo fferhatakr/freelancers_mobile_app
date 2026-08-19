@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/core/navigation/app_navigation.dart';
 import 'package:freelancer_tracking_system/core/theme/colors/app_colors.dart';
 import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/app_sizes.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/padding_sizes.dart';
 import 'package:freelancer_tracking_system/features/settings/pages/contact_us.dart';
 import 'package:freelancer_tracking_system/features/settings/pages/privacy_policy.dart';
 import 'package:freelancer_tracking_system/features/settings/pages/profile_info.dart';
@@ -12,9 +14,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
 
-  static const double containerHeight = 36;
-  static const double containerWidth = 48;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +21,10 @@ class SettingsScreen extends StatelessWidget {
         centerTitle: false,
         title: Text(
           SettingsStrings.ayarlar,
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          style: TextStyle(
+            fontSize: AppSizes.size24,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         actions: [
           Padding(
@@ -34,8 +36,8 @@ class SettingsScreen extends StatelessWidget {
                 Navigator.popUntil(context, ModalRoute.withName("/"));
               },
               child: Container(
-                height: containerHeight,
-                width: containerWidth,
+                height: AppSizes.size36,
+                width: AppSizes.size48,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(
                     Radius.circular(GeneralStyle.borderRadius),
@@ -156,16 +158,14 @@ class _SettingsPadding extends StatelessWidget {
   const _SettingsPadding({required this.title});
   final String title;
 
-  static const double fontSize = 16;
-
   TextStyle _textStyle() {
-    return TextStyle(fontSize: fontSize, fontWeight: FontWeight.bold);
+    return TextStyle(fontSize: AppSizes.size16, fontWeight: FontWeight.bold);
   }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(GeneralStyle.paddingSize),
+      padding: EdgeInsets.all(AppPadding.p10),
       child: Text(title, style: _textStyle()),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/padding_sizes.dart';
 import 'package:freelancer_tracking_system/features/settings/privacy_policy_text.dart';
 
 class GizlilikPolitika extends StatelessWidget {
@@ -12,7 +13,7 @@ class GizlilikPolitika extends StatelessWidget {
       body: SingleChildScrollView(
         child: Card(
           child: Padding(
-            padding: const EdgeInsets.all(GeneralStyle.paddingSize),
+            padding: EdgeInsets.all(AppPadding.p10),
             child: Text(privacyPolicyText),
           ),
         ),

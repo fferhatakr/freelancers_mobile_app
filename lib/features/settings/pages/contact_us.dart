@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/app_spacing.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/padding_sizes.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ContactUs extends StatefulWidget {
@@ -13,9 +16,9 @@ class _ContactUsState extends State<ContactUs> with LaunchMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Bize Ulaşın'),
+        title: Text(SettingsStrings.bizeUlasin),
         actions: [
-          Text('Website'),
+          Text(SettingsStrings.website),
           IconButton(
             onPressed: () {
               launchURL('x');
@@ -25,25 +28,27 @@ class _ContactUsState extends State<ContactUs> with LaunchMixin {
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: EdgeInsets.all(AppPadding.p8),
         child: SizedBox(
           width: double.infinity,
           child: Column(
-            spacing: 10,
+            spacing: AppSpacing.sm,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Mesajını gönder,genelde 24 içinde dönüş yaparız.'),
+              Text(SettingsStrings.geriDonus),
 
               SizedBox(
                 width: double.infinity,
                 child: TextField(
-                  decoration: InputDecoration(hintText: 'Ne Olduğunu Anlat'),
+                  decoration: InputDecoration(
+                    hintText: SettingsStrings.problemiAnlat,
+                  ),
                 ),
               ),
               Center(
                 child: TextButton(
                   onPressed: () {},
-                  child: Text('Mesajı Gönder'),
+                  child: Text(SettingsStrings.mesajGonder),
                 ),
               ),
             ],

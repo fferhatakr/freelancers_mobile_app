@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:freelancer_tracking_system/core/theme/colors/app_colors.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/app_sizes.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/padding_sizes.dart';
 
 class SettingsCard extends StatelessWidget {
   final IconData icon;
@@ -22,22 +25,25 @@ class SettingsCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(AppPadding.p8),
             child: Row(
               children: [
-                Icon(icon, size: 28, color: Colors.amber[600]),
-                SizedBox(width: 14),
+                Icon(icon, size: AppSizes.size28, color: AppColors.amber),
+                SizedBox(width: AppSizes.size14),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       title1,
                       style: TextStyle(
-                        fontSize: 15,
+                        fontSize: AppSizes.size14,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Text(title2 ?? '', style: TextStyle(fontSize: 11)),
+                    Text(
+                      title2 ?? '',
+                      style: TextStyle(fontSize: AppSizes.size12),
+                    ),
                   ],
                 ),
 

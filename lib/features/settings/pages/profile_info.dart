@@ -1,5 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/app_sizes.dart';
 
 class ProfileInfo extends StatefulWidget {
   const ProfileInfo({super.key});
@@ -37,20 +39,20 @@ class _ProfileInfoState extends State<ProfileInfo> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _EditingTextField(
-                    labelText: 'Ad Soyad',
-                    hintText: 'Ferhat Akar',
+                    labelText: SettingsStrings.adSoyad,
+                    hintText: SettingsStrings.ferhatAkar,
                   ),
                   _EditingTextField(
-                    labelText: 'Meslek',
-                    hintText: 'Freelance Mobil Geliştirici',
+                    labelText: SettingsStrings.meslek,
+                    hintText: SettingsStrings.meslekDetay,
                   ),
                   _EditingTextField(
-                    labelText: 'E-posta',
-                    hintText: 'test@gmail.com',
+                    labelText: SettingsStrings.ePosta,
+                    hintText: SettingsStrings.email,
                   ),
                   _EditingTextField(
-                    labelText: 'Telefon',
-                    hintText: '+90 5XX XXX XX XX',
+                    labelText: SettingsStrings.telefon,
+                    hintText: SettingsStrings.tel,
                   ),
                 ],
               ),
@@ -71,9 +73,12 @@ class _EditingTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      padding: EdgeInsets.symmetric(
+        horizontal: AppSizes.size12,
+        vertical: AppSizes.size12,
+      ),
       child: SizedBox(
-        height: 45,
+        height: AppSizes.size40,
         child: TextField(
           decoration: InputDecoration(
             labelText: labelText,

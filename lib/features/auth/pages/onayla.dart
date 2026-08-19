@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/core/navigation/app_navigation.dart';
 import 'package:freelancer_tracking_system/core/theme/colors/app_colors.dart';
-import 'package:freelancer_tracking_system/features/auth/pages/login_page.dart';
 import 'package:freelancer_tracking_system/features/home/pages/home.dart';
 
 class VerifyEmail extends StatelessWidget {

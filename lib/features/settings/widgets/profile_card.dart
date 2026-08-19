@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
+import 'package:freelancer_tracking_system/core/theme/colors/app_colors.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/app_sizes.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/padding_sizes.dart';
 
 class ProfileCard extends StatelessWidget {
   const ProfileCard({super.key});
@@ -6,33 +10,42 @@ class ProfileCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 80,
+      height: AppSizes.size80,
       child: Card(
-        color: Colors.white70,
+        color: AppColors.white,
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(AppPadding.p8),
           child: Row(
             children: [
               Container(
-                height: 50,
-                width: 50,
+                height: AppSizes.size48,
+                width: AppSizes.size48,
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.amber, width: 2),
+                  border: Border.all(
+                    color: AppColors.amber,
+                    width: AppSizes.size2,
+                  ),
                   shape: BoxShape.circle,
                 ),
                 child: Icon(Icons.person),
               ),
-              SizedBox(width: 10),
+              SizedBox(width: AppSizes.size12),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Ferhat Akar ',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+                    SettingsStrings.ferhatAkar,
+                    style: TextStyle(
+                      fontSize: AppSizes.size20,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                   Text(
-                    'Freelancer Geliştirici ',
-                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+                    SettingsStrings.meslekDetay,
+                    style: TextStyle(
+                      fontSize: AppSizes.size14,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
                 ],
               ),
