@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:freelancer_tracking_system/core/navigation/app_navigation.dart';
+import 'package:freelancer_tracking_system/core/theme/app_colors.dart';
 import 'package:freelancer_tracking_system/features/auth/pages/login_page.dart';
 import 'package:freelancer_tracking_system/features/home/pages/home.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -9,6 +11,7 @@ import 'package:freelancer_tracking_system/providers/navigation.dart';
 import 'package:freelancer_tracking_system/providers/project.dart';
 import 'package:freelancer_tracking_system/providers/tasks.dart';
 import 'package:freelancer_tracking_system/providers/watch.dart';
+import 'package:freelancer_tracking_system/services/onayla.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -21,10 +24,7 @@ void main() async {
   CustomerProvider().seedFakeData();
   TaskProvider().seedFakeData();
   ProjectProvider().seedFakeData();
-  await GoogleSignIn.instance.initialize(
-    clientId:
-        '317619464989-s2g7pomi64ubq95hasqgjfe5djnvflve.apps.googleusercontent.com',
-  );
+  await GoogleSignIn.instance.initialize();
   runApp(
     MultiProvider(
       providers: [
@@ -59,7 +59,7 @@ class MyApp extends StatelessWidget {
         appBarTheme: const AppBarTheme(
           titleTextStyle: TextStyle(
             fontWeight: FontWeight.bold,
-            color: Colors.black,
+            color: AppColors.black,
             fontSize: 20,
           ),
           centerTitle: false,
@@ -73,10 +73,15 @@ class MyApp extends StatelessWidget {
       home: StreamBuilder<User?>(
         stream: _authStream,
         builder: (context, snapshot) {
-          if (snapshot.hasData) {
+          if (snapshot.hasData &&
+              FirebaseAuth.instance.currentUser?.emailVerified == true) {
             return Home();
+          } else if (snapshot.hasData &&
+              FirebaseAuth.instance.currentUser?.emailVerified == false) {
+            return Onayla();
+          } else {
+            return LoginPage();
           }
-          return LoginPage();
         },
       ),
     );

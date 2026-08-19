@@ -36,7 +36,10 @@ class AuthServices {
       email: email,
       password: password,
     );
+    await FirebaseAuth.instance.setLanguageCode("tr");
+    await userCredential.user?.sendEmailVerification();
     await userCredential.user?.updateDisplayName(name);
+
     return userCredential;
   }
 

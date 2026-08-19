@@ -5,8 +5,7 @@ import 'package:freelancer_tracking_system/features/auth/widgets/labeled_text_fi
 import 'package:freelancer_tracking_system/services/auth_services.dart';
 
 class RegisterPage extends StatefulWidget {
-  RegisterPage({super.key, this.activeName});
-  String? activeName;
+  const RegisterPage({super.key});
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
@@ -126,10 +125,10 @@ class _RegisterPageState extends State<RegisterPage> {
                       password: _password.text.trim(),
                       confirmPassword: _confirmPassword.text.trim(),
                     );
-                    setState(() {
-                      widget.activeName = name.text.trim();
-                    });
+
                     if (!context.mounted) return;
+
+                    Navigator.popUntil(context, ModalRoute.withName("/"));
                   } on FirebaseAuthException catch (e) {
                     if (e.code == 'weak-password') {
                       ScaffoldMessenger.of(context).showSnackBar(_weakPassword);
