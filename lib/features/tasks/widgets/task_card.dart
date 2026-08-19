@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:freelancer_tracking_system/core/theme/colors/app_colors.dart';
+import 'package:freelancer_tracking_system/core/theme/localization/task_strings.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/app_sizes.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/app_spacing.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/border_sizes.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/padding_sizes.dart';
 import 'package:freelancer_tracking_system/providers/tasks.dart';
 import 'package:freelancer_tracking_system/providers/watch_record.dart';
 import 'package:freelancer_tracking_system/core/utils/date_formatter.dart';
@@ -25,12 +31,12 @@ class _TasksCardState extends State<TasksCard> {
             return SizedBox(
               width: double.infinity,
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(AppPadding.p8),
                 child: ListView(
                   children: [
                     Card(
                       child: ListTile(
-                        title: Text('Devam Ediyor'),
+                        title: Text(TaskStrings.onGoing),
                         onTap: () {
                           Navigator.pop(context, TaskStatus.devamEdiyor);
                         },
@@ -38,7 +44,7 @@ class _TasksCardState extends State<TasksCard> {
                     ),
                     Card(
                       child: ListTile(
-                        title: Text('Beklemede'),
+                        title: Text(TaskStrings.pending),
                         onTap: () {
                           Navigator.pop(context, TaskStatus.bekliyor);
                         },
@@ -46,7 +52,7 @@ class _TasksCardState extends State<TasksCard> {
                     ),
                     Card(
                       child: ListTile(
-                        title: Text('Tamamlandı'),
+                        title: Text(TaskStrings.pending),
                         onTap: () {
                           Navigator.pop(context, TaskStatus.tamamlandi);
                         },
@@ -67,30 +73,32 @@ class _TasksCardState extends State<TasksCard> {
         }
       },
       child: Card(
-        color: Colors.blueAccent[50],
+        color: AppColors.blueAccent,
         shape: _cardShape(),
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(AppPadding.p8),
           child: Column(
-            spacing: 20,
+            spacing: AppSpacing.lg,
             children: [
               Row(
-                spacing: 10,
+                spacing: AppSpacing.sm,
                 children: [
                   Column(
                     children: [
                       Container(
-                        height: _CardFeatures.containerHeight,
-                        width: _CardFeatures.containerWidht,
+                        height: AppSizes.size48,
+                        width: AppSizes.size48,
                         decoration: BoxDecoration(
                           color:
                               levelColor(widget.task.taskStatus.toString()) ??
-                              Colors.red,
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                              AppColors.red,
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(AppRadius.r10),
+                          ),
                         ),
                         child: Icon(
                           Icons.screenshot_monitor_outlined,
-                          color: Colors.white,
+                          color: AppColors.white,
                         ),
                       ),
                     ],
@@ -101,24 +109,25 @@ class _TasksCardState extends State<TasksCard> {
                       Text(
                         widget.task.taskName,
                         style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 18,
+                          color: AppColors.black,
+                          fontSize: AppSizes.size16,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      SizedBox(width: 5),
+                      SizedBox(width: AppSizes.size4),
                       Text(
-                        widget.task.bagliMusteri ?? 'Müşteri Seçilmedi',
+                        widget.task.bagliMusteri ?? TaskStrings.selectCustomer,
                         style: TextStyle(
-                          color: Color.fromRGBO(47, 47, 49, 1),
-                          fontSize: 14,
+                          color: AppColors.black,
+                          fontSize: AppSizes.size14,
                         ),
                       ),
                       Text(
-                        widget.task.baglantiliProje ?? 'Proje Seçilmedi',
+                        widget.task.baglantiliProje ??
+                            TaskStrings.noSelectedProject,
                         style: TextStyle(
-                          color: Color.fromRGBO(47, 47, 49, 1),
-                          fontSize: 14,
+                          color: AppColors.black,
+                          fontSize: AppSizes.size14,
                         ),
                       ),
                     ],
@@ -127,29 +136,33 @@ class _TasksCardState extends State<TasksCard> {
                   Align(
                     alignment: Alignment.bottomRight,
                     child: Column(
-                      spacing: 10,
+                      spacing: AppSpacing.sm,
                       children: [
                         Container(
-                          width: 75,
-                          height: 30,
+                          width: AppSizes.size76,
+                          height: AppSizes.size36,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            color: Colors.blueGrey[100],
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(AppRadius.r10),
+                            ),
+                            color: AppColors.greyLight,
                           ),
                           child: Icon(
                             Icons.circle,
                             color:
                                 levelColor(widget.task.taskStatus.toString()) ??
-                                Colors.red,
-                            size: 16,
+                                AppColors.red,
+                            size: AppSizes.size16,
                           ),
                         ),
 
                         Container(
-                          width: 75,
-                          height: 30,
+                          width: AppSizes.size76,
+                          height: AppSizes.size32,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(AppRadius.r10),
+                            ),
                             color: checkColor(
                               widget.task.taskStatus.toString(),
                             ),
@@ -160,7 +173,7 @@ class _TasksCardState extends State<TasksCard> {
                             children: [
                               Text(
                                 widget.task.taskStatus?.label.toString() ??
-                                    'Seçilmedi',
+                                    TaskStrings.noSelected,
                                 style: _statusStyle(),
                               ),
                             ],
@@ -177,7 +190,7 @@ class _TasksCardState extends State<TasksCard> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     SizedBox(
-                      width: 200,
+                      width: AppSizes.size200,
                       child: Row(
                         children: [
                           Icon(Icons.watch_later_outlined),
@@ -188,7 +201,7 @@ class _TasksCardState extends State<TasksCard> {
                       ),
                     ),
                     SizedBox(
-                      width: 110,
+                      width: AppSizes.size108,
                       child: Row(
                         children: [
                           Icon(Icons.calendar_month),
@@ -208,14 +221,9 @@ class _TasksCardState extends State<TasksCard> {
 
   BeveledRectangleBorder _cardShape() {
     return BeveledRectangleBorder(
-      borderRadius: BorderRadius.all(Radius.circular(5)),
+      borderRadius: BorderRadius.all(Radius.circular(AppRadius.r4)),
     );
   }
-}
-
-class _CardFeatures {
-  static double containerHeight = 48;
-  static double containerWidht = 48;
 }
 
 enum Levels { kolay, orta, zor }
@@ -253,7 +261,7 @@ dynamic checkStatus(TaskStatus status) {
 }
 
 TextStyle _statusStyle() =>
-    TextStyle(fontSize: 10, fontWeight: FontWeight.bold);
+    TextStyle(fontSize: AppSizes.size12, fontWeight: FontWeight.bold);
 
 enum TaskStatus {
   tamamlandi('Tamamlandı'),

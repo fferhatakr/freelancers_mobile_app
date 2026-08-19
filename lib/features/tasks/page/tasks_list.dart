@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/core/navigation/app_navigation.dart';
+import 'package:freelancer_tracking_system/core/theme/colors/app_colors.dart';
+import 'package:freelancer_tracking_system/core/theme/localization/task_strings.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/app_sizes.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/padding_sizes.dart';
 import 'package:freelancer_tracking_system/features/tasks/page/task_add.dart';
 import 'package:freelancer_tracking_system/features/tasks/widgets/task_card.dart';
 import 'package:freelancer_tracking_system/providers/tasks.dart';
@@ -50,37 +54,40 @@ class _TasksState extends State<Tasks> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Görevler',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              TaskStrings.tasks,
+              style: TextStyle(
+                fontSize: AppSizes.size24,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             Text(
-              'Görevleri Dilediğin Gibi Yönet',
-              style: TextStyle(fontSize: 15),
+              TaskStrings.tasksSubtitle,
+              style: TextStyle(fontSize: AppSizes.size14),
             ),
           ],
         ),
         actions: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(AppPadding.p8),
             child: Container(
-              width: 40,
-              height: 40,
+              width: AppSizes.size40,
+              height: AppSizes.size40,
               decoration: BoxDecoration(
-                color: Colors.amber,
-                borderRadius: BorderRadius.all(Radius.circular(64)),
+                shape: BoxShape.circle,
+                color: AppColors.amber,
               ),
               child: IconButton(
                 onPressed: () {
                   AppNavigation.navigateTo(context, TasksAdd());
                 },
-                icon: Icon(Icons.add, color: Colors.white),
+                icon: Icon(Icons.add, color: AppColors.white),
               ),
             ),
           ),
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: EdgeInsets.all(AppPadding.p8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -90,7 +97,7 @@ class _TasksState extends State<Tasks> {
               },
               autofocus: true,
               decoration: InputDecoration(
-                hintText: 'Görev Ara',
+                hintText: TaskStrings.foundTask,
                 prefixIcon: Icon(Icons.search),
               ),
             ),
@@ -116,8 +123,8 @@ class _TasksState extends State<Tasks> {
                     )
                   : Center(
                       child: const Text(
-                        'No results found',
-                        style: TextStyle(fontSize: 24),
+                        TaskStrings.foundTask,
+                        style: TextStyle(fontSize: AppSizes.size24),
                       ),
                     ),
             ),

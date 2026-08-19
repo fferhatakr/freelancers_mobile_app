@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:freelancer_tracking_system/core/theme/colors/app_colors.dart';
+import 'package:freelancer_tracking_system/core/theme/localization/task_strings.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/app_sizes.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/app_spacing.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/padding_sizes.dart';
 import 'package:freelancer_tracking_system/core/utils/date_formatter.dart';
 import 'package:freelancer_tracking_system/features/date/page/date.dart';
 import 'package:freelancer_tracking_system/features/tasks/widgets/task_add.dart';
@@ -32,35 +37,37 @@ class _TasksAddState extends State<TasksAdd> {
     content: Text('Zorunlu Alanları Giriniz'),
   );
 
-  final Color red = Colors.red;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 245, 33, 18),
-        title: Text('Görev Ekle', style: TextStyle(color: Colors.white)),
+        backgroundColor: AppColors.danger,
+        title: Text(
+          TaskStrings.appBarTitle,
+          style: TextStyle(color: AppColors.white),
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(20),
+          padding: EdgeInsets.all(AppPadding.p20),
           child: Column(
-            spacing: 10,
+            spacing: AppSpacing.sm,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               TaskAdd(
                 maxLength: 20,
                 controller: tasksNameController,
                 icon: Icons.add_task_outlined,
-                title: 'Görev İsmi *',
-                subtitle: 'Görev Adını Giriniz',
+                title: TaskStrings.taskNameTitle,
+                subtitle: TaskStrings.taskNameSubtitle,
               ),
 
               SelectionTask(
-                iconColor: red,
+                iconColor: AppColors.danger,
                 icon: Icons.person_2_outlined,
-                title: 'Bağlantılı Müşteri * ',
-                subtitle: selectedCustomerName ?? 'Müşteri Seçiniz',
+                title: TaskStrings.customerTitle,
+                subtitle:
+                    selectedCustomerName ?? TaskStrings.customerSubtitleDefault,
                 onTap: () async {
                   final customerName = await showModalBottomSheet<String>(
                     context: context,
@@ -76,13 +83,10 @@ class _TasksAddState extends State<TasksAdd> {
                                 padding: _paddingSize(),
                                 child: InkWell(
                                   onTap: () {
-                                    Navigator.pop(
-                                      context,
-                                      customer.adSoyad,
-                                    ); //Müşterinin seçtiği değerin ismini alıyoruz
+                                    Navigator.pop(context, customer.adSoyad);
                                   },
                                   child: Card(
-                                    color: Colors.blueGrey[50],
+                                    color: AppColors.greyLight,
                                     child: ListTile(
                                       leading: CircleAvatar(
                                         child: Icon(Icons.person_2_outlined),
@@ -94,17 +98,21 @@ class _TasksAddState extends State<TasksAdd> {
                                           Text(
                                             customer.adSoyad,
                                             style: TextStyle(
-                                              fontSize: 14,
+                                              fontSize: AppSizes.size14,
                                               fontWeight: FontWeight.bold,
                                             ),
                                           ),
                                           Text(
                                             customer.email,
-                                            style: TextStyle(fontSize: 14),
+                                            style: TextStyle(
+                                              fontSize: AppSizes.size14,
+                                            ),
                                           ),
                                           Text(
                                             customer.telefon,
-                                            style: TextStyle(fontSize: 14),
+                                            style: TextStyle(
+                                              fontSize: AppSizes.size14,
+                                            ),
                                           ),
                                         ],
                                       ),
@@ -125,10 +133,10 @@ class _TasksAddState extends State<TasksAdd> {
                 },
               ),
               SelectionTask(
-                iconColor: red,
+                iconColor: AppColors.danger,
                 icon: Icons.search,
-                title: 'Bağlantılı Proje*',
-                subtitle: selectedProject ?? 'Mobile App',
+                title: TaskStrings.projectTitle,
+                subtitle: selectedProject ?? TaskStrings.projectSubtitleDefault,
                 onTap: () async {
                   final projectName = await showModalBottomSheet<String>(
                     context: context,
@@ -148,17 +156,17 @@ class _TasksAddState extends State<TasksAdd> {
                                     Navigator.pop(context, project.projectName);
                                   },
                                   child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 10,
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: AppSizes.size12,
                                     ),
                                     child: Card(
-                                      color: Colors.blueGrey[50],
+                                      color: AppColors.greyLight,
                                       child: ListTile(
                                         leading: CircleAvatar(
-                                          backgroundColor: Colors.red,
+                                          backgroundColor: AppColors.danger,
                                           child: Icon(
                                             Icons.work,
-                                            color: Colors.white,
+                                            color: AppColors.white,
                                           ),
                                         ),
                                         title: Text(project.projectName),
@@ -179,10 +187,12 @@ class _TasksAddState extends State<TasksAdd> {
                 },
               ),
               DatePicture(
-                iconColor: Colors.red,
+                iconColor: AppColors.danger,
                 icon: Icons.calendar_month,
-                title: 'Başlangıç Tarihi',
-                title2: toFormat(selectedStartDate) ?? 'Tarih Seçiniz',
+                title: TaskStrings.startDateTitle,
+                title2:
+                    toFormat(selectedStartDate) ??
+                    TaskStrings.dateSubtitleDefault,
                 onDateSelected: (date) {
                   setState(() {
                     selectedStartDate = date;
@@ -192,8 +202,10 @@ class _TasksAddState extends State<TasksAdd> {
               DatePicture(
                 iconColor: Colors.red,
                 icon: Icons.calendar_month,
-                title: 'Bitiş Tarihi',
-                title2: toFormat(selectedEndDate) ?? 'Tarih Seçiniz',
+                title: TaskStrings.endDateTitle,
+                title2:
+                    toFormat(selectedEndDate) ??
+                    TaskStrings.dateSubtitleDefault,
                 onDateSelected: (date) {
                   setState(() {
                     selectedEndDate = date;
@@ -205,44 +217,45 @@ class _TasksAddState extends State<TasksAdd> {
                 maxLength: 20,
                 controller: noteController,
                 icon: Icons.note_add,
-                title: 'Not ekleyin',
-                subtitle: 'Görev Notlarını ekleyin',
+                title: TaskStrings.noteTitle,
+                subtitle: TaskStrings.noteSubtitle,
               ),
               TaskAdd(
                 maxLength: 20,
                 controller: commentController,
                 icon: Icons.article,
-                title: 'Açıklama',
-                subtitle: 'Açıklama Ekle',
+                title: TaskStrings.commentTitle,
+                subtitle: TaskStrings.commentSubtitle,
               ),
               SelectionTask(
-                iconColor: red,
+                iconColor: AppColors.red,
                 icon: Icons.flag,
-                title: 'Zorluk *',
-                subtitle: selectedLevel?.label ?? 'Derece Belirtin',
+                title: TaskStrings.levelTitle,
+                subtitle:
+                    selectedLevel?.label ?? TaskStrings.levelSubtitleDefault,
                 onTap: () async {
                   final level = await showModalBottomSheet<Levels>(
                     context: context,
                     builder: (context) {
                       return SizedBox(
                         width: double.infinity,
-                        height: 300,
+                        height: AppSizes.size300,
                         child: ListView(
                           children: [
                             ListTile(
-                              title: Text('Kolay'),
+                              title: Text(TaskStrings.levelKolay),
                               onTap: () {
                                 Navigator.pop(context, Levels.kolay);
                               },
                             ),
                             ListTile(
-                              title: Text('Orta'),
+                              title: Text(TaskStrings.levelOrta),
                               onTap: () {
                                 Navigator.pop(context, Levels.orta);
                               },
                             ),
                             ListTile(
-                              title: Text('Zor'),
+                              title: Text(TaskStrings.levelZor),
                               onTap: () {
                                 Navigator.pop(context, Levels.zor);
                               },
@@ -285,10 +298,10 @@ class _TasksAddState extends State<TasksAdd> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.save, color: Color.fromARGB(255, 245, 33, 18)),
+                    Icon(Icons.save, color: Colors.red),
                     Text(
-                      'Kaydedildi',
-                      style: TextStyle(color: Color.fromARGB(255, 245, 33, 18)),
+                      TaskStrings.saveButton,
+                      style: TextStyle(color: Colors.red),
                     ),
                   ],
                 ),
@@ -301,7 +314,7 @@ class _TasksAddState extends State<TasksAdd> {
   }
 
   EdgeInsets _paddingSize() {
-    return const EdgeInsets.symmetric(horizontal: 10);
+    return EdgeInsets.symmetric(horizontal: AppSizes.size12);
   }
 }
 

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:freelancer_tracking_system/core/theme/colors/app_colors.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/app_sizes.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/padding_sizes.dart';
 import 'package:freelancer_tracking_system/providers/watch.dart';
 
 class WatchTime extends StatefulWidget {
@@ -19,19 +22,22 @@ class _WatchTimeState extends State<WatchTime> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: EdgeInsets.all(AppPadding.p8),
                   child: Container(
-                    height: 250,
+                    height: AppSizes.size250,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      border: Border.all(color: Color(0xff0395eb), width: 4),
+                      border: Border.all(
+                        color: AppColors.blueAccent,
+                        width: AppSizes.size4,
+                      ),
                     ),
                     child: Text(
                       WatchProvider().formattedText,
                       style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 40,
+                        color: AppColors.black,
+                        fontSize: AppSizes.size40,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -45,7 +51,11 @@ class _WatchTimeState extends State<WatchTime> {
                       onPressed: () {
                         WatchProvider().stop();
                       },
-                      child: Icon(Icons.stop, size: 30, color: Colors.black),
+                      child: Icon(
+                        Icons.stop,
+                        size: AppSizes.size32,
+                        color: AppColors.black,
+                      ),
                     ),
                     ElevatedButton(
                       onPressed: () {
@@ -53,8 +63,8 @@ class _WatchTimeState extends State<WatchTime> {
                       },
                       child: Icon(
                         Icons.play_arrow_outlined,
-                        size: 30,
-                        color: Colors.black,
+                        size: AppSizes.size32,
+                        color: AppColors.black,
                       ),
                     ),
                   ],

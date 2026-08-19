@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:freelancer_tracking_system/core/theme/app_all_style.dart';
-import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
+import 'package:freelancer_tracking_system/core/theme/colors/app_colors.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/app_sizes.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/border_sizes.dart';
 
 class TaskAdd extends StatelessWidget {
   final IconData _icon;
@@ -24,20 +25,23 @@ class TaskAdd extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 75,
+      height: AppSizes.size76,
       width: double.infinity,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(10)),
-        color: Colors.blueGrey[50],
+        borderRadius: BorderRadius.all(Radius.circular(AppRadius.r10)),
+        color: AppColors.greyLight,
       ),
       child: ListTile(
-        leading: Icon(_icon, color: Colors.red),
+        leading: Icon(_icon, color: AppColors.red),
         title: Text(
           _title,
-          style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+          style: TextStyle(
+            fontSize: AppSizes.size14,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         subtitle: SizedBox(
-          height: 35,
+          height: AppSizes.size32,
           child: TextField(
             readOnly: onlyRead,
             maxLength: maxLength,
@@ -45,7 +49,7 @@ class TaskAdd extends StatelessWidget {
             keyboardType: keyboardType ?? TextInputType.text,
             controller: controller,
             decoration: InputDecoration(hint: Text(_subtitle), counterText: ''),
-            style: TextStyle(color: GeneralStyle.hintTextcolor),
+            style: TextStyle(color: AppColors.black),
           ),
         ),
       ),
@@ -76,16 +80,19 @@ class SelectionTask extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        height: 75,
+        height: AppSizes.size76,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-          color: Colors.blueGrey[50],
+          borderRadius: BorderRadius.all(Radius.circular(AppRadius.r10)),
+          color: AppColors.greyLight,
         ),
         child: ListTile(
-          leading: Icon(_icon, size: 24, color: iconColor),
+          leading: Icon(_icon, size: AppSizes.size24, color: iconColor),
           title: Text(
             _title,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: AppSizes.size14,
+            ),
           ),
           subtitle: Text(_subtitle),
           trailing: Icon(Icons.list),

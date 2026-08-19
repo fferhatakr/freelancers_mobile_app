@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:freelancer_tracking_system/core/theme/colors/app_colors.dart';
+import 'package:freelancer_tracking_system/core/theme/localization/stopwatch_strings.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/app_sizes.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/padding_sizes.dart';
 import 'package:freelancer_tracking_system/features/time_tracking/widget/watch_time.dart';
 import 'package:freelancer_tracking_system/providers/tasks.dart';
 import 'package:freelancer_tracking_system/providers/watch.dart';
@@ -15,22 +19,27 @@ class _StopWatchState extends State<StopWatch> {
   String? id;
   String? resultTime;
   final SnackBar _noSelected = SnackBar(
-    content: Text('Görev Seçilmedi'),
-    backgroundColor: Colors.red.shade600,
+    content: Text(StopWatchStrings.noSelected),
+    backgroundColor: AppColors.red,
   );
   final SnackBar _startStopWatch = SnackBar(
-    content: Text('Kronometre Başlatılmadı'),
-    backgroundColor: const Color.fromARGB(255, 251, 201, 22),
+    content: Text(StopWatchStrings.startStopWatch),
+    backgroundColor: AppColors.amber,
   );
   final SnackBar _selected = SnackBar(
-    content: Text('Görev Başarıyla Eklendi'),
-    backgroundColor: Colors.green,
+    content: Text(StopWatchStrings.selectedSuccess),
+    backgroundColor: AppColors.green,
   );
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Kronometre Başlat')),
-      body: Column(children: [SizedBox(height: 100), WatchTime()]),
+      appBar: AppBar(title: Text(StopWatchStrings.appBarTitle)),
+      body: Column(
+        children: [
+          SizedBox(height: AppSizes.size108),
+          WatchTime(),
+        ],
+      ),
       floatingActionButton: ElevatedButton(
         onPressed: () async {
           final task = await showModalBottomSheet<(String?, String?)>(
@@ -46,7 +55,7 @@ class _StopWatchState extends State<StopWatch> {
                       itemBuilder: (context, index) {
                         final task = value[index];
                         return Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: EdgeInsets.all(AppPadding.p10),
                           child: ListTile(
                             onTap: () {
                               Navigator.pop(context, (
@@ -54,7 +63,10 @@ class _StopWatchState extends State<StopWatch> {
                                 task.id,
                               ));
                             },
-                            leading: Icon(Icons.person_outline, size: 30),
+                            leading: Icon(
+                              Icons.person_outline,
+                              size: AppSizes.size32,
+                            ),
                             title: Text(
                               task.taskName,
                               style: TextStyle(fontWeight: FontWeight.bold),
@@ -64,7 +76,7 @@ class _StopWatchState extends State<StopWatch> {
                               children: [
                                 Text('${task.bagliMusteri} '),
                                 Text(
-                                  'Toplam Süre:${WatchRecord().formatDuration(WatchRecord().totalRecord[task.id] ?? Duration.zero)}',
+                                  '${StopWatchStrings.totalDurationPrefix}${WatchRecord().formatDuration(WatchRecord().totalRecord[task.id] ?? Duration.zero)}',
                                 ),
                               ],
                             ),
@@ -83,7 +95,7 @@ class _StopWatchState extends State<StopWatch> {
             selectedCustomer = task?.$1;
             id = task?.$2;
           });
-          if (WatchProvider().formattedText != '00:00:00') {
+          if (WatchProvider().stopWatch.elapsed != Duration.zero) {
             if (id != null && context.mounted) {
               WatchRecord().addTotalRecord(
                 id!,
@@ -92,19 +104,18 @@ class _StopWatchState extends State<StopWatch> {
 
               ScaffoldMessenger.of(context).showSnackBar(_selected);
               WatchProvider().reset();
-            }
-            if (!context.mounted) {
+            } else if (!context.mounted) {
+              return;
             } else {
               ScaffoldMessenger.of(context).showSnackBar(_noSelected);
             }
-          }
-          if (!context.mounted) {
+          } else if (!context.mounted) {
           } else {
             ScaffoldMessenger.of(context).showSnackBar(_startStopWatch);
           }
         },
         child: Text(
-          'Save',
+          StopWatchStrings.saveButton,
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
         ),
       ),

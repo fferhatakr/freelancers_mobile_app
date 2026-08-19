@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:freelancer_tracking_system/core/theme/colors/app_colors.dart';
+import 'package:freelancer_tracking_system/core/theme/localization/task_strings.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/app_sizes.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/app_spacing.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/border_sizes.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/padding_sizes.dart';
 import 'package:freelancer_tracking_system/providers/tasks.dart';
 
 class ResultTask extends StatefulWidget {
@@ -10,50 +16,48 @@ class ResultTask extends StatefulWidget {
 
 class _ResultTaskState extends State<ResultTask> {
   final DateTime now = DateTime.now();
-  int tamamlandi = 0;
-  int devamEdiyor = 0;
+  final double zeroK = 0;
   @override
   Widget build(BuildContext context) {
     final projectCount = TaskProvider().value.length;
     return SizedBox(
-      height: 100,
+      height: AppSizes.size108,
       child: Card(
-        elevation: 10,
-        color: Colors.blueGrey[50],
+        color: AppColors.greyLight,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadiusGeometry.circular(10),
+          borderRadius: BorderRadiusGeometry.circular(AppRadius.r10),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(AppPadding.p8),
           child: Row(
-            spacing: 5,
+            spacing: AppSpacing.xs,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.article_outlined, color: Colors.black),
+                  Icon(Icons.article_outlined, color: AppColors.black),
                   Text(projectCount.toString(), style: _textStyle()),
-                  Text('Toplam', style: _twoTextStyle()),
+                  Text(TaskStrings.result, style: _twoTextStyle()),
                 ],
               ),
               VerticalDivider(),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.check_outlined, color: Colors.green),
-                  Text(tamamlandi.toString(), style: _textStyle()),
-                  Text('Tamamlandı', style: _twoTextStyle()),
+                  Icon(Icons.check_outlined, color: AppColors.green),
+                  Text(zeroK.toString(), style: _textStyle()),
+                  Text(TaskStrings.completed, style: _twoTextStyle()),
                 ],
               ),
               VerticalDivider(),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.watch_later_outlined, color: Colors.amber),
+                  Icon(Icons.watch_later_outlined, color: AppColors.amber),
 
-                  Text(devamEdiyor.toString(), style: _textStyle()),
-                  Text('Devam', style: _twoTextStyle()),
+                  Text(zeroK.toString(), style: _textStyle()),
+                  Text(TaskStrings.onGoing, style: _twoTextStyle()),
                 ],
               ),
             ],
@@ -64,13 +68,13 @@ class _ResultTaskState extends State<ResultTask> {
   }
 
   TextStyle _twoTextStyle() =>
-      TextStyle(fontSize: 12, color: const Color.fromARGB(255, 3, 3, 3));
+      TextStyle(fontSize: AppSizes.size12, color: AppColors.black);
 
   TextStyle _textStyle() {
     return TextStyle(
-      fontSize: 24,
+      fontSize: AppSizes.size24,
       fontWeight: FontWeight.bold,
-      color: const Color.fromARGB(255, 0, 0, 0),
+      color: AppColors.black,
     );
   }
 }
