@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:freelancer_tracking_system/core/theme/colors/app_colors.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/app_sizes.dart';
 
 class DatePicture extends StatefulWidget {
   final IconData icon;
@@ -41,7 +43,7 @@ class _DatePictureState extends State<DatePicture> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Colors.blueGrey[50],
+      color: AppColors.surfaceBlueGreyLight,
       child: ListTile(
         onTap: () {
           _selectDate();
@@ -52,11 +54,17 @@ class _DatePictureState extends State<DatePicture> {
           children: [
             Text(
               widget.title,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: AppSizes.size14,
+              ),
             ),
             Text(
               widget.title2,
-              style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
+              style: TextStyle(
+                fontWeight: FontWeight.w400,
+                fontSize: AppSizes.size14,
+              ),
             ),
           ],
         ),

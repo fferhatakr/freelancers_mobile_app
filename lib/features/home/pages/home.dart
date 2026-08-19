@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/core/navigation/app_navigation.dart';
+import 'package:freelancer_tracking_system/core/theme/colors/app_colors.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/border_sizes.dart';
 import 'package:freelancer_tracking_system/features/customer/pages/customer_list.dart';
 import 'package:freelancer_tracking_system/features/dashboard/pages/dashboard.dart';
 import 'package:freelancer_tracking_system/features/projects/pages/project_list.dart';
@@ -24,6 +26,11 @@ final List<Widget> _sayfalar = [
 ];
 
 class _HomeState extends State<Home> {
+  final String _home = 'Home';
+  final String _client = 'Client';
+  final String _project = 'Project';
+  final String _task = 'Task';
+
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<int>(
@@ -31,14 +38,14 @@ class _HomeState extends State<Home> {
       builder: (context, secilenIndex, child) {
         return Scaffold(
           floatingActionButton: FloatingActionButton(
-            backgroundColor: Colors.blueGrey[100],
+            backgroundColor: AppColors.surfaceBlueGreyLight,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30),
+              borderRadius: BorderRadius.circular(AppRadius.r30),
             ),
             onPressed: () {
               AppNavigation.navigateTo(context, StopWatch());
             },
-            child: Icon(Icons.alarm_outlined, color: Colors.black),
+            child: Icon(Icons.alarm_outlined, color: AppColors.black),
           ),
           body: _sayfalar[secilenIndex],
           bottomNavigationBar: BottomNavigationBar(
@@ -48,16 +55,13 @@ class _HomeState extends State<Home> {
             currentIndex: secilenIndex,
             type: BottomNavigationBarType.fixed,
             items: [
-              BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+              BottomNavigationBarItem(icon: Icon(Icons.home), label: _home),
               BottomNavigationBarItem(
                 icon: Icon(Icons.assignment),
-                label: 'Project',
+                label: _project,
               ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.person),
-                label: 'Client',
-              ),
-              BottomNavigationBarItem(icon: Icon(Icons.task), label: 'Task'),
+              BottomNavigationBarItem(icon: Icon(Icons.person), label: _client),
+              BottomNavigationBarItem(icon: Icon(Icons.task), label: _task),
             ],
           ),
         );
