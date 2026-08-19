@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/core/navigation/app_navigation.dart';
 import 'package:freelancer_tracking_system/core/theme/colors/app_colors.dart';
-import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/padding_sizes.dart';
 import 'package:freelancer_tracking_system/features/dashboard/widgets/summary_cards.dart';
 import 'package:freelancer_tracking_system/features/dashboard/widgets/fast_transactions.dart';
 import 'package:freelancer_tracking_system/features/dashboard/widgets/statistics_linear.dart';
@@ -16,14 +16,16 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+  final String _welcome = 'Hoşgeldin';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
-        backgroundColor: GeneralStyle.dashboardBackground,
+        backgroundColor: AppColors.white,
         title: Text(
-          'Hoşgeldin ${FirebaseAuth.instance.currentUser?.displayName}',
+          '$_welcome ${FirebaseAuth.instance.currentUser?.displayName}',
         ),
         centerTitle: false,
         actions: [
@@ -37,7 +39,7 @@ class _DashboardState extends State<Dashboard> {
         ],
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(GeneralStyle.paddingSize),
+        padding: EdgeInsets.all(AppPadding.p10),
         child: Column(
           children: [SummaryCards(), StatisticsLiner(), FastTransactions()],
         ),

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:freelancer_tracking_system/core/theme/colors/app_colors.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/app_sizes.dart';
 
 class BillsInfo extends StatelessWidget {
   final String title;
@@ -13,6 +15,7 @@ class BillsInfo extends StatelessWidget {
     required this.hintTitle,
     this.widht,
     this.height,
+    super.key,
   });
 
   @override
@@ -22,15 +25,18 @@ class BillsInfo extends StatelessWidget {
       children: [
         Text(title, style: TextStyle(fontWeight: FontWeight.w400)),
         SizedBox(
-          height: height ?? 50,
-          width: widht ?? 170,
+          height: height ?? AppSizes.size48,
+          width: widht ?? AppSizes.size170,
           child: TextField(
             maxLength: 20,
             decoration: InputDecoration(
               counterText: '',
               prefixIcon: Icon(prefixIcon),
               hintText: hintTitle,
-              hintStyle: TextStyle(color: Colors.grey, fontSize: 12),
+              hintStyle: TextStyle(
+                color: AppColors.grey,
+                fontSize: AppSizes.size12,
+              ),
             ),
           ),
         ),

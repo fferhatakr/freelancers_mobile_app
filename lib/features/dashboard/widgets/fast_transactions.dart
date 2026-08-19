@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/core/navigation/app_navigation.dart';
 import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
+import 'package:freelancer_tracking_system/core/theme/colors/app_colors.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/app_sizes.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/app_spacing.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/border_sizes.dart';
+import 'package:freelancer_tracking_system/core/theme/sizing/padding_sizes.dart';
 import 'package:freelancer_tracking_system/features/customer/pages/customer_add.dart';
 import 'package:freelancer_tracking_system/features/dashboard/pages/bill_create.dart';
 import 'package:freelancer_tracking_system/features/projects/pages/project_add.dart';
@@ -28,7 +33,7 @@ class _FastCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: ActiveProjectStyle.activeProjectCardColor,
+      color: AppColors.cardDarkBackground,
       shape: RoundedRectangleBorder(borderRadius: cardBorderRadius()),
       child: Padding(
         padding: cardPadding(),
@@ -38,10 +43,10 @@ class _FastCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
-                spacing: GeneralStyle.rowSpacing,
+                spacing: AppSpacing.sm,
                 children: [
                   SizedBox(
-                    width: 35,
+                    width: AppSizes.size32,
                     child: Container(
                       height: FastTransactionsCardStyle.sizeContainer,
                       width: FastTransactionsCardStyle.sizeContainer,
@@ -51,13 +56,13 @@ class _FastCard extends StatelessWidget {
                       ),
                       child: Icon(
                         iconOne,
-                        color: FastTransactionsCardStyle.iconColor,
-                        size: FastTransactionsCardStyle.iconSize,
+                        color: AppColors.white,
+                        size: AppSizes.size16,
                       ),
                     ),
                   ),
                   SizedBox(
-                    width: 200,
+                    width: AppSizes.size200,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -68,19 +73,19 @@ class _FastCard extends StatelessWidget {
                   ),
                   Spacer(),
                   SizedBox(
-                    width: 50,
+                    width: AppSizes.size48,
                     child: Container(
-                      width: FastTransactionsCardStyle.iconSizeContainer,
-                      height: FastTransactionsCardStyle.iconSizeContainer,
+                      width: AppSizes.size28,
+                      height: AppSizes.size28,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(
-                          Radius.circular(GeneralStyle.borderRadius),
+                          Radius.circular(AppRadius.r10),
                         ),
                         color: iconContainerColorTwo,
                       ),
                       child: Icon(
                         Icons.arrow_forward_ios,
-                        size: FastTransactionsCardStyle.iconChevronSize,
+                        size: AppSizes.size16,
                         color: iconTwoColor,
                       ),
                     ),
@@ -111,53 +116,51 @@ class _FastTransactionsState extends State<FastTransactions> {
         Text(
           DashboardStrings.hizliIslemler,
           style: TextStyle(
-            fontSize: GeneralStyle.columnMiniTitle,
+            fontSize: AppSizes.size16,
             fontWeight: FontWeight.bold,
           ),
         ),
-        SizedBox(height: 10),
+        SizedBox(height: AppSizes.size12),
         _FastCard(
-          iconContainerColorOne: FastTransactionsCardStyle.faturaContainerColor,
+          iconContainerColorOne: AppColors.purpleAccent,
           iconOne: Icons.task,
           title1: InvoiceStrings.faturaOlustur,
           title2: InvoiceStrings.yeniFaturaekle,
-          iconContainerColorTwo:
-              FastTransactionsCardStyle.faturaIconContainerColor,
-          iconTwoColor: FastTransactionsCardStyle.faturaContainerColor,
+          iconContainerColorTwo: AppColors.purpleLight,
+          iconTwoColor: AppColors.purple,
           onTap: () {
             AppNavigation.navigateTo(context, BillCreate());
           },
         ),
         _FastCard(
-          iconContainerColorOne:
-              FastTransactionsCardStyle.yeniMusteriContainerColor,
+          iconContainerColorOne: AppColors.green,
           iconOne: Icons.person_add,
           title1: CustomerStrings.yeniMusteri,
           title2: CustomerStrings.musteriKaydiEkle,
-          iconContainerColorTwo: FastTransactionsCardStyle.yeniMusteriIconColor,
-          iconTwoColor: FastTransactionsCardStyle.yeniMusteriContainerColor,
+          iconContainerColorTwo: AppColors.greenPale,
+          iconTwoColor: AppColors.greenDark,
           onTap: () {
             AppNavigation.navigateTo(context, CustomerAddScreen());
           },
         ),
         _FastCard(
-          iconContainerColorOne: FastTransactionsCardStyle.projeContainerColor,
+          iconContainerColorOne: AppColors.amber,
           iconOne: Icons.assignment_add,
           title1: ProjectStrings.projeEkle,
           title2: ProjectStrings.yeniKazancSagla,
-          iconContainerColorTwo: FastTransactionsCardStyle.projeIconColor,
-          iconTwoColor: FastTransactionsCardStyle.projeContainerColor,
+          iconContainerColorTwo: AppColors.amberLight,
+          iconTwoColor: AppColors.amber,
           onTap: () {
             AppNavigation.navigateTo(context, ProjectAdd());
           },
         ),
         _FastCard(
-          iconContainerColorOne: FastTransactionsCardStyle.gorevContainerColor,
+          iconContainerColorOne: AppColors.red,
           iconOne: Icons.add_task,
           title1: ProjectStrings.gorevEkle,
           title2: ProjectStrings.projeniSaglamaAl,
-          iconContainerColorTwo: FastTransactionsCardStyle.gorevIconColor,
-          iconTwoColor: FastTransactionsCardStyle.gorevContainerColor,
+          iconContainerColorTwo: AppColors.redLight,
+          iconTwoColor: AppColors.red,
           onTap: () {
             AppNavigation.navigateTo(context, TasksAdd());
           },
@@ -167,23 +170,18 @@ class _FastTransactionsState extends State<FastTransactions> {
   }
 }
 
-BorderRadius cardBorderRadius() =>
-    BorderRadius.circular(GeneralStyle.borderRadius);
+BorderRadius cardBorderRadius() => BorderRadius.circular(AppRadius.r10);
 
-EdgeInsetsGeometry cardPadding() =>
-    EdgeInsetsGeometry.all(GeneralStyle.paddingSize);
+EdgeInsetsGeometry cardPadding() => EdgeInsetsGeometry.all(AppPadding.p10);
 
 TextStyle title2Style() {
-  return TextStyle(
-    color: FastTransactionsCardStyle.title2Color,
-    fontSize: FastTransactionsCardStyle.title2fontSize,
-  );
+  return TextStyle(color: AppColors.grey, fontSize: AppSizes.size12);
 }
 
 TextStyle title1Style() {
   return TextStyle(
     color: Colors.white,
     fontWeight: FontWeight.bold,
-    fontSize: FastTransactionsCardStyle.fontSize,
+    fontSize: AppSizes.size14,
   );
 }
