@@ -33,4 +33,12 @@ class CustomerStrings {
   static const String kaynakTitle = 'Müşteri Kaynağı';
   static const String kaynak = 'Kaynak';
   static const String kaynakAciklama = 'Müşterini Nereden Buldun(opsiyonel)';
+
+  static const String musteriDetay = 'Müşteri Detayı';
+  static const String iletisimBilgileri = 'İletişim Bilgileri';
+  static const String digerBilgiler = 'Diğer Bilgiler';
+  static const String sirketBilgisi = 'Şirket Bilgisi';
+  static const String adresBilgisi = 'Adres Bilgisi';
+  static const String notEkle = 'not';
+  static const String referans = 'Referans';
 }

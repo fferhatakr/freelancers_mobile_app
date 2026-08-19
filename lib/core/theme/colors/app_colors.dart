@@ -13,5 +13,23 @@ class AppColors {
   static const Color surfaceLight = Color(0xFFEEEEEE);
   static const Color purpleAccent = Colors.purpleAccent;
   static const Color surfaceBlueGreyLight = Color(0xFFECEFF1);
-  static const Color purple = Colors.purple;
+
+  // ClientsStyle'dan taşınanlar
+  static const Color greyLight = Color.fromARGB(236, 239, 241, 241);
+  static const Color greenDark = Color.fromARGB(255, 46, 125, 50);
+  static const Color blueAccent = Colors.blueAccent;
+  static const Color greenLight = Color.fromARGB(255, 223, 249, 224);
+
+  // FastTransactionsCardStyle'dan taşınanlar
+  static const Color purple = Color.fromARGB(255, 156, 39, 176);
+  static const Color purpleLight = Color.fromARGB(255, 240, 153, 255);
+  static const Color red = Color.fromARGB(255, 255, 53, 39);
+  static const Color redLight = Color.fromARGB(255, 255, 195, 190);
+  static const Color amber = Color.fromARGB(255, 255, 193, 7);
+  static const Color amberLight = Color.fromARGB(255, 255, 245, 213);
+  static const Color green = Color.fromARGB(255, 76, 175, 80);
+  static const Color greenPale = Color.fromARGB(255, 196, 249, 198);
+
+  // _FastCard içinde kullanılan (eskiden yanlışlıkla ActiveProjectStyle'dan geliyordu)
+  static const Color cardDarkBackground = Color.fromARGB(255, 0, 27, 49);
 }

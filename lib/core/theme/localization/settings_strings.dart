@@ -36,4 +36,24 @@ class SettingsStrings {
   static const String destek = 'Destek';
   static const String gizlilikPolitikasi = 'Gizlilik Politikası';
   static const String okumakTikla = 'Okumak için tıkla';
+
+  static const String website = 'Website';
+  static const String geriDonus =
+      'Mesajını gönder,genelde 24 içinde dönüş yaparız.';
+
+  static const String problemiAnlat = 'Ne Olduğunu Anlat';
+  static const String mesajGonder = 'Mesajı Gönder';
+
+  static const String kaydet = 'Kaydet';
+
+  static const String adSoyad = 'Ad Soyad';
+  static const String ferhatAkar = 'Ferhat Akar';
+
+  static const String meslek = 'Meslek';
+  static const String meslekDetay = 'Freelance Mobil Geliştirici';
+
+  static const String ePosta = 'E-posta';
+  static const String email = 'test@gmail.com';
+  static const String telefon = 'Telefon';
+  static const String tel = '+90 5XX XXX XX XX';
 }

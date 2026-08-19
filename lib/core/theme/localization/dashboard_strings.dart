@@ -15,4 +15,6 @@ class DashboardStrings {
   static const String yonetimPaneli = 'Yönetim Paneli';
   static const String kurumsalWebsite = 'Kurumsal Website';
   static const String webTasarim = 'Web Tasarim';
+
+  static const String haftaliKazanc = 'Haftalık Kazanç';
 }
