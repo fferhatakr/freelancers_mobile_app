@@ -60,11 +60,7 @@ class _CustomerAddScreenState extends State<CustomerAddScreen> {
   Text _clientAddAppBarTitle() {
     return Text(
       CustomerStrings.yeniMusteri,
-      style: TextStyle(
-        fontSize: AppSizes.size12,
-        color: AppColors.white,
-        fontWeight: FontWeight.bold,
-      ),
+      style: TextStyle(color: AppColors.white, fontWeight: FontWeight.bold),
     );
   }
 

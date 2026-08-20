@@ -7,7 +7,7 @@ import 'package:freelancer_tracking_system/core/theme/sizing/app_spacing.dart';
 import 'package:freelancer_tracking_system/core/theme/sizing/border_sizes.dart';
 import 'package:freelancer_tracking_system/core/theme/sizing/padding_sizes.dart';
 import 'package:freelancer_tracking_system/features/customer/pages/customer_add.dart';
-import 'package:freelancer_tracking_system/features/dashboard/pages/bill_create.dart';
+import 'package:freelancer_tracking_system/core/archive/bill_create.dart';
 import 'package:freelancer_tracking_system/features/projects/pages/project_add.dart';
 import 'package:freelancer_tracking_system/features/tasks/page/task_add.dart';
 
@@ -121,17 +121,7 @@ class _FastTransactionsState extends State<FastTransactions> {
           ),
         ),
         SizedBox(height: AppSizes.size12),
-        _FastCard(
-          iconContainerColorOne: AppColors.purpleAccent,
-          iconOne: Icons.task,
-          title1: InvoiceStrings.faturaOlustur,
-          title2: InvoiceStrings.yeniFaturaekle,
-          iconContainerColorTwo: AppColors.purpleLight,
-          iconTwoColor: AppColors.purple,
-          onTap: () {
-            AppNavigation.navigateTo(context, BillCreate());
-          },
-        ),
+
         _FastCard(
           iconContainerColorOne: AppColors.green,
           iconOne: Icons.person_add,
@@ -165,6 +155,7 @@ class _FastTransactionsState extends State<FastTransactions> {
             AppNavigation.navigateTo(context, TasksAdd());
           },
         ),
+        SizedBox(height: AppSizes.size40),
       ],
     );
   }

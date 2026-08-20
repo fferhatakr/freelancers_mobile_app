@@ -52,7 +52,7 @@ class _TasksCardState extends State<TasksCard> {
                     ),
                     Card(
                       child: ListTile(
-                        title: Text(TaskStrings.pending),
+                        title: Text(TaskStrings.completed),
                         onTap: () {
                           Navigator.pop(context, TaskStatus.tamamlandi);
                         },
@@ -73,7 +73,7 @@ class _TasksCardState extends State<TasksCard> {
         }
       },
       child: Card(
-        color: AppColors.blueAccent,
+        color: AppColors.greyLight,
         shape: _cardShape(),
         child: Padding(
           padding: EdgeInsets.all(AppPadding.p8),
@@ -266,7 +266,7 @@ TextStyle _statusStyle() =>
 enum TaskStatus {
   tamamlandi('Tamamlandı'),
   bekliyor('Beklemede'),
-  devamEdiyor('Devam Ediyor');
+  devamEdiyor('Devam');
 
   final String label;
   const TaskStatus(this.label);

@@ -51,7 +51,7 @@ class ClientFormField extends StatelessWidget {
   }
 
   TextStyle _hintStyle() {
-    return TextStyle(fontSize: AppSizes.size12, color: AppColors.grey);
+    return TextStyle(fontSize: AppSizes.size12, color: AppColors.black);
   }
 
   TextStyle _titleStyle() {

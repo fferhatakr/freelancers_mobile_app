@@ -8,7 +8,7 @@ import 'package:freelancer_tracking_system/core/theme/sizing/border_sizes.dart';
 import 'package:freelancer_tracking_system/core/theme/localization/billcreate_strings.dart';
 import 'package:freelancer_tracking_system/core/theme/sizing/padding_sizes.dart';
 import 'package:freelancer_tracking_system/features/customer/pages/customer_add.dart';
-import 'package:freelancer_tracking_system/features/dashboard/widgets/bill_create.dart';
+import 'package:freelancer_tracking_system/core/archive/bill_create_widget.dart';
 import 'package:freelancer_tracking_system/features/date/page/date.dart';
 import 'package:freelancer_tracking_system/core/utils/date_formatter.dart';
 

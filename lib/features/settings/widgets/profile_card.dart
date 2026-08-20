@@ -1,8 +1,10 @@
+import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
 import 'package:freelancer_tracking_system/core/theme/colors/app_colors.dart';
 import 'package:freelancer_tracking_system/core/theme/sizing/app_sizes.dart';
 import 'package:freelancer_tracking_system/core/theme/sizing/padding_sizes.dart';
+import 'package:freelancer_tracking_system/providers/profile.dart';
 
 class ProfileCard extends StatelessWidget {
   const ProfileCard({super.key});
@@ -27,21 +29,26 @@ class ProfileCard extends StatelessWidget {
                   ),
                   shape: BoxShape.circle,
                 ),
-                child: Icon(Icons.person),
+                child: CircleAvatar(
+                  backgroundImage: FileImage(
+                    ProfileProvider().photo ??
+                        File('https://picsum.photos/200'),
+                  ),
+                ),
               ),
               SizedBox(width: AppSizes.size12),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    SettingsStrings.ferhatAkar,
+                    FirebaseAuth.instance.currentUser?.displayName ?? '',
                     style: TextStyle(
                       fontSize: AppSizes.size20,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
                   Text(
-                    SettingsStrings.meslekDetay,
+                    ProfileProvider().job.toString(),
                     style: TextStyle(
                       fontSize: AppSizes.size14,
                       fontWeight: FontWeight.w400,

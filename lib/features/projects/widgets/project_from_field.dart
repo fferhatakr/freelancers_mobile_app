@@ -23,14 +23,14 @@ class ProjectFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: Container(
-        height: AppSizes.size32,
+        height: AppSizes.size76,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(AppRadius.r10)),
           color: AppColors.greyLight,
         ),
         child: Center(
           child: ListTile(
-            leading: Icon(_icon, size: AppSizes.size8, color: AppColors.amber),
+            leading: Icon(_icon, size: AppSizes.size24, color: AppColors.amber),
             title: Text(
               _title,
               style: TextStyle(
