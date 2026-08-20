@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:freelancer_tracking_system/core/theme/colors/app_colors.dart';
-import 'package:freelancer_tracking_system/core/theme/sizing/app_sizes.dart';
-import 'package:freelancer_tracking_system/core/theme/sizing/border_sizes.dart';
+import 'package:freelancer_tracking_system/core/themes/colors/app_colors.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/app_sizes.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/border_sizes.dart';
 
 class TaskAdd extends StatelessWidget {
   final IconData _icon;
@@ -29,7 +29,7 @@ class TaskAdd extends StatelessWidget {
       width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(AppRadius.r10)),
-        color: AppColors.greyLight,
+        color: AppColors.white,
       ),
       child: ListTile(
         leading: Icon(_icon, color: AppColors.red),
@@ -38,6 +38,7 @@ class TaskAdd extends StatelessWidget {
           style: TextStyle(
             fontSize: AppSizes.size14,
             fontWeight: FontWeight.bold,
+            color: AppColors.black,
           ),
         ),
         subtitle: SizedBox(
@@ -48,7 +49,13 @@ class TaskAdd extends StatelessWidget {
             textInputAction: TextInputAction.next,
             keyboardType: keyboardType ?? TextInputType.text,
             controller: controller,
-            decoration: InputDecoration(hint: Text(_subtitle), counterText: ''),
+            decoration: InputDecoration(
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(AppRadius.r10)),
+              ),
+              hint: Text(_subtitle),
+              counterText: '',
+            ),
             style: TextStyle(color: AppColors.black),
           ),
         ),
@@ -83,7 +90,7 @@ class SelectionTask extends StatelessWidget {
         height: AppSizes.size76,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(AppRadius.r10)),
-          color: AppColors.greyLight,
+          color: AppColors.white,
         ),
         child: ListTile(
           leading: Icon(_icon, size: AppSizes.size24, color: iconColor),

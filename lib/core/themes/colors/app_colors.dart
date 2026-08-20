@@ -1,18 +1,46 @@
 // core/theme/app_colors.dart
 import 'package:flutter/material.dart';
+import 'package:freelancer_tracking_system/providers/theme.dart';
 
 class AppColors {
   AppColors._(); // instantiate edilmesin diye private constructor
 
+  static Color get private =>
+      ThemeProvider().isDarkMode ? Colors.white : Colors.black;
+
+  static Color get white =>
+      ThemeProvider().isDarkMode ? Colors.black : Colors.white;
+
+  static Color get black =>
+      ThemeProvider().isDarkMode ? Colors.white : Colors.black;
+  static Color get chartBackground =>
+      ThemeProvider().isDarkMode ? Colors.grey[900]! : Colors.white;
+
+  static Color get onPrimary =>
+      ThemeProvider().isDarkMode ? Colors.grey : Colors.white;
+  static Color get primary =>
+      ThemeProvider().isDarkMode ? Colors.amber : Colors.blueAccent;
+  static Color get watchColor =>
+      ThemeProvider().isDarkMode ? Colors.white : Colors.black87;
+  static Color get projectListColorBlue =>
+      ThemeProvider().isDarkMode ? Colors.blue.shade900 : Colors.blue.shade100;
+  static Color get projectListColorOrange => ThemeProvider().isDarkMode
+      ? Colors.orange.shade900
+      : Colors.orange.shade100;
+  static Color get projectListColorGreen => ThemeProvider().isDarkMode
+      ? Colors.green.shade900
+      : Colors.green.shade100;
+  static Color get cardBackground =>
+      ThemeProvider().isDarkMode ? Colors.grey[900]! : Colors.white;
   static const Color danger = Color(0xFFE53935);
   static const Color success = Color(0xFF4CAF50);
   static const Color warning = Color(0xFFFFA000);
-  static const Color white = Colors.white;
-  static const Color black = Colors.black;
   static const Color grey = Colors.grey;
   static const Color surfaceLight = Color(0xFFEEEEEE);
   static const Color purpleAccent = Colors.purpleAccent;
   static const Color surfaceBlueGreyLight = Color(0xFFECEFF1);
+  static const Color realWhite = Colors.white;
+  static const Color realBlack = Colors.black;
 
   // ClientsStyle'dan taşınanlar
   static const Color greyLight = Color.fromARGB(236, 239, 241, 241);

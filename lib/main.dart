@@ -1,7 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:freelancer_tracking_system/core/theme/colors/app_colors.dart';
+import 'package:freelancer_tracking_system/core/themes/colors/app_colors.dart';
+import 'package:freelancer_tracking_system/core/themes/theme/theme.dart';
 import 'package:freelancer_tracking_system/features/auth/pages/login_page.dart';
 import 'package:freelancer_tracking_system/features/home/pages/home.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -9,6 +10,7 @@ import 'package:freelancer_tracking_system/providers/client.dart';
 import 'package:freelancer_tracking_system/providers/navigation.dart';
 import 'package:freelancer_tracking_system/providers/project.dart';
 import 'package:freelancer_tracking_system/providers/tasks.dart';
+import 'package:freelancer_tracking_system/providers/theme.dart';
 import 'package:freelancer_tracking_system/providers/watch.dart';
 import 'package:freelancer_tracking_system/features/auth/pages/onayla.dart';
 import 'package:provider/provider.dart';
@@ -44,10 +46,38 @@ class MyApp extends StatelessWidget {
       .authStateChanges();
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      localizationsDelegates: [GlobalMaterialLocalizations.delegate],
-      supportedLocales: [const Locale('en'), const Locale('tr')],
-      theme: ThemeData.light().copyWith(
+    return ListenableBuilder(
+      listenable: ThemeProvider(),
+      builder: (context, index) {
+        return MaterialApp(
+          localizationsDelegates: [GlobalMaterialLocalizations.delegate],
+          supportedLocales: [const Locale('en'), const Locale('tr')],
+          theme: ThemeProvider().isDarkMode
+              ? ThemeX().darkTheme
+              : ThemeX().lightTheme,
+
+          debugShowCheckedModeBanner: false,
+          home: StreamBuilder<User?>(
+            stream: _authStream,
+            builder: (context, snapshot) {
+              if (snapshot.hasData &&
+                  FirebaseAuth.instance.currentUser?.emailVerified == true) {
+                return Home();
+              } else if (snapshot.hasData &&
+                  FirebaseAuth.instance.currentUser?.emailVerified == false) {
+                return VerifyEmail();
+              } else {
+                return LoginPage();
+              }
+            },
+          ),
+        );
+      },
+    );
+  }
+}
+
+/**ThemeData.light().copyWith(
         cardTheme: CardThemeData(elevation: 10),
         inputDecorationTheme: InputDecorationTheme(
           border: OutlineInputBorder(
@@ -65,23 +95,4 @@ class MyApp extends StatelessWidget {
           elevation: 0,
           backgroundColor: Colors.transparent,
         ),
-      ),
-
-      debugShowCheckedModeBanner: false,
-      home: StreamBuilder<User?>(
-        stream: _authStream,
-        builder: (context, snapshot) {
-          if (snapshot.hasData &&
-              FirebaseAuth.instance.currentUser?.emailVerified == true) {
-            return Home();
-          } else if (snapshot.hasData &&
-              FirebaseAuth.instance.currentUser?.emailVerified == false) {
-            return VerifyEmail();
-          } else {
-            return LoginPage();
-          }
-        },
-      ),
-    );
-  }
-}
+      ), */

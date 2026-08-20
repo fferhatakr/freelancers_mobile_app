@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'package:freelancer_tracking_system/core/theme/colors/app_colors.dart';
-import 'package:freelancer_tracking_system/core/theme/sizing/app_sizes.dart';
-import 'package:freelancer_tracking_system/core/theme/sizing/border_sizes.dart';
+import 'package:freelancer_tracking_system/core/themes/colors/app_colors.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/app_sizes.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/border_sizes.dart';
 
-class ClientFormField extends StatelessWidget {
+class CustomerFormField extends StatelessWidget {
   final IconData icon;
   final String title;
   final String title2;
@@ -12,7 +12,7 @@ class ClientFormField extends StatelessWidget {
   final int? maxLines;
   final double? height;
 
-  const ClientFormField({
+  const CustomerFormField({
     required this.icon,
     required this.title,
     required this.title2,
@@ -24,7 +24,7 @@ class ClientFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: AppSizes.size76,
+      height: AppSizes.size80,
       width: double.infinity,
       decoration: clientAddDecartion(),
       child: ListTile(
@@ -34,11 +34,14 @@ class ClientFormField extends StatelessWidget {
           children: [
             Text(title, style: _titleStyle()),
             SizedBox(
-              height: height ?? AppSizes.size36,
+              height: height ?? AppSizes.size40,
 
               child: TextField(
                 controller: controlText,
                 decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(AppRadius.r10),
+                  ),
                   hintMaxLines: maxLines ?? AppSizes.size2.toInt(),
                   hint: Text(title2, style: _hintStyle()),
                 ),
@@ -51,7 +54,7 @@ class ClientFormField extends StatelessWidget {
   }
 
   TextStyle _hintStyle() {
-    return TextStyle(fontSize: AppSizes.size12, color: AppColors.black);
+    return TextStyle(fontSize: AppSizes.size14, color: AppColors.black);
   }
 
   TextStyle _titleStyle() {

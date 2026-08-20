@@ -1,10 +1,11 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
-import 'package:freelancer_tracking_system/core/theme/colors/app_colors.dart';
-import 'package:freelancer_tracking_system/core/theme/sizing/app_sizes.dart';
-import 'package:freelancer_tracking_system/core/theme/sizing/border_sizes.dart';
+import 'package:freelancer_tracking_system/core/themes/app_theme.dart';
+import 'package:freelancer_tracking_system/core/themes/colors/app_colors.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/app_sizes.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/border_sizes.dart';
 import 'package:freelancer_tracking_system/providers/project.dart';
+import 'package:freelancer_tracking_system/providers/theme.dart';
 
 class StatisticsLiner extends StatefulWidget {
   const StatisticsLiner({super.key});
@@ -19,39 +20,46 @@ class _StatisticsLinerState extends State<StatisticsLiner> {
   final double zeroK = 0;
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 11, left: 0, top: 10),
-      child: Column(
-        spacing: AppSizes.size12,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            DashboardStrings.haftaliKazanc,
-            style: TextStyle(
-              fontSize: AppSizes.size16,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(AppSizes.size12)),
-            ),
-            height: AppSizes.size250,
-            width: double.infinity,
-
-            child: Padding(
-              padding: const EdgeInsets.only(top: AppSizes.size12),
-
-              child: LineChart(
-                duration: Duration(milliseconds: 150),
-                curve: Curves.linear,
-
-                _lineChartData(),
+    return ListenableBuilder(
+      listenable: ThemeProvider(),
+      builder: (context, child) {
+        return Padding(
+          padding: const EdgeInsets.only(right: 11, left: 0, top: 10),
+          child: Column(
+            spacing: AppSizes.size12,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                DashboardStrings.haftaliKazanc,
+                style: TextStyle(
+                  fontSize: AppSizes.size16,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(AppSizes.size12),
+                  ),
+                ),
+                height: AppSizes.size250,
+                width: double.infinity,
+
+                child: Padding(
+                  padding: const EdgeInsets.only(top: AppSizes.size12),
+
+                  child: LineChart(
+                    duration: Duration(milliseconds: 150),
+                    curve: Curves.linear,
+
+                    _lineChartData(),
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 
@@ -102,15 +110,12 @@ class _StatisticsLinerState extends State<StatisticsLiner> {
       minY: zeroK,
       maxY: 200000,
       maxX: 6,
-      backgroundColor: AppColors.white,
+      backgroundColor: AppColors.chartBackground,
       gridData: FlGridData(show: true),
 
       lineBarsData: [
         LineChartBarData(
-          belowBarData: BarAreaData(
-            show: true,
-            color: AppColors.surfaceBlueGreyLight,
-          ),
+          belowBarData: BarAreaData(show: true, color: AppColors.greyLight),
           spots: List.generate(
             7,
             (index) => FlSpot(index.toDouble(), veriler[index]),

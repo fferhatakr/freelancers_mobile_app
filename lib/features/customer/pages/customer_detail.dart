@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
-import 'package:freelancer_tracking_system/core/theme/colors/app_colors.dart';
-import 'package:freelancer_tracking_system/core/theme/sizing/app_sizes.dart';
-import 'package:freelancer_tracking_system/core/theme/sizing/app_spacing.dart';
-import 'package:freelancer_tracking_system/core/theme/sizing/padding_sizes.dart';
+import 'package:freelancer_tracking_system/core/themes/app_theme.dart';
+import 'package:freelancer_tracking_system/core/themes/colors/app_colors.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/app_sizes.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/app_spacing.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/padding_sizes.dart';
 
-class ClientsDetail extends StatelessWidget {
+class CustomerDetail extends StatelessWidget {
   final String name;
   final String email;
   final String telefon;
@@ -14,7 +14,7 @@ class ClientsDetail extends StatelessWidget {
   final String? adres;
   final String? source;
   final String? comment;
-  const ClientsDetail({
+  const CustomerDetail({
     required this.name,
     required this.email,
     required this.telefon,

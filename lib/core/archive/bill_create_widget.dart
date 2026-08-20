@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:freelancer_tracking_system/core/theme/colors/app_colors.dart';
-import 'package:freelancer_tracking_system/core/theme/sizing/app_sizes.dart';
+import 'package:freelancer_tracking_system/core/themes/colors/app_colors.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/app_sizes.dart';
 
 class BillsInfo extends StatelessWidget {
   final String title;

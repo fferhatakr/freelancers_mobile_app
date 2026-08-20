@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:freelancer_tracking_system/core/theme/colors/app_colors.dart';
-import 'package:freelancer_tracking_system/core/theme/sizing/app_sizes.dart';
-import 'package:freelancer_tracking_system/core/theme/sizing/app_spacing.dart';
-import 'package:freelancer_tracking_system/core/theme/sizing/border_sizes.dart';
-import 'package:freelancer_tracking_system/core/theme/sizing/padding_sizes.dart';
+import 'package:freelancer_tracking_system/core/themes/colors/app_colors.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/app_sizes.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/app_spacing.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/border_sizes.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/padding_sizes.dart';
 import 'package:freelancer_tracking_system/providers/client.dart';
-import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
-import 'package:freelancer_tracking_system/features/customer/widgets/client_form_field.dart';
+import 'package:freelancer_tracking_system/core/themes/app_theme.dart';
+import 'package:freelancer_tracking_system/features/customer/widgets/customer_form_field.dart';
 
 class CustomerAddScreen extends StatefulWidget {
   const CustomerAddScreen({super.key});
@@ -77,25 +77,25 @@ class _CustomerAddScreenState extends State<CustomerAddScreen> {
           ),
         ),
 
-        ClientFormField(
+        CustomerFormField(
           icon: Icons.person_2_outlined,
           title: CustomerStrings.adSoyad,
           title2: CustomerStrings.adSoyadAciklama,
           controlText: nameController,
         ),
-        ClientFormField(
+        CustomerFormField(
           icon: Icons.mail_outline,
           title: CustomerStrings.eposta,
           title2: CustomerStrings.epostaAciklama,
           controlText: emailController,
         ),
-        ClientFormField(
+        CustomerFormField(
           icon: Icons.call,
           title: CustomerStrings.telefon,
           title2: CustomerStrings.telefonAciklama,
           controlText: telefonController,
         ),
-        ClientFormField(
+        CustomerFormField(
           icon: Icons.home,
           title: CustomerStrings.firmaAdi,
           title2: CustomerStrings.firmaAdiAciklama,
@@ -112,7 +112,7 @@ class _CustomerAddScreenState extends State<CustomerAddScreen> {
 
         SizedBox(
           height: AppSizes.size96,
-          child: ClientFormField(
+          child: CustomerFormField(
             icon: Icons.comment,
             title: CustomerStrings.opsiyonelAciklama,
             title2: CustomerStrings.aciklamaEkle,
@@ -128,7 +128,7 @@ class _CustomerAddScreenState extends State<CustomerAddScreen> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        ClientFormField(
+        CustomerFormField(
           icon: Icons.note_add_outlined,
           title: CustomerStrings.not,
           title2: CustomerStrings.notAciklama,
@@ -141,7 +141,7 @@ class _CustomerAddScreenState extends State<CustomerAddScreen> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        ClientFormField(
+        CustomerFormField(
           icon: Icons.source,
           title: CustomerStrings.kaynak,
           title2: CustomerStrings.kaynakAciklama,
@@ -158,6 +158,7 @@ class _CustomerAddScreenState extends State<CustomerAddScreen> {
 
   ElevatedButton _elevatedButton(BuildContext context) {
     return ElevatedButton(
+      style: ElevatedButton.styleFrom(backgroundColor: AppColors.black),
       onPressed: () {
         final customer = Customer(
           adSoyad: nameController.text,
@@ -201,7 +202,10 @@ class _Info extends StatelessWidget {
         leading: Icon(Icons.info_outline, color: AppColors.greenDark),
         title: Text(
           CommonStrings.info,
-          style: TextStyle(fontSize: AppSizes.size16),
+          style: TextStyle(
+            fontSize: AppSizes.size16,
+            color: AppColors.realBlack,
+          ),
         ),
       ),
     );

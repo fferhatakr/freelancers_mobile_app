@@ -1,19 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/core/navigation/app_navigation.dart';
-import 'package:freelancer_tracking_system/core/theme/colors/app_colors.dart';
-import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
-import 'package:freelancer_tracking_system/core/theme/sizing/app_sizes.dart';
-import 'package:freelancer_tracking_system/core/theme/sizing/padding_sizes.dart';
+import 'package:freelancer_tracking_system/core/themes/colors/app_colors.dart';
+import 'package:freelancer_tracking_system/core/themes/app_theme.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/app_sizes.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/app_spacing.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/border_sizes.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/padding_sizes.dart';
 import 'package:freelancer_tracking_system/features/settings/pages/contact_us.dart';
 import 'package:freelancer_tracking_system/features/settings/pages/privacy_policy.dart';
 import 'package:freelancer_tracking_system/features/settings/pages/profile_info.dart';
+import 'package:freelancer_tracking_system/features/settings/pages/sss.dart';
 import 'package:freelancer_tracking_system/features/settings/widgets/profile_card.dart';
 import 'package:freelancer_tracking_system/features/settings/widgets/settings_card.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:freelancer_tracking_system/providers/theme.dart';
 
-class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({super.key});
+class SettingsScreen extends StatefulWidget {
+  SettingsScreen({super.key, this.selectedTheme});
+  ThemeData? selectedTheme;
 
+  @override
+  State<SettingsScreen> createState() => _SettingsScreenState();
+}
+
+class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,29 +36,6 @@ class SettingsScreen extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(GeneralStyle.paddingSize),
-            child: GestureDetector(
-              onTap: () async {
-                await FirebaseAuth.instance.signOut();
-                if (!context.mounted) return;
-                Navigator.popUntil(context, ModalRoute.withName("/"));
-              },
-              child: Container(
-                height: AppSizes.size36,
-                width: AppSizes.size48,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(GeneralStyle.borderRadius),
-                  ),
-                  color: AppColors.danger,
-                ),
-                child: Icon(Icons.exit_to_app_outlined, color: AppColors.white),
-              ),
-            ),
-          ),
-        ],
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -63,6 +50,28 @@ class SettingsScreen extends StatelessWidget {
               _gorunumCard(),
               _SettingsPadding(title: SettingsStrings.destek),
               _destekCard(context),
+              SizedBox(height: 20),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.danger,
+                  ),
+                  onPressed: () async {
+                    await FirebaseAuth.instance.signOut();
+                    if (!context.mounted) return;
+                    Navigator.popUntil(context, ModalRoute.withName("/"));
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    spacing: AppSpacing.md,
+                    children: [
+                      Icon(Icons.exit_to_app, color: AppColors.white),
+                      Text('Exit', style: TextStyle(color: AppColors.white)),
+                    ],
+                  ),
+                ),
+              ),
             ],
           ),
         ),
@@ -110,11 +119,31 @@ class SettingsScreen extends StatelessWidget {
             ontap: () {},
           ),
 
-          SettingsCard(
-            icon: Icons.light_mode_outlined,
-            title1: SettingsStrings.koyuTema,
-            title2: SettingsStrings.varsayilan,
-            ontap: () {},
+          Container(
+            height: 50,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(AppRadius.r10)),
+            ),
+            child: ListenableBuilder(
+              listenable: ThemeProvider(),
+              builder: (context, child) {
+                return ListTile(
+                  leading: ThemeProvider().isDarkMode == true
+                      ? Icon(Icons.light_mode_outlined)
+                      : Icon(Icons.light_mode_outlined, color: AppColors.amber),
+                  title: ThemeProvider().isDarkMode == true
+                      ? Text('Karanlık Mod')
+                      : Text('Aydınlık Mod'),
+                  trailing: Switch.adaptive(
+                    value: ThemeProvider().isDarkMode,
+                    onChanged: (value) {
+                      ThemeProvider().toggleTheme();
+                    },
+                  ),
+                );
+              },
+            ),
           ),
         ],
       ),
@@ -129,7 +158,9 @@ class SettingsScreen extends StatelessWidget {
             icon: Icons.help_outline,
             title1: SettingsStrings.yardimMerkezi,
             title2: SettingsStrings.yardimMerkeziAciklama,
-            ontap: () {},
+            ontap: () {
+              AppNavigation.navigateTo(context, SSS());
+            },
           ),
 
           SettingsCard(

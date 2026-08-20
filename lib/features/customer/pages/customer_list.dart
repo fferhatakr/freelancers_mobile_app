@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/core/navigation/app_navigation.dart';
-import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
-import 'package:freelancer_tracking_system/core/theme/colors/app_colors.dart';
-import 'package:freelancer_tracking_system/core/theme/sizing/app_sizes.dart';
-import 'package:freelancer_tracking_system/core/theme/sizing/padding_sizes.dart';
+import 'package:freelancer_tracking_system/core/themes/app_theme.dart';
+import 'package:freelancer_tracking_system/core/themes/colors/app_colors.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/app_sizes.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/border_sizes.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/padding_sizes.dart';
 import 'package:freelancer_tracking_system/features/customer/pages/customer_add.dart';
-import 'package:freelancer_tracking_system/features/customer/widgets/client_card.dart';
+import 'package:freelancer_tracking_system/features/customer/widgets/customer_card.dart';
 import 'package:freelancer_tracking_system/providers/client.dart';
 
-class ClientList extends StatefulWidget {
-  const ClientList({super.key});
+class CustomerList extends StatefulWidget {
+  const CustomerList({super.key});
 
   @override
-  State<ClientList> createState() => _ClientListState();
+  State<CustomerList> createState() => _CustomerListState();
 }
 
-class _ClientListState extends State<ClientList> {
+class _CustomerListState extends State<CustomerList> {
   final String _noResult = 'No results found';
 
   final List<Customer> _allCustomer = CustomerProvider().value;
@@ -48,13 +49,7 @@ class _ClientListState extends State<ClientList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(CommonStrings.musteriler, style: _appBarTitle()),
-            Text(CommonStrings.musterileriYonet, style: _appBarSubtitle()),
-          ],
-        ),
+        title: Text(CommonStrings.musteriler),
 
         centerTitle: false,
         actions: [
@@ -71,7 +66,7 @@ class _ClientListState extends State<ClientList> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _clientSearch(),
+            Padding(padding: const EdgeInsets.all(8.0), child: _clientSearch()),
             Expanded(
               child: _foundCustomer.isNotEmpty
                   ? ValueListenableBuilder(
@@ -87,7 +82,7 @@ class _ClientListState extends State<ClientList> {
                                 CustomerProvider().removeCustomer(customer);
                               },
                               key: ValueKey(customer.id),
-                              child: ClientCard(
+                              child: CustomerCard(
                                 name: customer.adSoyad,
                                 telefon: customer.telefon,
                                 email: customer.email,
@@ -122,10 +117,14 @@ class _ClientListState extends State<ClientList> {
       autofocus: true,
       maxLength: GeneralStyle.textFieldMaxLenght,
       decoration: InputDecoration(
-        prefixIcon: Icon(Icons.search_outlined),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(AppRadius.r10),
+        ),
+        suffixIcon: Icon(Icons.search_outlined),
         labelText: CommonStrings.hizliArama,
+        labelStyle: TextStyle(color: AppColors.black),
         hintText: CommonStrings.musteriAra,
-        hintStyle: TextStyle(color: AppColors.grey),
+        hintStyle: TextStyle(color: AppColors.black),
       ),
     );
   }
@@ -135,13 +134,5 @@ class _ClientListState extends State<ClientList> {
       backgroundColor: AppColors.blueAccent,
       child: Icon(Icons.person_add, color: AppColors.white),
     );
-  }
-
-  TextStyle _appBarSubtitle() {
-    return TextStyle(fontSize: AppSizes.size12, fontWeight: FontWeight.w300);
-  }
-
-  TextStyle _appBarTitle() {
-    return TextStyle(fontSize: AppSizes.size24, fontWeight: FontWeight.bold);
   }
 }

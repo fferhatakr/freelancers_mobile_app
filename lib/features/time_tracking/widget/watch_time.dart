@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:freelancer_tracking_system/core/theme/colors/app_colors.dart';
-import 'package:freelancer_tracking_system/core/theme/sizing/app_sizes.dart';
-import 'package:freelancer_tracking_system/core/theme/sizing/padding_sizes.dart';
+import 'package:freelancer_tracking_system/core/themes/colors/app_colors.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/app_sizes.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/padding_sizes.dart';
 import 'package:freelancer_tracking_system/providers/watch.dart';
 
 class WatchTime extends StatefulWidget {
@@ -48,23 +48,29 @@ class _WatchTimeState extends State<WatchTime> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.black,
+                      ),
                       onPressed: () {
                         WatchProvider().stop();
                       },
                       child: Icon(
                         Icons.stop,
                         size: AppSizes.size32,
-                        color: AppColors.black,
+                        color: AppColors.white,
                       ),
                     ),
                     ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.black,
+                      ),
                       onPressed: () {
                         WatchProvider().start();
                       },
                       child: Icon(
-                        Icons.play_arrow_outlined,
+                        Icons.play_arrow,
                         size: AppSizes.size32,
-                        color: AppColors.black,
+                        color: AppColors.white,
                       ),
                     ),
                   ],

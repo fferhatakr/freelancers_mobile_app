@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/core/navigation/app_navigation.dart';
-import 'package:freelancer_tracking_system/core/theme/colors/app_colors.dart';
-import 'package:freelancer_tracking_system/core/theme/localization/task_strings.dart';
-import 'package:freelancer_tracking_system/core/theme/sizing/app_sizes.dart';
-import 'package:freelancer_tracking_system/core/theme/sizing/padding_sizes.dart';
+import 'package:freelancer_tracking_system/core/themes/colors/app_colors.dart';
+import 'package:freelancer_tracking_system/core/themes/localization/task_strings.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/app_sizes.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/border_sizes.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/padding_sizes.dart';
 import 'package:freelancer_tracking_system/features/tasks/page/task_add.dart';
 import 'package:freelancer_tracking_system/features/tasks/widgets/task_card.dart';
 import 'package:freelancer_tracking_system/providers/tasks.dart';
@@ -74,7 +75,7 @@ class _TasksState extends State<Tasks> {
               height: AppSizes.size40,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: AppColors.amber,
+                color: AppColors.grey,
               ),
               child: IconButton(
                 onPressed: () {
@@ -97,6 +98,9 @@ class _TasksState extends State<Tasks> {
               },
               autofocus: true,
               decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(AppRadius.r10),
+                ),
                 hintText: TaskStrings.foundTask,
                 prefixIcon: Icon(Icons.search),
               ),

@@ -10,7 +10,7 @@ class ProjectStrings {
   static final String projeAdi = 'Proje Adı *';
   static final String projeAdiEkle = 'Proje Adını Giriniz';
 
-  static final String musteri = 'MÜşteri *';
+  static final String musteri = 'Müşteri *';
   static final String aciklama = 'Açıklama';
   static final String musteriSec = 'Müşteri Seçiniz';
 
@@ -28,7 +28,7 @@ class ProjectStrings {
 
   static final String projeListesi = 'Proje Listesi';
   static final String hizliBul = 'Hızlı Bul';
-  static final String ornek = 'Örnek:Ferhat Akar';
+  static final String ornek = 'Örnek: Ferhat Akar';
 
   static final String noResult = 'No result found';
   static final String tanimlanmadi = 'Tanımlanmadı';

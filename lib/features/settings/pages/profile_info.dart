@@ -5,11 +5,11 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:freelancer_tracking_system/core/theme/colors/app_colors.dart';
+import 'package:freelancer_tracking_system/core/themes/colors/app_colors.dart';
 
-import 'package:freelancer_tracking_system/core/theme/sizing/app_sizes.dart';
-import 'package:freelancer_tracking_system/core/theme/sizing/border_sizes.dart';
-import 'package:freelancer_tracking_system/core/theme/sizing/padding_sizes.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/app_sizes.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/border_sizes.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/padding_sizes.dart';
 import 'package:freelancer_tracking_system/providers/profile.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -100,7 +100,10 @@ class _ProfileInfoState extends State<ProfileInfo> {
                       );
                     }
                   },
-                  child: Text('Change Photo'),
+                  child: Text(
+                    'Change Photo',
+                    style: TextStyle(color: AppColors.black),
+                  ),
                 ),
                 Padding(
                   padding: EdgeInsets.all(AppPadding.p10),
@@ -111,7 +114,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                       borderRadius: BorderRadius.all(
                         Radius.circular(AppRadius.r10),
                       ),
-                      color: AppColors.surfaceBlueGreyLight,
+                      color: AppColors.white,
                     ),
                     child: isEditingName != true
                         ? Column(
@@ -125,6 +128,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                                     Text(
                                       'Ad Soyad',
                                       style: TextStyle(
+                                        color: AppColors.black,
                                         fontSize: AppSizes.size14,
                                       ),
                                     ),
@@ -139,6 +143,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                                                     ?.displayName ??
                                                 'Kullanıcı Adı Bulunamadı',
                                             style: TextStyle(
+                                              color: AppColors.black,
                                               fontSize: AppSizes.size16,
                                               fontWeight: FontWeight.bold,
                                             ),
@@ -151,7 +156,10 @@ class _ProfileInfoState extends State<ProfileInfo> {
                                                 isEditingName = true;
                                               });
                                             },
-                                            child: Icon(Icons.edit),
+                                            child: Icon(
+                                              Icons.edit,
+                                              color: AppColors.black,
+                                            ),
                                           ),
                                         ),
                                       ],
@@ -164,7 +172,6 @@ class _ProfileInfoState extends State<ProfileInfo> {
                         : _EditingTextField(
                             controller: _name,
                             labelText: 'İsim Girinizi',
-                            hintText: 'İsim Giriniz',
                           ),
                   ),
                 ),
@@ -177,7 +184,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                       borderRadius: BorderRadius.all(
                         Radius.circular(AppRadius.r10),
                       ),
-                      color: AppColors.surfaceBlueGreyLight,
+                      color: AppColors.white,
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -189,7 +196,10 @@ class _ProfileInfoState extends State<ProfileInfo> {
                             children: [
                               Text(
                                 'E-posta',
-                                style: TextStyle(fontSize: AppSizes.size14),
+                                style: TextStyle(
+                                  fontSize: AppSizes.size14,
+                                  color: AppColors.black,
+                                ),
                               ),
                               Row(
                                 children: [
@@ -202,12 +212,18 @@ class _ProfileInfoState extends State<ProfileInfo> {
                                               ?.email ??
                                           'Kullanıcı Adı Bulunamadı',
                                       style: TextStyle(
+                                        color: AppColors.black,
                                         fontSize: AppSizes.size16,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
                                   ),
-                                  Expanded(child: Icon(Icons.lock)),
+                                  Expanded(
+                                    child: Icon(
+                                      Icons.lock,
+                                      color: AppColors.black,
+                                    ),
+                                  ),
                                 ],
                               ),
                             ],
@@ -226,7 +242,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                       borderRadius: BorderRadius.all(
                         Radius.circular(AppRadius.r10),
                       ),
-                      color: AppColors.surfaceBlueGreyLight,
+                      color: AppColors.white,
                     ),
                     child: isEditingPhone != true
                         ? Column(
@@ -241,6 +257,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                                       'Telefon',
                                       style: TextStyle(
                                         fontSize: AppSizes.size14,
+                                        color: AppColors.black,
                                       ),
                                     ),
                                     Row(
@@ -252,6 +269,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                                                   'Ekle',
                                                   style: TextStyle(
                                                     fontSize: AppSizes.size16,
+                                                    color: AppColors.white,
                                                     fontWeight: FontWeight.bold,
                                                   ),
                                                 )
@@ -259,6 +277,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                                                   '+90 ${ProfileProvider().phone}'
                                                       .toString(),
                                                   style: TextStyle(
+                                                    color: AppColors.black,
                                                     fontSize: AppSizes.size16,
                                                     fontWeight: FontWeight.bold,
                                                   ),
@@ -271,7 +290,10 @@ class _ProfileInfoState extends State<ProfileInfo> {
                                                 isEditingPhone = true;
                                               });
                                             },
-                                            child: Icon(Icons.edit),
+                                            child: Icon(
+                                              Icons.edit,
+                                              color: AppColors.black,
+                                            ),
                                           ),
                                         ),
                                       ],
@@ -286,7 +308,6 @@ class _ProfileInfoState extends State<ProfileInfo> {
                             keyboardType: TextInputType.numberWithOptions(),
                             controller: _phone,
                             labelText: 'Telefon Giriniz',
-                            hintText: '10 rakamdan oluşmalıdır.',
                           ),
                   ),
                 ),
@@ -299,7 +320,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                       borderRadius: BorderRadius.all(
                         Radius.circular(AppRadius.r10),
                       ),
-                      color: AppColors.surfaceBlueGreyLight,
+                      color: AppColors.white,
                     ),
                     child: isEditinigJob != true
                         ? Column(
@@ -314,6 +335,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                                       'Meslek',
                                       style: TextStyle(
                                         fontSize: AppSizes.size14,
+                                        color: AppColors.black,
                                       ),
                                     ),
                                     Row(
@@ -322,19 +344,19 @@ class _ProfileInfoState extends State<ProfileInfo> {
                                           width: AppSizes.size300,
                                           child: ProfileProvider().phone == null
                                               ? Text(
-                                                  'Ekle',
+                                                  'Meslek Giriniz',
                                                   style: TextStyle(
+                                                    color: AppColors.black,
                                                     fontSize: AppSizes.size16,
                                                     fontWeight: FontWeight.bold,
                                                   ),
                                                 )
                                               : Text(
-                                                  ProfileProvider().job ??
-                                                      'Meslek Giriniz'
-                                                          .toString(),
+                                                  'Meslek Giriniz',
                                                   style: TextStyle(
+                                                    color: AppColors.black,
                                                     fontSize: AppSizes.size16,
-                                                    fontWeight: FontWeight.bold,
+                                                    fontWeight: FontWeight.w500,
                                                   ),
                                                 ),
                                         ),
@@ -345,7 +367,10 @@ class _ProfileInfoState extends State<ProfileInfo> {
                                                 isEditinigJob = true;
                                               });
                                             },
-                                            child: Icon(Icons.edit),
+                                            child: Icon(
+                                              Icons.edit,
+                                              color: AppColors.black,
+                                            ),
                                           ),
                                         ),
                                       ],
@@ -359,7 +384,6 @@ class _ProfileInfoState extends State<ProfileInfo> {
                             maxLength: 15,
                             controller: _job,
                             labelText: 'Mesleğinizi Giriniz',
-                            hintText: 'Serbest Çalışan',
                           ),
                   ),
                 ),
@@ -375,14 +399,12 @@ class _ProfileInfoState extends State<ProfileInfo> {
 class _EditingTextField extends StatelessWidget {
   const _EditingTextField({
     required this.labelText,
-    required this.hintText,
     required this.controller,
     this.keyboardType = TextInputType.text,
     this.maxLength = 16,
   });
 
   final String labelText;
-  final String hintText;
   final TextEditingController controller;
   final TextInputType? keyboardType;
   final int maxLength;
@@ -397,14 +419,20 @@ class _EditingTextField extends StatelessWidget {
       child: SizedBox(
         height: AppSizes.size40,
         child: TextField(
+          style: TextStyle(color: AppColors.black),
           maxLength: maxLength,
           keyboardType: keyboardType,
           controller: controller,
           decoration: InputDecoration(
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(AppRadius.r10),
+            ),
             counterText: '',
             labelText: labelText,
-            hint: Text(hintText),
+            labelStyle: TextStyle(color: AppColors.black),
             suffixIcon: Icon(Icons.edit),
+            hintStyle: TextStyle(color: AppColors.black),
+            floatingLabelStyle: TextStyle(color: AppColors.black),
           ),
         ),
       ),

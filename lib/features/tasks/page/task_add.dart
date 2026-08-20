@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:freelancer_tracking_system/core/theme/colors/app_colors.dart';
-import 'package:freelancer_tracking_system/core/theme/localization/task_strings.dart';
-import 'package:freelancer_tracking_system/core/theme/sizing/app_sizes.dart';
-import 'package:freelancer_tracking_system/core/theme/sizing/app_spacing.dart';
-import 'package:freelancer_tracking_system/core/theme/sizing/padding_sizes.dart';
+import 'package:freelancer_tracking_system/core/themes/colors/app_colors.dart';
+import 'package:freelancer_tracking_system/core/themes/localization/task_strings.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/app_sizes.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/app_spacing.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/padding_sizes.dart';
 import 'package:freelancer_tracking_system/core/utils/date_formatter.dart';
 import 'package:freelancer_tracking_system/features/date/page/date.dart';
 import 'package:freelancer_tracking_system/features/tasks/widgets/task_add.dart';
@@ -86,7 +86,7 @@ class _TasksAddState extends State<TasksAdd> {
                                     Navigator.pop(context, customer.adSoyad);
                                   },
                                   child: Card(
-                                    color: AppColors.greyLight,
+                                    color: AppColors.white,
                                     child: ListTile(
                                       leading: CircleAvatar(
                                         child: Icon(Icons.person_2_outlined),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:freelancer_tracking_system/core/theme/colors/app_colors.dart';
-import 'package:freelancer_tracking_system/core/theme/localization/stopwatch_strings.dart';
-import 'package:freelancer_tracking_system/core/theme/sizing/app_sizes.dart';
-import 'package:freelancer_tracking_system/core/theme/sizing/padding_sizes.dart';
+import 'package:freelancer_tracking_system/core/themes/colors/app_colors.dart';
+import 'package:freelancer_tracking_system/core/themes/localization/stopwatch_strings.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/app_sizes.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/padding_sizes.dart';
 import 'package:freelancer_tracking_system/features/time_tracking/widget/watch_time.dart';
 import 'package:freelancer_tracking_system/providers/tasks.dart';
 import 'package:freelancer_tracking_system/providers/watch.dart';
@@ -41,6 +41,7 @@ class _StopWatchState extends State<StopWatch> {
         ],
       ),
       floatingActionButton: ElevatedButton(
+        style: ElevatedButton.styleFrom(backgroundColor: AppColors.black),
         onPressed: () async {
           final task = await showModalBottomSheet<(String?, String?)>(
             context: context,
@@ -116,7 +117,7 @@ class _StopWatchState extends State<StopWatch> {
         },
         child: Text(
           StopWatchStrings.saveButton,
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+          style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.white),
         ),
       ),
     );

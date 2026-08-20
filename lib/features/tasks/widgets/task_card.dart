@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:freelancer_tracking_system/core/theme/colors/app_colors.dart';
-import 'package:freelancer_tracking_system/core/theme/localization/task_strings.dart';
-import 'package:freelancer_tracking_system/core/theme/sizing/app_sizes.dart';
-import 'package:freelancer_tracking_system/core/theme/sizing/app_spacing.dart';
-import 'package:freelancer_tracking_system/core/theme/sizing/border_sizes.dart';
-import 'package:freelancer_tracking_system/core/theme/sizing/padding_sizes.dart';
+import 'package:freelancer_tracking_system/core/themes/colors/app_colors.dart';
+import 'package:freelancer_tracking_system/core/themes/localization/task_strings.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/app_sizes.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/app_spacing.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/border_sizes.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/padding_sizes.dart';
 import 'package:freelancer_tracking_system/providers/tasks.dart';
 import 'package:freelancer_tracking_system/providers/watch_record.dart';
 import 'package:freelancer_tracking_system/core/utils/date_formatter.dart';
@@ -73,7 +73,7 @@ class _TasksCardState extends State<TasksCard> {
         }
       },
       child: Card(
-        color: AppColors.greyLight,
+        color: AppColors.cardBackground,
         shape: _cardShape(),
         child: Padding(
           padding: EdgeInsets.all(AppPadding.p8),
@@ -91,14 +91,14 @@ class _TasksCardState extends State<TasksCard> {
                         decoration: BoxDecoration(
                           color:
                               levelColor(widget.task.taskStatus.toString()) ??
-                              AppColors.red,
+                              AppColors.surfaceBlueGreyLight,
                           borderRadius: BorderRadius.all(
                             Radius.circular(AppRadius.r10),
                           ),
                         ),
                         child: Icon(
                           Icons.screenshot_monitor_outlined,
-                          color: AppColors.white,
+                          color: AppColors.realBlack,
                         ),
                       ),
                     ],
@@ -139,7 +139,7 @@ class _TasksCardState extends State<TasksCard> {
                       spacing: AppSpacing.sm,
                       children: [
                         Container(
-                          width: AppSizes.size76,
+                          width: AppSizes.size80,
                           height: AppSizes.size36,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.all(
@@ -147,17 +147,32 @@ class _TasksCardState extends State<TasksCard> {
                             ),
                             color: AppColors.greyLight,
                           ),
-                          child: Icon(
-                            Icons.circle,
-                            color:
-                                levelColor(widget.task.taskStatus.toString()) ??
-                                AppColors.red,
-                            size: AppSizes.size16,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              spacing: AppSpacing.xs,
+                              mainAxisSize: .min,
+                              children: [
+                                Text(
+                                  'Zorluk',
+                                  style: TextStyle(color: AppColors.realBlack),
+                                ),
+                                Icon(
+                                  Icons.circle,
+                                  color:
+                                      levelColor(
+                                        widget.task.taskStatus.toString(),
+                                      ) ??
+                                      AppColors.red,
+                                  size: AppSizes.size16,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
 
                         Container(
-                          width: AppSizes.size76,
+                          width: AppSizes.size80,
                           height: AppSizes.size32,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.all(
@@ -168,6 +183,7 @@ class _TasksCardState extends State<TasksCard> {
                             ),
                           ),
                           child: Row(
+                            mainAxisSize: .min,
                             mainAxisAlignment: MainAxisAlignment.center,
 
                             children: [
@@ -195,7 +211,7 @@ class _TasksCardState extends State<TasksCard> {
                         children: [
                           Icon(Icons.watch_later_outlined),
                           Text(
-                            'Toplam Süre:${WatchRecord().formatDuration(WatchRecord().totalRecord[widget.task.id] ?? Duration.zero)}',
+                            'Toplam Süre: ${WatchRecord().formatDuration(WatchRecord().totalRecord[widget.task.id] ?? Duration.zero)}',
                           ),
                         ],
                       ),
@@ -205,7 +221,7 @@ class _TasksCardState extends State<TasksCard> {
                       child: Row(
                         children: [
                           Icon(Icons.calendar_month),
-                          Text('${toFormat(widget.task.startDate)}'),
+                          Text(' ${toFormat(widget.task.startDate)}'),
                         ],
                       ),
                     ),
@@ -260,8 +276,11 @@ dynamic checkStatus(TaskStatus status) {
   }
 }
 
-TextStyle _statusStyle() =>
-    TextStyle(fontSize: AppSizes.size12, fontWeight: FontWeight.bold);
+TextStyle _statusStyle() => TextStyle(
+  fontSize: AppSizes.size12,
+  fontWeight: FontWeight.bold,
+  color: AppColors.black,
+);
 
 enum TaskStatus {
   tamamlandi('Tamamlandı'),

@@ -38,7 +38,7 @@ class TaskProvider extends ValueNotifier<List<Task>> {
         startDate: DateTime(2026, 8, 1),
         endDate: DateTime(2026, 8, 5),
         saat: '8',
-        levels: 'Orta',
+        levels: 'Kolay',
         taskStatus: TaskStatus.devamEdiyor,
       ),
       Task(
@@ -49,7 +49,7 @@ class TaskProvider extends ValueNotifier<List<Task>> {
         startDate: DateTime(2026, 7, 16),
         endDate: DateTime(2026, 7, 20),
         saat: '12',
-        levels: 'Zor',
+        levels: 'Orta',
         taskStatus: TaskStatus.tamamlandi,
       ),
       Task(
@@ -60,7 +60,7 @@ class TaskProvider extends ValueNotifier<List<Task>> {
         startDate: DateTime(2026, 6, 2),
         endDate: DateTime(2026, 6, 4),
         saat: '3',
-        levels: 'Kolay',
+        levels: 'Zor',
         taskStatus: TaskStatus.tamamlandi,
       ),
       Task(

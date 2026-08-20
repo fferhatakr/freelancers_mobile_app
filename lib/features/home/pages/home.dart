@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/core/navigation/app_navigation.dart';
-import 'package:freelancer_tracking_system/core/theme/colors/app_colors.dart';
-import 'package:freelancer_tracking_system/core/theme/sizing/border_sizes.dart';
+import 'package:freelancer_tracking_system/core/themes/colors/app_colors.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/border_sizes.dart';
 import 'package:freelancer_tracking_system/features/customer/pages/customer_list.dart';
 import 'package:freelancer_tracking_system/features/dashboard/pages/dashboard.dart';
 import 'package:freelancer_tracking_system/features/projects/pages/project_list.dart';
@@ -21,7 +21,7 @@ class Home extends StatefulWidget {
 final List<Widget> _sayfalar = [
   Dashboard(),
   ProjectList(),
-  ClientList(),
+  CustomerList(),
   Tasks(),
 ];
 
@@ -38,14 +38,14 @@ class _HomeState extends State<Home> {
       builder: (context, secilenIndex, child) {
         return Scaffold(
           floatingActionButton: FloatingActionButton(
-            backgroundColor: AppColors.surfaceBlueGreyLight,
+            backgroundColor: AppColors.watchColor,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(AppRadius.r30),
             ),
             onPressed: () {
               AppNavigation.navigateTo(context, StopWatch());
             },
-            child: Icon(Icons.alarm_outlined, color: AppColors.black),
+            child: Icon(Icons.alarm_outlined, color: AppColors.white),
           ),
           body: _sayfalar[secilenIndex],
           bottomNavigationBar: BottomNavigationBar(

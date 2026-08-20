@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:freelancer_tracking_system/core/theme/app_all_style.dart';
+import 'package:freelancer_tracking_system/core/themes/app_all_style.dart';
 import 'package:freelancer_tracking_system/features/auth/widgets/labeled_text_field.dart.dart';
 import 'package:freelancer_tracking_system/services/auth_services.dart';
 

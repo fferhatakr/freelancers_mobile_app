@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/core/navigation/app_navigation.dart';
-import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
-import 'package:freelancer_tracking_system/core/theme/colors/app_colors.dart';
-import 'package:freelancer_tracking_system/core/theme/sizing/app_sizes.dart';
-import 'package:freelancer_tracking_system/core/theme/sizing/app_spacing.dart';
-import 'package:freelancer_tracking_system/core/theme/sizing/border_sizes.dart';
-import 'package:freelancer_tracking_system/features/customer/pages/client_detail.dart';
+import 'package:freelancer_tracking_system/core/themes/app_theme.dart';
+import 'package:freelancer_tracking_system/core/themes/colors/app_colors.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/app_sizes.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/app_spacing.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/border_sizes.dart';
+import 'package:freelancer_tracking_system/features/customer/pages/customer_detail.dart';
 
-class ClientCard extends StatelessWidget {
+class CustomerCard extends StatelessWidget {
   final String name;
   final String email;
   final String telefon;
@@ -16,7 +16,7 @@ class ClientCard extends StatelessWidget {
   final String? adres;
   final String? source;
   final String? aciklama;
-  const ClientCard({
+  const CustomerCard({
     required this.name,
     required this.email,
     required this.telefon,
@@ -34,7 +34,7 @@ class ClientCard extends StatelessWidget {
       onTap: () {
         AppNavigation.navigateTo(
           context,
-          ClientsDetail(
+          CustomerDetail(
             name: name,
             email: email,
             telefon: telefon,
@@ -51,21 +51,21 @@ class ClientCard extends StatelessWidget {
         child: ListTile(
           leading: _CircleAvatar(),
 
-          title: Text(name),
+          title: Text(name, style: TextStyle(color: AppColors.black)),
           subtitle: Column(
             children: [
               Row(
                 spacing: AppSpacing.xs,
                 children: [
                   Icon(Icons.email, size: AppSizes.size14),
-                  Text(email),
+                  Text(email, style: TextStyle(color: AppColors.black)),
                 ],
               ),
               Row(
                 spacing: AppSpacing.xs,
                 children: [
                   Icon(Icons.call, size: AppSizes.size14),
-                  Text(telefon),
+                  Text(telefon, style: TextStyle(color: AppColors.black)),
                 ],
               ),
             ],
@@ -88,7 +88,7 @@ class _CircleAvatar extends StatelessWidget {
   Widget build(BuildContext context) {
     return CircleAvatar(
       backgroundColor: AppColors.blueAccent,
-      child: Icon(ClientsStyle.personIcon, color: AppColors.white),
+      child: Icon(ClientsStyle.personIcon, color: AppColors.black),
     );
   }
 }

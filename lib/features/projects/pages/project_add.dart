@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
-import 'package:freelancer_tracking_system/core/theme/colors/app_colors.dart';
-import 'package:freelancer_tracking_system/core/theme/sizing/app_spacing.dart';
-import 'package:freelancer_tracking_system/core/theme/sizing/padding_sizes.dart';
+import 'package:freelancer_tracking_system/core/themes/app_theme.dart';
+import 'package:freelancer_tracking_system/core/themes/colors/app_colors.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/app_spacing.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/padding_sizes.dart';
 import 'package:freelancer_tracking_system/core/utils/date_formatter.dart';
 import 'package:freelancer_tracking_system/features/date/page/date.dart';
 import 'package:freelancer_tracking_system/features/projects/widgets/project_from_field.dart';
@@ -37,12 +37,7 @@ class _ProjectAddState extends State<ProjectAdd> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.amber,
-        title: Text(
-          ProjectStrings.projeEkle,
-          style: Theme.of(
-            context,
-          ).textTheme.headlineMedium?.copyWith(color: AppColors.white),
-        ),
+        title: Text(ProjectStrings.projeEkle),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -75,7 +70,7 @@ class _ProjectAddState extends State<ProjectAdd> {
                                   return Padding(
                                     padding: EdgeInsets.all(AppPadding.p8),
                                     child: Card(
-                                      color: AppColors.grey,
+                                      color: AppColors.white,
                                       child: Material(
                                         type: MaterialType.transparency,
                                         child: ListTile(
@@ -85,13 +80,28 @@ class _ProjectAddState extends State<ProjectAdd> {
                                               customerName.adSoyad,
                                             );
                                           },
-                                          title: Text(customerName.adSoyad),
+                                          title: Text(
+                                            customerName.adSoyad,
+                                            style: TextStyle(
+                                              color: AppColors.black,
+                                            ),
+                                          ),
                                           subtitle: Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              Text(customerName.email),
-                                              Text(customerName.telefon),
+                                              Text(
+                                                customerName.email,
+                                                style: TextStyle(
+                                                  color: AppColors.black,
+                                                ),
+                                              ),
+                                              Text(
+                                                customerName.telefon,
+                                                style: TextStyle(
+                                                  color: AppColors.black,
+                                                ),
+                                              ),
                                             ],
                                           ),
                                         ),

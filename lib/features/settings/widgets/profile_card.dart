@@ -1,9 +1,9 @@
 import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:freelancer_tracking_system/core/theme/colors/app_colors.dart';
-import 'package:freelancer_tracking_system/core/theme/sizing/app_sizes.dart';
-import 'package:freelancer_tracking_system/core/theme/sizing/padding_sizes.dart';
+import 'package:freelancer_tracking_system/core/themes/colors/app_colors.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/app_sizes.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/padding_sizes.dart';
 import 'package:freelancer_tracking_system/providers/profile.dart';
 
 class ProfileCard extends StatelessWidget {
@@ -24,7 +24,7 @@ class ProfileCard extends StatelessWidget {
                 width: AppSizes.size48,
                 decoration: BoxDecoration(
                   border: Border.all(
-                    color: AppColors.amber,
+                    color: AppColors.black,
                     width: AppSizes.size2,
                   ),
                   shape: BoxShape.circle,
@@ -45,13 +45,15 @@ class ProfileCard extends StatelessWidget {
                     style: TextStyle(
                       fontSize: AppSizes.size20,
                       fontWeight: FontWeight.w600,
+                      color: AppColors.black,
                     ),
                   ),
                   Text(
-                    ProfileProvider().job.toString(),
+                    ProfileProvider().job ?? 'Meslek Belirtilmedi',
                     style: TextStyle(
                       fontSize: AppSizes.size14,
                       fontWeight: FontWeight.w400,
+                      color: AppColors.black,
                     ),
                   ),
                 ],

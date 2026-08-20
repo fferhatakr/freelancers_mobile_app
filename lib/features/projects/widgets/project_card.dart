@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
-import 'package:freelancer_tracking_system/core/theme/colors/app_colors.dart';
-import 'package:freelancer_tracking_system/core/theme/sizing/app_sizes.dart';
-import 'package:freelancer_tracking_system/core/theme/sizing/border_sizes.dart';
+import 'package:freelancer_tracking_system/core/themes/app_theme.dart';
+import 'package:freelancer_tracking_system/core/themes/colors/app_colors.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/app_sizes.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/border_sizes.dart';
 import 'package:freelancer_tracking_system/providers/project.dart';
 
 class ProjectCard extends StatefulWidget {
@@ -89,6 +89,7 @@ class _ProjectCardState extends State<ProjectCard> {
           title: Text(
             widget.project.projectName,
             style: TextStyle(
+              color: AppColors.realBlack,
               fontSize: AppSizes.size14,
               fontWeight: FontWeight.w700,
             ),
@@ -96,12 +97,21 @@ class _ProjectCardState extends State<ProjectCard> {
           subtitle: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(widget.project.selectedCustomer.toString()),
-              Text(result.toString()),
+              Text(
+                widget.project.selectedCustomer.toString(),
+                style: TextStyle(color: AppColors.realBlack),
+              ),
+              Text(
+                result.toString(),
+                style: TextStyle(color: AppColors.realBlack),
+              ),
             ],
           ),
 
-          trailing: Icon(Icons.chevron_right_outlined),
+          trailing: Icon(
+            Icons.chevron_right_outlined,
+            color: AppColors.realBlack,
+          ),
         ),
       ),
     );
@@ -119,10 +129,10 @@ enum Status {
 
 dynamic checkStatusColor(Status? status) {
   if (status == Status.bekliyor) {
-    return const Color.fromARGB(255, 241, 145, 36);
+    return AppColors.projectListColorOrange;
   } else if (status == Status.devamEdiyor) {
-    return const Color.fromARGB(255, 189, 224, 252);
+    return AppColors.projectListColorBlue;
   } else if (status == Status.tamamlandi) {
-    return const Color.fromARGB(255, 109, 244, 113);
+    return AppColors.projectListColorGreen;
   }
 }

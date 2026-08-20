@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:freelancer_tracking_system/core/theme/app_all_style.dart';
+import 'package:freelancer_tracking_system/core/themes/app_all_style.dart';
 
 class LabeledTextField extends StatelessWidget {
   final String miniTitle;

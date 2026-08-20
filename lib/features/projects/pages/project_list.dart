@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:freelancer_tracking_system/core/theme/app_theme.dart';
-import 'package:freelancer_tracking_system/core/theme/colors/app_colors.dart';
-import 'package:freelancer_tracking_system/core/theme/sizing/app_sizes.dart';
-import 'package:freelancer_tracking_system/core/theme/sizing/padding_sizes.dart';
+import 'package:freelancer_tracking_system/core/themes/app_theme.dart';
+import 'package:freelancer_tracking_system/core/themes/colors/app_colors.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/app_sizes.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/border_sizes.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/padding_sizes.dart';
 import 'package:freelancer_tracking_system/features/projects/widgets/project_card.dart';
 import 'package:freelancer_tracking_system/providers/project.dart';
 
@@ -27,18 +28,24 @@ class _ProjectListState extends State<ProjectList> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextField(
-              controller: searchController,
-              onChanged: (value) {
-                setState(() {});
-              },
-              maxLength: 30,
-              autofocus: true,
-              decoration: InputDecoration(
-                labelText: ProjectStrings.hizliBul,
-                hintText: ProjectStrings.ornek,
-                hintStyle: TextStyle(color: AppColors.grey),
-                prefix: Icon(Icons.search),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                controller: searchController,
+                onChanged: (value) {
+                  setState(() {});
+                },
+                maxLength: 30,
+                autofocus: true,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(AppRadius.r10),
+                  ),
+                  labelText: ProjectStrings.hizliBul,
+                  hintText: ProjectStrings.ornek,
+                  hintStyle: TextStyle(color: AppColors.grey),
+                  suffixIcon: Icon(Icons.search),
+                ),
               ),
             ),
             Expanded(
