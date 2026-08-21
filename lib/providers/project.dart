@@ -1,27 +1,55 @@
 import 'package:flutter/material.dart';
-import 'package:freelancer_tracking_system/features/projects/widgets/project_card.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:uuid/uuid.dart';
+
+part 'project.g.dart';
 
 class ProjectProvider extends ValueNotifier<List<Project>> {
   ProjectProvider._sharedInstance() : super([]);
   static final ProjectProvider _shared = ProjectProvider._sharedInstance();
   factory ProjectProvider() => _shared;
-
+  late Box<Project> box;
   void addProject({required Project items}) {
     value.add(items);
+    box.add(items);
     notifyListeners();
   }
 
   void removeProject({required Project items}) {
     value.remove(items);
+    items.delete();
     notifyListeners();
+  }
+
+  void updateStatus({
+    required String id,
+    required ProjectStatus status,
+    required DateTime date,
+    required double money,
+  }) {
+    for (var i = 0; i < value.length; i++) {
+      if (value[i].id == id) {
+        value[i].status = status;
+        value[i].dateTime = date;
+        value[i].projectAmount = money;
+        value[i].save();
+        notifyListeners();
+        return;
+      }
+    }
+  }
+
+  void loadProject() {
+    value = box.values.toList();
+    notifyListeners();
+    return;
   }
 
   List<String> get completedProject {
     List<String> result = [];
     for (var p in value) {
       bool alreadyExists = false;
-      if (p.status == Status.tamamlandi) {
+      if (p.status == ProjectStatus.tamamlandi) {
         for (int i = 0; i < result.length; i++) {
           if (result[i] == p.projectName) {
             alreadyExists = true;
@@ -40,7 +68,7 @@ class ProjectProvider extends ValueNotifier<List<Project>> {
     List<int> result = [];
     for (var p in value) {
       bool already = false;
-      if (p.status == Status.tamamlandi) {
+      if (p.status == ProjectStatus.tamamlandi) {
         for (int i = 0; i < result.length; i++) {
           if (result[i] == p.projectAmount) {
             already = true;
@@ -66,7 +94,8 @@ class ProjectProvider extends ValueNotifier<List<Project>> {
   List<int> get pendingAndOngoingProject {
     List<int> resulta = [];
     for (var p in value) {
-      if (p.status == Status.bekliyor || p.status == Status.devamEdiyor) {
+      if (p.status == ProjectStatus.bekliyor ||
+          p.status == ProjectStatus.devamEdiyor) {
         bool already = false;
         for (int i = 0; i < resulta.length; i++) {
           if (resulta[i].toString() == p.projectName) {
@@ -82,29 +111,12 @@ class ProjectProvider extends ValueNotifier<List<Project>> {
     return resulta;
   }
 
-  void updateStatus({
-    required String id,
-    required Status status,
-    required DateTime date,
-    required double money,
-  }) {
-    for (var i = 0; i < value.length; i++) {
-      if (value[i].id == id) {
-        value[i].status = status;
-        value[i].dateTime = date;
-        value[i].projectAmount = money;
-        notifyListeners();
-        return;
-      }
-    }
-  }
-
   List<double> resultChart() {
     List<Project> allProject = ProjectProvider().value;
     List<double> result = [0, 0, 0, 0, 0, 0, 0];
 
     for (int i = 0; i < allProject.length; i++) {
-      if (allProject[i].status == Status.tamamlandi) {
+      if (allProject[i].status == ProjectStatus.tamamlandi) {
         if (allProject[i].dateTime != null) {
           int day = allProject[i].dateTime!.weekday - 1;
           result[day] += allProject[i].projectAmount;
@@ -126,127 +138,31 @@ class ProjectProvider extends ValueNotifier<List<Project>> {
     }
     return result;
   }
-
-  void seedFakeData() {
-    final fakeProjects = [
-      Project(
-        projectName: 'E-ticaret Sitesi',
-        selectedCustomer: 'Ahmet Yılmaz',
-        aciklama: 'Online mağaza tasarımı',
-        startDate: '01/08/2026',
-        endDate: '30/09/2026',
-        projectAmount: 15000,
-        status: Status.devamEdiyor,
-        oncelik: 'Yüksek',
-      ),
-      Project(
-        projectName: 'Mobil Uygulama',
-        selectedCustomer: 'Zeynep Kaya',
-        aciklama: 'iOS ve Android uygulama',
-        startDate: '15/07/2026',
-        endDate: '15/10/2026',
-        projectAmount: 25000,
-        status: Status.bekliyor,
-        oncelik: 'Orta',
-      ),
-      Project(
-        projectName: 'Logo Tasarımı',
-        selectedCustomer: 'Mehmet Demir',
-        aciklama: 'Kurumsal kimlik çalışması',
-        startDate: '01/06/2026',
-        endDate: '10/06/2026',
-        projectAmount: 3000,
-        status: Status.devamEdiyor,
-        oncelik: 'Düşük',
-      ),
-      Project(
-        projectName: 'Web Sitesi Yenileme',
-        selectedCustomer: 'Elif Şahin',
-        aciklama: 'Eski siteyi güncelleme',
-        startDate: '10/08/2026',
-        endDate: '25/08/2026',
-        projectAmount: 8000,
-        status: Status.devamEdiyor,
-        oncelik: 'Yüksek',
-      ),
-      Project(
-        projectName: 'SEO Danışmanlığı',
-        selectedCustomer: 'Can Öztürk',
-        aciklama: 'Arama motoru optimizasyonu',
-        startDate: '05/08/2026',
-        endDate: '05/11/2026',
-        projectAmount: 6000,
-        status: Status.bekliyor,
-        oncelik: 'Orta',
-      ),
-      Project(
-        projectName: 'Sosyal Medya Yönetimi',
-        selectedCustomer: 'Ayşe Arslan',
-        aciklama: 'Instagram ve Twitter içerikleri',
-        startDate: '01/07/2026',
-        endDate: '31/12/2026',
-        projectAmount: 12000,
-        status: Status.devamEdiyor,
-        oncelik: 'Orta',
-      ),
-      Project(
-        projectName: 'Muhasebe Yazılımı',
-        selectedCustomer: 'Burak Aydın',
-        aciklama: 'Küçük işletme için özel yazılım',
-        startDate: '20/06/2026',
-        endDate: '20/09/2026',
-        projectAmount: 30000,
-        status: Status.bekliyor,
-        oncelik: 'Yüksek',
-      ),
-      Project(
-        projectName: 'Video Düzenleme',
-        selectedCustomer: 'Selin Koç',
-        aciklama: 'Tanıtım filmi montajı',
-        startDate: '12/08/2026',
-        endDate: '20/08/2026',
-        projectAmount: 4500,
-        status: Status.devamEdiyor,
-        oncelik: 'Düşük',
-      ),
-      Project(
-        projectName: 'API Entegrasyonu',
-        selectedCustomer: 'Kerem Yıldız',
-        aciklama: 'Ödeme sistemi bağlantısı',
-        startDate: '01/08/2026',
-        endDate: '15/08/2026',
-        projectAmount: 9000,
-        status: Status.devamEdiyor,
-        oncelik: 'Yüksek',
-      ),
-      Project(
-        projectName: 'Veritabanı Optimizasyonu',
-        selectedCustomer: 'Deniz Aksoy',
-        aciklama: 'Sorgu hızlandırma çalışması',
-        startDate: '05/07/2026',
-        endDate: '20/07/2026',
-        projectAmount: 7000,
-        status: Status.tamamlandi,
-        oncelik: 'Orta',
-      ),
-    ];
-
-    value.addAll(fakeProjects);
-    notifyListeners();
-  }
 }
 
-class Project {
+@HiveType(typeId: 3)
+class Project extends HiveObject {
+  @HiveField(0)
   final String id;
+  @HiveField(1)
   final String projectName;
+  @HiveField(2)
   final String? selectedCustomer;
+  @HiveField(3)
   final String? aciklama;
+  @HiveField(4)
   final String? startDate;
+  @HiveField(5)
   final String? endDate;
+  @HiveField(6)
   double projectAmount;
+  @HiveField(7)
   DateTime? dateTime;
-  Status? status;
+  @HiveField(8)
+  ProjectStatus? status;
+  @HiveField(9)
   final String? oncelik;
+  @HiveField(10)
   final String? nots;
   Project({
     required this.projectName,
@@ -260,4 +176,17 @@ class Project {
     this.nots,
     this.dateTime,
   }) : id = const Uuid().v4();
+}
+
+@HiveType(typeId: 4)
+enum ProjectStatus {
+  @HiveField(0)
+  tamamlandi('Tamamlandı'),
+  @HiveField(1)
+  bekliyor('Beklemede'),
+  @HiveField(2)
+  devamEdiyor('Devam Ediyor');
+
+  final String label;
+  const ProjectStatus(this.label);
 }

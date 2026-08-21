@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:freelancer_tracking_system/features/tasks/widgets/task_card.dart';
+import 'package:hive/hive.dart';
 import 'package:uuid/uuid.dart';
+part 'tasks.g.dart';
 
 class TaskProvider extends ValueNotifier<List<Task>> {
   TaskProvider._sharedInstance() : super([]);
@@ -8,13 +9,16 @@ class TaskProvider extends ValueNotifier<List<Task>> {
   factory TaskProvider() =>
       _shared; //Factory kullanım amacı nesne çağıırlınca ne döndürücegime ben karar veririm.
 
-  void addTasks({required Task items}) {
+  late Box<Task> box;
+  void addTasks({required Task items}) async {
     value.add(items);
+    await box.add(items);
     notifyListeners();
   }
 
   void removeTasks({required Task items}) {
     value.remove(items);
+    items.delete();
     notifyListeners();
   }
 
@@ -22,144 +26,55 @@ class TaskProvider extends ValueNotifier<List<Task>> {
     for (var i = 0; i < value.length; i++) {
       if (value[i].id == id) {
         value[i].taskStatus = taskStatus;
-        notifyListeners();
+        value[i].save();
         return;
       }
     }
   }
 
-  void seedFakeData() {
-    final fakeTasks = [
-      Task(
-        taskName: 'Ana Sayfa Tasarımı',
-        comment: 'Figma üzerinden mockup hazırlanacak',
-        bagliMusteri: 'Ahmet Yılmaz',
-        baglantiliProje: 'E-ticaret Sitesi',
-        startDate: DateTime(2026, 8, 1),
-        endDate: DateTime(2026, 8, 5),
-        saat: '8',
-        levels: 'Kolay',
-        taskStatus: TaskStatus.devamEdiyor,
-      ),
-      Task(
-        taskName: 'Login Ekranı Kodlama',
-        comment: 'Firebase auth entegrasyonu',
-        bagliMusteri: 'Zeynep Kaya',
-        baglantiliProje: 'Mobil Uygulama',
-        startDate: DateTime(2026, 7, 16),
-        endDate: DateTime(2026, 7, 20),
-        saat: '12',
-        levels: 'Orta',
-        taskStatus: TaskStatus.tamamlandi,
-      ),
-      Task(
-        taskName: 'Logo Revizyonu',
-        comment: 'Müşteri renk değişikliği istedi',
-        bagliMusteri: 'Mehmet Demir',
-        baglantiliProje: 'Logo Tasarımı',
-        startDate: DateTime(2026, 6, 2),
-        endDate: DateTime(2026, 6, 4),
-        saat: '3',
-        levels: 'Zor',
-        taskStatus: TaskStatus.tamamlandi,
-      ),
-      Task(
-        taskName: 'Responsive',
-        comment: 'Mobil görünüm optimizasyonu',
-        bagliMusteri: 'Elif Şahin',
-        baglantiliProje: 'Web Sitesi Yenileme',
-        startDate: DateTime(2026, 8, 11),
-        endDate: DateTime(2026, 8, 15),
-        saat: '6',
-        levels: 'Orta',
-        taskStatus: TaskStatus.bekliyor,
-      ),
-      Task(
-        taskName: 'Anahtar Kelime Analizi',
-        comment: 'Rakip site analizi de yapılacak',
-        bagliMusteri: 'Can Öztürk',
-        baglantiliProje: 'SEO Danışmanlığı',
-        startDate: DateTime(2026, 8, 6),
-        endDate: DateTime(2026, 8, 10),
-        saat: '5',
-        levels: 'Kolay',
-        taskStatus: TaskStatus.devamEdiyor,
-      ),
-      Task(
-        taskName: 'İçerik Takvimi',
-        comment: 'Ağustos ayı planlanacak',
-        bagliMusteri: 'Ayşe Arslan',
-        baglantiliProje: 'Sosyal Medya Yönetimi',
-        startDate: DateTime(2026, 7, 2),
-        endDate: DateTime(2026, 7, 6),
-        saat: '4',
-        levels: 'Kolay',
-        taskStatus: TaskStatus.bekliyor,
-      ),
-      Task(
-        taskName: 'Veritabanı Şeması',
-        comment: 'PostgreSQL tabloları oluşturulacak',
-        bagliMusteri: 'Burak Aydın',
-        baglantiliProje: 'Muhasebe Yazılımı',
-        startDate: DateTime(2026, 6, 21),
-        endDate: DateTime(2026, 6, 28),
-        saat: '16',
-        levels: 'Zor',
-        taskStatus: TaskStatus.devamEdiyor,
-      ),
-      Task(
-        taskName: 'Renk Düzeltmesi',
-        comment: 'Video renk tonu ayarlanacak',
-        bagliMusteri: 'Selin Koç',
-        baglantiliProje: 'Video Düzenleme',
-        startDate: DateTime(2026, 8, 13),
-        endDate: DateTime(2026, 8, 14),
-        saat: '2',
-        levels: 'Kolay',
-        taskStatus: TaskStatus.tamamlandi,
-      ),
-      Task(
-        taskName: 'Ödeme Servisi Test',
-        comment: 'Sandbox ortamında test edilecek',
-        bagliMusteri: 'Kerem Yıldız',
-        baglantiliProje: 'API Entegrasyonu',
-        startDate: DateTime(2026, 8, 2),
-        endDate: DateTime(2026, 8, 6),
-        saat: '10',
-        levels: 'Zor',
-        taskStatus: TaskStatus.bekliyor,
-      ),
-      Task(
-        taskName: 'Sorgu Performans ',
-        comment: 'Yavaş sorgular tespit edilecek',
-        bagliMusteri: 'Deniz Aksoy',
-        baglantiliProje: 'Veritabanı Optimizasyonu',
-        startDate: DateTime(2026, 7, 6),
-        endDate: DateTime(2026, 7, 10),
-        saat: '7',
-        levels: 'Orta',
-        taskStatus: TaskStatus.devamEdiyor,
-      ),
-    ];
-
-    value.addAll(fakeTasks);
+  void loadTasks() {
+    value = box.values.toList();
     notifyListeners();
+    return;
   }
 }
 
-class Task {
+@HiveType(typeId: 0)
+class Task extends HiveObject {
+  @HiveField(0)
   final String id;
+
+  @HiveField(1)
   final String taskName;
+
+  @HiveField(2)
   final String comment;
+
+  @HiveField(3)
   final String? bagliMusteri;
+
+  @HiveField(4)
   final String? baglantiliProje;
+
+  @HiveField(5)
   final DateTime? startDate;
+
+  @HiveField(6)
   final DateTime? endDate;
+
+  @HiveField(7)
   final String? saat;
+
+  @HiveField(8)
   final String? note;
+
+  @HiveField(9)
   final String? levels;
+
+  @HiveField(10)
   TaskStatus? taskStatus;
   Task({
+    String? id,
     required this.taskName,
     required this.comment,
     required this.bagliMusteri,
@@ -170,5 +85,18 @@ class Task {
     this.note,
     this.levels,
     this.taskStatus,
-  }) : id = const Uuid().v4(); //v4 seçme sebebimiz rastgele dagıtım yapması
+  }) : id = id ?? Uuid().v4(); //v4 seçme sebebimiz rastgele dagıtım yapması
+}
+
+@HiveType(typeId: 1)
+enum TaskStatus {
+  @HiveField(0)
+  tamamlandi('Tamamlandı'),
+  @HiveField(1)
+  bekliyor('Beklemede'),
+  @HiveField(2)
+  devamEdiyor('Devam');
+
+  final String label;
+  const TaskStatus(this.label);
 }

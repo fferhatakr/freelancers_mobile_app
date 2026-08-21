@@ -1,27 +1,61 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+part 'watch_record.g.dart';
 
 class WatchRecord extends ChangeNotifier {
   WatchRecord._sharedInstance();
   static final WatchRecord _shared = WatchRecord._sharedInstance();
   factory WatchRecord() => _shared;
 
-  Map<String, Duration> totalRecord = {};
+  List<Watch> totalRecord = [];
+  late Box<Watch> box;
 
-  void addTotalRecord(String id, Duration duration) {
-    bool alreadyExisting = false;
-    if (totalRecord.containsKey(id)) {
-      alreadyExisting = true;
+  void addTotalRecord(String id, int duration) {
+    int foundIndex = -1;
+
+    for (int i = 0; i < totalRecord.length; i++) {
+      if (totalRecord[i].id == id) {
+        foundIndex = i;
+        break;
+      }
     }
-    if (!alreadyExisting) {
-      totalRecord.addAll({id: duration});
+    if (foundIndex != -1) {
+      totalRecord[foundIndex].duration =
+          totalRecord[foundIndex].duration + duration;
+      totalRecord[foundIndex].save();
     } else {
-      totalRecord[id] = totalRecord[id]! + duration;
+      final news = Watch(id: id, duration: duration);
+      totalRecord.add(news);
+      box.add(news);
     }
     notifyListeners();
   }
 
-  String formatDuration(Duration duration) {
-    var milli = duration.inMilliseconds;
+  void loadWatch() {
+    totalRecord = box.values.toList();
+    print(
+      'Hive box uzunluğu: ${box.length}, yüklenen kayıt sayısı: ${totalRecord.length}',
+    );
+
+    notifyListeners();
+    return;
+  }
+
+  int getDurationById(String id) {
+    print(
+      'Tüm kayıtlar: ${totalRecord.map((w) => "${w.id}: ${w.duration}ms").toList()}',
+    );
+
+    for (int i = 0; i < totalRecord.length; i++) {
+      if (totalRecord[i].id == id) {
+        return totalRecord[i].duration;
+      }
+    }
+    return 0;
+  }
+
+  String formatDuration(int duration) {
+    var milli = duration;
     String seconds = ((milli ~/ 1000) % 60).toString().padLeft(2, "0");
     String minutes = ((milli ~/ 1000) ~/ 60).toString().padLeft(2, "0");
     String hours = (((milli ~/ 1000) ~/ 60) ~/ 60).toString().padLeft(2, "0");
@@ -30,9 +64,12 @@ class WatchRecord extends ChangeNotifier {
   }
 }
 
-class Watch {
+@HiveType(typeId: 7)
+class Watch extends HiveObject {
+  @HiveField(0)
   final String id;
-  final Duration duration;
+  @HiveField(1)
+  int duration;
 
-  const Watch({required this.id, required this.duration});
+  Watch({required this.id, required this.duration});
 }

@@ -44,6 +44,4 @@ class WatchProvider extends ValueNotifier {
 
     return "$hours:$minutes:$seconds";
   }
-
-  void addTotal() {}
 }
