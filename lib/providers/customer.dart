@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:uuid/uuid.dart';
 
-part 'customer.g.dart';
+part 'generated/customer.g.dart';
 
 class CustomerProvider extends ValueNotifier<List<Customer>> {
   //Nerede çağrılırsa çağrılsın aynı provider nesnesini kullanmak

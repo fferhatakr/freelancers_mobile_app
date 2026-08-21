@@ -1,62 +1,61 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'tasks.dart';
+part of '../project.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class TaskAdapter extends TypeAdapter<Task> {
+class ProjectAdapter extends TypeAdapter<Project> {
   @override
-  final int typeId = 0;
+  final int typeId = 3;
 
   @override
-  Task read(BinaryReader reader) {
+  Project read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return Task(
-      id: fields[0] as String?,
-      taskName: fields[1] as String,
-      comment: fields[2] as String,
-      bagliMusteri: fields[3] as String?,
-      baglantiliProje: fields[4] as String?,
-      startDate: fields[5] as DateTime?,
-      endDate: fields[6] as DateTime?,
-      saat: fields[7] as String?,
-      note: fields[8] as String?,
-      levels: fields[9] as String?,
-      taskStatus: fields[10] as TaskStatus?,
+    return Project(
+      projectName: fields[1] as String,
+      selectedCustomer: fields[2] as String?,
+      aciklama: fields[3] as String?,
+      startDate: fields[4] as String?,
+      endDate: fields[5] as String?,
+      projectAmount: fields[6] as double,
+      status: fields[8] as ProjectStatus?,
+      oncelik: fields[9] as String?,
+      nots: fields[10] as String?,
+      dateTime: fields[7] as DateTime?,
     );
   }
 
   @override
-  void write(BinaryWriter writer, Task obj) {
+  void write(BinaryWriter writer, Project obj) {
     writer
       ..writeByte(11)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.taskName)
+      ..write(obj.projectName)
       ..writeByte(2)
-      ..write(obj.comment)
+      ..write(obj.selectedCustomer)
       ..writeByte(3)
-      ..write(obj.bagliMusteri)
+      ..write(obj.aciklama)
       ..writeByte(4)
-      ..write(obj.baglantiliProje)
-      ..writeByte(5)
       ..write(obj.startDate)
-      ..writeByte(6)
+      ..writeByte(5)
       ..write(obj.endDate)
+      ..writeByte(6)
+      ..write(obj.projectAmount)
       ..writeByte(7)
-      ..write(obj.saat)
+      ..write(obj.dateTime)
       ..writeByte(8)
-      ..write(obj.note)
+      ..write(obj.status)
       ..writeByte(9)
-      ..write(obj.levels)
+      ..write(obj.oncelik)
       ..writeByte(10)
-      ..write(obj.taskStatus);
+      ..write(obj.nots);
   }
 
   @override
@@ -65,39 +64,39 @@ class TaskAdapter extends TypeAdapter<Task> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is TaskAdapter &&
+      other is ProjectAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
 
-class TaskStatusAdapter extends TypeAdapter<TaskStatus> {
+class ProjectStatusAdapter extends TypeAdapter<ProjectStatus> {
   @override
-  final int typeId = 1;
+  final int typeId = 4;
 
   @override
-  TaskStatus read(BinaryReader reader) {
+  ProjectStatus read(BinaryReader reader) {
     switch (reader.readByte()) {
       case 0:
-        return TaskStatus.tamamlandi;
+        return ProjectStatus.tamamlandi;
       case 1:
-        return TaskStatus.bekliyor;
+        return ProjectStatus.bekliyor;
       case 2:
-        return TaskStatus.devamEdiyor;
+        return ProjectStatus.devamEdiyor;
       default:
-        return TaskStatus.tamamlandi;
+        return ProjectStatus.tamamlandi;
     }
   }
 
   @override
-  void write(BinaryWriter writer, TaskStatus obj) {
+  void write(BinaryWriter writer, ProjectStatus obj) {
     switch (obj) {
-      case TaskStatus.tamamlandi:
+      case ProjectStatus.tamamlandi:
         writer.writeByte(0);
         break;
-      case TaskStatus.bekliyor:
+      case ProjectStatus.bekliyor:
         writer.writeByte(1);
         break;
-      case TaskStatus.devamEdiyor:
+      case ProjectStatus.devamEdiyor:
         writer.writeByte(2);
         break;
     }
@@ -109,7 +108,7 @@ class TaskStatusAdapter extends TypeAdapter<TaskStatus> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is TaskStatusAdapter &&
+      other is ProjectStatusAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

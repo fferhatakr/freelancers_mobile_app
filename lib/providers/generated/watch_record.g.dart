@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'watch_record.dart';
+part of '../watch_record.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
@@ -16,10 +16,7 @@ class WatchAdapter extends TypeAdapter<Watch> {
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return Watch(
-      id: fields[0] as String,
-      duration: fields[1] as int,
-    );
+    return Watch(id: fields[0] as String, duration: fields[1] as int);
   }
 
   @override

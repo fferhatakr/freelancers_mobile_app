@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-part 'watch_record.g.dart';
+part 'generated/watch_record.g.dart';
 
 class WatchRecord extends ChangeNotifier {
   WatchRecord._sharedInstance();

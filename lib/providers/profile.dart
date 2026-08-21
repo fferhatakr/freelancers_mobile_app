@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-part 'profile.g.dart';
+part 'generated/profile.g.dart';
 
 class ProfileProvider extends ChangeNotifier {
   ProfileProvider._sharedInstance();

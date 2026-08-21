@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:uuid/uuid.dart';
-part 'tasks.g.dart';
+part 'generated/tasks.g.dart';
 
 class TaskProvider extends ValueNotifier<List<Task>> {
   TaskProvider._sharedInstance() : super([]);

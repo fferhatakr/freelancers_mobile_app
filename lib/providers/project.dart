@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:uuid/uuid.dart';
 
-part 'project.g.dart';
+part 'generated/project.g.dart';
 
 class ProjectProvider extends ValueNotifier<List<Project>> {
   ProjectProvider._sharedInstance() : super([]);
