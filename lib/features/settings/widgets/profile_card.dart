@@ -30,10 +30,9 @@ class ProfileCard extends StatelessWidget {
                   shape: BoxShape.circle,
                 ),
                 child: CircleAvatar(
-                  backgroundImage: FileImage(
-                    ProfileProvider().photo ??
-                        File('https://picsum.photos/200'),
-                  ),
+                  backgroundImage: ProfileProvider().profile?.photo != null
+                      ? FileImage(File(ProfileProvider().profile!.photo!))
+                      : null,
                 ),
               ),
               SizedBox(width: AppSizes.size12),
@@ -49,7 +48,7 @@ class ProfileCard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    ProfileProvider().job ?? 'Meslek Belirtilmedi',
+                    ProfileProvider().profile?.job ?? 'Meslek Belirtilmedi',
                     style: TextStyle(
                       fontSize: AppSizes.size14,
                       fontWeight: FontWeight.w400,

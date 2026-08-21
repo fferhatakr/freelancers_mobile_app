@@ -7,7 +7,7 @@ import 'package:freelancer_tracking_system/core/themes/sizing/border_sizes.dart'
 import 'package:freelancer_tracking_system/core/themes/sizing/padding_sizes.dart';
 import 'package:freelancer_tracking_system/features/customer/pages/customer_add.dart';
 import 'package:freelancer_tracking_system/features/customer/widgets/customer_card.dart';
-import 'package:freelancer_tracking_system/providers/client.dart';
+import 'package:freelancer_tracking_system/providers/customer.dart';
 
 class CustomerList extends StatefulWidget {
   const CustomerList({super.key});

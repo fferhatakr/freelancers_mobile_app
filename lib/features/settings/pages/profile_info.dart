@@ -1,12 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:async';
 import 'dart:io';
-
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/core/themes/colors/app_colors.dart';
-
 import 'package:freelancer_tracking_system/core/themes/sizing/app_sizes.dart';
 import 'package:freelancer_tracking_system/core/themes/sizing/border_sizes.dart';
 import 'package:freelancer_tracking_system/core/themes/sizing/padding_sizes.dart';
@@ -54,8 +50,8 @@ class _ProfileInfoState extends State<ProfileInfo> {
                       await FirebaseAuth.instance.currentUser
                           ?.updateDisplayName(_name.text.trim());
                       setState(() {
-                        ProfileProvider().phone = _phone.text.trim();
-                        ProfileProvider().job = _job.text.trim();
+                        ProfileProvider().profile?.phone = _phone.text.trim();
+                        ProfileProvider().profile?.job = _job.text.trim();
 
                         isEditingName = false;
                         isEditingPhone = false;
@@ -80,8 +76,8 @@ class _ProfileInfoState extends State<ProfileInfo> {
                     backgroundColor: AppColors.black,
                     child: CircleAvatar(
                       radius: AppSizes.size96,
-                      backgroundImage: ProfileProvider().photo != null
-                          ? FileImage(ProfileProvider().photo!)
+                      backgroundImage: ProfileProvider().profile?.photo != null
+                          ? FileImage(File(ProfileProvider().profile!.photo!))
                           : null,
                     ),
                   ),
@@ -93,10 +89,10 @@ class _ProfileInfoState extends State<ProfileInfo> {
                     );
                     if (photo != null) {
                       ProfileProvider().updateProfile(
-                        ProfileProvider().name ?? '',
-                        File(photo.path),
-                        ProfileProvider().phone ?? '',
-                        ProfileProvider().job ?? '',
+                        ProfileProvider().profile?.name ?? '',
+                        photo.path,
+                        ProfileProvider().profile?.phone ?? '',
+                        ProfileProvider().profile?.job ?? '',
                       );
                     }
                   },
@@ -264,7 +260,11 @@ class _ProfileInfoState extends State<ProfileInfo> {
                                       children: [
                                         SizedBox(
                                           width: AppSizes.size300,
-                                          child: ProfileProvider().phone == null
+                                          child:
+                                              ProfileProvider()
+                                                      .profile
+                                                      ?.phone ==
+                                                  null
                                               ? Text(
                                                   'Ekle',
                                                   style: TextStyle(
@@ -274,7 +274,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                                                   ),
                                                 )
                                               : Text(
-                                                  '+90 ${ProfileProvider().phone}'
+                                                  '+90 ${ProfileProvider().profile?.phone}'
                                                       .toString(),
                                                   style: TextStyle(
                                                     color: AppColors.black,
@@ -342,7 +342,11 @@ class _ProfileInfoState extends State<ProfileInfo> {
                                       children: [
                                         SizedBox(
                                           width: AppSizes.size300,
-                                          child: ProfileProvider().phone == null
+                                          child:
+                                              ProfileProvider()
+                                                      .profile
+                                                      ?.phone ==
+                                                  null
                                               ? Text(
                                                   'Meslek Giriniz',
                                                   style: TextStyle(

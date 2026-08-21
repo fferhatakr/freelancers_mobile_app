@@ -17,7 +17,6 @@ class Tasks extends StatefulWidget {
 }
 
 class _TasksState extends State<Tasks> {
-  final List<Task> taskAll = TaskProvider().value;
   List<Task> _foundTask = [];
 
   @override
@@ -30,9 +29,9 @@ class _TasksState extends State<Tasks> {
     List<Task> result = [];
 
     if (enteredKeyword.isEmpty) {
-      result = taskAll;
+      result = TaskProvider().value;
     } else {
-      result = taskAll
+      result = TaskProvider().value
           .where(
             (task) => task.taskName.toLowerCase().toString().contains(
               enteredKeyword.toLowerCase(),
@@ -114,6 +113,7 @@ class _TasksState extends State<Tasks> {
                           itemCount: _foundTask.length,
                           itemBuilder: (context, index) {
                             final task = _foundTask[index];
+                            print('${task.taskName} -> ${task.id}');
                             return Dismissible(
                               onDismissed: (direction) {
                                 TaskProvider().removeTasks(items: task);

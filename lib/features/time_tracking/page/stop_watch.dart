@@ -18,6 +18,7 @@ class _StopWatchState extends State<StopWatch> {
   String? selectedCustomer;
   String? id;
   String? resultTime;
+
   final SnackBar _noSelected = SnackBar(
     content: Text(StopWatchStrings.noSelected),
     backgroundColor: AppColors.red,
@@ -77,7 +78,7 @@ class _StopWatchState extends State<StopWatch> {
                               children: [
                                 Text('${task.bagliMusteri} '),
                                 Text(
-                                  '${StopWatchStrings.totalDurationPrefix}${WatchRecord().formatDuration(WatchRecord().totalRecord[task.id] ?? Duration.zero)}',
+                                  '${StopWatchStrings.totalDurationPrefix}${WatchRecord().formatDuration(WatchRecord().getDurationById(task.id))}',
                                 ),
                               ],
                             ),
@@ -100,9 +101,10 @@ class _StopWatchState extends State<StopWatch> {
             if (id != null && context.mounted) {
               WatchRecord().addTotalRecord(
                 id!,
-                WatchProvider().stopWatch.elapsed,
-              );
 
+                WatchProvider().stopWatch.elapsed.inMilliseconds,
+              );
+              print('Aranan Id: ${id}');
               ScaffoldMessenger.of(context).showSnackBar(_selected);
               WatchProvider().reset();
             } else if (!context.mounted) {

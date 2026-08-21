@@ -4,7 +4,7 @@ import 'package:freelancer_tracking_system/core/themes/sizing/app_sizes.dart';
 import 'package:freelancer_tracking_system/core/themes/sizing/app_spacing.dart';
 import 'package:freelancer_tracking_system/core/themes/sizing/border_sizes.dart';
 import 'package:freelancer_tracking_system/core/themes/sizing/padding_sizes.dart';
-import 'package:freelancer_tracking_system/providers/client.dart';
+import 'package:freelancer_tracking_system/providers/customer.dart';
 import 'package:freelancer_tracking_system/core/themes/app_theme.dart';
 import 'package:freelancer_tracking_system/features/customer/widgets/customer_form_field.dart';
 

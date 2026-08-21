@@ -6,7 +6,7 @@ import 'package:freelancer_tracking_system/core/themes/sizing/padding_sizes.dart
 import 'package:freelancer_tracking_system/core/utils/date_formatter.dart';
 import 'package:freelancer_tracking_system/features/date/page/date.dart';
 import 'package:freelancer_tracking_system/features/projects/widgets/project_from_field.dart';
-import 'package:freelancer_tracking_system/providers/client.dart';
+import 'package:freelancer_tracking_system/providers/customer.dart';
 import 'package:freelancer_tracking_system/providers/project.dart';
 
 class ProjectAdd extends StatefulWidget {

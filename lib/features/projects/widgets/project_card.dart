@@ -21,50 +21,51 @@ class _ProjectCardState extends State<ProjectCard> {
         widget.project.status?.label.toString() ?? ProjectStrings.tanimlanmadi;
     return InkWell(
       onTap: () async {
-        final status = await showModalBottomSheet<(Status, DateTime, double)>(
-          context: context,
-          builder: (context) {
-            return SizedBox(
-              width: double.infinity,
-              child: Material(
-                child: ListView(
-                  children: [
-                    ListTile(
-                      title: Text(ProjectStrings.bekliyor),
-                      onTap: () {
-                        Navigator.pop(context, (
-                          Status.bekliyor,
-                          DateTime.now(),
-                          widget.project.projectAmount,
-                        ));
-                      },
+        final status =
+            await showModalBottomSheet<(ProjectStatus, DateTime, double)>(
+              context: context,
+              builder: (context) {
+                return SizedBox(
+                  width: double.infinity,
+                  child: Material(
+                    child: ListView(
+                      children: [
+                        ListTile(
+                          title: Text(ProjectStrings.bekliyor),
+                          onTap: () {
+                            Navigator.pop(context, (
+                              ProjectStatus.bekliyor,
+                              DateTime.now(),
+                              widget.project.projectAmount,
+                            ));
+                          },
+                        ),
+                        ListTile(
+                          onTap: () {
+                            Navigator.pop(context, (
+                              ProjectStatus.devamEdiyor,
+                              DateTime.now(),
+                              widget.project.projectAmount,
+                            ));
+                          },
+                          title: Text(ProjectStrings.devamEdiyor),
+                        ),
+                        ListTile(
+                          onTap: () {
+                            Navigator.pop(context, (
+                              ProjectStatus.tamamlandi,
+                              DateTime.now(),
+                              widget.project.projectAmount,
+                            ));
+                          },
+                          title: Text(ProjectStrings.tamamlandi),
+                        ),
+                      ],
                     ),
-                    ListTile(
-                      onTap: () {
-                        Navigator.pop(context, (
-                          Status.devamEdiyor,
-                          DateTime.now(),
-                          widget.project.projectAmount,
-                        ));
-                      },
-                      title: Text(ProjectStrings.devamEdiyor),
-                    ),
-                    ListTile(
-                      onTap: () {
-                        Navigator.pop(context, (
-                          Status.tamamlandi,
-                          DateTime.now(),
-                          widget.project.projectAmount,
-                        ));
-                      },
-                      title: Text(ProjectStrings.tamamlandi),
-                    ),
-                  ],
-                ),
-              ),
+                  ),
+                );
+              },
             );
-          },
-        );
 
         if (status != null) {
           ProjectProvider().updateStatus(
@@ -118,21 +119,12 @@ class _ProjectCardState extends State<ProjectCard> {
   }
 }
 
-enum Status {
-  tamamlandi('Tamamlandı'),
-  bekliyor('Bekliyor'),
-  devamEdiyor('Devam Ediyor');
-
-  final String label;
-  const Status(this.label);
-}
-
-dynamic checkStatusColor(Status? status) {
-  if (status == Status.bekliyor) {
+dynamic checkStatusColor(ProjectStatus? status) {
+  if (status == ProjectStatus.bekliyor) {
     return AppColors.projectListColorOrange;
-  } else if (status == Status.devamEdiyor) {
+  } else if (status == ProjectStatus.devamEdiyor) {
     return AppColors.projectListColorBlue;
-  } else if (status == Status.tamamlandi) {
+  } else if (status == ProjectStatus.tamamlandi) {
     return AppColors.projectListColorGreen;
   }
 }
