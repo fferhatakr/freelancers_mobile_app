@@ -23,12 +23,10 @@ class CustomerFormField extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: AppSizes.size80,
-      width: double.infinity,
-      decoration: clientAddDecartion(),
+    return Card(
+      color: AppColors.white,
       child: ListTile(
-        leading: Icon(icon, size: AppSizes.size24, color: AppColors.green),
+        leading: Icon(icon, size: AppSizes.size24, color: AppColors.black),
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -59,12 +57,5 @@ class CustomerFormField extends StatelessWidget {
 
   TextStyle _titleStyle() {
     return TextStyle(fontSize: AppSizes.size14, fontWeight: FontWeight.bold);
-  }
-
-  BoxDecoration clientAddDecartion() {
-    return BoxDecoration(
-      color: AppColors.white,
-      borderRadius: BorderRadius.all(Radius.circular(AppRadius.r20)),
-    );
   }
 }

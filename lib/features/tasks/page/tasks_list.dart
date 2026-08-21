@@ -50,21 +50,12 @@ class _TasksState extends State<Tasks> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              TaskStrings.tasks,
-              style: TextStyle(
-                fontSize: AppSizes.size24,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Text(
-              TaskStrings.tasksSubtitle,
-              style: TextStyle(fontSize: AppSizes.size14),
-            ),
-          ],
+        title: Text(
+          TaskStrings.tasks,
+          style: TextStyle(
+            fontSize: AppSizes.size24,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         actions: [
           Padding(
@@ -74,7 +65,7 @@ class _TasksState extends State<Tasks> {
               height: AppSizes.size40,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: AppColors.grey,
+                color: AppColors.black,
               ),
               child: IconButton(
                 onPressed: () {
@@ -86,12 +77,12 @@ class _TasksState extends State<Tasks> {
           ),
         ],
       ),
-      body: Padding(
-        padding: EdgeInsets.all(AppPadding.p8),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            TextField(
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: EdgeInsets.all(AppPadding.p10),
+            child: TextField(
               onChanged: (value) {
                 _runFilter(value);
               },
@@ -104,36 +95,36 @@ class _TasksState extends State<Tasks> {
                 prefixIcon: Icon(Icons.search),
               ),
             ),
-            Expanded(
-              child: _foundTask.isNotEmpty
-                  ? ValueListenableBuilder(
-                      valueListenable: TaskProvider(),
-                      builder: (context, taskAll, child) {
-                        return ListView.builder(
-                          itemCount: _foundTask.length,
-                          itemBuilder: (context, index) {
-                            final task = _foundTask[index];
-                            print('${task.taskName} -> ${task.id}');
-                            return Dismissible(
-                              onDismissed: (direction) {
-                                TaskProvider().removeTasks(items: task);
-                              },
-                              key: ValueKey(task.id),
-                              child: TasksCard(task: task),
-                            );
-                          },
-                        );
-                      },
-                    )
-                  : Center(
-                      child: const Text(
-                        TaskStrings.foundTask,
-                        style: TextStyle(fontSize: AppSizes.size24),
-                      ),
+          ),
+          Expanded(
+            child: _foundTask.isNotEmpty
+                ? ValueListenableBuilder(
+                    valueListenable: TaskProvider(),
+                    builder: (context, taskAll, child) {
+                      return ListView.builder(
+                        itemCount: _foundTask.length,
+                        itemBuilder: (context, index) {
+                          final task = _foundTask[index];
+                          print('${task.taskName} -> ${task.id}');
+                          return Dismissible(
+                            onDismissed: (direction) {
+                              TaskProvider().removeTasks(items: task);
+                            },
+                            key: ValueKey(task.id),
+                            child: TasksCard(task: task),
+                          );
+                        },
+                      );
+                    },
+                  )
+                : Center(
+                    child: const Text(
+                      TaskStrings.foundTask,
+                      style: TextStyle(fontSize: AppSizes.size24),
                     ),
-            ),
-          ],
-        ),
+                  ),
+          ),
+        ],
       ),
     );
   }

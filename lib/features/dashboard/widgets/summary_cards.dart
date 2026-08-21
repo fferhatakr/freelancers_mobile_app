@@ -9,64 +9,6 @@ import 'package:freelancer_tracking_system/features/projects/pages/project_list.
 import 'package:freelancer_tracking_system/providers/project.dart';
 import 'package:freelancer_tracking_system/providers/theme.dart';
 
-class _SummaryCard extends StatelessWidget {
-  final IconData icon;
-  final Color color;
-  final String title;
-  final String value;
-
-  const _SummaryCard({
-    required this.icon,
-    required this.color,
-    required this.title,
-    required this.value,
-  });
-  final double _private = 23;
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      color: AppColors.cardDarkBackground,
-      child: SizedBox(
-        height: AppSizes.size120,
-        width: AppSizes.size108,
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.all(AppPadding.p10),
-              child: Column(
-                spacing: AppSpacing.xs,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    width: _private,
-                    height: _private,
-                    decoration: BoxDecoration(
-                      color: color,
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(AppRadius.r10),
-                      ),
-                    ),
-                    child: Icon(icon, color: AppColors.realWhite),
-                  ),
-                  Text(title, style: cardtitle1Style()),
-                  Text(
-                    value,
-                    style: TextStyle(
-                      color: AppColors.realWhite,
-                      fontSize: AppSizes.size14,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
 class SummaryCards extends StatelessWidget {
   const SummaryCards({super.key});
 
@@ -75,38 +17,68 @@ class SummaryCards extends StatelessWidget {
     return ListenableBuilder(
       listenable: ThemeProvider(),
       builder: (context, child) {
-        return InkWell(
-          onTap: () {},
-          child: Container(
-            height: AppSizes.size120,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(AppRadius.r10)),
-              color: AppColors.cardDarkBackground,
-            ),
+        return Container(
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.blueGrey),
+            borderRadius: BorderRadius.all(Radius.circular(AppRadius.r20)),
+            color: AppColors.white,
+          ),
+          width: double.infinity,
+          height: AppSizes.size108,
+          child: Padding(
+            padding: EdgeInsets.all(AppPadding.p10),
             child: Row(
               children: [
                 Expanded(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      _SummaryCard(
-                        icon: Icons.home,
-                        color: AppColors.purpleAccent,
-                        title: DashboardStrings.aktifProjelerim,
-                        value: '${ProjectList().allProject.length}',
+                      Column(
+                        spacing: AppSpacing.xs,
+                        children: [
+                          Icon(Icons.work_outline),
+                          Text(
+                            '${ProjectList().allProject.length}',
+                            style: _sumamryCardTwoStyle(),
+                          ),
+                          Text(
+                            DashboardStrings.projelerim,
+                            style: _summaryCardTextStyle(),
+                          ),
+                        ],
                       ),
-                      _SummaryCard(
-                        icon: Icons.check,
-                        color: AppColors.green,
-                        title: DashboardStrings.tamamlananProjeler,
-                        value: '${ProjectProvider().completedProject.length}',
+                      VerticalDivider(color: AppColors.white),
+
+                      Column(
+                        spacing: AppSpacing.xs,
+                        children: [
+                          Icon(Icons.check_circle_outline_sharp),
+
+                          Text(
+                            '${ProjectProvider().completedProject.length}/${ProjectList().allProject.length}',
+                            style: _sumamryCardTwoStyle(),
+                          ),
+                          Text(
+                            DashboardStrings.tamamlanan,
+                            style: _summaryCardTextStyle(),
+                          ),
+                        ],
                       ),
-                      _SummaryCard(
-                        icon: Icons.currency_lira,
-                        color: AppColors.amber,
-                        title: DashboardStrings.bekleyenOdeme,
-                        value: '${ProjectProvider().calPendingAndOngoing()} ₺',
+                      VerticalDivider(color: AppColors.white),
+                      Column(
+                        spacing: AppSpacing.xs,
+                        children: [
+                          Icon(Icons.currency_lira_outlined),
+
+                          Text(
+                            '${ProjectProvider().calPendingAndOngoing()} ₺',
+                            style: _sumamryCardTwoStyle(),
+                          ),
+                          Text(
+                            DashboardStrings.bekleyenOdeme,
+                            style: _summaryCardTextStyle(),
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -116,6 +88,25 @@ class SummaryCards extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+
+  TextStyle _sumamryCardTwoStyle() {
+    return TextStyle(
+      fontSize: AppSizes.size20,
+      color: AppColors.realBlack,
+      fontWeight: FontWeight.bold,
+    );
+  }
+
+  TextStyle _summaryCardTextStyle() {
+    return TextStyle(color: AppColors.realBlack, fontWeight: FontWeight.w500);
+  }
+
+  BoxDecoration _boxDecoration() {
+    return BoxDecoration(
+      borderRadius: BorderRadius.all(Radius.circular(AppRadius.r10)),
+      color: const Color.fromARGB(255, 38, 38, 38),
     );
   }
 }

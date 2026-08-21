@@ -43,7 +43,7 @@ class _CustomerAddScreenState extends State<CustomerAddScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.green,
+        backgroundColor: AppColors.white,
         title: _clientAddAppBarTitle(),
       ),
       body: SingleChildScrollView(
@@ -58,10 +58,7 @@ class _CustomerAddScreenState extends State<CustomerAddScreen> {
   EdgeInsets _paddingSizeTen() => EdgeInsets.all(AppPadding.p10);
 
   Text _clientAddAppBarTitle() {
-    return Text(
-      CustomerStrings.yeniMusteri,
-      style: TextStyle(color: AppColors.white, fontWeight: FontWeight.bold),
-    );
+    return Text(CustomerStrings.yeniMusteri);
   }
 
   Column _clientAddCards(BuildContext context) {

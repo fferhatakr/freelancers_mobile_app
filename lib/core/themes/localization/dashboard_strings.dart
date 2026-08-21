@@ -2,9 +2,9 @@
 class DashboardStrings {
   DashboardStrings._();
 
-  static const String aktifProjelerim = 'Toplam Projelerim';
-  static const String tamamlananProjeler = 'Tamamlanan Projeler';
-  static const String bekleyenOdeme = 'Bekleyen Ödeme';
+  static const String projelerim = 'Toplam';
+  static const String tamamlanan = 'Tamamlandı';
+  static const String bekleyenOdeme = 'Bekleyen';
   static const String hosgeldinKullanici = 'Hoşgeldin Ferhat';
   static const String hizliIslemler = 'Hızlı İşlemler';
   static const String aktifProje = 'Aktif Projeler';
@@ -16,5 +16,5 @@ class DashboardStrings {
   static const String kurumsalWebsite = 'Kurumsal Website';
   static const String webTasarim = 'Web Tasarim';
 
-  static const String haftaliKazanc = 'Haftalık Kazanç';
+  static const String haftaliKazanc = 'Kazanç';
 }

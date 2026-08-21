@@ -77,14 +77,14 @@ class _ProjectCardState extends State<ProjectCard> {
         }
       },
       child: Card(
-        color: checkStatusColor(widget.project.status),
+        color: AppColors.surfaceBlueGreyLight,
         elevation: 15,
-        shape: BeveledRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(AppRadius.r2)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(AppRadius.r20)),
         ),
         child: ListTile(
           leading: CircleAvatar(
-            backgroundColor: AppColors.grey,
+            backgroundColor: AppColors.black,
             child: Icon(Icons.assignment_outlined, color: AppColors.white),
           ),
           title: Text(

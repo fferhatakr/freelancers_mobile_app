@@ -11,28 +11,22 @@ import 'package:freelancer_tracking_system/features/projects/pages/project_add.d
 import 'package:freelancer_tracking_system/features/tasks/page/task_add.dart';
 
 class _FastCard extends StatelessWidget {
-  final Color iconContainerColorOne;
   final IconData iconOne;
   final String title1;
   final String title2;
-  final Color iconContainerColorTwo;
   final VoidCallback onTap;
-  final Color iconTwoColor;
 
   const _FastCard({
-    required this.iconContainerColorOne,
     required this.iconOne,
     required this.title1,
     required this.title2,
-    required this.iconContainerColorTwo,
-    required this.iconTwoColor,
     required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: AppColors.cardDarkBackground,
+      color: AppColors.white,
       shape: RoundedRectangleBorder(borderRadius: cardBorderRadius()),
       child: Padding(
         padding: cardPadding(),
@@ -45,18 +39,20 @@ class _FastCard extends StatelessWidget {
                 spacing: AppSpacing.sm,
                 children: [
                   SizedBox(
-                    width: AppSizes.size32,
+                    width: AppSizes.size40,
                     child: Container(
                       height: FastTransactionsCardStyle.sizeContainer,
                       width: FastTransactionsCardStyle.sizeContainer,
                       decoration: BoxDecoration(
+                        border: Border.all(
+                          color: AppColors.surfaceBlueGreyLight,
+                        ),
                         borderRadius: cardBorderRadius(),
-                        color: iconContainerColorOne,
                       ),
                       child: Icon(
                         iconOne,
-                        color: AppColors.white,
-                        size: AppSizes.size16,
+                        color: AppColors.black,
+                        size: AppSizes.size20,
                       ),
                     ),
                   ),
@@ -80,12 +76,11 @@ class _FastCard extends StatelessWidget {
                         borderRadius: BorderRadius.all(
                           Radius.circular(AppRadius.r10),
                         ),
-                        color: iconContainerColorTwo,
                       ),
                       child: Icon(
-                        Icons.arrow_forward_ios,
+                        Icons.arrow_forward_ios_outlined,
                         size: AppSizes.size16,
-                        color: iconTwoColor,
+                        color: AppColors.black,
                       ),
                     ),
                   ),
@@ -122,34 +117,25 @@ class _FastTransactionsState extends State<FastTransactions> {
         SizedBox(height: AppSizes.size12),
 
         _FastCard(
-          iconContainerColorOne: AppColors.green,
-          iconOne: Icons.person_add,
+          iconOne: Icons.person_add_outlined,
           title1: CustomerStrings.yeniMusteri,
           title2: CustomerStrings.musteriKaydiEkle,
-          iconContainerColorTwo: AppColors.greenPale,
-          iconTwoColor: AppColors.greenDark,
           onTap: () {
             AppNavigation.navigateTo(context, CustomerAddScreen());
           },
         ),
         _FastCard(
-          iconContainerColorOne: AppColors.amber,
-          iconOne: Icons.assignment_add,
+          iconOne: Icons.assignment_outlined,
           title1: ProjectStrings.projeEkle,
           title2: ProjectStrings.yeniKazancSagla,
-          iconContainerColorTwo: AppColors.amberLight,
-          iconTwoColor: AppColors.amber,
           onTap: () {
             AppNavigation.navigateTo(context, ProjectAdd());
           },
         ),
         _FastCard(
-          iconContainerColorOne: AppColors.red,
-          iconOne: Icons.add_task,
+          iconOne: Icons.add_task_outlined,
           title1: ProjectStrings.gorevEkle,
           title2: ProjectStrings.projeniSaglamaAl,
-          iconContainerColorTwo: AppColors.redLight,
-          iconTwoColor: AppColors.red,
           onTap: () {
             AppNavigation.navigateTo(context, TasksAdd());
           },
@@ -165,12 +151,12 @@ BorderRadius cardBorderRadius() => BorderRadius.circular(AppRadius.r10);
 EdgeInsetsGeometry cardPadding() => EdgeInsetsGeometry.all(AppPadding.p10);
 
 TextStyle title2Style() {
-  return TextStyle(color: AppColors.grey, fontSize: AppSizes.size12);
+  return TextStyle(color: AppColors.black, fontSize: AppSizes.size12);
 }
 
 TextStyle title1Style() {
   return TextStyle(
-    color: Colors.white,
+    color: Colors.black,
     fontWeight: FontWeight.bold,
     fontSize: AppSizes.size14,
   );

@@ -30,7 +30,7 @@ class ProjectFormField extends StatelessWidget {
         ),
         child: Center(
           child: ListTile(
-            leading: Icon(_icon, size: AppSizes.size24, color: AppColors.amber),
+            leading: Icon(_icon, size: AppSizes.size24, color: AppColors.black),
             title: Text(
               _title,
               style: TextStyle(
@@ -84,7 +84,7 @@ class SelectionTile extends StatelessWidget {
         ),
         child: ListTile(
           onTap: ontap,
-          leading: Icon(_icon2, size: AppSizes.size24, color: AppColors.amber),
+          leading: Icon(_icon2, size: AppSizes.size24, color: AppColors.black),
           title: Text(
             _title2,
             style: TextStyle(

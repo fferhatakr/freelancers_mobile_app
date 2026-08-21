@@ -65,6 +65,10 @@ dependencies:
   #Build Runner
   build_runner: ^2.4.13
 
+
+  #BottomNavigationBar
+  salomon_bottom_bar: ^3.3.2
+
   
 
 

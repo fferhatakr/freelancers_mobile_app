@@ -47,6 +47,7 @@ class CustomerCard extends StatelessWidget {
         );
       },
       child: Card(
+        color: AppColors.surfaceBlueGreyLight,
         shape: _listTileShape(),
         child: ListTile(
           leading: _CircleAvatar(),
@@ -70,7 +71,7 @@ class CustomerCard extends StatelessWidget {
               ),
             ],
           ),
-          trailing: Icon(Icons.chevron_right_outlined),
+          trailing: Icon(Icons.chevron_right_outlined, color: AppColors.black),
         ),
       ),
     );
@@ -87,8 +88,8 @@ class _CircleAvatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CircleAvatar(
-      backgroundColor: AppColors.blueAccent,
-      child: Icon(ClientsStyle.personIcon, color: AppColors.black),
+      backgroundColor: AppColors.black,
+      child: Icon(ClientsStyle.personIcon, color: AppColors.white),
     );
   }
 }

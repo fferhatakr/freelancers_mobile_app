@@ -24,16 +24,20 @@ class _StatisticsLinerState extends State<StatisticsLiner> {
       listenable: ThemeProvider(),
       builder: (context, child) {
         return Padding(
-          padding: const EdgeInsets.only(right: 11, left: 0, top: 10),
+          padding: const EdgeInsets.only(right: 20, left: 0, top: 10),
           child: Column(
             spacing: AppSizes.size12,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                DashboardStrings.haftaliKazanc,
-                style: TextStyle(
-                  fontSize: AppSizes.size16,
-                  fontWeight: FontWeight.bold,
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  DashboardStrings.haftaliKazanc,
+                  style: TextStyle(
+                    fontSize: AppSizes.size16,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.black,
+                  ),
                 ),
               ),
               Container(
@@ -45,15 +49,11 @@ class _StatisticsLinerState extends State<StatisticsLiner> {
                 height: AppSizes.size250,
                 width: double.infinity,
 
-                child: Padding(
-                  padding: const EdgeInsets.only(top: AppSizes.size12),
+                child: LineChart(
+                  duration: Duration(milliseconds: 150),
+                  curve: Curves.linear,
 
-                  child: LineChart(
-                    duration: Duration(milliseconds: 150),
-                    curve: Curves.linear,
-
-                    _lineChartData(),
-                  ),
+                  _lineChartData(),
                 ),
               ),
             ],
@@ -85,6 +85,15 @@ class _StatisticsLinerState extends State<StatisticsLiner> {
           sideTitles: SideTitles(
             showTitles: true,
             reservedSize: AppSizes.size48,
+            getTitlesWidget: (value, meta) {
+              return SideTitleWidget(
+                meta: meta,
+                child: Text(
+                  '${(value ~/ 1000).toString()}K',
+                  style: TextStyle(color: AppColors.black),
+                ),
+              );
+            },
           ),
         ),
 
@@ -97,7 +106,13 @@ class _StatisticsLinerState extends State<StatisticsLiner> {
             getTitlesWidget: (value, meta) {
               int index = value.toInt();
               if (index >= zeroK && index < gunler.length) {
-                return SideTitleWidget(meta: meta, child: Text(gunler[index]));
+                return SideTitleWidget(
+                  meta: meta,
+                  child: Text(
+                    gunler[index],
+                    style: TextStyle(color: AppColors.black),
+                  ),
+                );
               }
               return SizedBox.shrink();
             },
@@ -110,8 +125,8 @@ class _StatisticsLinerState extends State<StatisticsLiner> {
       minY: zeroK,
       maxY: 200000,
       maxX: 6,
-      backgroundColor: AppColors.chartBackground,
-      gridData: FlGridData(show: true),
+      backgroundColor: AppColors.white,
+      gridData: FlGridData(show: true, drawVerticalLine: false),
 
       lineBarsData: [
         LineChartBarData(
@@ -121,9 +136,7 @@ class _StatisticsLinerState extends State<StatisticsLiner> {
             (index) => FlSpot(index.toDouble(), veriler[index]),
           ),
           show: true, // Çubuk çizgisinini gösterilip Gösteriliceğini söyler.
-          gradient: LinearGradient(
-            colors: [AppColors.black, AppColors.red, AppColors.purple],
-          ),
+          gradient: LinearGradient(colors: [AppColors.white, AppColors.black]),
           barWidth: AppSizes.size4,
           isCurved: true,
           shadow: Shadow(color: AppColors.grey, blurRadius: AppRadius.r4),

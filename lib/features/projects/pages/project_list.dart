@@ -41,6 +41,7 @@ class _ProjectListState extends State<ProjectList> {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(AppRadius.r10),
                   ),
+
                   labelText: ProjectStrings.hizliBul,
                   hintText: ProjectStrings.ornek,
                   hintStyle: TextStyle(color: AppColors.grey),

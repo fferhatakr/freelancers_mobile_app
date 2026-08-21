@@ -27,12 +27,12 @@ class CustomerStrings {
   static const String adresAciklama = 'Adres Bilgileri(opsiyonel)';
 
   static const String not = 'Not Ekle';
-  static const String notAciklama = 'Müşterin ile ilgili not ekle(opsiyonel)';
+  static const String notAciklama = 'Not ekle';
   static const String notlarTitle = 'Notlar';
 
   static const String kaynakTitle = 'Müşteri Kaynağı';
   static const String kaynak = 'Kaynak';
-  static const String kaynakAciklama = 'Müşterini Nereden Buldun(opsiyonel)';
+  static const String kaynakAciklama = 'Referans';
 
   static const String musteriDetay = 'Müşteri Detayı';
   static const String iletisimBilgileri = 'İletişim Bilgileri';

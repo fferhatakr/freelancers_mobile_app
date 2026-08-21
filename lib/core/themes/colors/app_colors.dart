@@ -5,6 +5,8 @@ import 'package:freelancer_tracking_system/providers/theme.dart';
 class AppColors {
   AppColors._(); // instantiate edilmesin diye private constructor
 
+  static const Color darkOrange = Color(0xFFE8683F);
+  static const Color lightOrange = Color(0xFFFFAB91);
   static Color get private =>
       ThemeProvider().isDarkMode ? Colors.white : Colors.black;
 
@@ -32,6 +34,13 @@ class AppColors {
       : Colors.green.shade100;
   static Color get cardBackground =>
       ThemeProvider().isDarkMode ? Colors.grey[900]! : Colors.white;
+  static Color get classicColor => ThemeProvider().isDarkMode
+      ? Color(0x1E293B)
+      : AppColors.surfaceBlueGreyLight;
+
+  static Color get classicTextColor =>
+      ThemeProvider().isDarkMode ? AppColors.antrasit : Color(0xF8FAFC);
+  static const Color antrasit = Color(0xFF1E293B);
   static const Color danger = Color(0xFFE53935);
   static const Color success = Color(0xFF4CAF50);
   static const Color warning = Color(0xFFFFA000);

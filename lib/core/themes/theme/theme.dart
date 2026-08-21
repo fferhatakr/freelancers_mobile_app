@@ -7,7 +7,7 @@ class ThemeX {
   ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
     primaryColor: AppColors.blueAccent,
-
+    scaffoldBackgroundColor: Colors.white,
     appBarTheme: AppBarTheme(
       actionsIconTheme: IconThemeData(color: AppColors.black),
       systemOverlayStyle: SystemUiOverlayStyle.dark,
@@ -15,7 +15,8 @@ class ThemeX {
       backgroundColor: Colors.transparent,
       titleTextStyle: TextStyle(
         color: AppColors.black,
-        fontSize: AppSizes.size16,
+        fontSize: AppSizes.size20,
+        fontWeight: FontWeight.bold,
       ),
     ),
   );
@@ -23,7 +24,7 @@ class ThemeX {
   ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
     primaryColor: AppColors.amber,
-
+    scaffoldBackgroundColor: Color.fromARGB(0, 21, 37, 74),
     appBarTheme: AppBarTheme(
       actionsIconTheme: IconThemeData(color: AppColors.black),
       systemOverlayStyle: SystemUiOverlayStyle.light,

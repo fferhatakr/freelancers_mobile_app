@@ -1,6 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/core/navigation/app_navigation.dart';
+import 'package:freelancer_tracking_system/core/themes/colors/app_colors.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/app_sizes.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/app_spacing.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/border_sizes.dart';
 import 'package:freelancer_tracking_system/core/themes/sizing/padding_sizes.dart';
 import 'package:freelancer_tracking_system/features/dashboard/widgets/summary_cards.dart';
 import 'package:freelancer_tracking_system/features/dashboard/widgets/fast_transactions.dart';
@@ -22,7 +26,7 @@ class _DashboardState extends State<Dashboard> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          '$_welcome ${FirebaseAuth.instance.currentUser?.displayName}',
+          '$_welcome\n${FirebaseAuth.instance.currentUser?.displayName}',
         ),
         actions: [
           IconButton(onPressed: () {}, icon: Icon(Icons.notifications)),
@@ -37,7 +41,20 @@ class _DashboardState extends State<Dashboard> {
       body: SingleChildScrollView(
         padding: EdgeInsets.all(AppPadding.p10),
         child: Column(
-          children: [SummaryCards(), StatisticsLiner(), FastTransactions()],
+          spacing: AppSpacing.md,
+          children: [
+            SummaryCards(),
+            Container(
+              width: double.infinity,
+              height: 320,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(AppRadius.r10)),
+                color: AppColors.white,
+              ),
+              child: StatisticsLiner(),
+            ),
+            FastTransactions(),
+          ],
         ),
       ),
     );

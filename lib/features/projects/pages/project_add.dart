@@ -36,7 +36,7 @@ class _ProjectAddState extends State<ProjectAdd> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.amber,
+        backgroundColor: AppColors.white,
         title: Text(ProjectStrings.projeEkle),
       ),
       body: SingleChildScrollView(
@@ -142,7 +142,7 @@ class _ProjectAddState extends State<ProjectAdd> {
                     selectedEndDate = date;
                   });
                 },
-                iconColor: AppColors.amber,
+                iconColor: AppColors.black,
               ),
               DatePicture(
                 icon: Icons.calendar_month,
@@ -153,7 +153,7 @@ class _ProjectAddState extends State<ProjectAdd> {
                     selectedStartDate = date;
                   });
                 },
-                iconColor: AppColors.amber,
+                iconColor: AppColors.black,
               ),
               ProjectFormField(
                 keyboardType: TextInputType.numberWithOptions(),
@@ -190,10 +190,10 @@ class _ProjectAddState extends State<ProjectAdd> {
                   spacing: AppSpacing.sm,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.save, color: AppColors.amber),
+                    Icon(Icons.save, color: AppColors.black),
                     Text(
                       ProjectStrings.kaydet,
-                      style: TextStyle(color: AppColors.amber),
+                      style: TextStyle(color: AppColors.black),
                     ),
                   ],
                 ),

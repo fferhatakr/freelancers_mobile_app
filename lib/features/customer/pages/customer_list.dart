@@ -131,7 +131,7 @@ class _CustomerListState extends State<CustomerList> {
 
   CircleAvatar _personAdd() {
     return CircleAvatar(
-      backgroundColor: AppColors.blueAccent,
+      backgroundColor: AppColors.black,
       child: Icon(Icons.person_add, color: AppColors.white),
     );
   }
