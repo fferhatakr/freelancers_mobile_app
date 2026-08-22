@@ -77,20 +77,26 @@ class _ProjectCardState extends State<ProjectCard> {
         }
       },
       child: Card(
-        color: AppColors.surfaceBlueGreyLight,
+        color: AppColors.white,
         elevation: 15,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(AppRadius.r20)),
+          borderRadius: BorderRadius.all(Radius.circular(AppRadius.r12)),
         ),
         child: ListTile(
           leading: CircleAvatar(
-            backgroundColor: AppColors.black,
-            child: Icon(Icons.assignment_outlined, color: AppColors.white),
+            backgroundColor: Color.fromRGBO(37, 99, 235, 0.1),
+            child: Text(
+              widget.project.projectName.substring(0, 3),
+              style: TextStyle(
+                fontSize: AppSizes.size14,
+                color: Color.fromRGBO(37, 99, 235, 1.0),
+              ),
+            ),
           ),
           title: Text(
             widget.project.projectName,
             style: TextStyle(
-              color: AppColors.realBlack,
+              color: AppColors.black,
               fontSize: AppSizes.size14,
               fontWeight: FontWeight.w700,
             ),
@@ -100,19 +106,13 @@ class _ProjectCardState extends State<ProjectCard> {
             children: [
               Text(
                 widget.project.selectedCustomer.toString(),
-                style: TextStyle(color: AppColors.realBlack),
+                style: TextStyle(color: AppColors.black),
               ),
-              Text(
-                result.toString(),
-                style: TextStyle(color: AppColors.realBlack),
-              ),
+              Text(result.toString(), style: TextStyle(color: AppColors.black)),
             ],
           ),
 
-          trailing: Icon(
-            Icons.chevron_right_outlined,
-            color: AppColors.realBlack,
-          ),
+          trailing: Icon(Icons.chevron_right_outlined, color: AppColors.black),
         ),
       ),
     );

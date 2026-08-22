@@ -38,7 +38,7 @@ class CustomerFormField extends StatelessWidget {
                 controller: controlText,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(AppRadius.r10),
+                    borderRadius: BorderRadius.circular(AppRadius.r12),
                   ),
                   hintMaxLines: maxLines ?? AppSizes.size2.toInt(),
                   hint: Text(title2, style: _hintStyle()),

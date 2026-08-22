@@ -66,7 +66,10 @@ class _CustomerListState extends State<CustomerList> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(padding: const EdgeInsets.all(8.0), child: _clientSearch()),
+            Padding(
+              padding: EdgeInsets.all(AppPadding.p10),
+              child: _clientSearch(),
+            ),
             Expanded(
               child: _foundCustomer.isNotEmpty
                   ? ValueListenableBuilder(
@@ -117,11 +120,17 @@ class _CustomerListState extends State<CustomerList> {
       autofocus: true,
       maxLength: GeneralStyle.textFieldMaxLenght,
       decoration: InputDecoration(
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(AppRadius.r10),
+        counterText: '',
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(AppRadius.r12),
+          borderSide: const BorderSide(color: Colors.black, width: 0),
         ),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(AppRadius.r12),
+          borderSide: const BorderSide(color: Colors.black, width: 0),
+        ),
+
         suffixIcon: Icon(Icons.search_outlined),
-        labelText: CommonStrings.hizliArama,
         labelStyle: TextStyle(color: AppColors.black),
         hintText: CommonStrings.musteriAra,
         hintStyle: TextStyle(color: AppColors.black),
@@ -131,8 +140,8 @@ class _CustomerListState extends State<CustomerList> {
 
   CircleAvatar _personAdd() {
     return CircleAvatar(
-      backgroundColor: AppColors.black,
-      child: Icon(Icons.person_add, color: AppColors.white),
+      backgroundColor: AppColors.circleColor,
+      child: Icon(Icons.person_add, color: AppColors.iconColor),
     );
   }
 }

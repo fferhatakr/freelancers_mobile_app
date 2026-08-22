@@ -81,6 +81,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   Card _profileCard(BuildContext context) {
     return Card(
+      color: AppColors.white,
       child: Column(
         children: [
           SettingsCard(
@@ -110,6 +111,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   Card _gorunumCard() {
     return Card(
+      color: AppColors.white,
       child: Column(
         children: [
           SettingsCard(
@@ -123,7 +125,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             height: 50,
             width: double.infinity,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(AppRadius.r10)),
+              borderRadius: BorderRadius.all(Radius.circular(AppRadius.r16)),
             ),
             child: ListenableBuilder(
               listenable: ThemeProvider(),
@@ -152,6 +154,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   Card _destekCard(BuildContext context) {
     return Card(
+      color: AppColors.white,
       child: Column(
         children: [
           SettingsCard(

@@ -108,7 +108,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                     width: double.infinity,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(
-                        Radius.circular(AppRadius.r10),
+                        Radius.circular(AppRadius.r12),
                       ),
                       color: AppColors.white,
                     ),
@@ -178,7 +178,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                     width: double.infinity,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(
-                        Radius.circular(AppRadius.r10),
+                        Radius.circular(AppRadius.r12),
                       ),
                       color: AppColors.white,
                     ),
@@ -236,7 +236,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                     width: double.infinity,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(
-                        Radius.circular(AppRadius.r10),
+                        Radius.circular(AppRadius.r16),
                       ),
                       color: AppColors.white,
                     ),
@@ -318,7 +318,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                     width: double.infinity,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(
-                        Radius.circular(AppRadius.r10),
+                        Radius.circular(AppRadius.r16),
                       ),
                       color: AppColors.white,
                     ),
@@ -429,7 +429,7 @@ class _EditingTextField extends StatelessWidget {
           controller: controller,
           decoration: InputDecoration(
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(AppRadius.r10),
+              borderRadius: BorderRadius.circular(AppRadius.r12),
             ),
             counterText: '',
             labelText: labelText,

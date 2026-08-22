@@ -25,7 +25,7 @@ class ProjectFormField extends StatelessWidget {
       child: Container(
         height: AppSizes.size76,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(AppRadius.r10)),
+          borderRadius: BorderRadius.all(Radius.circular(AppRadius.r12)),
           color: AppColors.white,
         ),
         child: Center(
@@ -48,7 +48,9 @@ class ProjectFormField extends StatelessWidget {
                 controller: controller,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(AppRadius.r12),
+                    ),
                   ),
                   hint: Text(_title2, style: TextStyle(color: AppColors.black)),
                 ),
@@ -79,7 +81,7 @@ class SelectionTile extends StatelessWidget {
       child: Container(
         height: AppSizes.size76,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(AppRadius.r10)),
+          borderRadius: BorderRadius.all(Radius.circular(AppRadius.r16)),
           color: AppColors.white,
         ),
         child: ListTile(

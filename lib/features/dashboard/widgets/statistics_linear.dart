@@ -43,7 +43,7 @@ class _StatisticsLinerState extends State<StatisticsLiner> {
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(
-                    Radius.circular(AppSizes.size12),
+                    Radius.circular(AppSizes.size16),
                   ),
                 ),
                 height: AppSizes.size250,
@@ -68,8 +68,8 @@ class _StatisticsLinerState extends State<StatisticsLiner> {
       borderData: FlBorderData(
         show: true,
         border: Border(
-          left: BorderSide(width: AppSizes.size2),
-          bottom: BorderSide(width: AppSizes.size2),
+          left: BorderSide(width: AppSizes.size2, color: AppColors.black),
+          bottom: BorderSide(width: AppSizes.size2, color: AppColors.black),
           top: BorderSide.none,
           right: BorderSide.none,
         ),
@@ -130,7 +130,10 @@ class _StatisticsLinerState extends State<StatisticsLiner> {
 
       lineBarsData: [
         LineChartBarData(
-          belowBarData: BarAreaData(show: true, color: AppColors.greyLight),
+          belowBarData: BarAreaData(
+            show: true,
+            color: Color.fromRGBO(0, 230, 118, 0.2),
+          ),
           spots: List.generate(
             7,
             (index) => FlSpot(index.toDouble(), veriler[index]),

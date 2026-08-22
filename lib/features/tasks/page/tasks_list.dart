@@ -65,13 +65,13 @@ class _TasksState extends State<Tasks> {
               height: AppSizes.size40,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: AppColors.black,
+                color: AppColors.circleColor,
               ),
               child: IconButton(
                 onPressed: () {
                   AppNavigation.navigateTo(context, TasksAdd());
                 },
-                icon: Icon(Icons.add, color: AppColors.white),
+                icon: Icon(Icons.add, color: AppColors.iconColor),
               ),
             ),
           ),
@@ -81,16 +81,22 @@ class _TasksState extends State<Tasks> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsets.all(AppPadding.p10),
+            padding: EdgeInsets.all(AppPadding.p20),
             child: TextField(
               onChanged: (value) {
                 _runFilter(value);
               },
               autofocus: true,
               decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(AppRadius.r10),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(AppRadius.r12),
+                  borderSide: const BorderSide(color: Colors.black, width: 0),
                 ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(AppRadius.r12),
+                  borderSide: const BorderSide(color: Colors.black, width: 0),
+                ),
+
                 hintText: TaskStrings.foundTask,
                 prefixIcon: Icon(Icons.search),
               ),

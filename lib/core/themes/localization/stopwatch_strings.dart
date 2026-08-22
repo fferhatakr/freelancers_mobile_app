@@ -2,7 +2,7 @@ class StopWatchStrings {
   StopWatchStrings._();
 
   static const String appBarTitle = 'Kronometre Başlat';
-  static const String saveButton = 'Save';
+  static const String saveButton = 'Kaydet';
 
   static const String noSelected = 'Görev Seçilmedi';
   static const String startStopWatch = 'Kronometre Başlatılmadı';

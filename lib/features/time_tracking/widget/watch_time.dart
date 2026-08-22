@@ -29,7 +29,7 @@ class _WatchTimeState extends State<WatchTime> {
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       border: Border.all(
-                        color: AppColors.blueAccent,
+                        color: Color.fromRGBO(71, 85, 105, 1.0),
                         width: AppSizes.size4,
                       ),
                     ),
@@ -47,30 +47,36 @@ class _WatchTimeState extends State<WatchTime> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.black,
-                      ),
-                      onPressed: () {
-                        WatchProvider().stop();
-                      },
-                      child: Icon(
-                        Icons.stop,
-                        size: AppSizes.size32,
-                        color: AppColors.white,
+                    CircleAvatar(
+                      backgroundColor: Color.fromRGBO(100, 116, 139, 0.2),
+                      radius: 30,
+                      child: CircleAvatar(
+                        backgroundColor: Color.fromRGBO(71, 85, 105, 1.0),
+                        radius: 27,
+                        child: IconButton(
+                          onPressed: () {
+                            WatchProvider().stop();
+                          },
+                          icon: Icon(Icons.stop),
+                          iconSize: AppSizes.size32,
+                          color: AppColors.white,
+                        ),
                       ),
                     ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.black,
-                      ),
-                      onPressed: () {
-                        WatchProvider().start();
-                      },
-                      child: Icon(
-                        Icons.play_arrow,
-                        size: AppSizes.size32,
-                        color: AppColors.white,
+                    CircleAvatar(
+                      backgroundColor: Color.fromRGBO(100, 116, 139, 0.2),
+                      radius: 30,
+                      child: CircleAvatar(
+                        backgroundColor: Color.fromRGBO(71, 85, 105, 1.0),
+                        radius: 27,
+                        child: IconButton(
+                          onPressed: () {
+                            WatchProvider().start();
+                          },
+                          icon: Icon(Icons.play_arrow_outlined),
+                          iconSize: AppSizes.size32,
+                          color: AppColors.white,
+                        ),
                       ),
                     ),
                   ],

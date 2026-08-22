@@ -10,14 +10,18 @@ class AppColors {
   static Color get private =>
       ThemeProvider().isDarkMode ? Colors.white : Colors.black;
 
-  static Color get white =>
-      ThemeProvider().isDarkMode ? Colors.black : Colors.white;
+  static Color get white => ThemeProvider().isDarkMode
+      ? Color.fromRGBO(255, 255, 255, 0.05)
+      : Color.fromRGBO(255, 255, 255, 1.0);
 
   static Color get black =>
       ThemeProvider().isDarkMode ? Colors.white : Colors.black;
   static Color get chartBackground =>
       ThemeProvider().isDarkMode ? Colors.grey[900]! : Colors.white;
-
+  static Color get circleColor =>
+      ThemeProvider().isDarkMode ? Colors.white : Colors.grey[900]!;
+  static Color get iconColor =>
+      ThemeProvider().isDarkMode ? Colors.grey[900]! : Colors.white;
   static Color get onPrimary =>
       ThemeProvider().isDarkMode ? Colors.grey : Colors.white;
   static Color get primary =>
@@ -35,8 +39,8 @@ class AppColors {
   static Color get cardBackground =>
       ThemeProvider().isDarkMode ? Colors.grey[900]! : Colors.white;
   static Color get classicColor => ThemeProvider().isDarkMode
-      ? Color(0x1E293B)
-      : AppColors.surfaceBlueGreyLight;
+      ? Color.fromARGB(11, 11, 11, 1)
+      : AppColors.white;
 
   static Color get classicTextColor =>
       ThemeProvider().isDarkMode ? AppColors.antrasit : Color(0xF8FAFC);

@@ -24,25 +24,29 @@ class _ProjectListState extends State<ProjectList> {
     return Scaffold(
       appBar: AppBar(title: Text(ProjectStrings.projeListesi)),
       body: Padding(
-        padding: EdgeInsets.all(AppPadding.p8),
+        padding: EdgeInsets.all(AppPadding.p10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: EdgeInsets.all(AppPadding.p10),
               child: TextField(
                 controller: searchController,
                 onChanged: (value) {
                   setState(() {});
                 },
                 maxLength: 30,
-                autofocus: true,
                 decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(AppRadius.r10),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(AppRadius.r12),
+                    borderSide: const BorderSide(color: Colors.black, width: 0),
                   ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(AppRadius.r12),
+                    borderSide: const BorderSide(color: Colors.black, width: 0),
+                  ),
+                  counterText: '',
 
-                  labelText: ProjectStrings.hizliBul,
                   hintText: ProjectStrings.ornek,
                   hintStyle: TextStyle(color: AppColors.grey),
                   suffixIcon: Icon(Icons.search),

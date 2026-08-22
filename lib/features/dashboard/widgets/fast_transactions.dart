@@ -74,7 +74,7 @@ class _FastCard extends StatelessWidget {
                       height: AppSizes.size28,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(
-                          Radius.circular(AppRadius.r10),
+                          Radius.circular(AppRadius.r16),
                         ),
                       ),
                       child: Icon(
@@ -146,7 +146,7 @@ class _FastTransactionsState extends State<FastTransactions> {
   }
 }
 
-BorderRadius cardBorderRadius() => BorderRadius.circular(AppRadius.r10);
+BorderRadius cardBorderRadius() => BorderRadius.circular(AppRadius.r16);
 
 EdgeInsetsGeometry cardPadding() => EdgeInsetsGeometry.all(AppPadding.p10);
 
@@ -156,7 +156,7 @@ TextStyle title2Style() {
 
 TextStyle title1Style() {
   return TextStyle(
-    color: Colors.black,
+    color: AppColors.black,
     fontWeight: FontWeight.bold,
     fontSize: AppSizes.size14,
   );

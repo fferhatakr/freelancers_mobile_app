@@ -99,23 +99,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-/**ThemeData.light().copyWith(
-        cardTheme: CardThemeData(elevation: 10),
-        inputDecorationTheme: InputDecorationTheme(
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10)),
-          ),
-        ),
-        appBarTheme: const AppBarTheme(
-          titleTextStyle: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: AppColors.black,
-            fontSize: 20,
-          ),
-          centerTitle: false,
-          systemOverlayStyle: SystemUiOverlayStyle.dark,
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-        ),
-      ), */

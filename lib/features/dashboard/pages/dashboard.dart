@@ -25,16 +25,35 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          '$_welcome\n${FirebaseAuth.instance.currentUser?.displayName}',
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              _welcome,
+              style: TextStyle(
+                fontSize: AppSizes.size12,
+                color: AppColors.black,
+              ),
+            ),
+            Text(
+              '${FirebaseAuth.instance.currentUser?.displayName}',
+              style: TextStyle(color: AppColors.black),
+            ),
+          ],
         ),
         actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.notifications)),
+          IconButton(
+            onPressed: () {},
+            icon: Icon(
+              Icons.notifications,
+              color: Color.fromRGBO(37, 99, 235, 1.0),
+            ),
+          ),
           IconButton(
             onPressed: () {
               AppNavigation.navigateTo(context, SettingsScreen());
             },
-            icon: Icon(Icons.settings),
+            icon: Icon(Icons.settings, color: Color.fromRGBO(37, 99, 235, 1.0)),
           ),
         ],
       ),
@@ -44,16 +63,15 @@ class _DashboardState extends State<Dashboard> {
           spacing: AppSpacing.md,
           children: [
             SummaryCards(),
-            Container(
-              width: double.infinity,
-              height: 320,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(AppRadius.r10)),
-                color: AppColors.white,
+            Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(AppRadius.r16)),
               ),
+              color: AppColors.white,
               child: StatisticsLiner(),
             ),
             FastTransactions(),
+            SizedBox(height: AppSizes.size48),
           ],
         ),
       ),

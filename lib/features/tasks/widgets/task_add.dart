@@ -51,7 +51,7 @@ class TaskAdd extends StatelessWidget {
             controller: controller,
             decoration: InputDecoration(
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(AppRadius.r10)),
+                borderRadius: BorderRadius.all(Radius.circular(AppRadius.r12)),
               ),
               hint: Text(_subtitle),
               counterText: '',
@@ -89,7 +89,7 @@ class SelectionTask extends StatelessWidget {
       child: Container(
         height: AppSizes.size76,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(AppRadius.r10)),
+          borderRadius: BorderRadius.all(Radius.circular(AppRadius.r16)),
           color: AppColors.white,
         ),
         child: ListTile(

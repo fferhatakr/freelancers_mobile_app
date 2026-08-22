@@ -47,10 +47,16 @@ class CustomerCard extends StatelessWidget {
         );
       },
       child: Card(
-        color: AppColors.surfaceBlueGreyLight,
+        color: AppColors.white,
         shape: _listTileShape(),
         child: ListTile(
-          leading: _CircleAvatar(),
+          leading: CircleAvatar(
+            backgroundColor: Color.fromRGBO(37, 99, 235, 0.1),
+            child: Text(
+              '${name[0]}',
+              style: TextStyle(color: Color.fromRGBO(37, 99, 235, 1.0)),
+            ),
+          ),
 
           title: Text(name, style: TextStyle(color: AppColors.black)),
           subtitle: Column(
@@ -79,7 +85,7 @@ class CustomerCard extends StatelessWidget {
 
   RoundedRectangleBorder _listTileShape() {
     return RoundedRectangleBorder(
-      borderRadius: BorderRadius.all(Radius.circular(AppRadius.r20)),
+      borderRadius: BorderRadius.all(Radius.circular(AppRadius.r24)),
     );
   }
 }
@@ -88,8 +94,8 @@ class _CircleAvatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CircleAvatar(
-      backgroundColor: AppColors.black,
-      child: Icon(ClientsStyle.personIcon, color: AppColors.white),
+      backgroundColor: AppColors.circleColor,
+      child: Icon(ClientsStyle.personIcon, color: AppColors.iconColor),
     );
   }
 }

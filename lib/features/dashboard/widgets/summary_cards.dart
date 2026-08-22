@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/core/themes/app_theme.dart';
 import 'package:freelancer_tracking_system/core/themes/colors/app_colors.dart';
 import 'package:freelancer_tracking_system/core/themes/sizing/app_sizes.dart';
-import 'package:freelancer_tracking_system/core/themes/sizing/app_spacing.dart';
 import 'package:freelancer_tracking_system/core/themes/sizing/border_sizes.dart';
 import 'package:freelancer_tracking_system/core/themes/sizing/padding_sizes.dart';
 import 'package:freelancer_tracking_system/features/projects/pages/project_list.dart';
@@ -17,75 +16,87 @@ class SummaryCards extends StatelessWidget {
     return ListenableBuilder(
       listenable: ThemeProvider(),
       builder: (context, child) {
-        return Container(
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.blueGrey),
-            borderRadius: BorderRadius.all(Radius.circular(AppRadius.r20)),
-            color: AppColors.white,
-          ),
-          width: double.infinity,
-          height: AppSizes.size108,
-          child: Padding(
-            padding: EdgeInsets.all(AppPadding.p10),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Column(
-                        spacing: AppSpacing.xs,
+        return Column(
+          children: [
+            Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(AppRadius.r16)),
+              ),
+              color: AppColors.white,
+              child: Padding(
+                padding: EdgeInsets.all(AppPadding.p10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(AppPadding.p10),
+                      child: Row(
+                        spacing: 5,
                         children: [
-                          Icon(Icons.work_outline),
-                          Text(
-                            '${ProjectList().allProject.length}',
-                            style: _sumamryCardTwoStyle(),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Icon(Icons.work_outline),
+
+                              Text(
+                                '${ProjectList().allProject.length}',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColors.black,
+                                ),
+                              ),
+                              Text(
+                                DashboardStrings.projelerim,
+                                style: _summaryCardTextStyle(),
+                              ),
+                            ],
                           ),
-                          Text(
-                            DashboardStrings.projelerim,
-                            style: _summaryCardTextStyle(),
+                          SizedBox(width: 30),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+
+                            children: [
+                              Icon(Icons.check_box_outlined),
+                              Text(
+                                '${ProjectProvider().completedProject.length}/${ProjectList().allProject.length}',
+                                style: _sumamryCardTwoStyle(),
+                              ),
+                              Text(
+                                DashboardStrings.tamamlanan,
+                                style: _summaryCardTextStyle(),
+                              ),
+                            ],
+                          ),
+                          SizedBox(width: 30),
+
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+
+                            children: [
+                              Icon(Icons.payment_outlined),
+                              Text(
+                                '${ProjectProvider().calPendingAndOngoing()} ₺',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color.fromRGBO(22, 163, 74, 1.0),
+                                ),
+                              ),
+                              Text(
+                                DashboardStrings.bekleyenOdeme,
+                                style: _summaryCardTextStyle(),
+                              ),
+                            ],
                           ),
                         ],
                       ),
-                      VerticalDivider(color: AppColors.white),
-
-                      Column(
-                        spacing: AppSpacing.xs,
-                        children: [
-                          Icon(Icons.check_circle_outline_sharp),
-
-                          Text(
-                            '${ProjectProvider().completedProject.length}/${ProjectList().allProject.length}',
-                            style: _sumamryCardTwoStyle(),
-                          ),
-                          Text(
-                            DashboardStrings.tamamlanan,
-                            style: _summaryCardTextStyle(),
-                          ),
-                        ],
-                      ),
-                      VerticalDivider(color: AppColors.white),
-                      Column(
-                        spacing: AppSpacing.xs,
-                        children: [
-                          Icon(Icons.currency_lira_outlined),
-
-                          Text(
-                            '${ProjectProvider().calPendingAndOngoing()} ₺',
-                            style: _sumamryCardTwoStyle(),
-                          ),
-                          Text(
-                            DashboardStrings.bekleyenOdeme,
-                            style: _summaryCardTextStyle(),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
-          ),
+          ],
         );
       },
     );
@@ -94,19 +105,16 @@ class SummaryCards extends StatelessWidget {
   TextStyle _sumamryCardTwoStyle() {
     return TextStyle(
       fontSize: AppSizes.size20,
-      color: AppColors.realBlack,
+      color: AppColors.black,
       fontWeight: FontWeight.bold,
     );
   }
 
   TextStyle _summaryCardTextStyle() {
-    return TextStyle(color: AppColors.realBlack, fontWeight: FontWeight.w500);
-  }
-
-  BoxDecoration _boxDecoration() {
-    return BoxDecoration(
-      borderRadius: BorderRadius.all(Radius.circular(AppRadius.r10)),
-      color: const Color.fromARGB(255, 38, 38, 38),
+    return TextStyle(
+      fontSize: 15,
+      color: AppColors.black,
+      fontWeight: FontWeight.w500,
     );
   }
 }

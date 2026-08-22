@@ -4,7 +4,7 @@ class DashboardStrings {
 
   static const String projelerim = 'Toplam';
   static const String tamamlanan = 'Tamamlandı';
-  static const String bekleyenOdeme = 'Bekleyen';
+  static const String bekleyenOdeme = 'Bekleyen: ';
   static const String hosgeldinKullanici = 'Hoşgeldin Ferhat';
   static const String hizliIslemler = 'Hızlı İşlemler';
   static const String aktifProje = 'Aktif Projeler';

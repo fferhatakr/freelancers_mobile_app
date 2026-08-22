@@ -27,7 +27,7 @@ class _TasksCardState extends State<TasksCard> {
       listenable: WatchRecord(),
       builder: (context, child) {
         return Padding(
-          padding: EdgeInsets.all(AppPadding.p10),
+          padding: EdgeInsets.only(left: AppPadding.p10, right: AppPadding.p10),
           child: InkWell(
             onTap: () async {
               final taskStatus = await showModalBottomSheet<TaskStatus>(
@@ -37,7 +37,7 @@ class _TasksCardState extends State<TasksCard> {
                     height: AppSizes.size300,
                     width: double.infinity,
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(AppPadding.p10),
                       child: ListView(
                         children: [
                           Card(
@@ -81,149 +81,131 @@ class _TasksCardState extends State<TasksCard> {
                 );
               }
             },
-            child: Card(
-              color: AppColors.surfaceBlueGreyLight,
-              shape: _cardShape(),
-              child: Padding(
-                padding: EdgeInsets.all(AppPadding.p8),
-                child: Column(
-                  spacing: AppSpacing.lg,
-                  children: [
-                    Row(
-                      spacing: AppSpacing.sm,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              widget.task.taskName,
-                              style: TextStyle(
-                                color: AppColors.black,
-                                fontSize: AppSizes.size16,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            SizedBox(width: AppSizes.size4),
-                            Text(
-                              widget.task.bagliMusteri ??
-                                  TaskStrings.selectCustomer,
-                              style: TextStyle(
-                                color: AppColors.black,
-                                fontSize: AppSizes.size14,
-                              ),
-                            ),
-                            Text(
-                              widget.task.baglantiliProje ??
-                                  TaskStrings.noSelectedProject,
-                              style: TextStyle(
-                                color: AppColors.black,
-                                fontSize: AppSizes.size14,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Spacer(),
-                        Align(
-                          alignment: Alignment.bottomRight,
-                          child: Column(
+            child: Row(
+              children: [
+                Container(
+                  width: 5,
+                  height: 100,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: levelColor(widget.task.levels),
+                  ),
+                ),
+                Expanded(
+                  child: Card(
+                    color: AppColors.white,
+                    shape: _cardShape(),
+                    child: Padding(
+                      padding: EdgeInsets.all(AppPadding.p8),
+                      child: Column(
+                        spacing: AppSpacing.lg,
+                        children: [
+                          Row(
                             spacing: AppSpacing.sm,
                             children: [
-                              Container(
-                                width: AppSizes.size80,
-                                height: AppSizes.size36,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(AppRadius.r10),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    widget.task.taskName,
+                                    style: TextStyle(
+                                      color: AppColors.black,
+                                      fontSize: AppSizes.size16,
+                                      fontWeight: FontWeight.w600,
+                                    ),
                                   ),
-                                  color: AppColors.greyLight,
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    spacing: AppSpacing.xs,
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Text(
-                                        'Zorluk',
-                                        style: TextStyle(
-                                          color: AppColors.realBlack,
+                                  SizedBox(width: AppSizes.size4),
+                                  Text(
+                                    widget.task.bagliMusteri ??
+                                        TaskStrings.selectCustomer,
+                                    style: TextStyle(
+                                      color: AppColors.black,
+                                      fontSize: AppSizes.size14,
+                                    ),
+                                  ),
+                                  Text(
+                                    widget.task.baglantiliProje ??
+                                        TaskStrings.noSelectedProject,
+                                    style: TextStyle(
+                                      color: AppColors.black,
+                                      fontSize: AppSizes.size14,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Spacer(),
+                              Align(
+                                alignment: Alignment.bottomRight,
+                                child: Column(
+                                  spacing: AppSpacing.sm,
+                                  children: [
+                                    Container(
+                                      width: AppSizes.size80,
+                                      height: AppSizes.size32,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(AppRadius.r16),
+                                        ),
+                                        color: checkColor(
+                                          widget.task.taskStatus.toString(),
                                         ),
                                       ),
-                                      Icon(
-                                        Icons.circle,
-                                        color:
-                                            levelColor(
-                                              widget.task.taskStatus.toString(),
-                                            ) ??
-                                            AppColors.red,
-                                        size: AppSizes.size16,
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+
+                                        children: [
+                                          Text(
+                                            widget.task.taskStatus?.label
+                                                    .toString() ??
+                                                TaskStrings.noSelected,
+                                            style: _statusStyle(),
+                                          ),
+                                        ],
                                       ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-
-                              Container(
-                                width: AppSizes.size80,
-                                height: AppSizes.size32,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(AppRadius.r10),
-                                  ),
-                                  color: checkColor(
-                                    widget.task.taskStatus.toString(),
-                                  ),
-                                ),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-
-                                  children: [
-                                    Text(
-                                      widget.task.taskStatus?.label
-                                              .toString() ??
-                                          TaskStrings.noSelected,
-                                      style: _statusStyle(),
                                     ),
                                   ],
                                 ),
                               ),
                             ],
                           ),
-                        ),
-                      ],
-                    ),
 
-                    Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          SizedBox(
-                            width: AppSizes.size200,
+                          Center(
                             child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Icon(Icons.watch_later_outlined),
-                                Text(
-                                  'Toplam Süre: ${WatchRecord().formatDuration(WatchRecord().getDurationById(widget.task.id))}',
+                                SizedBox(
+                                  width: AppSizes.size200,
+                                  child: Row(
+                                    children: [
+                                      Icon(Icons.watch_later_outlined),
+                                      Text(
+                                        'Toplam Süre: ${WatchRecord().formatDuration(WatchRecord().getDurationById(widget.task.id))}',
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            width: AppSizes.size108,
-                            child: Row(
-                              children: [
-                                Icon(Icons.calendar_month),
-                                Text(' ${toFormat(widget.task.startDate)}'),
+                                SizedBox(
+                                  width: AppSizes.size108,
+                                  child: Row(
+                                    children: [
+                                      Icon(Icons.calendar_month),
+                                      Text(
+                                        ' ${toFormat(widget.task.startDate)}',
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               ],
                             ),
                           ),
                         ],
                       ),
                     ),
-                  ],
+                  ),
                 ),
-              ),
+              ],
             ),
           ),
         );
@@ -233,7 +215,7 @@ class _TasksCardState extends State<TasksCard> {
 
   RoundedRectangleBorder _cardShape() {
     return RoundedRectangleBorder(
-      borderRadius: BorderRadius.all(Radius.circular(AppRadius.r20)),
+      borderRadius: BorderRadius.all(Radius.circular(AppRadius.r24)),
     );
   }
 }

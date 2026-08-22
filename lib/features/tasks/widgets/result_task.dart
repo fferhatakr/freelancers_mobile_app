@@ -25,7 +25,7 @@ class _ResultTaskState extends State<ResultTask> {
       child: Card(
         color: AppColors.greyLight,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadiusGeometry.circular(AppRadius.r10),
+          borderRadius: BorderRadiusGeometry.circular(AppRadius.r16),
         ),
         child: Padding(
           padding: EdgeInsets.all(AppPadding.p8),

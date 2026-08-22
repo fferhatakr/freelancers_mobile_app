@@ -192,7 +192,7 @@ class _Info extends StatelessWidget {
     return Container(
       height: ClientsStyle.infoHeight,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(AppRadius.r10)),
+        borderRadius: BorderRadius.all(Radius.circular(AppRadius.r16)),
         color: AppColors.greenPale,
       ),
       child: ListTile(

@@ -7,13 +7,18 @@ class ThemeX {
   ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
     primaryColor: AppColors.blueAccent,
-    scaffoldBackgroundColor: Colors.white,
+    scaffoldBackgroundColor: Color.fromRGBO(245, 247, 251, 1.0),
+    cardTheme: CardThemeData(
+      elevation: 10,
+      shadowColor: Color.fromRGBO(160, 175, 192, 0.15),
+    ),
     appBarTheme: AppBarTheme(
       actionsIconTheme: IconThemeData(color: AppColors.black),
       systemOverlayStyle: SystemUiOverlayStyle.dark,
       centerTitle: false,
       backgroundColor: Colors.transparent,
       titleTextStyle: TextStyle(
+        fontFamily: 'Lora',
         color: AppColors.black,
         fontSize: AppSizes.size20,
         fontWeight: FontWeight.bold,
@@ -24,13 +29,16 @@ class ThemeX {
   ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
     primaryColor: AppColors.amber,
-    scaffoldBackgroundColor: Color.fromARGB(0, 21, 37, 74),
+    cardTheme: CardThemeData(elevation: 10),
+
+    scaffoldBackgroundColor: Color.fromRGBO(01, 21, 37, 74),
     appBarTheme: AppBarTheme(
       actionsIconTheme: IconThemeData(color: AppColors.black),
       systemOverlayStyle: SystemUiOverlayStyle.light,
       centerTitle: false,
       backgroundColor: Colors.transparent,
       titleTextStyle: TextStyle(
+        fontFamily: 'Caveat',
         color: AppColors.black,
         fontSize: AppSizes.size20,
         fontWeight: FontWeight.bold,
