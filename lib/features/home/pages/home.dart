@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/core/themes/colors/app_colors.dart';
 import 'package:freelancer_tracking_system/core/themes/sizing/border_sizes.dart';
@@ -27,11 +29,26 @@ class _HomeState extends State<Home> {
   ];
   int _currentIndex = 0;
   final _items = [
-    SalomonBottomBarItem(icon: Icon(Icons.home_outlined), title: Text('')),
-    SalomonBottomBarItem(icon: Icon(Icons.article_outlined), title: Text('')),
-    SalomonBottomBarItem(icon: Icon(Icons.access_time), title: Text('')),
-    SalomonBottomBarItem(icon: Icon(Icons.person), title: Text('')),
-    SalomonBottomBarItem(icon: Icon(Icons.task_alt_outlined), title: Text('')),
+    SalomonBottomBarItem(
+      icon: Icon(Icons.home_outlined, color: AppColors.white),
+      title: Text(''),
+    ),
+    SalomonBottomBarItem(
+      icon: Icon(Icons.article_outlined, color: AppColors.white),
+      title: Text(''),
+    ),
+    SalomonBottomBarItem(
+      icon: Icon(Icons.access_time, color: AppColors.white),
+      title: Text(''),
+    ),
+    SalomonBottomBarItem(
+      icon: Icon(Icons.person, color: AppColors.white),
+      title: Text(''),
+    ),
+    SalomonBottomBarItem(
+      icon: Icon(Icons.task_alt_outlined, color: AppColors.white),
+      title: Text(''),
+    ),
   ];
   @override
   Widget build(BuildContext context) {
@@ -53,13 +70,15 @@ class _HomeState extends State<Home> {
                   child: Container(
                     height: 64,
                     decoration: BoxDecoration(
-                      color: AppColors.white,
+                      color: AppColors.black,
                       borderRadius: BorderRadius.circular(AppRadius.r24),
                       boxShadow: [
-                        BoxShadow(color: AppColors.white, blurRadius: 8),
+                        BoxShadow(color: AppColors.antrasit, blurRadius: 8),
                       ],
                     ),
                     child: SalomonBottomBar(
+                      selectedColorOpacity: sqrt1_2,
+                      selectedItemColor: AppColors.blueAccent,
                       items: _items,
                       currentIndex: _currentIndex,
                       onTap: (index) {

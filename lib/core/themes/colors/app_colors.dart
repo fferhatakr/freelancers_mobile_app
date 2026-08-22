@@ -16,6 +16,7 @@ class AppColors {
 
   static Color get black =>
       ThemeProvider().isDarkMode ? Colors.white : Colors.black;
+
   static Color get chartBackground =>
       ThemeProvider().isDarkMode ? Colors.grey[900]! : Colors.white;
   static Color get circleColor =>

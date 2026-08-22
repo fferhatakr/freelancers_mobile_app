@@ -22,7 +22,7 @@ class SummaryCards extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(AppRadius.r16)),
               ),
-              color: AppColors.white,
+              color: AppColors.black,
               child: Padding(
                 padding: EdgeInsets.all(AppPadding.p10),
                 child: Row(
@@ -36,14 +36,14 @@ class SummaryCards extends StatelessWidget {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Icon(Icons.work_outline),
+                              Icon(Icons.work_outline, color: Colors.grey),
 
                               Text(
                                 '${ProjectList().allProject.length}',
                                 style: TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
-                                  color: AppColors.black,
+                                  color: AppColors.white,
                                 ),
                               ),
                               Text(
@@ -57,7 +57,10 @@ class SummaryCards extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
 
                             children: [
-                              Icon(Icons.check_box_outlined),
+                              Icon(
+                                Icons.check_box_outlined,
+                                color: Colors.grey,
+                              ),
                               Text(
                                 '${ProjectProvider().completedProject.length}/${ProjectList().allProject.length}',
                                 style: _sumamryCardTwoStyle(),
@@ -74,7 +77,7 @@ class SummaryCards extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
 
                             children: [
-                              Icon(Icons.payment_outlined),
+                              Icon(Icons.payment_outlined, color: Colors.grey),
                               Text(
                                 '${ProjectProvider().calPendingAndOngoing()} ₺',
                                 style: TextStyle(
@@ -105,7 +108,7 @@ class SummaryCards extends StatelessWidget {
   TextStyle _sumamryCardTwoStyle() {
     return TextStyle(
       fontSize: AppSizes.size20,
-      color: AppColors.black,
+      color: AppColors.white,
       fontWeight: FontWeight.bold,
     );
   }
@@ -113,7 +116,7 @@ class SummaryCards extends StatelessWidget {
   TextStyle _summaryCardTextStyle() {
     return TextStyle(
       fontSize: 15,
-      color: AppColors.black,
+      color: AppColors.white,
       fontWeight: FontWeight.w500,
     );
   }

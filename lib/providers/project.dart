@@ -9,6 +9,7 @@ class ProjectProvider extends ValueNotifier<List<Project>> {
   static final ProjectProvider _shared = ProjectProvider._sharedInstance();
   factory ProjectProvider() => _shared;
   late Box<Project> box;
+  String selectedTime = Time.haftalik.label;
   void addProject({required Project items}) {
     value.add(items);
     box.add(items);
@@ -37,6 +38,11 @@ class ProjectProvider extends ValueNotifier<List<Project>> {
         return;
       }
     }
+  }
+
+  void updateTime(String value) {
+    selectedTime = value;
+    notifyListeners();
   }
 
   void loadProject() {
@@ -83,6 +89,15 @@ class ProjectProvider extends ValueNotifier<List<Project>> {
     return result;
   }
 
+  int get totalMoney {
+    int totalMoney = 0;
+    for (int i = 0; i < completedProjectAmount.length; i++) {
+      totalMoney = completedProjectAmount[i] + totalMoney;
+    }
+
+    return totalMoney;
+  }
+
   dynamic calCompletedAmounts() {
     int toplam = 0;
     for (int i = 0; i < ProjectProvider().completedProjectAmount.length; i++) {
@@ -111,7 +126,7 @@ class ProjectProvider extends ValueNotifier<List<Project>> {
     return resulta;
   }
 
-  List<double> resultChart() {
+  List<double> weeklyResultChart() {
     List<Project> allProject = ProjectProvider().value;
     List<double> result = [0, 0, 0, 0, 0, 0, 0];
 
@@ -120,6 +135,38 @@ class ProjectProvider extends ValueNotifier<List<Project>> {
         if (allProject[i].dateTime != null) {
           int day = allProject[i].dateTime!.weekday - 1;
           result[day] += allProject[i].projectAmount;
+        }
+      }
+    }
+    notifyListeners();
+    return result;
+  }
+
+  List<double> monthResultChart() {
+    List<Project> allProject = ProjectProvider().value;
+    List<double> result = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+    for (int i = 0; i < allProject.length; i++) {
+      if (allProject[i].status == ProjectStatus.tamamlandi) {
+        if (allProject[i].dateTime != null) {
+          int month = allProject[i].dateTime!.month - 8;
+          result[month] += allProject[i].projectAmount;
+        }
+      }
+    }
+    notifyListeners();
+    return result;
+  }
+
+  List<double> yearResultChart() {
+    List<Project> allProject = ProjectProvider().value;
+    List<double> result = [0, 0, 0, 0, 0, 0, 0];
+
+    for (int i = 0; i < allProject.length; i++) {
+      if (allProject[i].status == ProjectStatus.tamamlandi) {
+        if (allProject[i].dateTime != null) {
+          int year = allProject[i].dateTime!.year - 2026;
+          result[year] += allProject[i].projectAmount;
         }
       }
     }
@@ -189,4 +236,13 @@ enum ProjectStatus {
 
   final String label;
   const ProjectStatus(this.label);
+}
+
+enum Time {
+  haftalik('Haftalık'),
+  aylik('Aylık'),
+  yillik('Yıllık');
+
+  final String label;
+  const Time(this.label);
 }
