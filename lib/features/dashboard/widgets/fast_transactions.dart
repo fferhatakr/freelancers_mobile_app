@@ -15,12 +15,16 @@ class _FastCard extends StatelessWidget {
   final String title1;
   final String title2;
   final VoidCallback onTap;
+  final Color containerColor;
+  final Color iconColor;
 
   const _FastCard({
     required this.iconOne,
     required this.title1,
     required this.title2,
     required this.onTap,
+    required this.containerColor,
+    required this.iconColor,
   });
 
   @override
@@ -44,14 +48,12 @@ class _FastCard extends StatelessWidget {
                       height: FastTransactionsCardStyle.sizeContainer,
                       width: FastTransactionsCardStyle.sizeContainer,
                       decoration: BoxDecoration(
-                        border: Border.all(
-                          color: AppColors.surfaceBlueGreyLight,
-                        ),
+                        color: containerColor,
                         borderRadius: cardBorderRadius(),
                       ),
                       child: Icon(
                         iconOne,
-                        color: AppColors.black,
+                        color: iconColor,
                         size: AppSizes.size20,
                       ),
                     ),
@@ -117,6 +119,8 @@ class _FastTransactionsState extends State<FastTransactions> {
         SizedBox(height: AppSizes.size12),
 
         _FastCard(
+          containerColor: AppColors.purpleLight,
+          iconColor: AppColors.purple,
           iconOne: Icons.person_add_outlined,
           title1: CustomerStrings.yeniMusteri,
           title2: CustomerStrings.musteriKaydiEkle,
@@ -125,6 +129,8 @@ class _FastTransactionsState extends State<FastTransactions> {
           },
         ),
         _FastCard(
+          containerColor: AppColors.greenPale,
+          iconColor: AppColors.green,
           iconOne: Icons.assignment_outlined,
           title1: ProjectStrings.projeEkle,
           title2: ProjectStrings.yeniKazancSagla,
@@ -133,6 +139,8 @@ class _FastTransactionsState extends State<FastTransactions> {
           },
         ),
         _FastCard(
+          containerColor: AppColors.redLight,
+          iconColor: AppColors.red,
           iconOne: Icons.add_task_outlined,
           title1: ProjectStrings.gorevEkle,
           title2: ProjectStrings.projeniSaglamaAl,

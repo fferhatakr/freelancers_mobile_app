@@ -44,16 +44,13 @@ class _DashboardState extends State<Dashboard> {
         actions: [
           IconButton(
             onPressed: () {},
-            icon: Icon(
-              Icons.notifications,
-              color: Color.fromRGBO(37, 99, 235, 1.0),
-            ),
+            icon: Icon(Icons.notifications, color: AppColors.black),
           ),
           IconButton(
             onPressed: () {
               AppNavigation.navigateTo(context, SettingsScreen());
             },
-            icon: Icon(Icons.settings, color: Color.fromRGBO(37, 99, 235, 1.0)),
+            icon: Icon(Icons.settings, color: AppColors.black),
           ),
         ],
       ),

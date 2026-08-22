@@ -111,7 +111,6 @@ class _TasksState extends State<Tasks> {
                         itemCount: _foundTask.length,
                         itemBuilder: (context, index) {
                           final task = _foundTask[index];
-                          print('${task.taskName} -> ${task.id}');
                           return Dismissible(
                             onDismissed: (direction) {
                               TaskProvider().removeTasks(items: task);

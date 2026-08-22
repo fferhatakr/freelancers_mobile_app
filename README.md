@@ -11,7 +11,7 @@
 
 | Dashboard | Customer | Project | Task | StopWatch |
 |-------|------|--------|---------|---------|
-| <img src="assets/png/dashboard.png" width="200"/> | <img src="assets/png/customer_list.png" width="200"/> | <img src="assets/png/project_list.png" width="200"/> | <img src="assets/png/tasks_list.png" width="200"/> | <img src="assets/png/stop_watch.png" width="200"/> |
+| <img src="assets/png/dashboard.png" width="200"/> | <img src="assets/png/customer_list.png" width="200"/> | <img src="assets/png/project_list.png" width="200"/> | <img src="assets/png/task_list.png" width="200"/> | <img src="assets/png/stop_watch.png" width="200"/> |
 
 </div>
 
