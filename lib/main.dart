@@ -11,7 +11,7 @@ import 'package:freelancer_tracking_system/providers/project.dart';
 import 'package:freelancer_tracking_system/providers/tasks.dart';
 import 'package:freelancer_tracking_system/providers/theme.dart';
 import 'package:freelancer_tracking_system/providers/watch.dart';
-import 'package:freelancer_tracking_system/features/auth/pages/onayla.dart';
+import 'package:freelancer_tracking_system/features/auth/pages/verify_email.dart';
 import 'package:freelancer_tracking_system/providers/watch_record.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';

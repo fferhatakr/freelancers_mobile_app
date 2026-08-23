@@ -1,8 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/core/themes/app_all_style.dart';
+import 'package:freelancer_tracking_system/core/themes/colors/app_colors.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/app_sizes.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/border_sizes.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/padding_sizes.dart';
 import 'package:freelancer_tracking_system/features/auth/widgets/labeled_text_field.dart.dart';
 import 'package:freelancer_tracking_system/services/auth_services.dart';
+import 'package:hive/hive.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -38,145 +43,157 @@ class _RegisterPageState extends State<RegisterPage> {
                 fontWeight: FontWeight.w500,
               ),
             ),
-            Text(
-              'Yeni bir hesap oluşturarak başlayın.',
-              style: TextStyle(
-                fontSize: 18,
-                color: const Color.fromARGB(255, 67, 67, 67),
-              ),
-            ),
           ],
         ),
       ),
-      backgroundColor: Colors.blueGrey[200],
+      backgroundColor: Color.fromRGBO(245, 247, 251, 1.0),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            LabeledTextField(
-              controller: name,
-              miniTitle: 'Ad Soyad',
-              hintText: 'Adınız Soyadınız',
-              prefixIcon: Icons.person_2_outlined,
-            ),
-            LabeledTextField(
-              controller: _email,
-              miniTitle: 'E-posta',
-              hintText: 'E-posta adresiniz',
-              prefixIcon: Icons.mail_outline,
-            ),
-            PasswordTextField(
-              controller: _password,
-              miniTitle: 'Şifre',
-              hintText: 'Şifrenizi Oluşturun',
-              prefixIcon: Icons.lock_outline,
-              suffixIconOff: Icons.visibility_off_outlined,
-              suffixIconOn: Icons.visibility_outlined,
-            ),
-            PasswordTextField(
-              controller: _confirmPassword,
-              miniTitle: 'Şifre(Tekrar)',
-              hintText: 'Şifrenizi Tekrar Girin',
-              prefixIcon: Icons.lock,
-              suffixIconOff: Icons.visibility_off_outlined,
-              suffixIconOn: Icons.visibility_outlined,
-            ),
+        padding: EdgeInsets.all(AppPadding.p20),
+        child: Container(
+          height: AppSizes.size650,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(AppRadius.r16)),
+            color: AppColors.white,
+          ),
 
-            Padding(
-              padding: const EdgeInsets.all(GeneralStyle.paddingSize),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(GeneralStyle.borderRadius),
-                  ),
-                  color: Colors.black,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                LabeledTextField(
+                  controller: name,
+                  miniTitle: 'Ad Soyad',
+                  hintText: 'Adınız Soyadınız',
+                  prefixIcon: Icons.person_2_outlined,
                 ),
-                width: double.infinity,
-                height: 100,
-                child: Padding(
+                LabeledTextField(
+                  controller: _email,
+                  miniTitle: 'E-posta',
+                  hintText: 'E-posta adresiniz',
+                  prefixIcon: Icons.mail_outline,
+                ),
+                PasswordTextField(
+                  controller: _password,
+                  miniTitle: 'Şifre',
+                  hintText: 'Şifrenizi Oluşturun',
+                  prefixIcon: Icons.lock_outline,
+                  suffixIconOff: Icons.visibility_off_outlined,
+                  suffixIconOn: Icons.visibility_outlined,
+                ),
+                PasswordTextField(
+                  controller: _confirmPassword,
+                  miniTitle: 'Şifre(Tekrar)',
+                  hintText: 'Şifrenizi Tekrar Girin',
+                  prefixIcon: Icons.lock,
+                  suffixIconOff: Icons.visibility_off_outlined,
+                  suffixIconOn: Icons.visibility_outlined,
+                ),
+
+                Padding(
                   padding: const EdgeInsets.all(GeneralStyle.paddingSize),
-                  child: Row(
-                    spacing: GeneralStyle.rowSpacing,
-                    children: [
-                      Icon(Icons.security, color: Colors.white, size: 40),
-                      Flexible(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(GeneralStyle.borderRadius),
+                      ),
+                      color: Colors.black,
+                    ),
+                    width: double.infinity,
+                    height: 100,
+                    child: Padding(
+                      padding: const EdgeInsets.all(GeneralStyle.paddingSize),
+                      child: Row(
+                        spacing: GeneralStyle.rowSpacing,
+                        children: [
+                          Icon(Icons.security, color: Colors.white, size: 40),
+                          Flexible(
+                            child: Text(
+                              maxLines: 3,
+                              'Şifreniz en az 8 karakter olmalı ve büyük harf,küçük harf,rakam ve özel karekter içermelidir.',
+                              style: TextStyle(
+                                color: const Color.fromARGB(255, 191, 191, 191),
+                                fontSize: 15,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(GeneralStyle.paddingSize),
+                  child: InkWell(
+                    onTap: () async {
+                      try {
+                        await _authServices.register(
+                          name: name.text.trim(),
+                          email: _email.text.trim(),
+                          password: _password.text.trim(),
+                          confirmPassword: _confirmPassword.text.trim(),
+                        );
+
+                        if (!context.mounted) return;
+
+                        Navigator.popUntil(context, ModalRoute.withName("/"));
+                      } on FirebaseAuthException catch (e) {
+                        if (e.code == 'weak-password') {
+                          ScaffoldMessenger.of(
+                            context,
+                          ).showSnackBar(_weakPassword);
+                        } else if (e.code == 'email-already-in-use') {
+                          ScaffoldMessenger.of(
+                            context,
+                          ).showSnackBar(_emailAlredyUse);
+                        }
+                      } catch (e) {
+                        final error = e.toString();
+                        if (error.contains('password-mismatch')) {
+                          ScaffoldMessenger.of(
+                            context,
+                          ).showSnackBar(_noMatchPassword);
+                        } else if (error.contains('password-too-short')) {
+                          ScaffoldMessenger.of(
+                            context,
+                          ).showSnackBar(_noLength8);
+                        } else if (error.contains('name-required')) {
+                          ScaffoldMessenger.of(
+                            context,
+                          ).showSnackBar(_nameRequired);
+                        } else if (error.contains('email-required')) {
+                          ScaffoldMessenger.of(
+                            context,
+                          ).showSnackBar(_emailRequired);
+                        }
+                        print(e);
+                      }
+                    },
+                    child: Container(
+                      width: double.infinity,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(GeneralStyle.borderRadius),
+                        ),
+                        color: AppColors.black,
+                      ),
+                      child: Center(
                         child: Text(
-                          maxLines: 3,
-                          'Şifreniz en az 8 karakter olmalı ve büyük harf,küçük harf,rakam ve özel karekter içermelidir.',
+                          'Kayıt Ol',
                           style: TextStyle(
-                            color: const Color.fromARGB(255, 191, 191, 191),
-                            fontSize: 15,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.white,
                           ),
                         ),
                       ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(GeneralStyle.paddingSize),
-              child: InkWell(
-                onTap: () async {
-                  try {
-                    await _authServices.register(
-                      name: name.text.trim(),
-                      email: _email.text.trim(),
-                      password: _password.text.trim(),
-                      confirmPassword: _confirmPassword.text.trim(),
-                    );
-
-                    if (!context.mounted) return;
-
-                    Navigator.popUntil(context, ModalRoute.withName("/"));
-                  } on FirebaseAuthException catch (e) {
-                    if (e.code == 'weak-password') {
-                      ScaffoldMessenger.of(context).showSnackBar(_weakPassword);
-                    } else if (e.code == 'email-already-in-use') {
-                      ScaffoldMessenger.of(
-                        context,
-                      ).showSnackBar(_emailAlredyUse);
-                    }
-                  } catch (e) {
-                    final error = e.toString();
-                    if (error.contains('password-mismatch')) {
-                      ScaffoldMessenger.of(
-                        context,
-                      ).showSnackBar(_noMatchPassword);
-                    } else if (error.contains('password-too-short')) {
-                      ScaffoldMessenger.of(context).showSnackBar(_noLength8);
-                    } else if (error.contains('name-required')) {
-                      ScaffoldMessenger.of(context).showSnackBar(_nameRequired);
-                    } else if (error.contains('email-required')) {
-                      ScaffoldMessenger.of(
-                        context,
-                      ).showSnackBar(_emailRequired);
-                    }
-                    print(e);
-                  }
-                },
-                child: Container(
-                  width: double.infinity,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(GeneralStyle.borderRadius),
-                    ),
-                    color: Colors.white,
-                  ),
-                  child: Center(
-                    child: Text(
-                      'Kayıt Ol',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
                     ),
                   ),
                 ),
-              ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );

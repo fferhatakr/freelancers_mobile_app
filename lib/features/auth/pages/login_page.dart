@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/core/navigation/app_navigation.dart';
 import 'package:freelancer_tracking_system/core/themes/app_all_style.dart';
+import 'package:freelancer_tracking_system/core/themes/colors/app_colors.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/border_sizes.dart';
 import 'package:freelancer_tracking_system/features/auth/widgets/labeled_text_field.dart.dart';
 import 'package:freelancer_tracking_system/features/auth/pages/register_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -27,7 +29,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blueGrey[200],
+      backgroundColor: Color.fromRGBO(245, 247, 251, 1.0),
       appBar: AppBar(),
       body: Padding(
         padding: const EdgeInsets.all(GeneralStyle.paddingSize),
@@ -39,24 +41,28 @@ class _LoginPageState extends State<LoginPage> {
                 width: 80,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(20)),
-                  color: Colors.blueGrey[300],
+                  color: AppColors.black,
                 ),
                 child: Icon(Icons.computer, color: Colors.white, size: 30),
               ),
             ),
             Text(
-              'Freelio',
+              'Librof',
               style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
             ),
             Text(
               'Projelerinizi yönetin, zamanınızı kazanın',
-              style: TextStyle(fontSize: 13, fontWeight: FontWeight.w300),
+              style: TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w300,
+                color: AppColors.black,
+              ),
             ),
             SizedBox(height: 10),
             SizedBox(
               width: double.infinity,
               child: Card(
-                color: Colors.blueGrey[100],
+                color: Colors.white,
                 child: Padding(
                   padding: const EdgeInsets.all(20),
                   child: Column(
@@ -131,10 +137,10 @@ class _LoginPageState extends State<LoginPage> {
       },
       child: Container(
         width: double.infinity,
-        height: 50,
+        height: 40,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-          color: Colors.blueGrey[300],
+          borderRadius: BorderRadius.all(Radius.circular(AppRadius.r20)),
+          color: Colors.black,
         ),
         child: Row(
           children: [
@@ -146,7 +152,7 @@ class _LoginPageState extends State<LoginPage> {
               child: Center(
                 child: Text(
                   'Google ile giriş yap.',
-                  style: TextStyle(color: Colors.black),
+                  style: TextStyle(color: Colors.white),
                 ),
               ),
             ),
@@ -159,6 +165,7 @@ class _LoginPageState extends State<LoginPage> {
 
   ElevatedButton _login() {
     return ElevatedButton(
+      style: ElevatedButton.styleFrom(backgroundColor: AppColors.black),
       onPressed: () async {
         try {
           await _authService.login(
@@ -177,7 +184,7 @@ class _LoginPageState extends State<LoginPage> {
         }
       },
       child: Center(
-        child: Text('Giriş Yap', style: TextStyle(color: Colors.black)),
+        child: Text('Giriş Yap', style: TextStyle(color: Colors.white)),
       ),
     );
   }

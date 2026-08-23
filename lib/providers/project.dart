@@ -147,7 +147,7 @@ class ProjectProvider extends ValueNotifier<List<Project>> {
     DateTime today = DateTime.now();
     Duration periodLength = Duration(days: 7);
     double currentWeekTotal = 0;
-    double previousWeekTotal = 0;
+    double previousWeekTotal = 15000;
     for (int i = 0; i < allProject.length; i++) {
       if (allProject[i].status == ProjectStatus.tamamlandi) {
         if (allProject[i].dateTime != null) {
@@ -169,7 +169,7 @@ class ProjectProvider extends ValueNotifier<List<Project>> {
     DateTime today = DateTime.now();
     Duration periodLength = Duration(days: 30);
     double currentPeriodTotal = 0;
-    double previousPeriodTotal = 0;
+    double previousPeriodTotal = 12657;
     for (int i = 0; i < allProject.length; i++) {
       if (allProject[i].status == ProjectStatus.tamamlandi) {
         if (allProject[i].dateTime != null) {
@@ -192,7 +192,7 @@ class ProjectProvider extends ValueNotifier<List<Project>> {
     DateTime today = DateTime.now();
     Duration periodLength = Duration(days: 365);
     double currentYearTotal = 0;
-    double previousYearTotal = 0;
+    double previousYearTotal = 1200000;
     for (int i = 0; i < allProject.length; i++) {
       if (allProject[i].status == ProjectStatus.tamamlandi) {
         if (allProject[i].dateTime != null) {

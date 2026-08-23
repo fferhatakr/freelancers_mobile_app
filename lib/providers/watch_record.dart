@@ -42,10 +42,6 @@ class WatchRecord extends ChangeNotifier {
   }
 
   int getDurationById(String id) {
-    print(
-      'Tüm kayıtlar: ${totalRecord.map((w) => "${w.id}: ${w.duration}ms").toList()}',
-    );
-
     for (int i = 0; i < totalRecord.length; i++) {
       if (totalRecord[i].id == id) {
         return totalRecord[i].duration;

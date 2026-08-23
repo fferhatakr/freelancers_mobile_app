@@ -69,6 +69,9 @@ dependencies:
   #BottomNavigationBar
   salomon_bottom_bar: ^3.3.2
 
+  #Google Emoji
+  lottie: ^3.1.0
+
   
 
 

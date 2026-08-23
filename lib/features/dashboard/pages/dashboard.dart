@@ -20,6 +20,7 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+  bool isOpen = false;
   final String _welcome = 'Hoşgeldin';
   @override
   Widget build(BuildContext context) {
@@ -36,7 +37,7 @@ class _DashboardState extends State<Dashboard> {
               ),
             ),
             Text(
-              '${FirebaseAuth.instance.currentUser?.displayName}',
+              '${FirebaseAuth.instance.currentUser?.displayName} 👋',
               style: TextStyle(color: AppColors.black),
             ),
           ],
@@ -90,6 +91,9 @@ class _DashboardState extends State<Dashboard> {
                       ),
                       GestureDetector(
                         onTap: () async {
+                          setState(() {
+                            isOpen = true;
+                          });
                           final selected = await showModalBottomSheet<String>(
                             context: context,
                             builder: (context) {
@@ -158,11 +162,29 @@ class _DashboardState extends State<Dashboard> {
                               );
                             },
                           );
+                          setState(() {
+                            isOpen = false;
+                          });
                           if (selected != null) {
                             ProjectProvider().updateTime(selected);
                           }
                         },
-                        child: Icon(Icons.keyboard_arrow_down_outlined),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: isOpen
+                              ? AnimatedCrossFade(
+                                  firstChild: Icon(Icons.menu_outlined),
+                                  secondChild: Icon(Icons.menu_open_outlined),
+                                  crossFadeState: CrossFadeState.showFirst,
+                                  duration: Duration(seconds: 1),
+                                )
+                              : AnimatedCrossFade(
+                                  firstChild: Icon(Icons.menu_outlined),
+                                  secondChild: Icon(Icons.menu_open_outlined),
+                                  crossFadeState: CrossFadeState.showSecond,
+                                  duration: Duration(seconds: 1),
+                                ),
+                        ),
                       ),
                     ],
                   ),

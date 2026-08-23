@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freelancer_tracking_system/core/themes/app_all_style.dart';
+import 'package:freelancer_tracking_system/core/themes/sizing/border_sizes.dart';
 
 class LabeledTextField extends StatelessWidget {
   final String miniTitle;
@@ -36,6 +37,14 @@ class LabeledTextField extends StatelessWidget {
             obscureText: obscureText,
 
             decoration: InputDecoration(
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(AppRadius.r12),
+                borderSide: const BorderSide(color: Colors.black, width: 0),
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(AppRadius.r12),
+                borderSide: const BorderSide(color: Colors.black, width: 0),
+              ),
               counterText: '',
               prefixIcon: Icon(prefixIcon),
               hintText: hintText,
@@ -103,6 +112,14 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
             controller: widget.controller,
             obscureText: _isSecure,
             decoration: InputDecoration(
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(AppRadius.r12),
+                borderSide: const BorderSide(color: Colors.black, width: 0),
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(AppRadius.r12),
+                borderSide: const BorderSide(color: Colors.black, width: 0),
+              ),
               counterText: '',
               prefixIcon: Icon(widget.prefixIcon),
               hintText: widget.hintText,
