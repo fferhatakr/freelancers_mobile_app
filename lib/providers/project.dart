@@ -142,6 +142,73 @@ class ProjectProvider extends ValueNotifier<List<Project>> {
     return result;
   }
 
+  double get weeklyGrowthPercentage {
+    List<Project> allProject = ProjectProvider().value;
+    DateTime today = DateTime.now();
+    Duration periodLength = Duration(days: 7);
+    double currentWeekTotal = 0;
+    double previousWeekTotal = 0;
+    for (int i = 0; i < allProject.length; i++) {
+      if (allProject[i].status == ProjectStatus.tamamlandi) {
+        if (allProject[i].dateTime != null) {
+          if (allProject[i].dateTime!.isBefore(today.subtract(periodLength))) {
+            previousWeekTotal += allProject[i].projectAmount;
+          } else {
+            currentWeekTotal += allProject[i].projectAmount;
+          }
+        }
+      }
+    }
+    if (previousWeekTotal == 0) return 0;
+
+    return ((currentWeekTotal - previousWeekTotal) / previousWeekTotal) * 100;
+  }
+
+  double get last30DaysGrowthPercentage {
+    List<Project> allProject = ProjectProvider().value;
+    DateTime today = DateTime.now();
+    Duration periodLength = Duration(days: 30);
+    double currentPeriodTotal = 0;
+    double previousPeriodTotal = 0;
+    for (int i = 0; i < allProject.length; i++) {
+      if (allProject[i].status == ProjectStatus.tamamlandi) {
+        if (allProject[i].dateTime != null) {
+          if (allProject[i].dateTime!.isBefore(today.subtract(periodLength))) {
+            previousPeriodTotal += allProject[i].projectAmount;
+          } else {
+            currentPeriodTotal += allProject[i].projectAmount;
+          }
+        }
+      }
+    }
+    if (previousPeriodTotal == 0) return 0;
+
+    return ((currentPeriodTotal - previousPeriodTotal) / previousPeriodTotal) *
+        100;
+  }
+
+  double get yearlyGrowthPercentage {
+    List<Project> allProject = ProjectProvider().value;
+    DateTime today = DateTime.now();
+    Duration periodLength = Duration(days: 365);
+    double currentYearTotal = 0;
+    double previousYearTotal = 0;
+    for (int i = 0; i < allProject.length; i++) {
+      if (allProject[i].status == ProjectStatus.tamamlandi) {
+        if (allProject[i].dateTime != null) {
+          if (allProject[i].dateTime!.isBefore(today.subtract(periodLength))) {
+            previousYearTotal += allProject[i].projectAmount;
+          } else {
+            currentYearTotal += allProject[i].projectAmount;
+          }
+        }
+      }
+    }
+    if (previousYearTotal == 0) return 0;
+
+    return ((currentYearTotal - previousYearTotal) / previousYearTotal) * 100;
+  }
+
   List<double> monthResultChart() {
     List<Project> allProject = ProjectProvider().value;
     List<double> result = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];

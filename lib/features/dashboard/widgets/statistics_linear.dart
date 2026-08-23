@@ -1,12 +1,9 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:freelancer_tracking_system/core/themes/app_theme.dart';
 import 'package:freelancer_tracking_system/core/themes/colors/app_colors.dart';
 import 'package:freelancer_tracking_system/core/themes/sizing/app_sizes.dart';
 import 'package:freelancer_tracking_system/core/themes/sizing/border_sizes.dart';
-import 'package:freelancer_tracking_system/core/themes/sizing/padding_sizes.dart';
 import 'package:freelancer_tracking_system/providers/project.dart';
-import 'package:freelancer_tracking_system/providers/theme.dart';
 import 'package:provider/provider.dart';
 
 class StatisticsLiner extends StatefulWidget {
@@ -57,13 +54,36 @@ class _StatisticsLinerState extends State<StatisticsLiner> {
             spacing: AppSizes.size16,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                '${ProjectProvider().totalMoney} ₺',
-                style: TextStyle(
-                  fontSize: AppSizes.size20,
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.black,
-                ),
+              Row(
+                children: [
+                  Text(
+                    '${ProjectProvider().totalMoney} ₺',
+                    style: TextStyle(
+                      fontSize: AppSizes.size20,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.black,
+                    ),
+                  ),
+                  SizedBox(width: 20),
+                  Text(
+                    '% ${getSelectedIncreaseValue(ProjectProvider().selectedTime)}',
+                    style: TextStyle(
+                      fontSize: AppSizes.size12,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.green,
+                    ),
+                  ),
+                  SizedBox(width: 10),
+
+                  Text(
+                    'Önceki ${getPeriodLabel(ProjectProvider().selectedTime)} Göre',
+                    style: TextStyle(
+                      fontSize: AppSizes.size12,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.grey,
+                    ),
+                  ),
+                ],
               ),
               Container(
                 decoration: BoxDecoration(
@@ -184,6 +204,15 @@ class _StatisticsLinerState extends State<StatisticsLiner> {
           belowBarData: BarAreaData(
             show: true,
             color: const Color.fromARGB(222, 160, 135, 242),
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Color.fromARGB(255, 80, 78, 154),
+                Color.fromARGB(150, 160, 160, 220),
+                Colors.white,
+              ],
+            ),
           ),
           spots: List.generate(
             getSayi(ProjectProvider().selectedTime).toInt(),
@@ -193,12 +222,22 @@ class _StatisticsLinerState extends State<StatisticsLiner> {
             ),
           ),
           show: true, // Çubuk çizgisinini gösterilip Gösteriliceğini söyler.
-          gradient: LinearGradient(
-            colors: [AppColors.blueAccent, AppColors.purple],
-          ),
+
+          color: const Color.fromARGB(255, 80, 78, 154),
           barWidth: AppSizes.size4,
           isCurved: true,
           shadow: Shadow(color: AppColors.grey, blurRadius: AppRadius.r4),
+          dotData: FlDotData(
+            show: true, // Noktaları görünür yapıyoruz
+
+            getDotPainter: (spot, percent, barData, index) {
+              return FlDotCirclePainter(
+                radius: 4,
+                color: const Color.fromARGB(255, 80, 78, 154),
+                strokeWidth: 0,
+              );
+            },
+          ),
         ),
       ],
     );
@@ -222,5 +261,25 @@ class _StatisticsLinerState extends State<StatisticsLiner> {
     } else {
       return 7;
     }
+  }
+}
+
+String getPeriodLabel(String time) {
+  if (ProjectProvider().selectedTime == Time.haftalik.label) {
+    return "Haftaya";
+  } else if (ProjectProvider().selectedTime == Time.aylik.label) {
+    return "30 Gün'e ";
+  } else {
+    return "Yıl'a";
+  }
+}
+
+String getSelectedIncreaseValue(String artis) {
+  if (ProjectProvider().selectedTime == Time.haftalik.label) {
+    return ProjectProvider().weeklyGrowthPercentage.toStringAsFixed(1);
+  } else if (ProjectProvider().selectedTime == Time.aylik.label) {
+    return ProjectProvider().last30DaysGrowthPercentage.toStringAsFixed(1);
+  } else {
+    return ProjectProvider().yearlyGrowthPercentage.toStringAsFixed(1);
   }
 }
